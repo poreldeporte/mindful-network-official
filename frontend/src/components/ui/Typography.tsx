@@ -1,21 +1,26 @@
 import React from "react";
 
-type VariantType = "h1" | "h2" | "h3" | "large" | "medium" | "small" | "xsmall";
+type VariantType =
+  | "xxlarge"
+  | "xlarge"
+  | "large"
+  | "medium"
+  | "small"
+  | "xsmall";
 type ColorType = "white" | "black";
 
 const variantClasses: Record<VariantType, string> = {
-  h1: "text-6xl",
-  h2: "",
-  h3: "",
-  large: "",
-  medium: "",
-  small: "",
-  xsmall: "",
+  xxlarge: "text-5xl",
+  xlarge: "text-4xl",
+  large: "text-2xl",
+  medium: "text-lg",
+  small: "text-md",
+  xsmall: "text-sm",
 };
 
 const colorClasses: Record<ColorType, string> = {
   white: "text-white",
-  black: "text-black-950",
+  black: "text-gray-950",
 };
 
 interface TypographyProps {
