@@ -5,7 +5,7 @@ const BlogCard = () => {
 };
 
 interface Props {
-  posts: BlogModel[] | null;
+  posts?: BlogModel[] | null;
 }
 
 export function BlogContainer({ posts }: Props) {
