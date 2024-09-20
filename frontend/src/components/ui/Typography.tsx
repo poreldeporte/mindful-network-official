@@ -1,13 +1,7 @@
 import React from "react";
+import { VariantType } from "@/models";
 
-type VariantType =
-  | "xxlarge"
-  | "xlarge"
-  | "large"
-  | "medium"
-  | "small"
-  | "xsmall";
-type ColorType = "white" | "black";
+type ColorType = "white" | "black" | "darkGray";
 
 const variantClasses: Record<VariantType, string> = {
   xxlarge: "text-5xl",
@@ -21,6 +15,7 @@ const variantClasses: Record<VariantType, string> = {
 const colorClasses: Record<ColorType, string> = {
   white: "text-white",
   black: "text-gray-950",
+  darkGray: "text-gray-700",
 };
 
 interface TypographyProps {
