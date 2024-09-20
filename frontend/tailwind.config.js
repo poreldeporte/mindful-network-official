@@ -56,6 +56,8 @@ export default {
         900: "#2f382f",
         950: "#161d16",
       },
+      white: "#ffffff",
+      black: "#000000",
     },
     screens: {
       xs: { max: "480px" },
