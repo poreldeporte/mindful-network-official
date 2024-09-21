@@ -1,2 +1,3 @@
-export * from './Footer';
-export * from './Topbar';
+export * from "./Footer";
+export * from "./Searchbar";
+export * from "./Topbar";
