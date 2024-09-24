@@ -1,5 +1,6 @@
+import { GetInTouch } from "@/components/forms";
 import { Typography } from "@/components/ui";
-import { About, BlogContainer, Hero } from "@/routes/homepage/components";
+import { About, BlogContainer, CTASection, Hero } from "@/routes/homepage/components";
 
 export default function Home() {
   return (
@@ -10,6 +11,8 @@ export default function Home() {
       <Hero />
       <About />
       <BlogContainer />
+      <CTASection />
+      <GetInTouch />
     </main>
   );
 }
