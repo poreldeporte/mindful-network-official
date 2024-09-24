@@ -6,7 +6,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="page-width mb-5">
+    <section className="page-width mb-20 mt-56 lg:flex items-center justify-center flex-col">
       <Typography
         className="font-antic my-4"
         as="h1"
@@ -22,7 +22,7 @@ export const Hero = () => {
         to find the support you need, when you need it.
       </Typography>
 
-      <Button className="mt-4" variant="medium">
+      <Button className="mt-4 p-2" variant="medium">
         Start Exploring
       </Button>
     </section>
