@@ -1,12 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import { Typography } from "../ui";
 import { Searchbar } from "./Searchbar";
 import { resources } from "@/lib/constants";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 export function Topbar() {
+  const pathname = usePathname();
+  const isSearchPage = pathname === "/search";
+
+  const headerFixed =
+    "fixed top-10 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+  const headerRelative =
+    "relative mt-10 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+
   return (
-    <header className="fixed top-10 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block">
+    <header className={isSearchPage ? headerRelative : headerFixed}>
       <div className="grid grid-cols-[auto_1fr] p-5 gap-5">
         <Typography
           variant="xlarge"
