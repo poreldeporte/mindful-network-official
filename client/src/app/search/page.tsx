@@ -1,24 +1,24 @@
-import { Typography } from "@/components/ui";
 import { MapComponent } from "@/components/shared";
+import { PsychologistModel } from "@/models";
+import { SidePanel } from "@/routes/search";
+import { getAllPsychologists } from "@/services/psychologist.service";
+import { getAllConditions } from "@/services/condition-specialties.service";
 
-export default function Search() {
+export default async function Search() {
+  const psychologists: PsychologistModel[] = await getAllPsychologists();
+  const conditions: any = await getAllConditions();
+
+  console.log(conditions);
+
   return (
-    <main className="">
-      <section className="h-screen bg-orange-200 mt-60">
-        <Typography
-          className="font-antic"
-          as="h2"
-          color="black"
-          variant="medium"
-        >
-          Search component
-        </Typography>
-
+    <>
+      <section className="h-screen mt-10 relative">
+        <SidePanel psychologists={psychologists} />
         <MapComponent
           position={[34.0522, -118.2437]}
           className="h-full w-full"
         />
       </section>
-    </main>
+    </>
   );
 }
