@@ -59,6 +59,7 @@ module.exports = {
       },
       white: "#ffffff",
       black: "#000000",
+      transparent: "transparent"
     },
     screens: {
       xs: { max: "480px" },
