@@ -15,7 +15,7 @@ export function GetInTouch() {
             as="h2"
             variant="medium"
           >
-            We're Here to Help—Reach Out with Your Questions or Concerns
+            We&apos;re Here to Help—Reach Out with Your Questions or Concerns
           </Typography>
         </div>
         <div className="flex flex-col items-end">

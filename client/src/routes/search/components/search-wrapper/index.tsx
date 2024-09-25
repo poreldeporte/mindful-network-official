@@ -3,13 +3,13 @@
 import { MapComponent } from "@/components/shared";
 import { getValidationError } from "@/utilities";
 import {
-  ageSpecialty,
+  // ageSpecialty,
   conditionSpecialty,
   Insurances,
   PsychologistModel,
   TherapyModality,
 } from "@/models";
-import { Positions } from "@/models";
+// import { Positions } from "@/models";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 import { useSearchParams } from "next/navigation";
@@ -18,9 +18,9 @@ export const SearchWrapper = () => {
   const [psychologists, setPsychologists] = useState<
     PsychologistModel[] | null
   >(null);
-  const [ageSpecialties, setAgeSpecialties] = useState<ageSpecialty[] | null>(
-    null
-  );
+  // const [ageSpecialties, setAgeSpecialties] = useState<ageSpecialty[] | null>(
+  //   null
+  // );
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
     null
   );
@@ -29,9 +29,9 @@ export const SearchWrapper = () => {
     TherapyModality[] | null
   >(null);
 
-  const [mapPositions, setMapPositions] = useState<Positions[]>([
-    { lat: 34.0522, lng: -118.2437 },
-  ]);
+  // const [mapPositions, setMapPositions] = useState<Positions[]>([
+  //   { lat: 34.0522, lng: -118.2437 },
+  // ]);
   const [filteredPsychologists, setFilteredPsychologists] = useState<
     PsychologistModel[] | null
   >(null);
@@ -44,7 +44,7 @@ export const SearchWrapper = () => {
         const [
           psychologistsRes,
           conditionsRes,
-          ageSpecialtiesRes,
+          // ageSpecialtiesRes,
           insurancesRes,
           therapyModalitiesRes,
         ] = await Promise.all([
@@ -57,13 +57,13 @@ export const SearchWrapper = () => {
 
         const psychologistsData = await psychologistsRes.json();
         const conditionsData = await conditionsRes.json();
-        const ageSpecialtiesData = await ageSpecialtiesRes.json();
+        // const ageSpecialtiesData = await ageSpecialtiesRes.json();
         const insurancesData = await insurancesRes.json();
         const therapyModalitiesData = await therapyModalitiesRes.json();
 
         setPsychologists(psychologistsData);
         setConditions(conditionsData);
-        setAgeSpecialties(ageSpecialtiesData);
+        // setAgeSpecialties(ageSpecialtiesData);
         setInsurances(insurancesData);
         setTherapyModalities(therapyModalitiesData);
       } catch (error) {
@@ -134,7 +134,10 @@ export const SearchWrapper = () => {
         insurances={insurances}
         therapyModalities={therapyModalities}
       />
-      <MapComponent positions={mapPositions} className="h-full w-full" />
+      <MapComponent
+        positions={[{ lat: 34.0522, lng: -118.2437 }]}
+        className="h-full w-full"
+      />
     </>
   );
 };

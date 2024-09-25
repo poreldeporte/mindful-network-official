@@ -2,6 +2,7 @@ import { BlogModel } from "@/models/blog.model";
 import { blogPosts } from "@/lib/constants";
 import { Typography } from "@/components/ui";
 import Image from "next/image";
+import React from "react";
 
 const BlogCard = ({ title, description, image, slug }: BlogModel) => {
   return (
@@ -34,7 +35,7 @@ interface Props {
   posts?: BlogModel[] | null;
 }
 
-export function BlogContainer({ posts }: Props) {
+export const BlogContainer: React.FC<Props> = () => {
   return (
     <section className="page-width my-32 lg:my-56">
       <Typography
@@ -54,4 +55,4 @@ export function BlogContainer({ posts }: Props) {
       </div>
     </section>
   );
-}
+};
