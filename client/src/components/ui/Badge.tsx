@@ -5,6 +5,7 @@ interface Props {
   className?: string;
   isSelected?: boolean;
   color?: ColorType;
+  onClick?: () => void;
 }
 
 export const Badge = ({
@@ -12,6 +13,7 @@ export const Badge = ({
   className = "",
   isSelected = true,
   color = "orange",
+  onClick,
 }: Props) => {
   const colorClasses: Record<ColorType, string> = {
     orange: `${
@@ -26,11 +28,13 @@ export const Badge = ({
   };
 
   const colorClass = colorClasses[color] || "";
+
   return (
-    <span
-      className={`${className} ${colorClass} text-sm rounded-full px-2.5 py-0.5 border font-medium`}
+    <button
+      className={`${className} ${colorClass} text-sm rounded-full px-2.5 py-0.5 border font-medium focus:outline-none`}
+      onClick={onClick}
     >
       {children}
-    </span>
+    </button>
   );
 };

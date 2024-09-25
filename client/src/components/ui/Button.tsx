@@ -13,7 +13,10 @@ interface Props {
 
 export function Button({ children, className, variant, onClick }: Props) {
   return (
-    <button onClick={onClick} className={`${className} bg-blue-500 text-white`}>
+    <button
+      onClick={onClick}
+      className={`${className} bg-blue-500 transition-colors hover:bg-blue-700 text-white`}
+    >
       <Typography
         className="flex items-center gap-2"
         as="span"
