@@ -1,5 +1,4 @@
 import { GetInTouch } from "@/components/forms";
-import { Typography } from "@/components/ui";
 import {
   About,
   BlogContainer,

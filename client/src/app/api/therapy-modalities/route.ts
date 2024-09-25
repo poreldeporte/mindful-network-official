@@ -14,7 +14,7 @@ export async function GET() {
     return NextResponse.json(therapyModalities);
   } catch (error) {
     return NextResponse.json(
-      { error: "Error reading psychologists data" },
+      { error: `Error reading psychologists data ${error}` },
       { status: 500 }
     );
   }

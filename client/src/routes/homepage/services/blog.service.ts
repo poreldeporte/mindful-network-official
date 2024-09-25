@@ -12,7 +12,7 @@ export const getLatestBlog = async () => {
   }
 };
 
-export const getBlogById = async (id: string) => {
+export const getBlogById = async () => {
   try {
     // const idQuery = id ? ` && id match "*${id}*"` : "";
     // const query = `[_type === blog ${idQuery}]{

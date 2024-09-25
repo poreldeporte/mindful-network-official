@@ -1,1 +1,1 @@
-export * from "./doctor.adapter";
+// export * from "./doctor.adapter";

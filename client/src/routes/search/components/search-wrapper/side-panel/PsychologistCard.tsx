@@ -14,7 +14,7 @@ const PsychologistCard = ({
     therapyOptions,
     conditionSpecialty,
     insurances,
-    phone,
+    // phone,
     ageSpecialty,
   } = psychologist;
 

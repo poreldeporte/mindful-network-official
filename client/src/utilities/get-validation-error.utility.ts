@@ -1,6 +1,6 @@
 import { TypeWithKey } from "@/models/type-with-key.model";
 
-export const getValidationError = (errorCode: any) => {
+export const getValidationError = (errorCode: string) => {
   const codeMatcher: TypeWithKey<string> = {
     ERR_NETWORK: "Network connection lost",
     ERR_TIMEOUT: "Request timed out",

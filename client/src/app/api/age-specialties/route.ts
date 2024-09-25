@@ -11,7 +11,7 @@ export async function GET() {
     return NextResponse.json(ageSpecialties);
   } catch (error) {
     return NextResponse.json(
-      { error: "Error reading Age Specialties data" },
+      { error: `Error reading Age Specialties data ${error}` },
       { status: 500 }
     );
   }

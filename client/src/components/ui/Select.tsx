@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { Typography } from "./Typography";
 import { VariantType } from "@/models";
+import React from "react";
 
 interface SelectProps {
   options: string[];
@@ -19,7 +18,6 @@ export function Select({
   value,
   setValue,
   className,
-  variant,
 }: SelectProps) {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
