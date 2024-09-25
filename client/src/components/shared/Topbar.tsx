@@ -25,7 +25,7 @@ export function Topbar() {
           color="black"
           className="font-antic font-normal flex items-center"
         >
-          The Mindful Network
+          <Link href={"/"}>The Mindful Network</Link>
         </Typography>
 
         <Searchbar />
