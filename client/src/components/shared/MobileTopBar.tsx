@@ -24,6 +24,8 @@ export function MobileTopBar() {
     },
   };
 
+  const handleCloseHeader = () => setIsOpen(!isOpen);
+
   return (
     <section className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
       <div>
@@ -54,7 +56,7 @@ export function MobileTopBar() {
             variants={menuVariants}
             className="absolute top-14 left-0 w-full bg-orange-50 page-width py-5 shadow-lg flex flex-col gap-2"
           >
-            <Searchbar />
+            <Searchbar onClick={handleCloseHeader} />
 
             {navigation.map((link) => (
               <Link key={link.key} href={link.path}>

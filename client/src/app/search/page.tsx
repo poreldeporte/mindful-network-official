@@ -2,7 +2,7 @@ import { SearchWrapper } from "@/routes/search";
 
 export default function Search() {
   return (
-    <section className="h-screen mt-10 relative">
+    <section className="min-h-screen lg:h-screen max-h-max mt-10 relative">
       <SearchWrapper />
     </section>
   );

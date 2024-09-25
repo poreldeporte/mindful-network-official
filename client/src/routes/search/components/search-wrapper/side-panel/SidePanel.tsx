@@ -94,7 +94,7 @@ const SidePanel = ({
   };
 
   return (
-    <aside className="overflow-hidden z-10 py-5 absolute md:left-2.5 top-1/2 -translate-y-1/2 md:h-[calc(100%-20px)] w-1/2 bg-white rounded-3xl grid grid-rows-[auto_1fr_auto]">
+    <aside className="overflow-hidden z-10 lg:py-5 pb-5 pt-14 lg:absolute lg:left-2.5 lg:top-1/2 lg:-translate-y-1/2 h-max lg:h-[calc(100%-20px)] w-full lg:w-1/2 bg-white rounded-3xl grid grid-rows-[auto_1fr_auto]">
       <header className="px-5 pb-5 w-full shadow-md">
         <Typography
           className="font-antic"

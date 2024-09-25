@@ -1,21 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Select } from "../ui";
-import { Button } from "../ui";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
 import { conditionSpecialty } from "@/models";
 import { getValidationError } from "@/utilities";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Button, Select } from "../ui";
 
-export function Searchbar() {
+interface Props {
+  onClick?: () => void;
+}
+
+export function Searchbar({ onClick }: Props) {
   const [selectedCondition, setSelectedCondition] = useState<string | null>(
     null
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
-    null
-  );
   const [conditionOptions, setConditionOptions] = useState<string[]>([]);
 
   const router = useRouter();
@@ -31,6 +30,7 @@ export function Searchbar() {
       params.set("search", searchQuery);
     }
 
+    if (onClick) onClick();
     setSearchQuery("");
     router.push(`/search?${params.toString()}`);
   };
@@ -41,8 +41,6 @@ export function Searchbar() {
         const conditionsRes = await fetch("/api/conditions");
 
         const conditionsData = await conditionsRes.json();
-
-        setConditions(conditionsData);
 
         const conditionNames = conditionsData.map(
           (condition: conditionSpecialty) => condition.name
