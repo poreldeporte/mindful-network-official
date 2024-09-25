@@ -160,3 +160,14 @@ export const navigation = [
   { key: "reviews", label: "Reviews", path: "/reviews" },
   { key: "contact", label: "Contact", path: "/contact" },
 ];
+
+export const psychologistNavigation = [
+  {
+    key: "#condition-specialty",
+    label: "Condition Specialty"
+  },
+  {
+    key: "#age-specialty",
+    label: "Age Specialty"
+  },
+]
