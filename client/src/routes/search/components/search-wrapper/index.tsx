@@ -1,6 +1,7 @@
 "use client";
 
 import { MapComponent } from "@/components/shared";
+import { getValidationError } from "@/utilities";
 import {
   ageSpecialty,
   conditionSpecialty,
@@ -8,8 +9,11 @@ import {
   PsychologistModel,
   TherapyModality,
 } from "@/models";
+import { Positions } from "@/models";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
+import { useSearchParams } from "next/navigation";
+// import { geocodeAddress } from "../../utilities";
 
 export const SearchWrapper = () => {
   const [psychologists, setPsychologists] = useState<
@@ -21,10 +25,19 @@ export const SearchWrapper = () => {
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
     null
   );
-  const [Insurances, setInsurances] = useState<Insurances[] | null>(null);
+  const [insurances, setInsurances] = useState<Insurances[] | null>(null);
   const [therapyModalities, setTherapyModalities] = useState<
     TherapyModality[] | null
   >(null);
+
+  const [mapPositions, setMapPositions] = useState<Positions[]>([
+    { lat: 34.0522, lng: -118.2437 },
+  ]);
+  const [filteredPsychologists, setFilteredPsychologists] = useState<
+    PsychologistModel[] | null
+  >(null);
+
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     async function fetchData() {
@@ -49,21 +62,77 @@ export const SearchWrapper = () => {
         const insurancesData = await insurancesRes.json();
         const therapyModalitiesData = await therapyModalitiesRes.json();
 
+        // const psychologistsWithPosition = await Promise.all(
+        //   psychologistsData.map(async (psychologist: PsychologistModel) => {
+        //     const position = await geocodeAddress(psychologist.address);
+        //     return {
+        //       ...psychologist,
+        //       position,
+        //     };
+        //   })
+        // );
+        // console.log(psychologistsWithPosition);
+
         setPsychologists(psychologistsData);
         setConditions(conditionsData);
         setAgeSpecialties(ageSpecialtiesData);
         setInsurances(insurancesData);
         setTherapyModalities(therapyModalitiesData);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+        getValidationError(error);
+      }
     }
     fetchData();
   }, []);
 
-  console.log(psychologists);
+  useEffect(() => {
+    if (psychologists) {
+      const conditionParam = searchParams.get("condition");
+      const insuranceParam = searchParams.get("insurance");
+      const therapyParam = searchParams.get("therapy");
+
+      let filtered = psychologists;
+
+      if (conditionParam) {
+        filtered = filtered.filter((psychologist) =>
+          psychologist.conditionSpecialty.some(
+            (condition) => condition.name === conditionParam
+          )
+        );
+      }
+
+      if (insuranceParam) {
+        const selectedInsurances = insuranceParam.split(",");
+        filtered = filtered.filter((psychologist) =>
+          psychologist.insurances.some((insurance) =>
+            selectedInsurances.includes(insurance.name)
+          )
+        );
+      }
+
+      if (therapyParam) {
+        filtered = filtered.filter((psychologist) =>
+          psychologist.therapyOptions.some(
+            (modality) => modality.type === therapyParam
+          )
+        );
+      }
+
+      setFilteredPsychologists(filtered);
+    }
+  }, [psychologists, searchParams]);
+
   return (
     <>
-      <SidePanel psychologists={psychologists} />
-      <MapComponent position={[34.0522, -118.2437]} className="h-full w-full" />
+      <SidePanel
+        psychologists={psychologists}
+        filteredPsychologists={filteredPsychologists}
+        conditions={conditions}
+        insurances={insurances}
+        therapyModalities={therapyModalities}
+      />
+      <MapComponent positions={mapPositions} className="h-full w-full" />
     </>
   );
 };
