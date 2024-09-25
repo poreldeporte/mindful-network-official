@@ -13,10 +13,7 @@ export default function PsychologistLayout({
 }>) {
   return (
     <>
-      <Topbar />
-      <MobileTopBar />
       {children}
-      <Footer />
     </>
   );
 }
