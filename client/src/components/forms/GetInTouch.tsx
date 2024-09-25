@@ -1,0 +1,50 @@
+import { Typography } from "../ui";
+import { Button } from "../ui";
+
+export function GetInTouch() {
+  return (
+    <section className="page-width mt-20 py-20 bg-orange-100">
+      <div className="p-5 bg-orange-200 rounded-xl grid grid-cols-1 lg:grid-cols-2">
+        <div>
+          <Typography className="mb-2" color="black" as="h2" variant="xlarge">
+            Get in Touch
+          </Typography>
+          <Typography
+            className="mb-10"
+            color="darkGray"
+            as="h2"
+            variant="medium"
+          >
+            We're Here to Help—Reach Out with Your Questions or Concerns
+          </Typography>
+        </div>
+        <div className="flex flex-col items-end">
+          <form className="w-full flex flex-col gap-5">
+            <input
+              className="bg-transparent w-auto p-2 border-b-2 border-gray-400 appearance-none outline-none"
+              type="text"
+              placeholder="Full Name"
+            ></input>
+            <input
+              className="bg-transparent w-auto p-2 border-b-2 border-gray-400 appearance-none outline-none"
+              type="text"
+              placeholder="Email"
+            ></input>
+            <input
+              className="bg-transparent w-auto p-2 border-b-2 border-gray-400 appearance-none outline-none"
+              type="text"
+              placeholder="Phone"
+            ></input>
+            <textarea
+              className="bg-transparent h-44 w-auto p-2 border-b-2 border-gray-400 appearance-none outline-none"
+              placeholder="Your message"
+            ></textarea>
+          </form>
+          <Button className="p-2 mt-10 rounded-full w-auto" variant="medium">
+            Send Message
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}

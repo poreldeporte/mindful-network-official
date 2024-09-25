@@ -1,0 +1,22 @@
+import { NextResponse } from "next/server";
+import { promises as fs } from "fs";
+import path from "path";
+
+export async function GET() {
+  try {
+    const filePath = path.join(
+      process.cwd(),
+      "src/app/db/condition-specialties.json"
+    );
+    const file = await fs.readFile(filePath, "utf8");
+    const conditions = JSON.parse(file);
+
+    return NextResponse.json(conditions);
+  } catch (error) {
+    console.error("Error reading conditions data:", error);
+    return NextResponse.json(
+      { error: "Error reading conditions data" },
+      { status: 500 }
+    );
+  }
+}
