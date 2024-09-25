@@ -1,58 +1,54 @@
 [
-    {
-        "id": "96639165-f372-48c3-a3fc-61386492881d",
-        "name": ""
-    },
-    {
-        "id": "5c4b2b61-1920-49a1-b6c7-a6b388d384a0",
-        "name": "Anxiety Disorder"
-    },
-    {
-        "id": "e06f133c-5d22-43f9-a7e6-a3d051fc861f",
-        "name": "Obsessive-Compulsive Disorder"
-    },
-    {
-        "id": "9349ac7d-ceb4-4446-abb2-f07613a5d6da",
-        "name": "Personality Disorders"
-    },
-    {
-        "id": "c875c678-6c18-4383-a31b-c28067249b1c",
-        "name": "Personlity Disorders"
-    },
-    {
-        "id": "b93d348e-8175-4f18-ac71-e67f5c95d013",
-        "name": "Anxiety"
-    },
-    {
-        "id": "dbbd38be-90ef-4db6-a195-8633f6bcd1f4",
-        "name": "Eating Disorders"
-    },
-    {
-        "id": "37723c6a-fe93-4637-a67c-4a0cd2fcb616",
-        "name": "PTSD"
-    },
-    {
-        "id": "36ecf477-bfa3-49ca-a256-7ec5ab298a85",
-        "name": "Bipolar Disorder"
-    },
-    {
-        "id": "47636ea4-a0b9-46b6-b346-c2dc25522c68",
-        "name": "Anxiety Disorders"
-    },
-    {
-        "id": "b45a23f1-351f-4bab-8123-4658cf93b4c5",
-        "name": "depression"
-    },
-    {
-        "id": "92a5b432-06fa-4147-87f1-bec45534bd88",
-        "name": "Schizophrenia"
-    },
-    {
-        "id": "a8898870-6377-466a-9ca6-31f42ffeaaf6",
-        "name": "Depression"
-    },
-    {
-        "id": "51ec5a2c-45c6-49af-bb59-8d9516afdf5f",
-        "name": "Personality Disorder"
-    }
+  {
+    "id": "5c4b2b61-1920-49a1-b6c7-a6b388d384a0",
+    "name": "Anxiety Disorder"
+  },
+  {
+    "id": "e06f133c-5d22-43f9-a7e6-a3d051fc861f",
+    "name": "Obsessive-Compulsive Disorder"
+  },
+  {
+    "id": "9349ac7d-ceb4-4446-abb2-f07613a5d6da",
+    "name": "Personality Disorders"
+  },
+  {
+    "id": "c875c678-6c18-4383-a31b-c28067249b1c",
+    "name": "Personlity Disorders"
+  },
+  {
+    "id": "b93d348e-8175-4f18-ac71-e67f5c95d013",
+    "name": "Anxiety"
+  },
+  {
+    "id": "dbbd38be-90ef-4db6-a195-8633f6bcd1f4",
+    "name": "Eating Disorders"
+  },
+  {
+    "id": "37723c6a-fe93-4637-a67c-4a0cd2fcb616",
+    "name": "PTSD"
+  },
+  {
+    "id": "36ecf477-bfa3-49ca-a256-7ec5ab298a85",
+    "name": "Bipolar Disorder"
+  },
+  {
+    "id": "47636ea4-a0b9-46b6-b346-c2dc25522c68",
+    "name": "Anxiety Disorders"
+  },
+  {
+    "id": "b45a23f1-351f-4bab-8123-4658cf93b4c5",
+    "name": "depression"
+  },
+  {
+    "id": "92a5b432-06fa-4147-87f1-bec45534bd88",
+    "name": "Schizophrenia"
+  },
+  {
+    "id": "a8898870-6377-466a-9ca6-31f42ffeaaf6",
+    "name": "Depression"
+  },
+  {
+    "id": "51ec5a2c-45c6-49af-bb59-8d9516afdf5f",
+    "name": "Personality Disorder"
+  }
 ]
