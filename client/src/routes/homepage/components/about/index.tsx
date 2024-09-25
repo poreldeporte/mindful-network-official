@@ -16,7 +16,7 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
         className="mb-2 font-bold"
         color="black"
         as="h4"
-        variant="medium"
+        variant="large"
       >
         {title}
       </Typography>
@@ -30,17 +30,22 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
 
 export function About() {
   return (
-    <section className="page-width my-56">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between">
-        <div>
-          <Typography className="mb-2" color="black" as="h2" variant="subtitle">
-            <span className="text-green-300">We're here to help</span>{" "}
-            <span className="block" />
-            build your support net
-          </Typography>
-
-          <Typography className="mb-2 font-semibold" color="black" as="h3" variant="medium">
-            Access the most reliable and reputable mental health resources available
+    <section className="page-width my-32 lg:my-56">
+      <Typography className="mb-2" color="black" as="h2" variant="title">
+        <span className="text-green-300">We're here to help</span>{" "}
+        <span className="block" />
+        build your support net
+      </Typography>
+      <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 lg:mt-20 gap-5">
+        <div className="flex flex-col gap-5">
+          <Typography
+            className="mb-2 font-semibold"
+            color="black"
+            as="h3"
+            variant="xlarge"
+          >
+            Access the most reliable and reputable mental health resources
+            available
           </Typography>
 
           <div className="my-5">
@@ -56,26 +61,24 @@ export function About() {
           </div>
         </div>
 
-        <div className="relative w-full">
-          <div className="grid grid-cols-3 gap-5 lg:relative">
-            <Image
-              className="w-auto h-auto lg:absolute lg:top-0 lg:left-0 lg:w-1/3 lg:h-auto"
-              src={Person1}
-              alt="Person 1"
-            />
-            <Image
-              className="w-auto h-auto lg:absolute lg:top-10 lg:left-1/3 lg:w-1/3 lg:h-auto"
-              src={Person2}
-              alt="Person 2"
-            />
-            <Image
-              className="w-auto h-auto lg:absolute lg:bottom-0 lg:right-0 lg:w-1/3 lg:h-auto"
-              src={Person3}
-              alt="Person 3"
-            />
-          </div>
+        <div className="grid grid-cols-3 lg:flex gap-5 w-full h-full relative">
+          <Image
+            className="w-auto h-auto lg:absolute lg:top-0 lg:left-0 lg:w-[370px] lg:h-auto"
+            src={Person1}
+            alt="Person 1"
+          />
+          <Image
+            className="w-auto h-auto lg:absolute lg:-bottom-20 lg:w-[200px] lg:left-1/4 lg:h-auto"
+            src={Person2}
+            alt="Person 2"
+          />
+          <Image
+            className="w-auto h-auto lg:absolute lg:bottom-20 lg:w-[270px] lg:right-20 lg:h-auto"
+            src={Person3}
+            alt="Person 3"
+          />
         </div>
       </div>
-</section>
+    </section>
   );
 }
