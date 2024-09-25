@@ -1,19 +1,24 @@
-type TherapyModality = {
+export type Positions = {
+  lat: number;
+  lng: number;
+};
+
+export type TherapyModality = {
   id: string;
   type: string;
 };
 
-type ageSpecialty = {
+export type ageSpecialty = {
   id: string;
   age: string;
 };
 
-type conditionSpecialty = {
+export type conditionSpecialty = {
   id: string;
   name: string;
 };
 
-type Insurances = {
+export type Insurances = {
   id: string;
   name: string;
 };
@@ -23,6 +28,7 @@ export interface PsychologistModel {
   name: string;
   facility: string;
   address: string;
+  position: Positions;
   phone: string;
   insurances: Insurances[];
   ageSpecialty: ageSpecialty[];
