@@ -41,7 +41,7 @@ const PsychologistCard = ({
           <div className="flex items-center gap-1">
             {therapyOptions.length
               ? therapyOptions.map((option) => (
-                  <Badge key={option.id} color="orange">
+                  <Badge key={option.id} color="blue">
                     {option.type}
                   </Badge>
                 ))
