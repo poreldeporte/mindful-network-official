@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { Positions } from "@/models";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import React, { useEffect, useRef } from "react";
 
 interface MapProps {
-  position: [number, number];
+  positions: Positions[];
   className?: string;
 }
 
 export const MapComponent: React.FC<MapProps> = ({
-  position,
+  positions,
   className = "",
 }) => {
   const mapRef = useRef<L.Map | null>(null);
@@ -23,21 +24,37 @@ export const MapComponent: React.FC<MapProps> = ({
 
   useEffect(() => {
     if (mapRef.current === null) {
+      const initialPosition =
+        positions.length > 0 ? [positions[0].lat, positions[0].lng] : [0, 0];
       mapRef.current = L.map("map", {
-        center: position,
+        center: initialPosition as L.LatLngExpression,
         zoom: 11,
       });
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(mapRef.current);
-
-      L.marker(position).addTo(mapRef.current);
     } else {
-      mapRef.current.setView(position, 11);
-      L.marker(position).addTo(mapRef.current);
+      const bounds = L.latLngBounds(positions.map((pos) => [pos.lat, pos.lng]));
+      mapRef.current.fitBounds(bounds);
     }
-  }, [position]);
 
-  return <div id="map" className={className} style={{ zIndex: "5" }}></div>;
+    mapRef.current.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        mapRef.current?.removeLayer(layer);
+      }
+    });
+
+    positions.forEach((position) => {
+      L.marker([position.lat, position.lng]).addTo(mapRef.current!);
+    });
+  }, [positions]);
+
+  return (
+    <div
+      id="map"
+      className={className}
+      style={{ zIndex: "5", height: "100%" }}
+    ></div>
+  );
 };

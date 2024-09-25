@@ -1,0 +1,82 @@
+[
+  {
+    "id": "131371ab-b625-4571-93ab-aedea2ddb1b9",
+    "name": "Humana"
+  },
+  {
+    "id": "0e5564ec-b281-4f27-b674-5839b41f86f9",
+    "name": "United Healthcare"
+  },
+  {
+    "id": "583d89b0-76c1-407c-b4cb-c09a93cd0fc8",
+    "name": "Aetna"
+  },
+  {
+    "id": "7d04fa68-b745-472b-8502-d5b174831f93",
+    "name": "Unitedhealthcare"
+  },
+  {
+    "id": "08ab3b61-894b-4ecf-85e0-ee7500c71f5d",
+    "name": "Oscar Health"
+  },
+  {
+    "id": "25a5bbc0-7101-4b20-9582-55b1d33af29a",
+    "name": "Medicare"
+  },
+  {
+    "id": "28352264-8c92-42fd-88cf-1f848517f21f",
+    "name": "Medicaid"
+  },
+  {
+    "id": "4e9598ea-acb3-4e5c-b1e6-090cc987b0a3",
+    "name": "AvMed"
+  },
+  {
+    "id": "a7e2f895-4acf-4800-9f67-9c70a981e49a",
+    "name": "Cigna"
+  },
+  {
+    "id": "80d49188-b887-4050-9ce6-1e7d208f2408",
+    "name": "UnitedHealthcare"
+  },
+  {
+    "id": "6b5aa3a7-8e71-443c-b1fd-0d533889241f",
+    "name": "BlueCrossBlueShield"
+  },
+  {
+    "id": "85c179fc-035d-4742-a43c-cb882ebcd837",
+    "name": "Ambetter"
+  },
+  {
+    "id": "7eea5737-2c5e-4266-936e-787b40045ab0",
+    "name": "FloridaBlue"
+  },
+  {
+    "id": "856cf7d0-40a9-4f84-bcc5-07f55a0b3328",
+    "name": "Florida Blue"
+  },
+  {
+    "id": "e17c0eaf-604f-4a22-9ef1-4ae381ed9bb1",
+    "name": "Molina Healthcare"
+  },
+  {
+    "id": "2bbc5ba9-1c34-4191-8b40-d42840d21d3f",
+    "name": "Oscar"
+  },
+  {
+    "id": "0230b2da-b929-4bbb-9a41-9d39939ab199",
+    "name": "Magellan"
+  },
+  {
+    "id": "6b65a030-fc37-4546-837c-aa398943179f",
+    "name": "NewDirections"
+  },
+  {
+    "id": "9a0e9eec-36a6-4afc-9416-56dee11a2162",
+    "name": "Optum"
+  },
+  {
+    "id": "a889800d-d03e-417e-9e67-56fed8fa703d",
+    "name": "Lucet"
+  }
+]

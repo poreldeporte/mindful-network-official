@@ -1,11 +1,9 @@
-import { Typography } from "@/components/ui";
+import { SearchWrapper } from "@/routes/search";
 
 export default function Search() {
   return (
-    <main className="">
-      <Typography className="font-antic" as="h2" color="black" variant="medium">
-        Search Page
-      </Typography>
-    </main>
+    <section className="h-screen mt-10 relative">
+      <SearchWrapper />
+    </section>
   );
 }
