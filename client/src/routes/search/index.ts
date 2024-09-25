@@ -1,1 +1,1 @@
-export { default as SidePanel } from "./side-panel/SidePanel";
+export * from "./components/search-wrapper/index";
