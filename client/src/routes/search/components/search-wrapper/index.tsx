@@ -50,7 +50,7 @@ export const SearchWrapper = () => {
         ] = await Promise.all([
           fetch("/api/psychologists"),
           fetch("/api/conditions"),
-          fetch("/api/age-specialties"),
+          // fetch("/api/age-specialties"),
           fetch("/api/insurances"),
           fetch("/api/therapy-modalities"),
         ]);
