@@ -1,12 +1,9 @@
-import { Typography, Button } from "@/components/ui";
+import { Typography } from "@/components/ui";
+import Link from "next/link";
 
 export const Hero = () => {
-  const handleTest = (text: string, event: React.MouseEvent): void => {
-    console.log(text, event);
-  };
-
   return (
-    <section className="page-width mb-5">
+    <section className="page-width mt-32 lg:mt-56 lg:flex items-center justify-center flex-col">
       <Typography
         className="font-antic my-4"
         as="h1"
@@ -22,9 +19,11 @@ export const Hero = () => {
         to find the support you need, when you need it.
       </Typography>
 
-      <Button className="mt-4" variant="medium">
-        Start Exploring
-      </Button>
+      <Link href={"/search"} className="mt-4 py-2 px-4 rounded-xl bg-blue-500">
+        <Typography as="span" variant={"medium"} color="white">
+          Start Exploring
+        </Typography>
+      </Link>
     </section>
   );
 };
