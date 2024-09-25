@@ -1,4 +1,4 @@
-import { Footer, Topbar } from "@/components/shared";
+import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
 import "./globals.css";
@@ -31,6 +31,7 @@ export default function RootLayout({
         className={`${anticDidone.className} ${dmSans.className} antialiased`}
       >
         <Topbar />
+        <MobileTopBar />
         {children}
         <Footer />
       </body>
