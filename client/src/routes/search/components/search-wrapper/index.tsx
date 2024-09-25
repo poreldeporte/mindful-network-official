@@ -13,7 +13,6 @@ import { Positions } from "@/models";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 import { useSearchParams } from "next/navigation";
-// import { geocodeAddress } from "../../utilities";
 
 export const SearchWrapper = () => {
   const [psychologists, setPsychologists] = useState<
@@ -62,17 +61,6 @@ export const SearchWrapper = () => {
         const insurancesData = await insurancesRes.json();
         const therapyModalitiesData = await therapyModalitiesRes.json();
 
-        // const psychologistsWithPosition = await Promise.all(
-        //   psychologistsData.map(async (psychologist: PsychologistModel) => {
-        //     const position = await geocodeAddress(psychologist.address);
-        //     return {
-        //       ...psychologist,
-        //       position,
-        //     };
-        //   })
-        // );
-        // console.log(psychologistsWithPosition);
-
         setPsychologists(psychologistsData);
         setConditions(conditionsData);
         setAgeSpecialties(ageSpecialtiesData);
@@ -91,6 +79,7 @@ export const SearchWrapper = () => {
       const conditionParam = searchParams.get("condition");
       const insuranceParam = searchParams.get("insurance");
       const therapyParam = searchParams.get("therapy");
+      const searchQuery = searchParams.get("search");
 
       let filtered = psychologists;
 
@@ -116,6 +105,19 @@ export const SearchWrapper = () => {
           psychologist.therapyOptions.some(
             (modality) => modality.type === therapyParam
           )
+        );
+      }
+
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        filtered = filtered.filter(
+          (psychologist) =>
+            psychologist.insurances.some((insurance) =>
+              insurance.name.toLowerCase().includes(query)
+            ) ||
+            psychologist.therapyOptions.some((modality) =>
+              modality.type.toLowerCase().includes(query)
+            )
         );
       }
 
