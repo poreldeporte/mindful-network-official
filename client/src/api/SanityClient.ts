@@ -1,7 +1,7 @@
 import { createClient } from "@sanity/client";
 import { sanityConfig } from "@/config";
 
-export const SanityClient = createClient({
+export const sanityClient = createClient({
   projectId: sanityConfig.projectId || "",
   dataset: sanityConfig.dataset || "production",
   apiVersion: "2024-09-16",
