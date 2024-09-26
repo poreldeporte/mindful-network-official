@@ -3,7 +3,7 @@ import { sanityClient } from "@/api";
 import { v4 as uuidv4 } from "uuid";
 
 export const createReferences = async (items, referenceArray, type, key) => {
-  let itemsArr = Array.isArray(items) ? items : items.trim().split(",");
+  const itemsArr = Array.isArray(items) ? items : items.trim().split(",");
 
   const references = await Promise.all(
     itemsArr.map(async (item) => {
