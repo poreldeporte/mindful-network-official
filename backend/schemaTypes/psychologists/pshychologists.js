@@ -7,7 +7,6 @@ export default {
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'facility',
@@ -37,57 +36,25 @@ export default {
       name: 'insurances',
       title: 'Insurances',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {name: 'id', title: 'ID', type: 'string'},
-            {name: 'name', title: 'Name', type: 'string'},
-          ],
-        },
-      ],
+      of: [{type: 'reference', to: [{type: 'insurance'}]}],
     },
     {
       name: 'ageSpecialty',
       title: 'Age Specialty',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {name: 'id', title: 'ID', type: 'string'},
-            {name: 'age', title: 'Age', type: 'string'},
-          ],
-        },
-      ],
+      of: [{type: 'reference', to: [{type: 'ageSpecialty'}]}],
     },
     {
       name: 'conditionSpecialty',
       title: 'Condition Specialty',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {name: 'id', title: 'ID', type: 'string'},
-            {name: 'name', title: 'Name', type: 'string'},
-          ],
-        },
-      ],
+      of: [{type: 'reference', to: [{type: 'conditionSpecialty'}]}],
     },
     {
       name: 'therapyOptions',
       title: 'Therapy Options',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {name: 'id', title: 'ID', type: 'string'},
-            {name: 'type', title: 'Type', type: 'string'},
-          ],
-        },
-      ],
+      of: [{type: 'reference', to: [{type: 'therapyModality'}]}],
     },
     {
       name: 'image',
