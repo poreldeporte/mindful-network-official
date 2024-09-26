@@ -1,10 +1,9 @@
 import { findDocumentByName } from "./findDocumentByName.utility";
 import { sanityClient } from "@/api";
+import { v4 as uuidv4 } from "uuid";
 
 export const createReferences = async (items, referenceArray, type, key) => {
-  let itemsArr = [];
-
-  if (!Array.isArray(items)) itemsArr = items.trim().split(",");
+  let itemsArr = Array.isArray(items) ? items : items.trim().split(",");
 
   const references = await Promise.all(
     itemsArr.map(async (item) => {
@@ -15,10 +14,15 @@ export const createReferences = async (items, referenceArray, type, key) => {
           [key]: item,
         });
         console.log(`Created new ${type} document: ${item}`);
-        if (doc._id) return { _type: "reference", _ref: doc._id };
       }
-      if (doc._id) return { _type: "reference", _ref: doc._id };
+      if (doc._id) {
+        return {
+          _key: uuidv4(),
+          _type: "reference",
+          _ref: doc._id,
+        };
+      }
     })
   );
-  return references;
+  return references.filter(Boolean);
 };
