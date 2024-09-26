@@ -1,27 +1,8 @@
-export type Positions = {
-  lat: number;
-  lng: number;
-};
-
-export type TherapyModality = {
-  id: string;
-  type: string;
-};
-
-export type ageSpecialty = {
-  id: string;
-  age: string;
-};
-
-export type conditionSpecialty = {
-  id: string;
-  name: string;
-};
-
-export type Insurances = {
-  id: string;
-  name: string;
-};
+import { ageSpecialty } from "./age-specialty.model";
+import { conditionSpecialty } from "./condition-specialty.model";
+import { insurances } from "./insurances.model";
+import { Positions } from "./positions.model";
+import { TherapyModality } from "./therapy-modality.model";
 
 export interface PsychologistModel {
   id: string;
@@ -30,7 +11,7 @@ export interface PsychologistModel {
   address: string;
   position: Positions;
   phone: string;
-  insurances: Insurances[];
+  insurances: insurances[];
   ageSpecialty: ageSpecialty[];
   conditionSpecialty: conditionSpecialty[];
   therapyOptions: TherapyModality[];
