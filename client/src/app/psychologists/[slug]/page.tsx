@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { PsychologistModel } from '@/models';
-import { PsychologistAbout, ProfileCard } from '@/routes/psychologists/components';
+import { PsychologistAbout, ProfileCard, GetInTouch } from '@/routes/psychologists/components';
 
 
 export default function PsychologistPage() {
@@ -39,33 +39,8 @@ export default function PsychologistPage() {
 
       <PsychologistAbout {...psychologist}/>
 
-      <h2>Insurances Accepted</h2>
-      <ul>
-        {psychologist.insurances.map((insurance) => (
-          <li key={insurance.id}>{insurance.name}</li>
-        ))}
-      </ul>
+      <GetInTouch {...psychologist} />
 
-      <h2>Age Specialties</h2>
-      <ul>
-        {psychologist.ageSpecialty.map((specialty) => (
-          <li key={specialty.id}>{specialty.age}</li>
-        ))}
-      </ul>
-
-      <h2>Condition Specialties</h2>
-      <ul>
-        {psychologist.conditionSpecialty.map((condition) => (
-          <li key={condition.id}>{condition.name}</li>
-        ))}
-      </ul>
-
-      <h2>Therapy Options</h2>
-      <ul>
-        {psychologist.therapyOptions.map((option) => (
-          <li key={option.id}>{option.type}</li>
-        ))}
-      </ul>
     </section>
   );
 }
