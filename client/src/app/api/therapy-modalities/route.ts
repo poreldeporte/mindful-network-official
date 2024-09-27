@@ -1,20 +1,24 @@
+import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { allTherapyModalitiesQuery } from "../types";
+import { getTherapyModalityAdapter } from "@/adapters";
 
 export async function GET() {
   try {
-    const filePath = path.join(
-      process.cwd(),
-      "/src/app/db/therapy-modality.json"
+    const therapyModalities = await sanityClient.fetch(
+      allTherapyModalitiesQuery
     );
-    const file = await fs.readFile(filePath, "utf8");
-    const therapyModalities = JSON.parse(file);
 
-    return NextResponse.json(therapyModalities);
+    const adaptedTherapyModalities = therapyModalities.map(
+      getTherapyModalityAdapter
+    );
+
+    return NextResponse.json(adaptedTherapyModalities);
   } catch (error) {
+    console.error("Error reading therapy modalities data:", error);
+
     return NextResponse.json(
-      { error: `Error reading psychologists data ${error}` },
+      { error: "Error reading therapy modalities data" },
       { status: 500 }
     );
   }

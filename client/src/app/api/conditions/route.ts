@@ -1,21 +1,20 @@
+import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { allConditionSpecialtiesQuery } from "../types";
+import { getConditionSpecialtyAdapter } from "@/adapters";
 
 export async function GET() {
   try {
-    const filePath = path.join(
-      process.cwd(),
-      "src/app/db/condition-specialties.json"
-    );
-    const file = await fs.readFile(filePath, "utf8");
-    const conditions = JSON.parse(file);
+    const conditions = await sanityClient.fetch(allConditionSpecialtiesQuery);
 
-    return NextResponse.json(conditions);
+    const adaptedConditions = conditions.map(getConditionSpecialtyAdapter);
+
+    return NextResponse.json(adaptedConditions);
   } catch (error) {
-    console.error("Error reading conditions data:", error);
+    console.error("Error reading condition specialties data:", error);
+
     return NextResponse.json(
-      { error: "Error reading conditions data" },
+      { error: "Error reading condition specialties data" },
       { status: 500 }
     );
   }

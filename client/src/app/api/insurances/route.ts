@@ -1,18 +1,20 @@
+import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { allInsurancesQuery } from "../types";
+import { getinsurancesAdapter } from "@/adapters";
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "/src/app/db/insurances.json");
-    const file = await fs.readFile(filePath, "utf8");
-    const insurances = JSON.parse(file);
+    const insurances = await sanityClient.fetch(allInsurancesQuery);
 
-    return NextResponse.json(insurances);
+    const adaptedInsurances = insurances.map(getinsurancesAdapter);
+
+    return NextResponse.json(adaptedInsurances);
   } catch (error) {
-    console.error("Error reading psychologists data:", error);
+    console.error("Error reading insurances data:", error);
+
     return NextResponse.json(
-      { error: "Error reading psychologists data" },
+      { error: "Error reading insurances data" },
       { status: 500 }
     );
   }

@@ -3,7 +3,7 @@
 import { Badge, Typography } from "@/components/ui";
 import {
   conditionSpecialty,
-  Insurances,
+  insurances,
   PsychologistModel,
   TherapyModality,
 } from "@/models";
@@ -15,7 +15,7 @@ interface Props {
   psychologists: PsychologistModel[] | null;
   filteredPsychologists: PsychologistModel[] | null;
   conditions: conditionSpecialty[] | null;
-  insurances: Insurances[] | null;
+  insurances: insurances[] | null;
   therapyModalities: TherapyModality[] | null;
 }
 

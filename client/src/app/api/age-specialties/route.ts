@@ -1,17 +1,20 @@
+import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { allAgeSpecialtiesQuery } from "../types";
+import { getAgeSpecialtyAdapter } from "@/adapters";
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "/src/app/db/age-specialty.json");
-    const file = await fs.readFile(filePath, "utf8");
-    const ageSpecialties = JSON.parse(file);
+    const ageSpecialties = await sanityClient.fetch(allAgeSpecialtiesQuery);
 
-    return NextResponse.json(ageSpecialties);
+    const adaptedAgeSpecialties = ageSpecialties.map(getAgeSpecialtyAdapter);
+
+    return NextResponse.json(adaptedAgeSpecialties);
   } catch (error) {
+    console.error("Error reading age specialties data:", error);
+
     return NextResponse.json(
-      { error: `Error reading Age Specialties data ${error}` },
+      { error: "Error reading age specialties data" },
       { status: 500 }
     );
   }

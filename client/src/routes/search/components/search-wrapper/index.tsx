@@ -5,7 +5,7 @@ import { getValidationError } from "@/utilities";
 import {
   // ageSpecialty,
   conditionSpecialty,
-  Insurances,
+  insurances,
   PsychologistModel,
   TherapyModality,
 } from "@/models";
@@ -24,7 +24,7 @@ export const SearchWrapper = () => {
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
     null
   );
-  const [insurances, setInsurances] = useState<Insurances[] | null>(null);
+  const [insurances, setInsurances] = useState<insurances[] | null>(null);
   const [therapyModalities, setTherapyModalities] = useState<
     TherapyModality[] | null
   >(null);
