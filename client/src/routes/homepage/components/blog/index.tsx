@@ -6,13 +6,13 @@ import React from "react";
 
 const BlogCard = ({ title, description, image, slug }: BlogModel) => {
   return (
-    <article>
+    <article className="w-full">
       <a href={slug}>
         <Image
-          className="w-full aspect-video h-auto object-cover mb-4"
+          className="w-full aspect-video object-cover mb-4"
           src={image}
-          width={400}
-          height={200}
+          width={300}
+          height={300}
           alt="Picture of the author"
         />
         <Typography className="mb-2" color="black" as="h4" variant="medium">
@@ -22,7 +22,7 @@ const BlogCard = ({ title, description, image, slug }: BlogModel) => {
           className="mb-2 font-semibold"
           color="black"
           as="h2"
-          variant="xlarge"
+          variant="large"
         >
           {description}
         </Typography>
@@ -42,13 +42,13 @@ export const BlogContainer: React.FC<Props> = () => {
         className="mb-10 font-bold"
         color="black"
         as="h4"
-        variant="title"
+        variant="subtitle"
       >
         Expert articles and resources <span className="block"></span>to
         <span className="text-green-300"> support your journey</span>
       </Typography>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-5">
         {blogPosts.map((blogPost) => (
           <BlogCard key={blogPost.id} {...blogPost} />
         ))}

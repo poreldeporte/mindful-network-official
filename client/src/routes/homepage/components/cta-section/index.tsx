@@ -10,12 +10,12 @@ interface Props {
 
 const CTACard = ({ image, buttonText }: Props) => {
   return (
-    <article className="relative w-full h-auto rounded-xl overflow-hidden">
+    <article className="relative w-full h-72 rounded-xl overflow-hidden">
       <Image
         className="w-full h-full object-cover"
         src={image}
         width={500}
-        height={500}
+        height={200}
         alt="Picture of the author"
       />
       <div className="absolute bottom-0 left-0 w-full p-8 flex items-center">
