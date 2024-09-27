@@ -6,120 +6,110 @@ import { Button, Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
 
 import { usePathname } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { Section } from "../section";
 
-const NavigationBar = () => {
-  const pathname = usePathname();
+import { useEffect, useState } from "react";
 
+export function PsychologistAbout({
+  ageSpecialty,
+  insurances,
+  conditionSpecialty,
+  therapyOptions,
+}: PsychologistModel) {
   return (
-    <nav className="hidden lg:flex items-center justify-between">
-      <div>
-        {psychologistNavigation.map((link) => {
-          const isActive = pathname === link.key;
-          return (
-            <a
-              className={`mr-10 ${isActive ? "font-bold underline" : ""}`}
-              key={link.key}
-              href={link.key}
-            >
-              {link.label}
-            </a>
-          );
-        })}
-      </div>
-      <Button className="p-2" variant="medium">
-        Get in Touch
-      </Button>
-    </nav>
-  );
-};
-
-export function PsychologistAbout({ ageSpecialty, insurances, conditionSpecialty, therapyOptions}: PsychologistModel) {
-  return (
-    <div>
-      <NavigationBar />
-
-      <Section title="Child Specialty">
-        <ul>
+    <>
+      <Section id="child-specialty" title="Child Specialty">
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {ageSpecialty && ageSpecialty.length ? (
             <>
-              {ageSpecialty.map((condition) => 
-              (
-                <li key={condition.id}>
-                <Typography as="p" variant="medium" color="darkGray">
-                  {condition.age}
+              {ageSpecialty.map((insurance) => (
+                <li
+                  key={insurance.id}
+                  className="flex justify-between items-center border-b py-2"
+                >
+                  <Typography as="p" variant="large" color="darkGray">
+                    {insurance.age}
                   </Typography>
-                  </li>
-                )
-                )}
+                </li>
+              ))}
             </>
           ) : (
-            ""
+            <Typography as="p" variant="large" color="darkGray">
+              No Age Specialty available
+            </Typography>
           )}
         </ul>
       </Section>
 
-      <Section title="Insurances">
-        <ul>
+      <Section id="insurances" title="Insurances">
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {insurances && insurances.length ? (
             <>
-              {insurances.map((insurance) => 
-              (
-                <li key={insurance.id}>
-                <Typography as="p" variant="medium" color="darkGray">
-                  {insurance.name}
+              {insurances.map((insurance) => (
+                <li
+                  key={insurance.id}
+                  className="flex justify-between items-center border-b py-2"
+                >
+                  <Typography as="p" variant="large" color="darkGray">
+                    {insurance.name}
                   </Typography>
-                  </li>
-                )
-                )}
+                </li>
+              ))}
             </>
           ) : (
-            ""
+            <Typography as="p" variant="large" color="darkGray">
+              No insurances available
+            </Typography>
           )}
         </ul>
       </Section>
 
-      <Section title="Condition Specialty">
-        <ul>
+      <Section id="condition-specialty" title="Condition Specialty">
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {conditionSpecialty && conditionSpecialty.length ? (
             <>
-              {conditionSpecialty.map((condition) => 
-              (
-                <li key={condition.id}>
-                <Typography as="p" variant="medium" color="darkGray">
-                  {condition.name}
+              {conditionSpecialty.map((condition) => (
+                <li
+                  key={condition.id}
+                  className="flex justify-between items-center border-b py-2"
+                >
+                  <Typography as="p" variant="large" color="darkGray">
+                    {condition.name}
                   </Typography>
-                  </li>
-                )
-                )}
+                </li>
+              ))}
             </>
           ) : (
-            ""
+            <Typography as="p" variant="large" color="darkGray">
+              No conditions available
+            </Typography>
           )}
         </ul>
       </Section>
 
-      <Section title="Therapy options">
-        <ul>
+      <Section id="therapy-options" title="Therapy options">
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {therapyOptions && therapyOptions.length ? (
             <>
-              {therapyOptions.map((option) => 
-              (
-                <li key={option.id}>
-                <Typography as="p" variant="medium" color="darkGray">
-                  {option.type}
+              {therapyOptions.map((option) => (
+                <li
+                  key={option.id}
+                  className="flex justify-between items-center border-b py-2"
+                >
+                  <Typography as="p" variant="large" color="darkGray">
+                    {option.type}
                   </Typography>
-                  </li>
-                )
-                )}
+                </li>
+              ))}
             </>
           ) : (
-            ""
+            <Typography as="p" variant="large" color="darkGray">
+              No Therapy options available
+            </Typography>
           )}
         </ul>
       </Section>
-
-
-    </div>
+    </>
   );
 }
