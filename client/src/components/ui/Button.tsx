@@ -9,11 +9,19 @@ interface Props {
   className?: string;
   variant: VariantType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: "button" | "submit" | "reset";
 }
 
-export function Button({ children, className, variant, onClick }: Props) {
+export function Button({
+  children,
+  className,
+  variant,
+  onClick,
+  type = "button",
+}: Props) {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${className} bg-blue-500 transition-colors hover:bg-blue-700 text-white`}
     >
