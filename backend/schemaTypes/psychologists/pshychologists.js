@@ -9,6 +9,41 @@ export default {
       type: 'string',
     },
     {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    },
+    {
+      name: 'image',
+      title: 'Image',
+      description: 'Suggestion: Ensure the image size is under 1MB.',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'video',
+      title: 'Video File',
+      description: 'Suggestion: Ensure the video size is under 50MB.',
+      type: 'file',
+      options: {
+        accept: 'video/*',
+      },
+      fields: [
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        },
+        {
+          name: 'attribution',
+          type: 'string',
+          title: 'Attribution',
+        },
+      ],
+    },
+    {
       name: 'facility',
       title: 'Facility',
       type: 'string',
@@ -16,7 +51,13 @@ export default {
     {
       name: 'address',
       title: 'Address',
-      type: 'string',
+      type: 'object',
+      fields: [
+        {name: 'address', title: 'Address', type: 'string'},
+        {name: 'state', title: 'State', type: 'string'},
+        {name: 'city', title: 'City', type: 'string'},
+        {name: 'zip', title: 'Zip', type: 'string'},
+      ],
     },
     {
       name: 'position',
@@ -55,14 +96,6 @@ export default {
       title: 'Therapy Options',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'therapyModality'}]}],
-    },
-    {
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
     },
   ],
   preview: {
