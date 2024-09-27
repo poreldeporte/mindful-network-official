@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { PsychologistModel } from '@/models';
-import { PsychologistAbout, ProfileCard, GetInTouch } from '@/routes/psychologists/components';
+import { PsychologistAbout, ProfileCard, GetInTouch, NavigationBar } from '@/routes/psychologists/components';
 
 
 export default function PsychologistPage() {
@@ -34,7 +34,9 @@ export default function PsychologistPage() {
   }
 
   return (
-    <section className='page-width my-56'>
+    <section className='min-h-screen page-width my-56'>
+      <NavigationBar />
+
       <ProfileCard {...psychologist}/>
 
       <PsychologistAbout {...psychologist}/>

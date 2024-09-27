@@ -10,13 +10,14 @@ export function ProfileCard({
   name,
 }: PsychologistModel) {
   return (
-    <header className="p-5 flex">
-      <div>
+    <header className="mb-56 mt-96 flex items-center">
+      <div className="w-32 h-32 mr-5">
         <Image
-          src={image ? image : UserImage}
+          className="rounded-full aspect-square object-cover"
+          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTh8fHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D"
           alt={name}
-          width={100}
-          height={100}
+          width={300}
+          height={300}
         />
       </div>
       <div>
@@ -28,7 +29,7 @@ export function ProfileCard({
         >
           {name}
         </Typography>
-        <div className="">
+        <div>
           {conditionSpecialty && conditionSpecialty.length ? (
             <Typography as="p" variant="medium" color="lightGray">
               {conditionSpecialty.map((condition) => condition.name).join(", ")}
