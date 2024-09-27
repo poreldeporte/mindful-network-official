@@ -10,7 +10,7 @@ export function ProfileCard({
   name,
 }: PsychologistModel) {
   return (
-    <header className="mb-56 mt-96 flex items-center">
+    <header className="mb-20 lg:mb-48 mt-32 lg:mt-72 flex items-center">
       <div className="w-32 h-32 mr-5">
         <Image
           className="rounded-full aspect-square object-cover"

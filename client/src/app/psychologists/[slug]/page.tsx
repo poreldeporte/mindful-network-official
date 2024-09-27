@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { PsychologistModel } from '@/models';
-import { PsychologistAbout, ProfileCard, GetInTouch, NavigationBar } from '@/routes/psychologists/components';
-
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { PsychologistModel } from "@/models";
+import {
+  PsychologistAbout,
+  ProfileCard,
+  GetInTouch,
+  NavigationBar,
+} from "@/routes/psychologists/components";
+import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 
 export default function PsychologistPage() {
-  const { slug } = useParams(); // Retrieve slug from the dynamic route
-  const [psychologist, setPsychologist] = useState<PsychologistModel | null>(null);
+  const { slug } = useParams();
+  const [psychologist, setPsychologist] = useState<PsychologistModel | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,15 +41,17 @@ export default function PsychologistPage() {
   }
 
   return (
-    <section className='min-h-screen page-width my-56'>
-      <NavigationBar />
+    <main>
+      <Topbar />
+      <MobileTopBar />
 
-      <ProfileCard {...psychologist}/>
-
-      <PsychologistAbout {...psychologist}/>
-
-      <GetInTouch {...psychologist} />
-
-    </section>
+      <div className="min-h-screen page-width lg:my-56">
+        <NavigationBar />
+        <ProfileCard {...psychologist} />
+        <PsychologistAbout {...psychologist} />
+        <GetInTouch {...psychologist} />
+      </div>
+      <Footer />
+    </main>
   );
 }

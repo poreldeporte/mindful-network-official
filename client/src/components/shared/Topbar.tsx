@@ -12,9 +12,9 @@ export function Topbar() {
   const isSearchPage = pathname === "/search";
 
   const headerFixed =
-    "fixed top-10 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+    "fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
   const headerRelative =
-    "relative mt-10 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+    "relative mt-5 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
 
   return (
     <header className={isSearchPage ? headerRelative : headerFixed}>

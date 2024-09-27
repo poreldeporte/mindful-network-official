@@ -19,8 +19,8 @@ export function PsychologistAbout({
 }: PsychologistModel) {
   return (
     <>
-      <Section id="child-specialty" title="Child Specialty">
-      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
+      <Section id="age-specialty" title="Age Specialty">
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {ageSpecialty && ageSpecialty.length ? (
             <>
               {ageSpecialty.map((insurance) => (
@@ -66,7 +66,7 @@ export function PsychologistAbout({
       </Section>
 
       <Section id="condition-specialty" title="Condition Specialty">
-      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {conditionSpecialty && conditionSpecialty.length ? (
             <>
               {conditionSpecialty.map((condition) => (
@@ -89,7 +89,7 @@ export function PsychologistAbout({
       </Section>
 
       <Section id="therapy-options" title="Therapy options">
-      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {therapyOptions && therapyOptions.length ? (
             <>
               {therapyOptions.map((option) => (
