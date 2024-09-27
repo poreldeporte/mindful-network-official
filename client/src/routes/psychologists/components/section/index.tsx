@@ -10,7 +10,7 @@ interface Props {
 
 export function Section({ children, title, id }: Props) {
   return (
-    <section id={id} className="my-10 pb-10 lg:pb-32 border-b border-gray-300">
+    <section id={id} className="py-20 lg:py-28 border-b border-gray-300">
       <div className="flex items-center space-x-3 ">
         <BriefcaseIcon className="h-12 w-12" />
         <Typography

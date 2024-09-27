@@ -15,7 +15,7 @@ export function GetInTouch({ name, phone, address }: PsychologistModel) {
           <span className="text-orange-600">{name}</span>
         </Typography>
       </div>
-      <div className="bg-orange-100 w-full first:flex flex-col items-center justify-centerlg:flex-grow p-5 lg:w-1/2">
+      <div className="bg-orange-100 rounded-xl w-full first:flex flex-col items-center justify-centerlg:flex-grow p-5 lg:w-1/2">
         <div className="flex flex-col items-center space-y-5">
           <div className="flex flex-row items-center space-x-2">
             <EnvelopeIcon className="h-8 w-8" />

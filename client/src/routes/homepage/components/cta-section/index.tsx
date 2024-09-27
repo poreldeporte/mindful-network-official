@@ -35,7 +35,7 @@ const CTACard = ({ image, buttonText }: Props) => {
 
 export function CTASection() {
   return (
-    <section className="page-width">
+    <section className="page-width section-y-padding">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {CTACards.map((card) => (
           <CTACard key={card.id} {...card} />

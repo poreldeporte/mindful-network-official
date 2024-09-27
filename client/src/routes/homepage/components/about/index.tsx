@@ -30,7 +30,7 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
 
 export function About() {
   return (
-    <section className="page-width my-32 lg:my-56">
+    <section className="page-width section-y-padding">
       <Typography className="mb-2" color="black" as="h2" variant="title">
         <span className="text-green-300">We&apos;re here to help</span>{" "}
         <span className="block" />
