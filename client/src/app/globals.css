@@ -9,6 +9,10 @@
   padding-inline: 20px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @media only screen and (min-width: 1200px) {
   .page-width {
     padding-inline: 70px;

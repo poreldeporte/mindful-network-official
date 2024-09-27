@@ -2,6 +2,7 @@ import { Button, Typography, Badge } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import Image from "next/image";
+import Link from "next/link";
 
 const PsychologistCard = ({
   psychologist,
@@ -10,6 +11,7 @@ const PsychologistCard = ({
 }) => {
   const {
     name,
+    id,
     image,
     therapyOptions,
     conditionSpecialty,
@@ -82,9 +84,12 @@ const PsychologistCard = ({
           </div>
 
           <div className="flex items-end">
-            <Button className="px-3 py-1.5 rounded-full" variant="medium">
+            <Link
+              href={`/psychologists/${id}`}
+              className="px-3 py-1.5 rounded-full bg-blue-500 text-white"
+            >
               Get in Touch
-            </Button>
+            </Link>
           </div>
         </div>
       </div>

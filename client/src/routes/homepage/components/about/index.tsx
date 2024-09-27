@@ -42,7 +42,7 @@ export function About() {
             className="mb-2 font-semibold"
             color="black"
             as="h3"
-            variant="xlarge"
+            variant="large"
           >
             Access the most reliable and reputable mental health resources
             available
