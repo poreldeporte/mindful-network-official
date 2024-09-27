@@ -1,6 +1,6 @@
 import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
-import { createReferences } from "./utilities";
+import { createReferences, formatAddress } from "./utilities";
 import { allPsychologistsQuery } from "../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
@@ -44,7 +44,7 @@ export async function POST(req) {
             _type: "psychologist",
             name: psychologist.name,
             facility: psychologist.facility,
-            address: psychologist.address,
+            address: formatAddress(psychologist.address),
             phone: psychologist.phone,
             insurances: await createReferences(
               psychologist.insurances,
