@@ -13,9 +13,16 @@ html {
   scroll-behavior: smooth;
 }
 
+.section-y-padding {
+  padding-block: 80px;
+}
+
 @media only screen and (min-width: 1200px) {
   .page-width {
     padding-inline: 70px;
+  }
+  .section-y-padding {
+    padding-block: 120px;
   }
 }
 @media only screen and (min-width: 1920px) {
