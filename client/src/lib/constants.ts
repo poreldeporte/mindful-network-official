@@ -130,6 +130,26 @@ export const blogPosts: BlogModel[] = [
     createdAt: "2024-09-24",
     author: "Author Name 6",
   },
+  {
+    id: "7",
+    title: "HEALTH",
+    description: "Coping with Depression: Finding Light in the Darkness",
+    image:
+      "https://plus.unsplash.com/premium_photo-1665990294269-f1d6c35ab9d1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cHN5Y2hvbG9neXxlbnwwfHwwfHx8MA%3D%3D",
+    slug: "coping-with-depression-health-6",
+    createdAt: "2024-09-24",
+    author: "Author Name 6",
+  },
+  {
+    id: "8",
+    title: "HEALTH",
+    description: "Coping with Depression: Finding Light in the Darkness",
+    image:
+      "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8am91cm5hbGluZ3xlbnwwfHwwfHx8MA%3D%3D",
+    slug: "coping-with-depression-health-6",
+    createdAt: "2024-09-24",
+    author: "Author Name 6",
+  },
 ];
 
 export const CTACards = [
