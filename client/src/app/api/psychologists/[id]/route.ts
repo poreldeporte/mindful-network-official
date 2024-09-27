@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { sanityClient } from "@/api";
+import { getPsychologistById } from "../../types";
+import { getPsychologistsAdapter } from "@/adapters";
 
 export async function GET(
   req: Request,
@@ -8,23 +9,22 @@ export async function GET(
 ) {
   try {
     const { id } = params;
+    const query = getPsychologistById(id);
 
-    const filePath = path.join(process.cwd(), "src/app/db/psychologists.json");
-    const file = await fs.readFile(filePath, "utf8");
-    const psychologists = JSON.parse(file);
+    const psychologist = await sanityClient.fetch(query);
 
-    const psychologist = psychologists.find(
-      (p: { id: string }) => p.id === id
-    );
+    const adaptedPsychologist = getPsychologistsAdapter(psychologist[0]);
 
-    if (!psychologist) {
+    console.log(adaptedPsychologist);
+
+    if (!adaptedPsychologist) {
       return NextResponse.json(
         { error: "Psychologist not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(psychologist);
+    return NextResponse.json(adaptedPsychologist);
   } catch (error) {
     console.error("Error reading psychologist data:", error);
     return NextResponse.json(
