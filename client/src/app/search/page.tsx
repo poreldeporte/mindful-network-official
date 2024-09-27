@@ -4,13 +4,17 @@ import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 
 export default function Search() {
   return (
-    <section className="min-h-screen lg:h-screen max-h-max mt-10 relative">
+    <main>
       <Topbar />
       <MobileTopBar />
-      <Suspense fallback={<div>loading...</div>}>
-        <SearchWrapper />
-      </Suspense>
+
+      <section className="min-h-screen lg:h-screen max-h-max relative mt-10">
+        <Suspense fallback={<div>loading...</div>}>
+          <SearchWrapper />
+        </Suspense>
+      </section>
+
       <Footer />
-    </section>
+    </main>
   );
 }
