@@ -38,7 +38,7 @@ export const FileUpload = ({
 
   const handleFileChange = (newFile: File | null) => {
     setFile(newFile);
-    onChange && onChange(newFile);
+    if (onChange) onChange(newFile);
   };
 
   const handleClick = () => {

@@ -7,6 +7,7 @@ export const formatAddress = (fullAddress: string) => {
   }
 
   const [_, address, city, state, zip] = match;
+  console.log(_);
 
   return {
     address: address.trim(),

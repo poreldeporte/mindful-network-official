@@ -2,9 +2,7 @@
 
 import { Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
-
 import { Section } from "../section";
-
 
 export function PsychologistAbout({
   ageSpecialty,
