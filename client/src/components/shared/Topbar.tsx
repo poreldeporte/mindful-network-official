@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Typography } from "../ui";
-import { Searchbar } from "./Searchbar";
 import { resources } from "@/lib/constants";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
@@ -29,11 +28,7 @@ export function Topbar() {
           <Link href={"/"}>The Mindful Network</Link>
         </Typography>
 
-        {/*<Searchbar />*/}
-        <Button
-          variant="medium"
-          className="py-2 rounded-full px-4"
-        >
+        <Button variant="medium" className="py-2 rounded-full px-4">
           <Link href={"/search"}>Start Search</Link>
         </Button>
       </div>
