@@ -183,23 +183,19 @@ export const navigation = [
 
 export const psychologistNavigation = [
   {
-    key: "#child-specialty",
-    label: "Child Specialty"
+    key: "#age-specialty",
+    label: "Age Specialty",
   },
   {
     key: "#insurances",
-    label: "Insurances"
+    label: "Insurances",
   },
   {
     key: "#condition-specialty",
-    label: "Condition Specialty"
-  },
-  {
-    key: "#age-specialty",
-    label: "Age Specialty"
+    label: "Condition Specialty",
   },
   {
     key: "#therapy-options",
-    label: "Therapy Options"
+    label: "Therapy Options",
   },
-]
+];

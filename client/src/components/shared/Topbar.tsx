@@ -2,23 +2,23 @@
 
 import Link from "next/link";
 import { Typography } from "../ui";
-import { Searchbar } from "./Searchbar";
 import { resources } from "@/lib/constants";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
+import { Button } from "../ui";
 
 export function Topbar() {
   const pathname = usePathname();
   const isSearchPage = pathname === "/search";
 
   const headerFixed =
-    "fixed top-10 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+    "fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
   const headerRelative =
-    "relative mt-10 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+    "relative mt-5 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
 
   return (
     <header className={isSearchPage ? headerRelative : headerFixed}>
-      <div className="grid grid-cols-[auto_1fr] p-5 gap-5">
+      <div className="flex items-center justify-between p-5">
         <Typography
           variant="xlarge"
           as="span"
@@ -28,7 +28,9 @@ export function Topbar() {
           <Link href={"/"}>The Mindful Network</Link>
         </Typography>
 
-        <Searchbar />
+        <Button variant="medium" className="py-2 rounded-full px-4">
+          <Link href={"/search"}>Start Search</Link>
+        </Button>
       </div>
       <nav className="bg-blue-500 px-5 py-2 flex items-center justify-center gap-5">
         <Link href={"/search"} className="flex items-center">

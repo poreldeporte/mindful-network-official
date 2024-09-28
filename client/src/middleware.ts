@@ -1,9 +1,9 @@
 // import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// import type { NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";
 
 export function middleware() {
-// request: NextRequest
+  // request: NextRequest
   // const token = request.cookies.get("token")?.value;
   // if (request.nextUrl.pathname.startsWith("/admin")) {
   //   if (!token) {

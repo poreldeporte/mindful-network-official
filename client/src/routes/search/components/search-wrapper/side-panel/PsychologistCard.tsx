@@ -1,4 +1,4 @@
-import { Button, Typography, Badge } from "@/components/ui";
+import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import Image from "next/image";

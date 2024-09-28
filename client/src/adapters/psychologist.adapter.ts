@@ -14,5 +14,7 @@ export const getPsychologistsAdapter = (
   conditionSpecialty: psychologist.conditionSpecialty,
   ageSpecialty: psychologist.ageSpecialty,
   insurances: psychologist.insurances,
+  address: psychologist.address,
   image: psychologist.image,
+  phone: psychologist.phone,
 });
