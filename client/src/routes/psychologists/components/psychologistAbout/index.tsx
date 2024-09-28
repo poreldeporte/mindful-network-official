@@ -1,15 +1,8 @@
 "use client";
 
-import { psychologistNavigation } from "@/lib/constants";
-import Link from "next/link";
-import { Button, Typography } from "@/components/ui";
+import { Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
-
-import { usePathname } from "next/navigation";
-import { useSelectedLayoutSegment } from "next/navigation";
 import { Section } from "../section";
-
-import { useEffect, useState } from "react";
 
 export function PsychologistAbout({
   ageSpecialty,
