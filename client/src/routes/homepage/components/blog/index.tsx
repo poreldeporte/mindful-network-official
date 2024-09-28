@@ -37,7 +37,7 @@ interface Props {
 
 export const BlogContainer: React.FC<Props> = () => {
   return (
-    <section className="page-width my-32 lg:my-56">
+    <section className="page-width section-y-padding">
       <Typography
         className="mb-10 font-bold"
         color="black"
