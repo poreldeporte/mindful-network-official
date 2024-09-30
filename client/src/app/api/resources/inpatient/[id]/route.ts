@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { sanityClient } from "@/api";
-import { getPsychologistById } from "../../types";
+import { getPsychologistById } from "../../../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
 export async function GET(

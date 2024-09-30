@@ -1,6 +1,6 @@
 export default {
   name: 'ageSpecialty',
-  title: 'Age Specialty',
+  title: '⚙️ Age Specialty',
   type: 'document',
   fields: [
     {
