@@ -1,6 +1,6 @@
 export default {
   name: 'insurance',
-  title: 'Insurance',
+  title: '⚙️ Insurance',
   type: 'document',
   fields: [
     {
