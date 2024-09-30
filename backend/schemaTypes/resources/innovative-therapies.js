@@ -1,6 +1,6 @@
 export default {
-  name: 'psychologist',
-  title: 'Psychologist',
+  name: 'innovativeTherapies',
+  title: '👨‍⚕️ Innovative Therapies',
   type: 'document',
   fields: [
     {
