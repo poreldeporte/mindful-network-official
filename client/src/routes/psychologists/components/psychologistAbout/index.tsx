@@ -15,18 +15,16 @@ export function PsychologistAbout({
       <Section id="age-specialty" title="Age Specialty">
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {ageSpecialty && ageSpecialty.length ? (
-            <>
-              {ageSpecialty.map((insurance) => (
-                <li
-                  key={insurance.id}
-                  className="flex justify-between items-center border-b py-2"
-                >
-                  <Typography as="p" variant="large" color="darkGray">
-                    {insurance.age}
-                  </Typography>
-                </li>
-              ))}
-            </>
+            ageSpecialty.map((insurance) => (
+              <li
+                key={insurance.id}
+                className="flex justify-between items-center border-b py-2"
+              >
+                <Typography as="p" variant="large" color="darkGray">
+                  {insurance.age}
+                </Typography>
+              </li>
+            ))
           ) : (
             <Typography as="p" variant="large" color="darkGray">
               No Age Specialty available
@@ -38,18 +36,16 @@ export function PsychologistAbout({
       <Section id="insurances" title="Insurances">
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {insurances && insurances.length ? (
-            <>
-              {insurances.map((insurance) => (
-                <li
-                  key={insurance.id}
-                  className="flex justify-between items-center border-b py-2"
-                >
-                  <Typography as="p" variant="large" color="darkGray">
-                    {insurance.name}
-                  </Typography>
-                </li>
-              ))}
-            </>
+            insurances.map((insurance) => (
+              <li
+                key={insurance.id}
+                className="flex justify-between items-center border-b py-2"
+              >
+                <Typography as="p" variant="large" color="darkGray">
+                  {insurance.name}
+                </Typography>
+              </li>
+            ))
           ) : (
             <Typography as="p" variant="large" color="darkGray">
               No insurances available
@@ -61,18 +57,16 @@ export function PsychologistAbout({
       <Section id="condition-specialty" title="Condition Specialty">
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {conditionSpecialty && conditionSpecialty.length ? (
-            <>
-              {conditionSpecialty.map((condition) => (
-                <li
-                  key={condition.id}
-                  className="flex justify-between items-center border-b py-2"
-                >
-                  <Typography as="p" variant="large" color="darkGray">
-                    {condition.name}
-                  </Typography>
-                </li>
-              ))}
-            </>
+            conditionSpecialty.map((condition) => (
+              <li
+                key={condition.id}
+                className="flex justify-between items-center border-b py-2"
+              >
+                <Typography as="p" variant="large" color="darkGray">
+                  {condition.name}
+                </Typography>
+              </li>
+            ))
           ) : (
             <Typography as="p" variant="large" color="darkGray">
               No conditions available
@@ -84,18 +78,16 @@ export function PsychologistAbout({
       <Section id="therapy-options" title="Therapy options">
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {therapyOptions && therapyOptions.length ? (
-            <>
-              {therapyOptions.map((option) => (
-                <li
-                  key={option.id}
-                  className="flex justify-between items-center border-b py-2"
-                >
-                  <Typography as="p" variant="large" color="darkGray">
-                    {option.type}
-                  </Typography>
-                </li>
-              ))}
-            </>
+            therapyOptions.map((option) => (
+              <li
+                key={option.id}
+                className="flex justify-between items-center border-b py-2"
+              >
+                <Typography as="p" variant="large" color="darkGray">
+                  {option.type}
+                </Typography>
+              </li>
+            ))
           ) : (
             <Typography as="p" variant="large" color="darkGray">
               No Therapy options available

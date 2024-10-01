@@ -142,7 +142,7 @@ export const SearchWrapper = () => {
     }
   }, [searchParams, allProffesionals]);
 
-  console.log(allCombinedProfessionals);
+  console.log(allProffesionals);
 
   return (
     <>

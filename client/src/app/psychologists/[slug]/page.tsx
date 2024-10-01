@@ -10,6 +10,8 @@ import {
   NavigationBar,
 } from "@/routes/psychologists/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
+import { sanityClient } from "@/api";
+import { getPsychologistsAdapter } from "@/adapters";
 
 export default function PsychologistPage() {
   const { slug } = useParams();
@@ -19,17 +21,21 @@ export default function PsychologistPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (slug) {
-      fetch(`/api/psychologists/${slug}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch psychologist");
-          }
-          return response.json();
-        })
-        .then((data) => setPsychologist(data))
-        .catch((err) => setError(err.message));
-    }
+    const fetchData = async () => {
+      if (slug) {
+        try {
+          const query = `*[_id == $slug][0]`;
+          const data = await sanityClient.fetch(query, { slug });
+          const adaptedData = getPsychologistsAdapter(data);
+
+          if (adaptedData) setPsychologist(adaptedData);
+        } catch (error) {
+          console.log(error);
+          setError(error);
+        }
+      }
+    };
+    fetchData();
   }, [slug]);
 
   if (error) {

@@ -12,11 +12,12 @@ interface Address {
 }
 
 export interface PsychologistModel {
+  _type: string;
   id: string;
   name: string;
   facility: string;
   address: Address;
-  position: Positions;
+  position?: Positions;
   phone: string;
   insurances: insurances[];
   ageSpecialty: ageSpecialty[];

@@ -30,7 +30,6 @@ export async function GET(req, res) {
     const data = await sanityClient.fetch(query);
 
     if (data) {
-      // Aplicar adaptadores a cada tipo de recurso
       const adaptedData = {
         psychologists: data.psychologists.map(getPsychologistsAdapter),
         backerActFacilities: data.backerActFacilities.map(
@@ -47,7 +46,6 @@ export async function GET(req, res) {
         psychiatric: data.psychiatric.map(getPsychologistsAdapter),
       };
 
-      // Retorna los datos adaptados
       return NextResponse.json(adaptedData);
     }
   } catch (error) {
