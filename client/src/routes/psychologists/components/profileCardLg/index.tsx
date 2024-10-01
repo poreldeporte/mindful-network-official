@@ -11,7 +11,7 @@ export function ProfileCardLg({
   description,
 }: PsychologistModel) {
   return (
-    <header className="hidden lg:flex mt-72 py-10 px-10 bg-white rounded-lg border border-gray-100">
+    <header className="hidden lg:flex py-10 px-10 bg-white rounded-lg border border-gray-100 shadow-sm shadow-gray-100">
       <div className="flex flex-row items-center">
         <div className="flex items-center w-64 h-64 mr-10 mb-5">
           <Image

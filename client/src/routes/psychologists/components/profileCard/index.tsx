@@ -11,7 +11,7 @@ export function ProfileCard({
   description,
 }: PsychologistModel) {
   return (
-    <header className="mb-20 justify-center mt-32 bg-white rounded-lg py-10 px-5 border border-gray-100 lg:hidden">
+    <header className="mb-20 mt-32 justify-center bg-white rounded-lg py-10 px-5 border border-gray-100 lg:hidden">
       <div className="flex items-center justify-start">
         <div className="w-32 h-32 lg:w-64 lg:h-64 mr-5 mb-5">
           <Image
