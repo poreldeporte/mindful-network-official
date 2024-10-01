@@ -5,6 +5,7 @@ import {
   conditionSpecialty,
   insurances,
   PsychologistModel,
+  ResourcesKey,
   TherapyModality,
 } from "@/models";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,23 +13,26 @@ import PsychologistCard from "./PsychologistCard";
 import { useState, useEffect } from "react";
 
 interface Props {
-  psychologists: PsychologistModel[] | null;
-  filteredPsychologists: PsychologistModel[] | null;
+  proffesionals: PsychologistModel[] | null;
+  filteredProffesionals: PsychologistModel[] | null;
   conditions: conditionSpecialty[] | null;
   insurances: insurances[] | null;
   therapyModalities: TherapyModality[] | null;
+  resources: ResourcesKey[];
 }
 
 const SidePanel = ({
-  psychologists,
-  filteredPsychologists,
+  proffesionals,
+  filteredProffesionals,
   conditions,
   insurances,
   therapyModalities,
+  resources,
 }: Props) => {
   const [selectedCondition, setSelectedCondition] = useState<string | null>(
     null
   );
+  const [selectedResources, setSelectedResources] = useState<string[]>([]);
   const [selectedInsurance, setSelectedInsurance] = useState<string[]>([]);
   const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
 
@@ -39,6 +43,7 @@ const SidePanel = ({
     const conditionParam = searchParams.get("condition");
     const insuranceParam = searchParams.get("insurance");
     const therapyParam = searchParams.get("therapy");
+    const resourceParam = searchParams.get("resource");
 
     if (conditionParam) {
       setSelectedCondition(conditionParam);
@@ -51,12 +56,34 @@ const SidePanel = ({
     if (therapyParam) {
       setSelectedTherapy(therapyParam);
     }
+
+    if (resourceParam) {
+      setSelectedResources(resourceParam.split(","));
+    }
   }, [searchParams]);
 
   const handleBadgeClick = (filterType: string, value: string) => {
     const currentParams = new URLSearchParams(searchParams.toString());
 
-    if (filterType === "insurance") {
+    if (filterType === "resource") {
+      let updatedResources = [...selectedResources];
+
+      if (updatedResources.includes(value)) {
+        updatedResources = updatedResources.filter(
+          (resource) => resource !== value
+        );
+      } else {
+        updatedResources.push(value);
+      }
+
+      setSelectedResources(updatedResources);
+
+      if (updatedResources.length > 0) {
+        currentParams.set("resource", updatedResources.join(","));
+      } else {
+        currentParams.delete("resource");
+      }
+    } else if (filterType === "insurance") {
       let selectedInsurances = selectedInsurance ? [...selectedInsurance] : [];
 
       if (selectedInsurances.includes(value)) {
@@ -106,6 +133,25 @@ const SidePanel = ({
         </Typography>
 
         <div>
+          <div className="my-2">
+            <Typography as="p" color="darkGray" variant="medium">
+              Resources:
+            </Typography>
+            <div className="flex items-center flex-wrap gap-2 w-full">
+              {resources.map((resourceKey) => (
+                <Badge
+                  key={resourceKey.key}
+                  color="blue"
+                  className="w-max"
+                  isSelected={selectedResources.includes(resourceKey.key)}
+                  onClick={() => handleBadgeClick("resource", resourceKey.key)}
+                >
+                  {resourceKey.label}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
           <div className="my-2">
             <Typography as="p" color="darkGray" variant="medium">
               Conditions:
@@ -177,8 +223,8 @@ const SidePanel = ({
 
       <div className="overflow-y-auto overflow-x-hidden max-w-full">
         <ul className="px-5 divide-y divide-gray-200">
-          {filteredPsychologists && filteredPsychologists.length
-            ? filteredPsychologists.map((psychologist) => (
+          {filteredProffesionals && filteredProffesionals.length
+            ? filteredProffesionals.map((psychologist) => (
                 <PsychologistCard
                   psychologist={psychologist}
                   key={psychologist.id}
@@ -189,9 +235,9 @@ const SidePanel = ({
       </div>
 
       <footer className="px-5 pt-2.5 flex items-center">
-        {filteredPsychologists && psychologists && (
+        {filteredProffesionals && proffesionals && (
           <Typography as="span" color="black" variant="small">
-            Showing {filteredPsychologists.length} of {psychologists.length}{" "}
+            Showing {filteredProffesionals.length} of {proffesionals.length}{" "}
             professionals
           </Typography>
         )}
