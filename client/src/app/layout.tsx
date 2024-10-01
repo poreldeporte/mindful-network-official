@@ -9,7 +9,7 @@ const anticDidone = Antic_Didone({
 });
 
 const dmSans = DM_Sans({
-  weight: ["400", "900"],
+  weight: ["400", "900", "500", "600", "700", "800"],
   subsets: ["latin"],
   display: "swap",
 });
