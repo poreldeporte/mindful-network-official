@@ -8,6 +8,7 @@ import {
   ProfileCard,
   GetInTouch,
   NavigationBar,
+  ProfileCardLg,
 } from "@/routes/psychologists/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 import { sanityClient } from "@/api";
@@ -36,6 +37,7 @@ export default function PsychologistPage() {
       }
     };
     fetchData();
+
   }, [slug]);
 
   if (error) {
@@ -53,6 +55,7 @@ export default function PsychologistPage() {
 
       <div className="min-h-screen page-width lg:my-56">
         <NavigationBar />
+        <ProfileCardLg {...psychologist}/>
         <ProfileCard {...psychologist} />
         <PsychologistAbout {...psychologist} />
         <GetInTouch {...psychologist} />

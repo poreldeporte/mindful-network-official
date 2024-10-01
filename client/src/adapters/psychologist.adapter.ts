@@ -20,4 +20,5 @@ export const getPsychologistsAdapter = (
   image: psychologist.image,
   phone: psychologist.phone,
   position: psychologist.position,
+  description: psychologist.description,
 });
