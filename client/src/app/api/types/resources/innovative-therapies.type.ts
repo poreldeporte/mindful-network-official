@@ -1,4 +1,4 @@
-export const allInnovativeTherapiesQuery = `*[_type == 'innovativeTherapy']{
+export const allInnovativeTherapiesQuery = `*[_type == 'innovativeTherapies']{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
@@ -20,7 +20,7 @@ export const allInnovativeTherapiesQuery = `*[_type == 'innovativeTherapy']{
   }`;
 
 export const getInnovativeTherapyById = (id: string) => {
-  const query: string = `*[_type == 'innovativeTherapy' && _id == "${id}"]{
+  const query: string = `*[_type == 'innovativeTherapies' && _id == "${id}"]{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,

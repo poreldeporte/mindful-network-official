@@ -1,4 +1,4 @@
-export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacility']{
+export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacilities']{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
@@ -20,7 +20,7 @@ export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacility']{
   }`;
 
 export const getBackerActFacilityById = (id: string) => {
-  const query: string = `*[_type == 'backerActFacility' && _id == "${id}"]{
+  const query: string = `*[_type == 'backerActFacilities' && _id == "${id}"]{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
