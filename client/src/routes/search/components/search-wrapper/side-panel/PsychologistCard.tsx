@@ -26,6 +26,8 @@ const PsychologistCard = ({
         src={image ? image : UserImage}
         alt={`${name} image`}
         loading="lazy"
+        width={100}
+        height={100}
         className="w-12 h-12 object-cover rounded-full"
       />
 
