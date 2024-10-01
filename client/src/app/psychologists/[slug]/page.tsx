@@ -9,6 +9,7 @@ import {
   GetInTouch,
   NavigationBar,
   ProfileCardLg,
+  StickyButton,
 } from "@/routes/psychologists/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 import { sanityClient } from "@/api";
@@ -53,13 +54,19 @@ export default function PsychologistPage() {
       <Topbar />
       <MobileTopBar />
 
-      <div className="min-h-screen page-width lg:my-56">
-        <NavigationBar />
-        <ProfileCardLg {...psychologist}/>
-        <ProfileCard {...psychologist} />
-        <PsychologistAbout {...psychologist} />
-        <GetInTouch {...psychologist} />
+      <div className="min-h-screen page-width lg:grid lg:grid-cols-6 lg:items-start lg:my-56 lg:gap-x-10">
+        <div className="lg:col-span-4">
+          <NavigationBar />
+          <ProfileCardLg {...psychologist}/>
+          <ProfileCard {...psychologist} />
+          <PsychologistAbout {...psychologist} />
+        </div>
+        
+        <div className="lg:col-span-2 lg:relative h-full">
+          <StickyButton />
+        </div>
       </div>
+      <GetInTouch {...psychologist} />
       <Footer />
     </main>
   );

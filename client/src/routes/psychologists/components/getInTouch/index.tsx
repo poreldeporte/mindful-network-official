@@ -8,7 +8,7 @@ import {
 
 export function GetInTouch({ name, phone, address }: PsychologistModel) {
   return (
-    <section className="my-20 lg:my-56 lg:flex">
+    <section className="my-20 page-width lg:my-56 lg:flex">
       <div className="mb-10 lg:w-1/2">
         <Typography className="" color="black" variant="subtitle" as="h2">
           Get in Touch with <span className="block"></span>

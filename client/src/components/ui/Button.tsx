@@ -28,7 +28,7 @@ export function Button({
       }  transition-colors  text-white`}
     >
       <Typography
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 justify-center"
         as="span"
         variant={variant}
         color="white"
