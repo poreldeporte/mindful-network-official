@@ -1,4 +1,4 @@
-export const allPsychiatricQuery = `*[_type == 'psychiatric']{
+export const allPsychiatricQuery = `*[_type == 'psychiatricAssessment']{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
@@ -20,7 +20,7 @@ export const allPsychiatricQuery = `*[_type == 'psychiatric']{
   }`;
 
 export const getPsychiatricById = (id: string) => {
-  const query: string = `*[_type == 'psychiatric' && _id == "${id}"]{
+  const query: string = `*[_type == 'psychiatricAssessment' && _id == "${id}"]{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
