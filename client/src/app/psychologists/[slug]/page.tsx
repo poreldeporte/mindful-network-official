@@ -8,6 +8,7 @@ import {
   ProfileCard,
   GetInTouch,
   NavigationBar,
+  ProfileCardLg,
 } from "@/routes/psychologists/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 
@@ -20,7 +21,7 @@ export default function PsychologistPage() {
 
   useEffect(() => {
     if (slug) {
-      fetch(`/api/psychologists/${slug}`)
+      fetch(`/api/resources/psychologists/${slug}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch psychologist");
@@ -47,6 +48,7 @@ export default function PsychologistPage() {
 
       <div className="min-h-screen page-width lg:my-56">
         <NavigationBar />
+        <ProfileCardLg {...psychologist}/>
         <ProfileCard {...psychologist} />
         <PsychologistAbout {...psychologist} />
         <GetInTouch {...psychologist} />
