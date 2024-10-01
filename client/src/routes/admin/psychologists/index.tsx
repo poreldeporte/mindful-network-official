@@ -64,7 +64,7 @@ export function FileUploadContainer() {
 
     try {
       if (parsedData.length > 0) {
-        const response = await fetch("/api/psychologists", {
+        const response = await fetch("/api/resources/psychologists", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

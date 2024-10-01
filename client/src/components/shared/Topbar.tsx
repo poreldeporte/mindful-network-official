@@ -1,13 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { resources } from "@/lib/constants";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Button, Typography } from "../ui";
-import { navigation } from "@/lib/constants";
-import { useState } from "react";
 
 import {
   Select,
@@ -92,7 +88,12 @@ export function Topbar() {
         {resources.map((resource, resourceIdx) => {
           if (resourceIdx < 4)
             return (
-              <Link key={resource.key} href={resource.path}>
+              <Link
+                key={resource.key}
+                href={`/search?resource=${encodeURIComponent(
+                  resource.path.substring(1)
+                )}`}
+              >
                 <Typography
                   className="flex items-center gap-2"
                   as="span"
