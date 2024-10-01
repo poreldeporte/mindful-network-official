@@ -16,6 +16,7 @@ export interface PsychologistModel {
   name: string;
   facility: string;
   address: Address;
+  description: string;
   position: Positions;
   phone: string;
   insurances: insurances[];
