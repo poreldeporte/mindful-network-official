@@ -4,12 +4,14 @@ import { Typography, Badge } from "@/components/ui";
 import { PsychologistModel } from "@/models";
 import { UserImage } from "@/lib/images";
 import { ShieldPlus, CircleCheck } from "lucide-react";
+import { formatType } from "@/utilities";
 
 export function ProfileCard({
   image,
   conditionSpecialty,
   name,
   description,
+  _type,
 }: PsychologistModel) {
   return (
     <header className="mb-10 mt-32 justify-center bg-white rounded-2xl p-10 lg:mt-0">
@@ -33,24 +35,9 @@ export function ProfileCard({
             {name}
           </Typography>
           <div>
-            {conditionSpecialty && conditionSpecialty.length ? (
-              <>
-                {conditionSpecialty.map((condition) => {
-                  return (
-                    <Badge
-                      className="mr-2 mb-2"
-                      key={condition.id}
-                      color="blue"
-                      isSelected={false}
-                    >
-                      {condition.name}
-                    </Badge>
-                  );
-                })}
-              </>
-            ) : (
-              ""
-            )}
+            <Badge className="mr-2 mb-2" color="blue" isSelected={false}>
+              {formatType(_type)}
+            </Badge>
           </div>
         </div>
       </div>
