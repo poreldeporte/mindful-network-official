@@ -2,7 +2,8 @@
 
 import { Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
-import { Section } from "../section";
+import { Section, SectionContent, SectionHeader } from "../section";
+import { PersonStanding, Activity, Brain, ArmchairIcon} from "lucide-react";
 
 export function PsychologistAbout({
   ageSpecialty,
@@ -12,7 +13,19 @@ export function PsychologistAbout({
 }: PsychologistModel) {
   return (
     <>
-      <Section id="age-specialty" title="Age Specialty">
+      <Section id="age-specialty">
+        <SectionHeader>
+          <PersonStanding className="h-12 w-12" />
+          <Typography
+            variant="large"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Age Specialty
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {ageSpecialty && ageSpecialty.length ? (
             ageSpecialty.map((insurance) => (
@@ -31,9 +44,22 @@ export function PsychologistAbout({
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
 
-      <Section id="insurances" title="Insurances">
+      <Section id="insurances">
+        <SectionHeader>
+          <Activity className="h-12 w-12" />
+          <Typography
+            variant="large"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Insurances
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {insurances && insurances.length ? (
             insurances.map((insurance) => (
@@ -52,9 +78,22 @@ export function PsychologistAbout({
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
 
-      <Section id="condition-specialty" title="Condition Specialty">
+      <Section id="condition-specialty">
+        <SectionHeader>
+          <Brain className="h-12 w-12"/>
+          <Typography
+            variant="large"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Condition Specialty
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {conditionSpecialty && conditionSpecialty.length ? (
             conditionSpecialty.map((condition) => (
@@ -73,9 +112,22 @@ export function PsychologistAbout({
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
 
-      <Section id="therapy-options" title="Therapy options">
+      <Section id="therapy-options">
+        <SectionHeader>
+          <ArmchairIcon className="h-12 w-12"/>
+          <Typography
+            variant="large"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Therapy Options
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {therapyOptions && therapyOptions.length ? (
             therapyOptions.map((option) => (
@@ -94,6 +146,7 @@ export function PsychologistAbout({
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
     </>
   );
