@@ -26,7 +26,26 @@ export default function PsychologistPage() {
     const fetchData = async () => {
       if (slug) {
         try {
-          const query = `*[_id == $slug][0]`;
+          const query = `*[_id == $slug][0]{
+            ..., 
+            "conditionSpecialty": conditionSpecialty[]->{
+              "id": _id,
+              name
+            },
+            "insurances": insurances[]->{
+              "id": _id,
+              name
+            },
+            "ageSpecialty": ageSpecialty[]->{
+              "id": _id,
+              age
+            },
+            "therapyOptions": therapyOptions[]->{
+              "id": _id,
+              type
+            },
+            "image": image.asset->url
+          }`;
           const data = await sanityClient.fetch(query, { slug });
           const adaptedData = getPsychologistsAdapter(data);
 
@@ -38,7 +57,6 @@ export default function PsychologistPage() {
       }
     };
     fetchData();
-
   }, [slug]);
 
   if (error) {
@@ -57,11 +75,11 @@ export default function PsychologistPage() {
       <div className="min-h-screen page-width lg:grid lg:grid-cols-6 lg:items-start lg:my-56 lg:gap-x-10">
         <div className="lg:col-span-4">
           <NavigationBar />
-          <ProfileCardLg {...psychologist}/>
+          <ProfileCardLg {...psychologist} />
           <ProfileCard {...psychologist} />
           <PsychologistAbout {...psychologist} />
         </div>
-        
+
         <div className="lg:col-span-2 lg:relative h-full">
           <StickyButton />
         </div>
