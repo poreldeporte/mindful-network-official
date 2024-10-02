@@ -17,7 +17,7 @@ export function PsychologistAbout({
         <SectionHeader>
           <PersonStanding className="h-12 w-12" />
           <Typography
-            variant="large"
+            variant="medium"
             className="font-bold"
             as="h3"
             color="black"
@@ -33,13 +33,13 @@ export function PsychologistAbout({
                 key={insurance.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {insurance.age}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No Age Specialty available
             </Typography>
           )}
@@ -51,7 +51,7 @@ export function PsychologistAbout({
         <SectionHeader>
           <Activity className="h-12 w-12" />
           <Typography
-            variant="large"
+            variant="medium"
             className="font-bold"
             as="h3"
             color="black"
@@ -67,13 +67,13 @@ export function PsychologistAbout({
                 key={insurance.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {insurance.name}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No insurances available
             </Typography>
           )}
@@ -85,7 +85,7 @@ export function PsychologistAbout({
         <SectionHeader>
           <Brain className="h-12 w-12"/>
           <Typography
-            variant="large"
+            variant="medium"
             className="font-bold"
             as="h3"
             color="black"
@@ -101,13 +101,13 @@ export function PsychologistAbout({
                 key={condition.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {condition.name}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No conditions available
             </Typography>
           )}
@@ -119,7 +119,7 @@ export function PsychologistAbout({
         <SectionHeader>
           <ArmchairIcon className="h-12 w-12"/>
           <Typography
-            variant="large"
+            variant="medium"
             className="font-bold"
             as="h3"
             color="black"
@@ -135,13 +135,13 @@ export function PsychologistAbout({
                 key={option.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {option.type}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No Therapy options available
             </Typography>
           )}

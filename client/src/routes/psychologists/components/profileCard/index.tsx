@@ -49,7 +49,7 @@ export function ProfileCard({
         </div>
       </div>
       <div className="mt-5">
-        <Typography className="mb-5" as="h2" variant="medium" color="black">
+        <Typography className="mb-5" as="h2" variant="medium" color="darkGray">
           {description}
         </Typography>
       </div>
