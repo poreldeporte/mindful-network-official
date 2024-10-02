@@ -9,20 +9,20 @@ const BlogCard = ({ title, description, image, slug }: BlogModel) => {
     <article className="w-full">
       <a href={slug}>
         <Image
-          className="w-full aspect-video object-cover mb-4"
+          className="w-full aspect-video object-cover mb-4 rounded-md"
           src={image}
           width={300}
           height={300}
-          alt="Picture of the author"
+          alt={`${title} image`}
         />
-        <Typography className="mb-2" color="black" as="h4" variant="medium">
+        <Typography color="darkGray" as="h3" variant="small">
           {title}
         </Typography>
         <Typography
           className="mb-2 font-semibold"
           color="black"
           as="h2"
-          variant="large"
+          variant="medium"
         >
           {description}
         </Typography>
@@ -39,9 +39,9 @@ export const BlogContainer: React.FC<Props> = () => {
   return (
     <section className="page-width section-y-padding">
       <Typography
-        className="mb-20 font-medium"
+        className="mb-20 font-medium leading-tight"
         color="black"
-        as="h4"
+        as="h2"
         variant="title"
       >
         Expert articles and resources <span className="block"></span>to

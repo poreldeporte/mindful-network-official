@@ -22,7 +22,7 @@ const CTACard = ({ image, buttonText }: Props) => {
         <Typography
           color="white"
           as="p"
-          variant="large"
+          variant="medium"
           className="text-lg font-bold mr-5 flex items-center gap-2"
         >
           {buttonText}

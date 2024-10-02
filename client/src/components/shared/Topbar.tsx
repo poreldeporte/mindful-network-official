@@ -85,7 +85,7 @@ export function Topbar() {
                 <Typography
                   className="flex items-center gap-2"
                   as="span"
-                  variant="small"
+                  variant="xsmall"
                   color="white"
                 >
                   {resource.title}
