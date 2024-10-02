@@ -73,7 +73,7 @@ export default function PsychologistPage() {
 
       <div className="min-h-screen mx-auto w-11/12 xl:w-3/4 lg:grid lg:grid-cols-6 lg:items-start lg:mt-56 lg:gap-x-10">
         <div className="lg:col-span-4">
-          <NavigationBar />
+          {/*<NavigationBar />*/}
           <ProfileCard {...psychologist} />
           <PsychologistAbout {...psychologist} />
         </div>
