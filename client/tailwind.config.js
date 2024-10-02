@@ -3,6 +3,17 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {},
+    fontSize: {
+      xs: "16px",
+      sm: "24px",
+      base: "32px",
+      lg: "40px",
+      xl: "48px",
+      "2xl": "56px",
+      "3xl": "64px",
+      "4xl": "72px",
+      "5xl": "80px",
+    },
     colors: {
       blue: {
         50: "#f5f7fa",
@@ -59,7 +70,7 @@ module.exports = {
       },
       white: "#ffffff",
       black: "#000000",
-      transparent: "transparent"
+      transparent: "transparent",
     },
     screens: {
       xs: { max: "480px" },
