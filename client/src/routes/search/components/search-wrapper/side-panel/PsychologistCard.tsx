@@ -1,6 +1,7 @@
 import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
+import { formatType } from "@/utilities";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,14 +22,8 @@ const PsychologistCard = ({
     _type,
   } = psychologist;
 
-  const formatType = (type: string) => {
-    return type
-      .replace(/([a-z])([A-Z])/g, "$1 $2")
-      .replace(/^./, (str) => str.toUpperCase());
-  };
-
   return (
-    <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-2.5 items-center">
+    <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-5 items-center">
       <Image
         src={image ? image : UserImage}
         alt={`${name} image`}
@@ -81,6 +76,15 @@ const PsychologistCard = ({
                 <span className="font-semibold">Age Specialty:</span>{" "}
                 {ageSpecialty?.length
                   ? ageSpecialty.map((specialty) => specialty.age).join(", ")
+                  : ""}
+              </Typography>
+            </div>
+
+            <div>
+              <Typography as="p" color="darkGray" variant="small">
+                <span className="font-semibold">Therapy Option:</span>{" "}
+                {therapyOptions?.length
+                  ? therapyOptions.map((option) => option.type).join(", ")
                   : ""}
               </Typography>
             </div>
