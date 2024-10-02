@@ -2,7 +2,8 @@
 
 import { Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
-import { Section } from "../section";
+import { Section, SectionContent, SectionHeader } from "../section";
+import { PersonStanding, Activity, Brain, ArmchairIcon} from "lucide-react";
 
 export function PsychologistAbout({
   ageSpecialty,
@@ -12,7 +13,19 @@ export function PsychologistAbout({
 }: PsychologistModel) {
   return (
     <>
-      <Section id="age-specialty" title="Age Specialty">
+      <Section id="age-specialty">
+        <SectionHeader>
+          <PersonStanding className="h-12 w-12" />
+          <Typography
+            variant="medium"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Age Specialty
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {ageSpecialty && ageSpecialty.length ? (
             ageSpecialty.map((insurance) => (
@@ -20,20 +33,33 @@ export function PsychologistAbout({
                 key={insurance.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {insurance.age}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No Age Specialty available
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
 
-      <Section id="insurances" title="Insurances">
+      <Section id="insurances">
+        <SectionHeader>
+          <Activity className="h-12 w-12" />
+          <Typography
+            variant="medium"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Insurances
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {insurances && insurances.length ? (
             insurances.map((insurance) => (
@@ -41,20 +67,33 @@ export function PsychologistAbout({
                 key={insurance.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {insurance.name}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No insurances available
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
 
-      <Section id="condition-specialty" title="Condition Specialty">
+      <Section id="condition-specialty">
+        <SectionHeader>
+          <Brain className="h-12 w-12"/>
+          <Typography
+            variant="medium"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Condition Specialty
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {conditionSpecialty && conditionSpecialty.length ? (
             conditionSpecialty.map((condition) => (
@@ -62,20 +101,33 @@ export function PsychologistAbout({
                 key={condition.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {condition.name}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No conditions available
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
 
-      <Section id="therapy-options" title="Therapy options">
+      <Section id="therapy-options">
+        <SectionHeader>
+          <ArmchairIcon className="h-12 w-12"/>
+          <Typography
+            variant="medium"
+            className="font-bold"
+            as="h3"
+            color="black"
+          >
+            Therapy Options
+          </Typography>
+        </SectionHeader>
+        <SectionContent>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
           {therapyOptions && therapyOptions.length ? (
             therapyOptions.map((option) => (
@@ -83,17 +135,18 @@ export function PsychologistAbout({
                 key={option.id}
                 className="flex justify-between items-center border-b py-2"
               >
-                <Typography as="p" variant="large" color="darkGray">
+                <Typography as="p" variant="medium" color="darkGray">
                   {option.type}
                 </Typography>
               </li>
             ))
           ) : (
-            <Typography as="p" variant="large" color="darkGray">
+            <Typography as="p" variant="medium" color="darkGray">
               No Therapy options available
             </Typography>
           )}
         </ul>
+        </SectionContent>
       </Section>
     </>
   );
