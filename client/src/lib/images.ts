@@ -3,4 +3,16 @@ import Person2 from "@/assets/images/person-2.png";
 import Person3 from "@/assets/images/person-3.png";
 import UserImage from "@/assets/images/user-icon.jpg";
 
-export { Person1, Person2, Person3, UserImage };
+import MindfulImagotype from "@/assets/images/mindful-logos/mindful-imagotype.png";
+import MindfulIsotype from "@/assets/images/mindful-logos/mindful-isotype.png";
+import MindfulLogo from "@/assets/images/mindful-logos/mindful-logo.png";
+
+export {
+  Person1,
+  Person2,
+  Person3,
+  UserImage,
+  MindfulImagotype,
+  MindfulIsotype,
+  MindfulLogo,
+};
