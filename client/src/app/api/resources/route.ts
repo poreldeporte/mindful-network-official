@@ -13,7 +13,7 @@ import {
 } from "../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
-export async function GET(req, res) {
+export async function GET() {
   const query = `{
     "psychologists": ${allPsychologistsQuery},
     "backerActFacilities": ${allBackerActFacilitiesQuery},
