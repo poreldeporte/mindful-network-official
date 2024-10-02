@@ -1,20 +1,19 @@
 "use client";
 
 import { MapComponent } from "@/components/shared";
-import { getValidationError } from "@/utilities";
 import {
   conditionSpecialty,
   insurances,
   PsychologistModel,
-  TherapyModality,
-  ResourcesModel,
   ResourcesKey,
+  ResourcesModel,
+  TherapyModality,
 } from "@/models";
-// import { Positions } from "@/models";
+import { getValidationError } from "@/utilities";
+import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
-import { useSearchParams } from "next/navigation";
-import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 
 export const SearchWrapper = () => {
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
@@ -27,9 +26,6 @@ export const SearchWrapper = () => {
   const [allResourceKeys, setAllResourceKeys] = useState<ResourcesKey[] | []>(
     []
   );
-  // const [mapPositions, setMapPositions] = useState<Positions[]>([
-  //   { lat: 34.0522, lng: -118.2437 },
-  // ]);
   const [filteredProffesionals, setFilteredProffesionals] = useState<
     PsychologistModel[] | null
   >(null);
