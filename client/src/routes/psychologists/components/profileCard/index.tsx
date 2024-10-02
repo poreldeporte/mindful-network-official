@@ -11,7 +11,7 @@ export function ProfileCard({
   description,
 }: PsychologistModel) {
   return (
-    <header className="mb-10 mt-32 justify-center bg-white rounded-lg py-10 px-5 border border-gray-100 lg:mt-0">
+    <header className="mb-10 mt-32 justify-center bg-white rounded-2xl py-10 px-5 lg:mt-0">
       <div className="flex items-center justify-start">
         <div className="w-24 h-24 lg:h-48 lg:w-48 mr-5 mb-5">
           <Image
@@ -26,7 +26,7 @@ export function ProfileCard({
           <Typography
             className="font-bold mb-5"
             as="h2"
-            variant="large"
+            variant="medium"
             color="black"
           >
             {name}
@@ -49,7 +49,7 @@ export function ProfileCard({
         </div>
       </div>
       <div className="mt-5">
-        <Typography className="mb-5" as="h2" variant="medium" color="darkGray">
+        <Typography className="mb-5" as="h2" variant="small" color="darkGray">
           {description}
         </Typography>
       </div>
