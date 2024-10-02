@@ -18,7 +18,14 @@ const PsychologistCard = ({
     insurances,
     // phone,
     ageSpecialty,
+    _type,
   } = psychologist;
+
+  const formatType = (type: string) => {
+    return type
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replace(/^./, (str) => str.toUpperCase());
+  };
 
   return (
     <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-2.5 items-center">
@@ -37,26 +44,20 @@ const PsychologistCard = ({
             className="font-bold"
             as="h2"
             color="black"
-            variant="large"
+            variant="medium"
           >
             {name}
           </Typography>
 
           <div className="flex items-center gap-1">
-            {therapyOptions?.length
-              ? therapyOptions.map((option) => (
-                  <Badge key={option.id} color="blue">
-                    {option.type}
-                  </Badge>
-                ))
-              : ""}
+            <Badge color="green">{formatType(_type)}</Badge>
           </div>
         </div>
 
         <div className="grid grid-cols-[1fr_auto] gap-2.5 mt-5">
           <div className="flex flex-col gap-1">
             <div>
-              <Typography as="p" color="darkGray" variant="medium">
+              <Typography as="p" color="darkGray" variant="small">
                 <span className="font-semibold">Specialty:</span>{" "}
                 {conditionSpecialty?.length
                   ? conditionSpecialty
@@ -67,7 +68,7 @@ const PsychologistCard = ({
             </div>
 
             <div>
-              <Typography as="p" color="darkGray" variant="medium">
+              <Typography as="p" color="darkGray" variant="small">
                 <span className="font-semibold">Accepted Insurance:</span>{" "}
                 {insurances?.length
                   ? insurances.map((insurance) => insurance.name).join(", ")
@@ -76,7 +77,7 @@ const PsychologistCard = ({
             </div>
 
             <div>
-              <Typography as="p" color="darkGray" variant="medium">
+              <Typography as="p" color="darkGray" variant="small">
                 <span className="font-semibold">Age Specialty:</span>{" "}
                 {ageSpecialty?.length
                   ? ageSpecialty.map((specialty) => specialty.age).join(", ")
@@ -90,7 +91,9 @@ const PsychologistCard = ({
               href={`/psychologists/${id}`}
               className="px-3 py-1.5 rounded-full bg-blue-500 text-white"
             >
-              View profile
+              <Typography as="span" color="white" variant="small">
+                View profile
+              </Typography>
             </Link>
           </div>
         </div>

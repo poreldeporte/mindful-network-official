@@ -49,7 +49,7 @@ export function NavigationBar() {
             );
           })}
         </div>
-        <Button className="p-2 rounded-full" variant="medium">
+        <Button className="p-2 rounded-full" variant="small">
           Get in Touch
         </Button>
       </div>

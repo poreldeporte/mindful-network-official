@@ -134,7 +134,7 @@ const SidePanel = ({
 
         <div>
           <div className="my-2">
-            <Typography as="p" color="darkGray" variant="medium">
+            <Typography as="p" color="darkGray" variant="small">
               Resources:
             </Typography>
             <div className="flex items-center flex-wrap gap-2 w-full">
@@ -153,7 +153,7 @@ const SidePanel = ({
           </div>
 
           <div className="my-2">
-            <Typography as="p" color="darkGray" variant="medium">
+            <Typography as="p" color="darkGray" variant="small">
               Conditions:
             </Typography>
             <div className="flex items-center flex-wrap gap-2 w-full">
@@ -176,7 +176,7 @@ const SidePanel = ({
           </div>
 
           <div className="mb-2">
-            <Typography as="p" color="darkGray" variant="medium">
+            <Typography as="p" color="darkGray" variant="small">
               Insurance:
             </Typography>
             <div className="flex items-center flex-wrap gap-2 w-full">
@@ -199,7 +199,7 @@ const SidePanel = ({
           </div>
 
           <div className="mt-2">
-            <Typography as="p" color="darkGray" variant="medium">
+            <Typography as="p" color="darkGray" variant="small">
               Therapy Options:
             </Typography>
             <div className="flex items-center flex-wrap gap-2 w-full">
@@ -236,7 +236,7 @@ const SidePanel = ({
 
       <footer className="px-5 pt-2.5 flex items-center">
         {filteredProffesionals && proffesionals && (
-          <Typography as="span" color="black" variant="small">
+          <Typography as="span" color="black" variant="xsmall">
             Showing {filteredProffesionals.length} of {proffesionals.length}{" "}
             professionals
           </Typography>
