@@ -4,5 +4,6 @@ export type VariantType =
   | "large"
   | "medium"
   | "small"
+  | "xsmall"
   | "title"
   | "subtitle";
