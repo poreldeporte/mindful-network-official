@@ -4,14 +4,13 @@ import { VariantType } from "@/models";
 type ColorType = "white" | "black" | "darkGray" | "lightGray";
 
 const variantClasses: Record<VariantType, string> = {
-  xxlarge: "text-3xl md:text-4xl xl:text-5xl",
-  xlarge: "text-2xl md:text-3xl xl:text-4xl",
-  large: "text-xl xl:text-2xl",
-  medium: "text-md xl:text-lg",
-  small: "text-sm xl:text-md",
-  xsmall: "text-xs xl:text-sm",
-  title: "text-3xl md:text-5xl xl:text-6xl font-antic",
-  subtitle: "text-2xl md:text-3xl xl:text-4xl font-antic",
+  xxlarge: "text-xl md:text-2xl xl:text-3xl",
+  xlarge: "text-base md:text-lg xl:text-xl",
+  large: "text-sm md:text-base xl:text-lg",
+  medium: "text-xs xl:text-sm",
+  small: "text-xs",
+  title: "text-xl md:text-2xl xl:text-3xl font-antic",
+  subtitle: "text-base md:text-lg xl:text-xl font-antic",
 };
 
 const colorClasses: Record<ColorType, string> = {

@@ -1,4 +1,4 @@
-export const allInpatientQuery = `*[_type == 'inpatient']{
+export const allInpatientQuery = `*[_type == 'inpatientPrograms']{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
@@ -20,7 +20,7 @@ export const allInpatientQuery = `*[_type == 'inpatient']{
   }`;
 
 export const getInpatientById = (id: string) => {
-  const query: string = `*[_type == 'inpatient' && _id == "${id}"]{
+  const query: string = `*[_type == 'inpatientPrograms' && _id == "${id}"]{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,

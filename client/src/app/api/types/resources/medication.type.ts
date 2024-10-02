@@ -1,4 +1,4 @@
-export const allMedicationQuery = `*[_type == 'medication']{
+export const allMedicationQuery = `*[_type == 'medicationManagement']{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
@@ -20,7 +20,7 @@ export const allMedicationQuery = `*[_type == 'medication']{
   }`;
 
 export const getMedicationById = (id: string) => {
-  const query: string = `*[_type == 'medication' && _id == "${id}"]{
+  const query: string = `*[_type == 'medicationManagement' && _id == "${id}"]{
     ..., 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
