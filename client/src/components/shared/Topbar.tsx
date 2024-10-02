@@ -43,7 +43,7 @@ export function Topbar() {
     <header className={isSearchPage ? headerRelative : headerFixed}>
       <div className="flex items-center justify-between p-5">
         <Typography
-          variant="xlarge"
+          variant="large"
           as="span"
           color="black"
           className="font-antic font-normal flex items-center"
@@ -51,24 +51,12 @@ export function Topbar() {
           <Link href={"/"}>The Mindful Network</Link>
         </Typography>
 
-        {/*<menu className="flex space-x-5">
-          <>
-            {navigation.map((item) => {
-              return (
-                <Link key={item.key} href={item.path}>
-                  {item.label}
-                </Link>
-              );
-            })}
-          </>
-        </menu>*/}
-
-        <Button variant="medium" className="py-2 rounded-full px-4">
+        <Button variant="small" className="py-2 rounded-full px-4">
           <Link href={"/search"}>Start Search</Link>
         </Button>
       </div>
 
-      <nav className="bg-blue-500 px-5 py-2 flex items-center justify-center gap-5">
+      <nav className="bg-blue-500 px-5 flex items-center justify-center gap-5">
         <Select onValueChange={handleSelectChange}>
           <SelectTrigger className="w-[100px] z-50 bg-blue-500 border-none text-white px-0">
             <SelectValue placeholder="Resources" />
