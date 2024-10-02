@@ -1,6 +1,6 @@
 export default {
   name: 'conditionSpecialty',
-  title: 'Condition Specialty',
+  title: '⚙️ Condition Specialty',
   type: 'document',
   fields: [
     {

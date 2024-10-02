@@ -3,24 +3,20 @@
 import { MapComponent } from "@/components/shared";
 import { getValidationError } from "@/utilities";
 import {
-  // ageSpecialty,
   conditionSpecialty,
   insurances,
   PsychologistModel,
   TherapyModality,
+  ResourcesModel,
+  ResourcesKey,
 } from "@/models";
 // import { Positions } from "@/models";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 import { useSearchParams } from "next/navigation";
+import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 
 export const SearchWrapper = () => {
-  const [psychologists, setPsychologists] = useState<
-    PsychologistModel[] | null
-  >(null);
-  // const [ageSpecialties, setAgeSpecialties] = useState<ageSpecialty[] | null>(
-  //   null
-  // );
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
     null
   );
@@ -28,13 +24,20 @@ export const SearchWrapper = () => {
   const [therapyModalities, setTherapyModalities] = useState<
     TherapyModality[] | null
   >(null);
-
+  const [allResourceKeys, setAllResourceKeys] = useState<ResourcesKey[] | []>(
+    []
+  );
   // const [mapPositions, setMapPositions] = useState<Positions[]>([
   //   { lat: 34.0522, lng: -118.2437 },
   // ]);
-  const [filteredPsychologists, setFilteredPsychologists] = useState<
+  const [filteredProffesionals, setFilteredProffesionals] = useState<
     PsychologistModel[] | null
   >(null);
+  const [allProffesionals, setAllProffesionals] =
+    useState<ResourcesModel | null>(null);
+  const [allCombinedProfessionals, setAllCombinedProfessionals] = useState<
+    PsychologistModel[]
+  >([]);
 
   const searchParams = useSearchParams();
 
@@ -42,28 +45,24 @@ export const SearchWrapper = () => {
     async function fetchData() {
       try {
         const [
-          psychologistsRes,
           conditionsRes,
-          // ageSpecialtiesRes,
           insurancesRes,
           therapyModalitiesRes,
+          proffesionals,
         ] = await Promise.all([
-          fetch("/api/psychologists"),
           fetch("/api/conditions"),
-          // fetch("/api/age-specialties"),
           fetch("/api/insurances"),
           fetch("/api/therapy-modalities"),
+          fetch("/api/resources"),
         ]);
 
-        const psychologistsData = await psychologistsRes.json();
         const conditionsData = await conditionsRes.json();
-        // const ageSpecialtiesData = await ageSpecialtiesRes.json();
         const insurancesData = await insurancesRes.json();
         const therapyModalitiesData = await therapyModalitiesRes.json();
+        const proffesionalsData = await proffesionals.json();
 
-        setPsychologists(psychologistsData);
+        setAllProffesionals(proffesionalsData);
         setConditions(conditionsData);
-        // setAgeSpecialties(ageSpecialtiesData);
         setInsurances(insurancesData);
         setTherapyModalities(therapyModalitiesData);
       } catch (error) {
@@ -75,16 +74,30 @@ export const SearchWrapper = () => {
   }, []);
 
   useEffect(() => {
-    if (psychologists) {
+    if (allProffesionals) {
+      const combinedProfessionals = Object.values(allProffesionals).flat();
+      setAllCombinedProfessionals(combinedProfessionals);
+
+      const resourceParam = searchParams.get("resource");
       const conditionParam = searchParams.get("condition");
       const insuranceParam = searchParams.get("insurance");
       const therapyParam = searchParams.get("therapy");
       const searchQuery = searchParams.get("search");
 
-      let filtered = psychologists;
+      let result: PsychologistModel[] = [];
+
+      if (resourceParam) {
+        const camelCaseResource = resourceParam.replace(/-([a-z])/g, (g) =>
+          g[1].toUpperCase()
+        );
+        result =
+          allProffesionals?.[camelCaseResource as keyof ResourcesModel] || [];
+      } else {
+        result = Object.values(allProffesionals).flat();
+      }
 
       if (conditionParam) {
-        filtered = filtered.filter((psychologist) =>
+        result = result.filter((psychologist) =>
           psychologist.conditionSpecialty.some(
             (condition) => condition.name === conditionParam
           )
@@ -93,7 +106,7 @@ export const SearchWrapper = () => {
 
       if (insuranceParam) {
         const selectedInsurances = insuranceParam.split(",");
-        filtered = filtered.filter((psychologist) =>
+        result = result.filter((psychologist) =>
           psychologist.insurances.some((insurance) =>
             selectedInsurances.includes(insurance.name)
           )
@@ -101,7 +114,7 @@ export const SearchWrapper = () => {
       }
 
       if (therapyParam) {
-        filtered = filtered.filter((psychologist) =>
+        result = result.filter((psychologist) =>
           psychologist.therapyOptions.some(
             (modality) => modality.type === therapyParam
           )
@@ -110,8 +123,9 @@ export const SearchWrapper = () => {
 
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
-        filtered = filtered.filter(
+        result = result.filter(
           (psychologist) =>
+            psychologist.name.toLowerCase().includes(query) ||
             psychologist.insurances.some((insurance) =>
               insurance.name.toLowerCase().includes(query)
             ) ||
@@ -121,19 +135,26 @@ export const SearchWrapper = () => {
         );
       }
 
-      setFilteredPsychologists(filtered);
+      const resourceKeys = generateResourceKeys(allProffesionals);
+      setAllResourceKeys(resourceKeys);
+
+      setFilteredProffesionals(result);
     }
-  }, [psychologists, searchParams]);
+  }, [searchParams, allProffesionals]);
+
+  console.log(allProffesionals);
 
   return (
     <>
       <SidePanel
-        psychologists={psychologists}
-        filteredPsychologists={filteredPsychologists}
+        proffesionals={allCombinedProfessionals}
+        filteredProffesionals={filteredProffesionals}
         conditions={conditions}
         insurances={insurances}
         therapyModalities={therapyModalities}
+        resources={allResourceKeys}
       />
+
       <MapComponent
         positions={[{ lat: 34.0522, lng: -118.2437 }]}
         className="h-full w-full"

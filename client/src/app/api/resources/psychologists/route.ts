@@ -1,7 +1,7 @@
 import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
-import { createReferences, formatAddress } from "./utilities";
-import { allPsychologistsQuery } from "../types";
+import { createReferences, formatAddress } from "../../utilities";
+import { allPsychologistsQuery } from "../../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
 export async function GET() {

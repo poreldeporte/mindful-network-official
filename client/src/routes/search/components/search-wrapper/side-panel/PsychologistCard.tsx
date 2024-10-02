@@ -21,12 +21,14 @@ const PsychologistCard = ({
   } = psychologist;
 
   return (
-    <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-2.5">
+    <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-2.5 items-center">
       <Image
         src={image ? image : UserImage}
         alt={`${name} image`}
         loading="lazy"
-        className="w-12 h-12 object-cover rounded-full"
+        width={100}
+        height={100}
+        className="w-32 h-32 object-cover rounded-full"
       />
 
       <div className="flex flex-col">
@@ -41,7 +43,7 @@ const PsychologistCard = ({
           </Typography>
 
           <div className="flex items-center gap-1">
-            {therapyOptions.length
+            {therapyOptions?.length
               ? therapyOptions.map((option) => (
                   <Badge key={option.id} color="blue">
                     {option.type}
@@ -56,7 +58,7 @@ const PsychologistCard = ({
             <div>
               <Typography as="p" color="darkGray" variant="medium">
                 <span className="font-semibold">Specialty:</span>{" "}
-                {conditionSpecialty.length
+                {conditionSpecialty?.length
                   ? conditionSpecialty
                       .map((condition) => condition.name)
                       .join(", ")
@@ -67,7 +69,7 @@ const PsychologistCard = ({
             <div>
               <Typography as="p" color="darkGray" variant="medium">
                 <span className="font-semibold">Accepted Insurance:</span>{" "}
-                {insurances.length
+                {insurances?.length
                   ? insurances.map((insurance) => insurance.name).join(", ")
                   : ""}
               </Typography>
@@ -76,7 +78,7 @@ const PsychologistCard = ({
             <div>
               <Typography as="p" color="darkGray" variant="medium">
                 <span className="font-semibold">Age Specialty:</span>{" "}
-                {ageSpecialty.length
+                {ageSpecialty?.length
                   ? ageSpecialty.map((specialty) => specialty.age).join(", ")
                   : ""}
               </Typography>
@@ -88,7 +90,7 @@ const PsychologistCard = ({
               href={`/psychologists/${id}`}
               className="px-3 py-1.5 rounded-full bg-blue-500 text-white"
             >
-              Get in Touch
+              View profile
             </Link>
           </div>
         </div>

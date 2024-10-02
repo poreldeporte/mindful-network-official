@@ -1,20 +1,43 @@
 "use client";
 
-import Link from "next/link";
-import { Typography } from "../ui";
 import { resources } from "@/lib/constants";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
-import { Button } from "../ui";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { Button, Typography } from "../ui";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Shadcn-select";
 
 export function Topbar() {
   const pathname = usePathname();
   const isSearchPage = pathname === "/search";
 
+  const router = useRouter();
+
+  const handleSelectChange = (value: string) => {
+    const selectedResource = resources.find(
+      (resource) => resource.title === value
+    );
+    if (selectedResource) {
+      router.push(
+        `/search?resource=${encodeURIComponent(
+          selectedResource.path.substring(1)
+        )}`
+      );
+    }
+  };
+
   const headerFixed =
-    "fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+    "fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden lg:block z-50";
   const headerRelative =
-    "relative mt-5 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden md:block z-50";
+    "relative mt-5 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden lg:block z-50";
 
   return (
     <header className={isSearchPage ? headerRelative : headerFixed}>
@@ -28,26 +51,49 @@ export function Topbar() {
           <Link href={"/"}>The Mindful Network</Link>
         </Typography>
 
+        {/*<menu className="flex space-x-5">
+          <>
+            {navigation.map((item) => {
+              return (
+                <Link key={item.key} href={item.path}>
+                  {item.label}
+                </Link>
+              );
+            })}
+          </>
+        </menu>*/}
+
         <Button variant="medium" className="py-2 rounded-full px-4">
           <Link href={"/search"}>Start Search</Link>
         </Button>
       </div>
+
       <nav className="bg-blue-500 px-5 py-2 flex items-center justify-center gap-5">
-        <Link href={"/search"} className="flex items-center">
-          <Typography
-            className="flex items-center gap-2"
-            as="span"
-            variant="small"
-            color="white"
-          >
-            All resources <ChevronDownIcon className="h-4 w-4" />
-          </Typography>
-        </Link>
+        <Select onValueChange={handleSelectChange}>
+          <SelectTrigger className="w-[100px] z-50 bg-blue-500 border-none text-white px-0">
+            <SelectValue placeholder="Resources" />
+          </SelectTrigger>
+          <SelectContent className="bg-white">
+            <SelectGroup>
+              <SelectLabel>Resources</SelectLabel>
+              {resources.map((resource) => (
+                <SelectItem key={resource.key} value={resource.title}>
+                  {resource.title}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
         {resources.map((resource, resourceIdx) => {
           if (resourceIdx < 4)
             return (
-              <Link key={resource.key} href={resource.path}>
+              <Link
+                key={resource.key}
+                href={`/search?resource=${encodeURIComponent(
+                  resource.path.substring(1)
+                )}`}
+              >
                 <Typography
                   className="flex items-center gap-2"
                   as="span"

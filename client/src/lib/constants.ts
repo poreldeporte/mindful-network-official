@@ -23,49 +23,49 @@ export const benefits = [
 
 export const resources = [
   {
-    key: "therapy-services-option",
-    title: "Therapy Services",
-    path: "/therapy-services",
+    key: "psychologists",
+    title: "Psychologists",
+    path: "/psychologists",
   },
   {
-    key: "medication-management-option",
-    title: "Medication Management",
-    path: "/medication-management",
+    key: "backer-act-facilities",
+    title: "Backer Act Facilities",
+    path: "/backer-act-facilities",
   },
   {
-    key: "neuropsychological-assessment-option",
-    title: "Neuropsychological Assessment",
-    path: "/neuropsychological-assessment",
-  },
-  {
-    key: "outpatient-programs-option",
-    title: "Outpatient Programs",
-    path: "/outpatient-programs",
-  },
-  {
-    key: "inpatient-programs-option",
-    title: "Inpatient Programs",
-    path: "/inpatient-programs",
-  },
-  {
-    key: "baker-act-facilities-option",
-    title: "Baker Act Facilities",
-    path: "/baker-act-facilities",
-  },
-  {
-    key: "mental-health-legal-support-option",
-    title: "Mental Health Legal Support",
-    path: "/mental-health-legal-support",
-  },
-  {
-    key: "innovative-therapies-option",
+    key: "innovative-therapies",
     title: "Innovative Therapies",
     path: "/innovative-therapies",
   },
   {
-    key: "mind-body-practices-option",
-    title: "Mind-Body Practices",
+    key: "inpatient",
+    title: "Inpatient",
+    path: "/inpatient",
+  },
+  {
+    key: "medication",
+    title: "Medication",
+    path: "/medication",
+  },
+  {
+    key: "mental-health",
+    title: "Mental Health",
+    path: "/mental-health",
+  },
+  {
+    key: "mind-body-practices",
+    title: "Mind Body Practices",
     path: "/mind-body-practices",
+  },
+  {
+    key: "outpatient",
+    title: "Outpatient",
+    path: "/outpatient",
+  },
+  {
+    key: "psychiatric",
+    title: "Psychiatric",
+    path: "/psychiatric",
   },
 ];
 

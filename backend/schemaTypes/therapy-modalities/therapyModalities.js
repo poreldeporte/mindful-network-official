@@ -1,6 +1,6 @@
 export default {
   name: 'therapyModality',
-  title: 'Therapy Modality',
+  title: '⚙️ Therapy Modality',
   type: 'document',
   fields: [
     {

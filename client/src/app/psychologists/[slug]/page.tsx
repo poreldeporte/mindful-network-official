@@ -8,8 +8,12 @@ import {
   ProfileCard,
   GetInTouch,
   NavigationBar,
+  ProfileCardLg,
+  StickyButton,
 } from "@/routes/psychologists/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
+import { sanityClient } from "@/api";
+import { getPsychologistsAdapter } from "@/adapters";
 
 export default function PsychologistPage() {
   const { slug } = useParams();
@@ -19,17 +23,40 @@ export default function PsychologistPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (slug) {
-      fetch(`/api/psychologists/${slug}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch psychologist");
-          }
-          return response.json();
-        })
-        .then((data) => setPsychologist(data))
-        .catch((err) => setError(err.message));
-    }
+    const fetchData = async () => {
+      if (slug) {
+        try {
+          const query = `*[_id == $slug][0]{
+            ..., 
+            "conditionSpecialty": conditionSpecialty[]->{
+              "id": _id,
+              name
+            },
+            "insurances": insurances[]->{
+              "id": _id,
+              name
+            },
+            "ageSpecialty": ageSpecialty[]->{
+              "id": _id,
+              age
+            },
+            "therapyOptions": therapyOptions[]->{
+              "id": _id,
+              type
+            },
+            "image": image.asset->url
+          }`;
+          const data = await sanityClient.fetch(query, { slug });
+          const adaptedData = getPsychologistsAdapter(data);
+
+          if (adaptedData) setPsychologist(adaptedData);
+        } catch (error) {
+          console.log(error);
+          setError(error);
+        }
+      }
+    };
+    fetchData();
   }, [slug]);
 
   if (error) {
@@ -45,12 +72,19 @@ export default function PsychologistPage() {
       <Topbar />
       <MobileTopBar />
 
-      <div className="min-h-screen page-width lg:my-56">
-        <NavigationBar />
-        <ProfileCard {...psychologist} />
-        <PsychologistAbout {...psychologist} />
-        <GetInTouch {...psychologist} />
+      <div className="min-h-screen page-width lg:grid lg:grid-cols-6 lg:items-start lg:my-56 lg:gap-x-10">
+        <div className="lg:col-span-4">
+          <NavigationBar />
+          <ProfileCardLg {...psychologist} />
+          <ProfileCard {...psychologist} />
+          <PsychologistAbout {...psychologist} />
+        </div>
+
+        <div className="lg:col-span-2 lg:relative h-full">
+          <StickyButton />
+        </div>
       </div>
+      <GetInTouch {...psychologist} />
       <Footer />
     </main>
   );

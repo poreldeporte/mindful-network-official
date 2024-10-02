@@ -13,7 +13,7 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
   return (
     <article>
       <Typography
-        className="mb-2 font-bold"
+        className="mb-2 font-semibold"
         color="black"
         as="h4"
         variant="large"
@@ -30,7 +30,7 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
 
 export function About() {
   return (
-    <section className="page-width section-y-padding">
+    <section className="page-width section-y-padding bg-gray-50">
       <Typography className="mb-2" color="black" as="h2" variant="title">
         <span className="text-green-300">We&apos;re here to help</span>{" "}
         <span className="block" />
@@ -39,10 +39,10 @@ export function About() {
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 lg:mt-20 gap-5">
         <div className="flex flex-col gap-5">
           <Typography
-            className="mb-2 font-semibold"
+            className="mb-2 font-medium w-3/4"
             color="black"
             as="h3"
-            variant="large"
+            variant="xlarge"
           >
             Access the most reliable and reputable mental health resources
             available

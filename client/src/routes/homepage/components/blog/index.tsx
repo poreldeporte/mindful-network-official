@@ -39,10 +39,10 @@ export const BlogContainer: React.FC<Props> = () => {
   return (
     <section className="page-width section-y-padding">
       <Typography
-        className="mb-10 font-bold"
+        className="mb-20 font-medium"
         color="black"
         as="h4"
-        variant="subtitle"
+        variant="title"
       >
         Expert articles and resources <span className="block"></span>to
         <span className="text-green-300"> support your journey</span>
