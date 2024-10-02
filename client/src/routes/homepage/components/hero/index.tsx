@@ -19,8 +19,11 @@ export const Hero = () => {
         to find the support you need, when you need it.
       </Typography>
 
-      <Link href={"/search"} className="mt-4 py-2 px-4 rounded-xl bg-blue-500">
-        <Typography as="span" variant={"medium"} color="white">
+      <Link
+        href={"/search"}
+        className="mt-4 py-2 px-4 rounded-full bg-blue-500"
+      >
+        <Typography as="span" variant={"small"} color="white">
           Start Exploring
         </Typography>
       </Link>
