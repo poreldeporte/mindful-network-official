@@ -21,7 +21,7 @@ interface Props {
   therapyModalities: TherapyModality[];
   handleBadgeClick: (key: string, arg: string) => void;
   selectedResources: string[];
-  selectedCondition: string;
+  selectedCondition: string[];
   selectedInsurance: string[];
   selectedTherapy: string;
 }
@@ -108,7 +108,6 @@ const Header = ({
                 ))}
               </div>
             </div>
-
             <div className="my-2">
               <Typography as="p" color="darkGray" variant="small">
                 Conditions:
@@ -120,7 +119,7 @@ const Header = ({
                         key={condition.id}
                         color="orange"
                         className="w-max"
-                        isSelected={selectedCondition === condition.name}
+                        isSelected={selectedCondition.includes(condition.name)}
                         onClick={() =>
                           handleBadgeClick("condition", condition.name)
                         }

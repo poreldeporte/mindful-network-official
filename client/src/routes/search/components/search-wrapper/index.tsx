@@ -83,19 +83,26 @@ export const SearchWrapper = () => {
       let result: PsychologistModel[] = [];
 
       if (resourceParam) {
-        const camelCaseResource = resourceParam.replace(/-([a-z])/g, (g) =>
-          g[1].toUpperCase()
-        );
-        result =
-          allProffesionals?.[camelCaseResource as keyof ResourcesModel] || [];
+        const selectedResources = resourceParam.split(",");
+
+        result = selectedResources.flatMap((resource) => {
+          const camelCaseResource = resource.replace(/-([a-z])/g, (g) =>
+            g[1].toUpperCase()
+          );
+          return (
+            allProffesionals?.[camelCaseResource as keyof ResourcesModel] || []
+          );
+        });
       } else {
         result = Object.values(allProffesionals).flat();
       }
 
       if (conditionParam) {
+        const selectedConditions = conditionParam.split(",");
+
         result = result.filter((psychologist) =>
-          psychologist.conditionSpecialty.some(
-            (condition) => condition.name === conditionParam
+          psychologist.conditionSpecialty.some((specialty) =>
+            selectedConditions.includes(specialty.name)
           )
         );
       }
