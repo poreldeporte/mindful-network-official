@@ -1,5 +1,3 @@
-import { BadgeSkeleton } from "@/components/ui";
-
 export const PsychologistCardSkeleton = () => {
   return (
     <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-5 items-center">

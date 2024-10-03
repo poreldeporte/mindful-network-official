@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Typography } from "@/components/ui";
+import { Badge, Typography, NoResults } from "@/components/ui";
 import {
   conditionSpecialty,
   insurances,
@@ -21,6 +21,7 @@ interface Props {
   insurances: insurances[] | null;
   therapyModalities: TherapyModality[] | null;
   resources: ResourcesKey[];
+  isLoading: Boolean;
 }
 
 const SidePanel = ({
@@ -30,6 +31,7 @@ const SidePanel = ({
   insurances,
   therapyModalities,
   resources,
+  isLoading
 }: Props) => {
   const [selectedCondition, setSelectedCondition] = useState<string[]>([]);
 
@@ -39,8 +41,6 @@ const SidePanel = ({
 
   const searchParams = useSearchParams();
   const router = useRouter();
-
-  const [isLoading, seTisLoading] = useState(false)
 
   useEffect(() => {
     const conditionParam = searchParams.get("condition");
@@ -148,24 +148,27 @@ const handleBadgeClick = (filterType: string, value: string) => {
                 selectedTherapy={selectedTherapy}
       />
       <div className="overflow-y-auto overflow-x-hidden max-w-full">
-        <ul className="px-5 divide-y divide-gray-200">
+        
           {isLoading ? (
             <>
-              {[0, 1, 2].map((_, index) => (
+              {Array(5).fill(0).map((_, index) => (
                 <PsychologistCardSkeleton key={index} />
               ))}
             </>
           ) : filteredProffesionals && filteredProffesionals.length ? (
+            <ul className="px-5 divide-y divide-gray-200">
+            {
             filteredProffesionals.map((psychologist) => (
               <PsychologistCard
                 psychologist={psychologist}
                 key={psychologist.id}
               />
-            ))
+            ))}
+            </ul>
           ) : (
-            "There is no psychologist matching your filters"
+            <NoResults title="No results found"/>
           )}
-        </ul>
+        
       </div>
 
       <footer className="px-5 pt-2.5 flex items-center">
