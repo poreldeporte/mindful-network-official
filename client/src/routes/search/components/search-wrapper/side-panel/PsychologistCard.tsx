@@ -93,7 +93,7 @@ const PsychologistCard = ({
           <div className="flex items-end">
             <Link
               href={`/psychologists/${id}`}
-              className="px-3 py-1.5 rounded-full bg-blue-500 text-white"
+              className="px-3 py-1.5 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white"
             >
               <Typography as="span" color="white" variant="small">
                 View profile
