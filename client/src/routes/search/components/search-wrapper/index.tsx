@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 import { useSearchParams } from "next/navigation";
+import { PsychologistCardSkeleton } from "./side-panel/PsychologistCard.skeleton";
 import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 
 export const SearchWrapper = () => {
@@ -38,6 +39,8 @@ export const SearchWrapper = () => {
   const [allCombinedProfessionals, setAllCombinedProfessionals] = useState<
     PsychologistModel[]
   >([]);
+
+  const [isLoading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
 

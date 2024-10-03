@@ -8,6 +8,12 @@ interface Props {
   onClick?: () => void;
 }
 
+export const BadgeSkeleton = () => {
+  return (
+    <button className="text-xs rounded-full px-2.5 py-0.5 border font-medium focus:outline-none" />
+  );
+};
+
 export const Badge = ({
   children,
   className = "",
