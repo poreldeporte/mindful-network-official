@@ -81,7 +81,7 @@ export default function PsychologistPage() {
         <div className="lg:col-span-2 lg:relative h-full">
           <StickyButton />
         </div>
-        <GetInTouch {...psychologist} />
+        <GetInTouch {...psychologist}/>
       </div>
       
       <Footer />
