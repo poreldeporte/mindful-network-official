@@ -46,7 +46,7 @@ export function ProfileCard({
           {description}
         </Typography>
       </div>
-      <div className="flex items-center justify-start space-x-6">
+      <div className="flex flex-col space-y-3 lg:items-center lg:justify-start lg:flex-row lg:space-x-6 lg:space-y-0">
         <div className="flex items-center space-x-2">
           <ShieldPlus className="w-10 h-10" />
           <Typography

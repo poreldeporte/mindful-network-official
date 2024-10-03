@@ -8,8 +8,8 @@ const variantClasses: Record<VariantType, string> = {
   xlarge: "text-base md:text-lg xl:text-xl leading-tight",
   large: "text-sm md:text-base xl:text-lg leading-tight",
   medium: "text-xs xl:text-sm",
-  small: "text-[20px]",
-  xsmall: "text-xs",
+  small: "text-xs lg:text-[20px]",
+  xsmall: "text-[14px] lg:text-xs",
   title: "text-xl md:text-2xl xl:text-3xl font-antic leading-tight",
   subtitle: "text-base md:text-lg xl:text-xl font-antic",
 };
