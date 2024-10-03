@@ -14,7 +14,6 @@ import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
-import { PsychologistCardSkeleton } from "./side-panel/PsychologistCard.skeleton";
 
 export const SearchWrapper = () => {
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
@@ -36,13 +35,14 @@ export const SearchWrapper = () => {
     PsychologistModel[]
   >([]);
 
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   const searchParams = useSearchParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true)
         const [
           conditionsRes,
           insurancesRes,
@@ -64,6 +64,8 @@ export const SearchWrapper = () => {
         setConditions(conditionsData);
         setInsurances(insurancesData);
         setTherapyModalities(therapyModalitiesData);
+
+        setLoading(false)
       } catch (error) {
         console.log(error);
         getValidationError(error);
@@ -148,8 +150,6 @@ export const SearchWrapper = () => {
     }
   }, [searchParams, allProffesionals]);
 
-  console.log(allProffesionals);
-
   return (
     <>
       <SidePanel
@@ -159,6 +159,7 @@ export const SearchWrapper = () => {
         insurances={insurances}
         therapyModalities={therapyModalities}
         resources={allResourceKeys}
+        isLoading={isLoading}
       />
 
       <MapComponent
