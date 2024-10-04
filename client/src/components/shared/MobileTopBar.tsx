@@ -17,7 +17,7 @@ export function MobileTopBar() {
 		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
 			<div>
 				<Typography
-					variant="xlarge"
+					variant="large"
 					as="span"
 					color="black"
 					className="font-antic font-normal flex items-center"
