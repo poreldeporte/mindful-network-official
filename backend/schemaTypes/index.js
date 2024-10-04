@@ -9,6 +9,7 @@ import {
   outpatient,
   psychiatric,
 } from './resources'
+import blog from './blog/blog'
 
 import ageSpecialties from './age-specialties/ageSpecialties'
 import conditionSpecialties from './condition-specialties/conditionSpecialties'
@@ -26,6 +27,7 @@ export const schemaTypes = [
   mindBodyPractices,
   outpatient,
   psychiatric,
+  blog,
   ageSpecialties,
   conditionSpecialties,
   insurances,
