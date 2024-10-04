@@ -1,21 +1,21 @@
-import React from "react";
-import Image from "next/image";
-import { Typography, Badge } from "@/components/ui";
+import { Badge, Typography } from "@/components/ui";
+import { MindfulIsotype, UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
-import { UserImage } from "@/lib/images";
-import { ShieldPlus, CircleCheck } from "lucide-react";
 import { formatType } from "@/utilities";
+import { ShieldPlus } from "lucide-react";
+import Image from "next/image";
 
 export function ProfileCard({
 	image,
 	name,
 	description,
 	_type,
+	facility,
 }: PsychologistModel) {
 	return (
 		<header className="mb-10 mt-32 justify-center bg-white rounded-2xl p-10 lg:mt-0">
 			<div className="flex items-center justify-start">
-				<div className="w-24 h-24 lg:h-48 lg:w-48 mr-5 mb-5">
+				<div className="w-24 h-24 lg:h-48 lg:w-48 mr-5">
 					<Image
 						className="rounded-full aspect-square object-cover"
 						src={image ? image : UserImage}
@@ -26,12 +26,20 @@ export function ProfileCard({
 				</div>
 				<div>
 					<Typography
-						className="font-bold mb-5"
+						className="font-bold"
 						as="h2"
-						variant="medium"
+						variant="large"
 						color="black"
 					>
 						{name}
+					</Typography>
+					<Typography
+						className="font-medium mb-2"
+						as="p"
+						variant="small"
+						color="darkGray"
+					>
+						{facility}
 					</Typography>
 					<div>
 						<Badge className="mr-2 mb-2" color="blue" isSelected={false}>
@@ -58,7 +66,11 @@ export function ProfileCard({
 					</Typography>
 				</div>
 				<div className="flex items-center space-x-2">
-					<CircleCheck className="w-10 h-10" />
+					<Image
+						alt="Mindful Logo"
+						className="w-10 h-10"
+						src={MindfulIsotype}
+					/>
 					<Typography
 						className="font-semibold"
 						as="p"
