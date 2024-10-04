@@ -1,22 +1,23 @@
 import React from "react";
 import { VariantType } from "@/models";
 
-type ColorType = "white" | "black" | "darkGray" | "lightGray";
+type ColorType = "white" | "black" | "darkGray" | "lightGray" | "blue";
 
 const variantClasses: Record<VariantType, string> = {
-  xxlarge: "text-3xl md:text-4xl xl:text-5xl",
-  xlarge: "text-2xl md:text-3xl xl:text-4xl",
-  large: "text-xl xl:text-2xl",
-  medium: "text-md xl:text-lg",
-  small: "text-sm xl:text-md",
-  xsmall: "text-xs xl:text-sm",
-  title: "text-3xl md:text-5xl xl:text-6xl font-antic",
-  subtitle: "text-2xl md:text-3xl xl:text-4xl font-antic",
+  xxlarge: "text-xl md:text-2xl xl:text-3xl leading-tight",
+  xlarge: "text-base md:text-lg xl:text-xl leading-tight",
+  large: "text-sm md:text-base xl:text-lg leading-tight",
+  medium: "text-xs xl:text-sm",
+  small: "text-xs lg:text-[20px]",
+  xsmall: "text-[14px] lg:text-xs",
+  title: "text-xl md:text-2xl xl:text-3xl font-antic leading-tight",
+  subtitle: "text-base md:text-lg xl:text-xl font-antic",
 };
 
 const colorClasses: Record<ColorType, string> = {
   white: "text-white",
   black: "text-gray-950",
+  blue: "text-blue-500",
   darkGray: "text-gray-700",
   lightGray: "text-gray-400",
 };

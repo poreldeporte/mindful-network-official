@@ -1,20 +1,19 @@
 "use client";
 
 import { MapComponent } from "@/components/shared";
-import { getValidationError } from "@/utilities";
 import {
   conditionSpecialty,
   insurances,
   PsychologistModel,
-  TherapyModality,
-  ResourcesModel,
   ResourcesKey,
+  ResourcesModel,
+  TherapyModality,
 } from "@/models";
-// import { Positions } from "@/models";
+import { getValidationError } from "@/utilities";
+import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
-import { useSearchParams } from "next/navigation";
-import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 
 export const SearchWrapper = () => {
   const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
@@ -27,9 +26,6 @@ export const SearchWrapper = () => {
   const [allResourceKeys, setAllResourceKeys] = useState<ResourcesKey[] | []>(
     []
   );
-  // const [mapPositions, setMapPositions] = useState<Positions[]>([
-  //   { lat: 34.0522, lng: -118.2437 },
-  // ]);
   const [filteredProffesionals, setFilteredProffesionals] = useState<
     PsychologistModel[] | null
   >(null);
@@ -39,11 +35,14 @@ export const SearchWrapper = () => {
     PsychologistModel[]
   >([]);
 
+  const [isLoading, setLoading] = useState(false);
+
   const searchParams = useSearchParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true)
         const [
           conditionsRes,
           insurancesRes,
@@ -65,6 +64,8 @@ export const SearchWrapper = () => {
         setConditions(conditionsData);
         setInsurances(insurancesData);
         setTherapyModalities(therapyModalitiesData);
+
+        setLoading(false)
       } catch (error) {
         console.log(error);
         getValidationError(error);
@@ -87,19 +88,26 @@ export const SearchWrapper = () => {
       let result: PsychologistModel[] = [];
 
       if (resourceParam) {
-        const camelCaseResource = resourceParam.replace(/-([a-z])/g, (g) =>
-          g[1].toUpperCase()
-        );
-        result =
-          allProffesionals?.[camelCaseResource as keyof ResourcesModel] || [];
+        const selectedResources = resourceParam.split(",");
+
+        result = selectedResources.flatMap((resource) => {
+          const camelCaseResource = resource.replace(/-([a-z])/g, (g) =>
+            g[1].toUpperCase()
+          );
+          return (
+            allProffesionals?.[camelCaseResource as keyof ResourcesModel] || []
+          );
+        });
       } else {
         result = Object.values(allProffesionals).flat();
       }
 
       if (conditionParam) {
+        const selectedConditions = conditionParam.split(",");
+
         result = result.filter((psychologist) =>
-          psychologist.conditionSpecialty.some(
-            (condition) => condition.name === conditionParam
+          psychologist.conditionSpecialty.some((specialty) =>
+            selectedConditions.includes(specialty.name)
           )
         );
       }
@@ -142,8 +150,6 @@ export const SearchWrapper = () => {
     }
   }, [searchParams, allProffesionals]);
 
-  console.log(allProffesionals);
-
   return (
     <>
       <SidePanel
@@ -153,6 +159,7 @@ export const SearchWrapper = () => {
         insurances={insurances}
         therapyModalities={therapyModalities}
         resources={allResourceKeys}
+        isLoading={isLoading}
       />
 
       <MapComponent

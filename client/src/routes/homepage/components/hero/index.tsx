@@ -5,7 +5,7 @@ export const Hero = () => {
   return (
     <section className="page-width h-[60vh] lg:h-[90vh] flex items-center justify-center flex-col">
       <Typography
-        className="font-antic my-4"
+        className="font-antic mb-2"
         as="h1"
         color="black"
         variant="title"
@@ -14,14 +14,17 @@ export const Hero = () => {
         <span className="text-green-300">path to healing</span>
       </Typography>
 
-      <Typography className="mb-2" as="p" color="darkGray" variant="medium">
+      <Typography as="p" color="darkGray" variant="medium">
         Explore our mindfully curated network of trusted mental health resources
         to find the support you need, when you need it.
       </Typography>
 
-      <Link href={"/search"} className="mt-4 py-2 px-4 rounded-xl bg-blue-500">
-        <Typography as="span" variant={"medium"} color="white">
-          Start Exploring
+      <Link
+        href={"/search"}
+        className="mt-4 py-2 px-4 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors"
+      >
+        <Typography as="span" variant={"small"} color="white">
+          Start Search
         </Typography>
       </Link>
     </section>

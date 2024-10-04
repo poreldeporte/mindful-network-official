@@ -16,12 +16,12 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
         className="mb-2 font-semibold"
         color="black"
         as="h4"
-        variant="large"
+        variant="medium"
       >
         {title}
       </Typography>
 
-      <Typography className="mb-2" color="darkGray" as="p" variant="medium">
+      <Typography className="mb-2" color="darkGray" as="p" variant="small">
         {description}
       </Typography>
     </article>
@@ -42,7 +42,7 @@ export function About() {
             className="mb-2 font-medium w-3/4"
             color="black"
             as="h3"
-            variant="xlarge"
+            variant="large"
           >
             Access the most reliable and reputable mental health resources
             available

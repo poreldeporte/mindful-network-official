@@ -29,7 +29,7 @@ export function NavigationBar() {
   }, []);
 
   return (
-    <nav className="hidden overflow-hidden lg:flex  items-center justify-center fixed bottom-10 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 mx-auto z-10">
+    <nav className="hidden overflow-hidden lg:flex items-center justify-center fixed bottom-10 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 mx-auto z-10">
       <div className="bg-orange-100/60 backdrop-blur rounded-full px-10 py-5 flex items-center justify-between">
         <div>
           {psychologistNavigation.map((link) => {
@@ -49,7 +49,7 @@ export function NavigationBar() {
             );
           })}
         </div>
-        <Button className="p-2 rounded-full" variant="medium">
+        <Button className="p-2 rounded-full" variant="small">
           Get in Touch
         </Button>
       </div>

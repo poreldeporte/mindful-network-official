@@ -1,100 +1,60 @@
 "use client";
 
-import { Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
 import { Section } from "../section";
+import { PersonStanding, Activity, Brain, ArmchairIcon } from "lucide-react";
 
 export function PsychologistAbout({
-  ageSpecialty,
-  insurances,
-  conditionSpecialty,
-  therapyOptions,
+	ageSpecialty,
+	insurances,
+	conditionSpecialty,
+	therapyOptions,
 }: PsychologistModel) {
-  return (
-    <>
-      <Section id="age-specialty" title="Age Specialty">
-        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
-          {ageSpecialty && ageSpecialty.length ? (
-            ageSpecialty.map((insurance) => (
-              <li
-                key={insurance.id}
-                className="flex justify-between items-center border-b py-2"
-              >
-                <Typography as="p" variant="large" color="darkGray">
-                  {insurance.age}
-                </Typography>
-              </li>
-            ))
-          ) : (
-            <Typography as="p" variant="large" color="darkGray">
-              No Age Specialty available
-            </Typography>
-          )}
-        </ul>
-      </Section>
+	return (
+		<>
+			<Section
+				id="age-specialty"
+				icon={<PersonStanding className="h-12 w-12" />}
+				title="Age Specialty"
+				items={
+					ageSpecialty?.map((item) => ({ id: item.id, label: item.age })) || []
+				}
+				emptyMessage="No Age Specialty available"
+			/>
 
-      <Section id="insurances" title="Insurances">
-        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
-          {insurances && insurances.length ? (
-            insurances.map((insurance) => (
-              <li
-                key={insurance.id}
-                className="flex justify-between items-center border-b py-2"
-              >
-                <Typography as="p" variant="large" color="darkGray">
-                  {insurance.name}
-                </Typography>
-              </li>
-            ))
-          ) : (
-            <Typography as="p" variant="large" color="darkGray">
-              No insurances available
-            </Typography>
-          )}
-        </ul>
-      </Section>
+			<Section
+				id="insurances"
+				icon={<Activity className="h-12 w-12" />}
+				title="Insurances"
+				items={
+					insurances?.map((item) => ({ id: item.id, label: item.name })) || []
+				}
+				emptyMessage="No Insurances available"
+			/>
 
-      <Section id="condition-specialty" title="Condition Specialty">
-        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
-          {conditionSpecialty && conditionSpecialty.length ? (
-            conditionSpecialty.map((condition) => (
-              <li
-                key={condition.id}
-                className="flex justify-between items-center border-b py-2"
-              >
-                <Typography as="p" variant="large" color="darkGray">
-                  {condition.name}
-                </Typography>
-              </li>
-            ))
-          ) : (
-            <Typography as="p" variant="large" color="darkGray">
-              No conditions available
-            </Typography>
-          )}
-        </ul>
-      </Section>
+			<Section
+				id="condition-specialty"
+				icon={<Brain className="h-12 w-12" />}
+				title="Condition Specialty"
+				items={
+					conditionSpecialty?.map((item) => ({
+						id: item.id,
+						label: item.name,
+					})) || []
+				}
+				emptyMessage="No Conditions available"
+			/>
 
-      <Section id="therapy-options" title="Therapy options">
-        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
-          {therapyOptions && therapyOptions.length ? (
-            therapyOptions.map((option) => (
-              <li
-                key={option.id}
-                className="flex justify-between items-center border-b py-2"
-              >
-                <Typography as="p" variant="large" color="darkGray">
-                  {option.type}
-                </Typography>
-              </li>
-            ))
-          ) : (
-            <Typography as="p" variant="large" color="darkGray">
-              No Therapy options available
-            </Typography>
-          )}
-        </ul>
-      </Section>
-    </>
-  );
+			<Section
+				id="therapy-options"
+				icon={<ArmchairIcon className="h-12 w-12" />}
+				title="Therapy Options"
+				items={
+					therapyOptions?.map((item) => ({ id: item.id, label: item.type })) ||
+					[]
+				}
+				emptyMessage="No Therapy Options available"
+			/>
+		</>
+	);
 }

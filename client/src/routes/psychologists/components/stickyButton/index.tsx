@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui"
 
 export const StickyButton = () => {
+  const handleScrollToContact = () => {
+    const element = document.getElementById('get-in-touch');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
     return (
-        <div className="hidden lg:flex py-5 px-20 items-center justify-center sticky top-48 right-0 bg-white rounded-xl shadow-sm shadow-gray-100">
-        <Button className="rounded-full py-2 w-full" color="" variant="large">
-          Book a consultation
+        <div className="hidden lg:flex px-10 items-center justify-center sticky top-48 right-0 rounded-xl">
+        <Button className="rounded-full py-4 w-full" color="" variant="small" onClick={handleScrollToContact} >
+          Get in Touch
         </Button>
       </div>
     )

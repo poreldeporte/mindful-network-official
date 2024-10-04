@@ -1,6 +1,7 @@
 import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
+import { formatType } from "@/utilities";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,10 +19,11 @@ const PsychologistCard = ({
     insurances,
     // phone,
     ageSpecialty,
+    _type,
   } = psychologist;
 
   return (
-    <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-2.5 items-center">
+    <li className="grid grid-cols-[auto_1fr] w-full py-5 px-2.5 gap-5 items-center">
       <Image
         src={image ? image : UserImage}
         alt={`${name} image`}
@@ -37,26 +39,20 @@ const PsychologistCard = ({
             className="font-bold"
             as="h2"
             color="black"
-            variant="large"
+            variant="medium"
           >
             {name}
           </Typography>
 
           <div className="flex items-center gap-1">
-            {therapyOptions?.length
-              ? therapyOptions.map((option) => (
-                  <Badge key={option.id} color="blue">
-                    {option.type}
-                  </Badge>
-                ))
-              : ""}
+            <Badge color="green">{formatType(_type)}</Badge>
           </div>
         </div>
 
         <div className="grid grid-cols-[1fr_auto] gap-2.5 mt-5">
           <div className="flex flex-col gap-1">
             <div>
-              <Typography as="p" color="darkGray" variant="medium">
+              <Typography as="p" color="darkGray" variant="small">
                 <span className="font-semibold">Specialty:</span>{" "}
                 {conditionSpecialty?.length
                   ? conditionSpecialty
@@ -67,7 +63,7 @@ const PsychologistCard = ({
             </div>
 
             <div>
-              <Typography as="p" color="darkGray" variant="medium">
+              <Typography as="p" color="darkGray" variant="small">
                 <span className="font-semibold">Accepted Insurance:</span>{" "}
                 {insurances?.length
                   ? insurances.map((insurance) => insurance.name).join(", ")
@@ -76,10 +72,19 @@ const PsychologistCard = ({
             </div>
 
             <div>
-              <Typography as="p" color="darkGray" variant="medium">
+              <Typography as="p" color="darkGray" variant="small">
                 <span className="font-semibold">Age Specialty:</span>{" "}
                 {ageSpecialty?.length
                   ? ageSpecialty.map((specialty) => specialty.age).join(", ")
+                  : ""}
+              </Typography>
+            </div>
+
+            <div>
+              <Typography as="p" color="darkGray" variant="small">
+                <span className="font-semibold">Therapy Option:</span>{" "}
+                {therapyOptions?.length
+                  ? therapyOptions.map((option) => option.type).join(", ")
                   : ""}
               </Typography>
             </div>
@@ -88,9 +93,11 @@ const PsychologistCard = ({
           <div className="flex items-end">
             <Link
               href={`/psychologists/${id}`}
-              className="px-3 py-1.5 rounded-full bg-blue-500 text-white"
+              className="px-3 py-1.5 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white"
             >
-              View profile
+              <Typography as="span" color="white" variant="small">
+                View profile
+              </Typography>
             </Link>
           </div>
         </div>
