@@ -1,13 +1,12 @@
 "use client";
 
-import { Typography } from "../ui";
-import { AnimatePresence, motion } from "framer-motion";
-import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { navigation } from "@/lib/constants";
-import { useState } from "react";
-import { Searchbar } from "./Searchbar";
 import { menuVariants } from "@/lib/anim";
+import { resources } from "@/lib/constants";
+import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
+import { Button, Typography } from "../ui";
 
 export function MobileTopBar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +14,7 @@ export function MobileTopBar() {
 	const handleCloseHeader = () => setIsOpen(!isOpen);
 
 	return (
-		<section className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
+		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
 			<div>
 				<Typography
 					variant="xlarge"
@@ -44,18 +43,29 @@ export function MobileTopBar() {
 						variants={menuVariants}
 						className="absolute top-14 left-0 w-full bg-orange-50 page-width py-5 shadow-lg flex flex-col gap-2"
 					>
-						<Searchbar onClick={handleCloseHeader} />
+						<Typography variant="large" as="span" color="black">
+							Resources
+						</Typography>
+						<nav className="flex flex-col gap-2">
+							{resources.map((link) => (
+								<Link key={link.key} href={link.path}>
+									<Typography variant="medium" as="span" color="black">
+										{link.title}
+									</Typography>
+								</Link>
+							))}
+						</nav>
 
-						{navigation.map((link) => (
-							<Link key={link.key} href={link.path}>
-								<Typography variant="large" as="span" color="black">
-									{link.label}
-								</Typography>
-							</Link>
-						))}
+						<Button
+							onClick={handleCloseHeader}
+							variant="small"
+							className="py-2 rounded-full px-4 mt-5"
+						>
+							<Link href={"/search"}>Start Search</Link>
+						</Button>
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</section>
+		</header>
 	);
 }
