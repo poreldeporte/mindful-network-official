@@ -4,7 +4,7 @@ import {
 	IconUser,
 	IconMail,
 	IconMessage,
-	IconHelpHexagon,
+	IconPhone,
 } from "@tabler/icons-react";
 
 export function GetInTouch({ name, phone, address }: PsychologistModel) {
@@ -31,7 +31,7 @@ export function GetInTouch({ name, phone, address }: PsychologistModel) {
 						<div className="relative">
 							<input
 								type="text"
-								placeholder="Your name"
+								placeholder="Name"
 								className="rounded-full p-2 pl-10 w-full outline-0"
 							/>
 							<span className="absolute left-3 top-1/2 transform -translate-y-1/2 ">
@@ -41,11 +41,11 @@ export function GetInTouch({ name, phone, address }: PsychologistModel) {
 						<div className="relative">
 							<input
 								type="text"
-								placeholder="Inquiry type"
+								placeholder="Number"
 								className="rounded-full p-2 pl-10 w-full outline-0"
 							/>
 							<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-								<IconHelpHexagon className="h-5 w-5 text-gray-400" />
+								<IconPhone className="h-5 w-5 text-gray-400" />
 							</span>
 						</div>
 						<div className="relative">
@@ -60,7 +60,7 @@ export function GetInTouch({ name, phone, address }: PsychologistModel) {
 						</div>
 						<div className="relative">
 							<textarea
-								placeholder="Your message"
+								placeholder="Message"
 								className="rounded-xl p-2 pl-10 w-full resize-none outline-0"
 								rows={4}
 							></textarea>
