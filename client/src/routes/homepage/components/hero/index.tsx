@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Hero = () => {
 	return (
-		<section className="page-width h-[60vh] lg:h-[90vh] xs:mt-10 flex lg:items-center justify-center flex-col">
+		<section className="page-width h-[60vh] lg:h-[90vh] xs:mt-10 flex lg:items-center lg:text-center justify-center flex-col">
 			<Typography
 				className="font-antic mb-2"
 				as="h1"

@@ -1,99 +1,89 @@
 "use client";
 
 import { resources } from "@/lib/constants";
+import { MindfulIsotype, MindfulLogo } from "@/lib/images";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Button, Typography } from "../ui";
+import { Button } from "../ui";
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
 } from "@/components/ui/Shadcn-select";
 
 export function Topbar() {
-  const pathname = usePathname();
-  const isSearchPage = pathname === "/search";
+	const pathname = usePathname();
+	const isSearchPage = pathname === "/search";
 
-  const router = useRouter();
+	const router = useRouter();
 
-  const handleSelectChange = (value: string) => {
-    const selectedResource = resources.find(
-      (resource) => resource.title === value
-    );
-    if (selectedResource) {
-      router.push(
-        `/search?resource=${encodeURIComponent(
-          selectedResource.path.substring(1)
-        )}`
-      );
-    }
-  };
+	const handleSelectChange = (value: string) => {
+		const selectedResource = resources.find(
+			(resource) => resource.title === value
+		);
+		if (selectedResource) {
+			router.push(
+				`/search?resource=${encodeURIComponent(
+					selectedResource.path.substring(1)
+				)}`
+			);
+		}
+	};
 
-  const headerFixed =
-    "fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden lg:block z-50";
-  const headerRelative =
-    "relative mt-5 mx-auto w-11/12 xl:w-3/4 bg-white rounded-xl overflow-hidden hidden lg:block z-50";
+	return (
+		<header className="fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden lg:block z-50">
+			<div className="flex items-center justify-between">
+				<div className="flex content-center space-x-3 items-center py-5 px-20 bg-green-500 rounded-ee-full">
+					<Image
+						alt="Mindful Logo"
+						className="w-16 h-14 filter invert brightness-0"
+						src={MindfulIsotype}
+					/>
+					<Image
+						alt="Mindful Logo"
+						className="w-28 h-12 filter invert brightness-0"
+						src={MindfulLogo}
+					/>
+				</div>
 
-  return (
-    <header className={isSearchPage ? headerRelative : headerFixed}>
-      <div className="flex items-center justify-between p-5">
-        <Typography
-          variant="large"
-          as="span"
-          color="black"
-          className="font-antic font-normal flex items-center"
-        >
-          <Link href={"/"}>The Mindful Network</Link>
-        </Typography>
+				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
+					<Link href="" className="text-green-400 font-bold">
+						About
+					</Link>
+					<Select onValueChange={handleSelectChange}>
+						<SelectTrigger className="w-[100px] z-50 border-none text-gray-500 px-0">
+							<SelectValue placeholder="Resources" />
+						</SelectTrigger>
+						<SelectContent className="bg-white">
+							<SelectGroup>
+								<SelectLabel>Resources</SelectLabel>
+								{resources.map((resource) => (
+									<SelectItem key={resource.key} value={resource.title}>
+										{resource.title}
+									</SelectItem>
+								))}
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+					<Link href="">Blog</Link>
+				</nav>
 
-        <Button variant="small" className="py-2 rounded-full px-4">
-          <Link href={"/search"}>Start Search</Link>
-        </Button>
-      </div>
-
-      <nav className="bg-blue-500 px-5 flex items-center justify-center gap-5">
-        <Select onValueChange={handleSelectChange}>
-          <SelectTrigger className="w-[100px] z-50 bg-blue-500 border-none text-white px-0">
-            <SelectValue placeholder="Resources" />
-          </SelectTrigger>
-          <SelectContent className="bg-white">
-            <SelectGroup>
-              <SelectLabel>Resources</SelectLabel>
-              {resources.map((resource) => (
-                <SelectItem key={resource.key} value={resource.title}>
-                  {resource.title}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-
-        {resources.map((resource, resourceIdx) => {
-          if (resourceIdx < 4)
-            return (
-              <Link
-                key={resource.key}
-                href={`/search?resource=${encodeURIComponent(
-                  resource.path.substring(1)
-                )}`}
-              >
-                <Typography
-                  className="flex items-center gap-2"
-                  as="span"
-                  variant="xsmall"
-                  color="white"
-                >
-                  {resource.title}
-                </Typography>
-              </Link>
-            );
-        })}
-      </nav>
-    </header>
-  );
+				<div className="p-5">
+					<Button
+						variant="small"
+						className="py-2 rounded-full px-4 bg-none"
+						form="secondary"
+					>
+						<Link href={"/search"}>Start Exploring</Link>
+					</Button>
+				</div>
+			</div>
+		</header>
+	);
 }
