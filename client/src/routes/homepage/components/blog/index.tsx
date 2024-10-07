@@ -17,8 +17,8 @@ const BlogCard = ({ title, category, featuredImage, slug }: BlogModel) => (
 				height={300}
 				alt={`${title} image`}
 			/>
-			<Typography color="darkGray" as="h3" variant="small">
-				{category}
+			<Typography color="darkGray" as="h3" variant="xsmall">
+				{category.replaceAll("-", " ").toUpperCase()}
 			</Typography>
 			<Typography
 				className="mb-2 font-semibold"
