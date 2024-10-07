@@ -1,5 +1,7 @@
 import { sanityClient } from "@/api";
 import { getBlogById } from "@/routes/homepage/services";
+import { Footer, Topbar, MobileTopBar } from "@/components/shared";
+import { Hero, Content } from "@/routes/blog";
 import Head from "next/head";
 
 interface BlogPostProps {
@@ -32,10 +34,14 @@ export default async function BlogPost({ params }: BlogPostProps) {
 				)}
 			</Head>
 
-			<article>
-				<h1>{post.title}</h1>
-				<div>{post.body}</div>
-			</article>
+			<MobileTopBar />
+			<Topbar />
+			<MobileTopBar />
+
+			<Hero post={post} />
+			<Content post={post} />
+
+			<Footer />
 		</>
 	);
 }
