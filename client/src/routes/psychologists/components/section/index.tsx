@@ -8,17 +8,23 @@ import { opacityVariants } from "@/lib/anim";
 
 interface SectionProps {
 	id: string;
+	title: string;
+	subsections: Array<SubsectionProps>;
+	emptyMessage: string;
+}
+
+interface SubsectionProps {
+	id: string;
 	icon: React.ReactNode;
 	title: string;
-	items: Array<{ id: string; label: string }>;
-	emptyMessage: string;
+	items: Array<string>;
+	layoutStyle?: string;
 }
 
 export function Section({
 	id,
-	icon,
 	title,
-	items,
+	subsections,
 	emptyMessage,
 }: SectionProps) {
 	const [isOpen, setIsOpen] = useState(true);
@@ -33,7 +39,6 @@ export function Section({
 			className="py-10 px-10 lg:rounded-2xl my-10 bg-white shadow-sm shadow-gray-100 transition-all h-max"
 		>
 			<SectionHeader
-				icon={icon}
 				title={title}
 				isOpen={isOpen}
 				toggleContent={toggleContent}
@@ -41,24 +46,15 @@ export function Section({
 			<AnimatePresence mode="wait">
 				{isOpen && (
 					<SectionContent>
-						<ul className="grid grid-cols-1 gap-4 w-full">
-							{items && items.length ? (
-								items.map((item) => (
-									<li
-										key={item.id}
-										className="flex justify-between items-center py-2"
-									>
-										<Typography as="p" variant="medium" color="darkGray">
-											{item.label}
-										</Typography>
-									</li>
-								))
-							) : (
-								<Typography as="p" variant="medium" color="darkGray">
-									{emptyMessage}
-								</Typography>
-							)}
-						</ul>
+						{subsections && subsections.length ? (
+							subsections.map((subsection) => (
+								<Subsection key={subsection.id} {...subsection} />
+							))
+						) : (
+							<Typography as="p" variant="medium" color="darkGray">
+								{emptyMessage}
+							</Typography>
+						)}
 					</SectionContent>
 				)}
 			</AnimatePresence>
@@ -66,15 +62,46 @@ export function Section({
 	);
 }
 
+export const Subsection = ({
+	id,
+	icon,
+	title,
+	items,
+	layoutStyle = "column",
+}: SubsectionProps) => {
+	return (
+		<div className={`flex flex-col`}>
+			<div className="flex items-center space-x-2 mb-2">
+				<div className="flex-shrink-0 bg-orange-50 border border-gray-100 rounded-full p-2">
+					{icon}
+				</div>
+				<Typography variant="small" className="font-bold" as="h4" color="black">
+					{title}
+				</Typography>
+			</div>
+
+			<ul
+				className={`space-y-1 my-2 ${layoutStyle === "row" ? "grid grid-cols-2 gap-4" : "flex flex-col"}`}
+			>
+				{items.map((item, index) => (
+					<li key={index}>
+						<Typography as="p" variant="small" color="darkGray">
+							{item}
+						</Typography>
+					</li>
+				))}
+			</ul>
+		</div>
+	);
+};
+
 interface SectionHeaderProps {
-	icon: React.ReactNode;
 	title: string;
 	isOpen: boolean;
 	toggleContent: () => void;
 }
 
 export const SectionHeader = ({
-	icon,
 	title,
 	isOpen,
 	toggleContent,
@@ -84,8 +111,7 @@ export const SectionHeader = ({
 			className="flex items-center justify-between border-b pb-5 border-gray-200 cursor-pointer"
 			onClick={toggleContent}
 		>
-			<div className="flex items-center space-x-3">
-				{icon}
+			<div className="flex items-center">
 				<Typography
 					variant="medium"
 					className="font-bold"
@@ -106,7 +132,7 @@ export const SectionHeader = ({
 export const SectionContent = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<motion.div
-			className="lg:flex gap-20 mt-10"
+			className="pt-5 space-y-5"
 			initial="closed"
 			animate="open"
 			exit="closed"
