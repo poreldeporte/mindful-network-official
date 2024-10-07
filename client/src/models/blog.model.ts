@@ -1,3 +1,5 @@
+import { PortableTextBlock } from "@portabletext/types";
+
 export interface BlogModel {
 	id: string;
 	title: string;
@@ -7,18 +9,13 @@ export interface BlogModel {
 	category: string;
 	isInternal: boolean;
 	externalLink?: string;
-	body: string;
+	content: PortableTextBlock;
 	excerpt: string;
 	featuredImage: string;
 	tags?: string[];
 	seo?: {
 		metaTitle: string;
 		metaDescription: string;
-		openGraphImage?: {
-			asset: {
-				_ref: string;
-				_type: string;
-			};
-		};
+		openGraphImage?: string;
 	};
 }
