@@ -22,7 +22,7 @@ export function Footer() {
 						/>
 					</div>
 				</div>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+				<div className="grid grid-cols-1 lg:grid-cols-1 gap-5">
 					<div>
 						<Typography color="black" as="h2" variant="medium">
 							Resources
@@ -55,46 +55,6 @@ export function Footer() {
 							})}
 						</div>
 					</div> */}
-				</div>
-			</div>
-			<div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-2">
-				<div className="space-y-1">
-					<Typography
-						variant="medium"
-						color="black"
-						as="h3"
-						className="font-semibold"
-					>
-						Platform information
-					</Typography>
-					<Typography variant="small" color="black" as="p" className="w-full">
-						The Mindful Network is an informational platform designed to connect
-						individuals with mental health resources. The content on this site
-						is for educational purposes only and is not a substitute for
-						professional medical advice, diagnosis, or treatment. Always seek
-						the advice of your physician or qualified mental health provider
-						with any questions regarding your condition. In case of a
-						life-threatening emergency, call 911 or go to your nearest emergency
-						room immediately. This platform does not provide direct clinical
-						services.
-					</Typography>
-				</div>
-				<div className="space-y-1">
-					<Typography
-						variant="medium"
-						color="black"
-						as="h3"
-						className="font-semibold"
-					>
-						Accessibility Commitment
-					</Typography>
-					<Typography variant="small" color="black" as="p" className="w-full">
-						The Mindful Network is committed to making our website accessible to
-						individuals with disabilities in compliance with the Americans with
-						Disabilities Act (ADA). If you experience any barriers while using
-						our website or need assistance, please contact us at [Contact
-						Information] so we can assist you.
-					</Typography>
 				</div>
 			</div>
 			<div className="mt-10 flex flex-col-reverseitems-center justify-between w-full lg:flex-row">
