@@ -33,7 +33,6 @@ const PsychologistCard = ({
 			role="article"
 			aria-label={`Profile of psychologist ${name}`}
 		>
-			{/* Image */}
 			<div className="flex items-start">
 				<Image
 					src={image ? image : UserImage}
@@ -64,7 +63,7 @@ const PsychologistCard = ({
 					</Badge>
 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div className="flex gap-1">
 						<IconStar
 							className="min-h-5 min-w-5 text-gray-500"
@@ -124,7 +123,7 @@ const PsychologistCard = ({
 			<div className="flex justify-end items-end h-full">
 				<Link
 					href={`/psychologists/${id}`}
-					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center"
+					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
 					<Typography as="span" color="white" variant="small">
