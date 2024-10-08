@@ -1,13 +1,13 @@
 import { Button, Typography } from "@/components/ui";
 import { PsychologistModel } from "@/models";
 import {
-	IconUser,
 	IconMail,
 	IconMessage,
 	IconPhone,
+	IconUser,
 } from "@tabler/icons-react";
 
-export function GetInTouch({ name, phone, address }: PsychologistModel) {
+export function GetInTouch({ name }: PsychologistModel) {
 	return (
 		<section
 			className="section-y-padding col-span-full lg:flex"
