@@ -3,11 +3,14 @@ import { BlogModel } from "@/models";
 import { Typography } from "@/components/ui";
 import { ExternalLink } from "lucide-react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
+import Image from "next/image";
 
 const components: PortableTextComponents = {
 	types: {
 		image: ({ value }) => (
-			<img
+			<Image
+				height={750}
+				width={750}
 				src={value.asset._ref}
 				alt={value.alt || "Image related to the blog content"}
 				style={{ maxWidth: "100%", height: "auto" }}

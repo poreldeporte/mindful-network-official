@@ -1,4 +1,4 @@
-import { navigation, resources } from "@/lib/constants";
+import { resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import Image from "next/image";
 import Link from "next/link";
