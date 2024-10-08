@@ -4,9 +4,11 @@ import { menuVariants } from "@/lib/anim";
 import { resources } from "@/lib/constants";
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
+import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import Link from "next/link";
 import { useState } from "react";
 import { Button, Typography } from "../ui";
+import Image from "next/image";
 
 export function MobileTopBar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -15,16 +17,14 @@ export function MobileTopBar() {
 
 	return (
 		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
-			<div>
-				<Typography
-					variant="large"
-					as="span"
-					color="black"
-					className="font-antic font-normal flex items-center"
-				>
-					<Link href={"/"}>The Mindful Network</Link>
-				</Typography>
-			</div>
+			<Link href={"/"} className="flex content-center space-x-3 items-center">
+				<Image
+					alt="Mindful Logo"
+					className="w-auto h-12"
+					src={MindfulIsotype}
+				/>
+				<Image alt="Mindful Logo" className="w-auto h-10" src={MindfulLogo} />
+			</Link>
 
 			<div onClick={() => setIsOpen(!isOpen)}>
 				{isOpen ? (

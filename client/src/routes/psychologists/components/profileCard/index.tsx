@@ -2,7 +2,7 @@ import { Badge, Typography } from "@/components/ui";
 import { MindfulIsotype, UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
-import { ShieldPlus } from "lucide-react";
+import { HeartPulse } from "lucide-react";
 import Image from "next/image";
 
 export function ProfileCard({
@@ -59,7 +59,7 @@ export function ProfileCard({
 			</div>
 			<div className="flex flex-col space-y-3 lg:items-center lg:justify-start lg:flex-row lg:space-x-6 lg:space-y-0">
 				<div className="flex items-center space-x-2">
-					<ShieldPlus className="w-10 h-10" aria-hidden="true" />
+					<HeartPulse className="w-10 h-10" aria-hidden="true" />
 					<Typography
 						className="font-semibold"
 						as="p"

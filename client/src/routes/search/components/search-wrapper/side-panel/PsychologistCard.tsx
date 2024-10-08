@@ -2,12 +2,7 @@ import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
-import {
-	IconMail,
-	IconShieldCheck,
-	IconStar,
-	IconUser,
-} from "@tabler/icons-react";
+import { Armchair, Brain, HeartPulse, PersonStanding } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -65,7 +60,7 @@ const PsychologistCard = ({
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div className="flex gap-1">
-						<IconStar
+						<Brain
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
@@ -80,7 +75,7 @@ const PsychologistCard = ({
 					</div>
 
 					<div className="flex gap-1">
-						<IconShieldCheck
+						<HeartPulse
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
@@ -93,7 +88,7 @@ const PsychologistCard = ({
 					</div>
 
 					<div className="flex gap-1">
-						<IconUser
+						<PersonStanding
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
@@ -106,7 +101,7 @@ const PsychologistCard = ({
 					</div>
 
 					<div className="flex gap-1">
-						<IconMail
+						<Armchair
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
