@@ -20,10 +20,35 @@ export default async function BlogPost({ params }: BlogPostProps) {
 		);
 	}
 
+	const schemaData = {
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: post.title,
+		description: post.seo?.metaDescription || post.excerpt,
+		image: post.featuredImage,
+		author: {
+			"@type": "Person",
+			name: post.author,
+		},
+		datePublished: post.publishDate,
+		publisher: {
+			"@type": "Organization",
+			name: "Mindful Network",
+			logo: {
+				"@type": "ImageObject",
+				url: "/assets/mindful-logo.png",
+			},
+		},
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": `https://www.mindfulnetwork.com/blog/${post.slug}`,
+		},
+	};
+
 	return (
-		<main aria-labelledby="Blog Page">
+		<main aria-labelledby="blog-page">
 			<Head>
-				<title>{post.seo?.metaTitle || post.title}</title>
+				<title>{post.seo?.metaTitle || post.title} | Mindful Network</title>
 				<meta
 					name="description"
 					content={post.seo?.metaDescription || post.excerpt}
@@ -33,9 +58,35 @@ export default async function BlogPost({ params }: BlogPostProps) {
 					property="og:description"
 					content={post.seo?.metaDescription || post.excerpt}
 				/>
+				<meta property="og:type" content="article" />
+				<meta
+					property="og:url"
+					content={`https://www.mindfulnetwork.com/blog/${post.slug}`}
+				/>
 				{post.featuredImage && (
 					<meta property="og:image" content={post.featuredImage} />
 				)}
+				{post.publishDate && (
+					<meta property="article:published_time" content={post.publishDate} />
+				)}
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta
+					name="twitter:title"
+					content={post.seo?.metaTitle || post.title}
+				/>
+				<meta
+					name="twitter:description"
+					content={post.seo?.metaDescription || post.excerpt}
+				/>
+				{post.featuredImage && (
+					<meta name="twitter:image" content={post.featuredImage} />
+				)}
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="robots" content="index, follow" />
 			</Head>
 
 			<MobileTopBar />

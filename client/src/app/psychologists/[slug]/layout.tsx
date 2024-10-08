@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mindful Network - Psychologist",
-  description: "",
+	title: "Mindful Network - Psychologist",
+	description: "",
 };
 
 export default function PsychologistLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+	return <>{children}</>;
 }
