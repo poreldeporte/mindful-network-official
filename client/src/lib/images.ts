@@ -7,12 +7,15 @@ import MindfulImagotype from "@/assets/images/mindful-logos/mindful-imagotype.pn
 import MindfulIsotype from "@/assets/images/mindful-logos/mindful-isotype.png";
 import MindfulLogo from "@/assets/images/mindful-logos/mindful-logo.png";
 
+import AboutImage from "@/assets/images/mindful-about-image.webp";
+
 export {
-  Person1,
-  Person2,
-  Person3,
-  UserImage,
-  MindfulImagotype,
-  MindfulIsotype,
-  MindfulLogo,
+	Person1,
+	Person2,
+	Person3,
+	UserImage,
+	MindfulImagotype,
+	MindfulIsotype,
+	MindfulLogo,
+	AboutImage,
 };
