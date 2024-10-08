@@ -127,47 +127,42 @@ export const resources = [
 	{
 		key: "psychologists",
 		title: "Psychologists",
-		path: "/psychologists",
+		path: "/search?resource=psychologists",
 	},
 	{
 		key: "backer-act-facilities",
 		title: "Backer Act Facilities",
-		path: "/backer-act-facilities",
+		path: "/search?resource=backer-act-facilities",
 	},
 	{
 		key: "innovative-therapies",
 		title: "Innovative Therapies",
-		path: "/innovative-therapies",
+		path: "/search?resource=innovative-therapies",
 	},
 	{
 		key: "inpatient",
 		title: "Inpatient",
-		path: "/inpatient",
+		path: "/search?resource=inpatient",
 	},
 	{
 		key: "medication",
 		title: "Medication",
-		path: "/medication",
-	},
-	{
-		key: "mental-health",
-		title: "Mental Health",
-		path: "/mental-health",
+		path: "/search?resource=medication",
 	},
 	{
 		key: "mind-body-practices",
 		title: "Mind Body Practices",
-		path: "/mind-body-practices",
+		path: "/search?resource=mind-body-practices",
 	},
 	{
 		key: "outpatient",
 		title: "Outpatient",
-		path: "/outpatient",
+		path: "/search?resource=outpatient",
 	},
 	{
 		key: "psychiatric",
 		title: "Psychiatric",
-		path: "/psychiatric",
+		path: "/search?resource=psychiatric",
 	},
 ];
 

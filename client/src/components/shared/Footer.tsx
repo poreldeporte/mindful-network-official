@@ -30,11 +30,11 @@ export function Footer() {
 						<div className="flex flex-col">
 							{resources.map((resource) => {
 								return (
-									<a href={resource.path} key={resource.key}>
+									<Link href={resource.path} key={resource.key}>
 										<Typography color="darkGray" as="span" variant="small">
 											{resource.title}
 										</Typography>
-									</a>
+									</Link>
 								);
 							})}
 						</div>
