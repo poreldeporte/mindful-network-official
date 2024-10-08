@@ -38,12 +38,15 @@ const Header = ({
 	selectedInsurance,
 	selectedTherapy,
 }: Props) => {
-	const [headerIsOpen, setHeaderIsOpen] = useState(false);
+	const [headerIsOpen, setHeaderIsOpen] = useState(true);
 
 	const toggleMenu = () => setHeaderIsOpen(!headerIsOpen);
 
 	return (
-		<header className="px-5 pb-5 w-full border-b border-gray-200 relative">
+		<header
+			className="px-5 pb-5 w-full border-b border-gray-200 relative"
+			aria-label="Header with navigation options and filters"
+		>
 			<Link href={"/"}>
 				<Typography
 					as="span"
@@ -51,7 +54,7 @@ const Header = ({
 					variant="small"
 					className="flex items-center gap-2 hover:text-blue-700 hover:underline underline-offset-4"
 				>
-					<ArrowLongLeftIcon className="h-8 w-8" />
+					<ArrowLongLeftIcon className="h-8 w-8" aria-hidden="true" />
 					Back to Home
 				</Typography>
 			</Link>
@@ -63,16 +66,23 @@ const Header = ({
 				<button
 					className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full p-0.5 shadow-md"
 					title={headerIsOpen ? "Hide Menu" : "Show Menu"}
+					aria-expanded={headerIsOpen}
+					aria-controls="filter-menu"
 					onClick={toggleMenu}
 				>
+					<span className="sr-only">
+						{headerIsOpen ? "Hide Menu" : "Show Menu"}
+					</span>
 					<ChevronDownIcon
 						className={`h-7 w-7 ${
 							headerIsOpen ? "rotate-180" : "rotate-0"
 						} transition-transform`}
+						aria-hidden="true"
 					/>
 				</button>
 				{headerIsOpen && (
 					<motion.div
+						id="filter-menu"
 						initial="closed"
 						animate="open"
 						exit="closed"
@@ -92,6 +102,10 @@ const Header = ({
 										onClick={() =>
 											handleBadgeClick("resource", resourceKey.key)
 										}
+										role="button"
+										tabIndex={0}
+										aria-pressed={selectedResources.includes(resourceKey.key)}
+										aria-label={`Resource ${resourceKey.label}`}
 									>
 										{resourceKey.label}
 									</Badge>
@@ -113,6 +127,12 @@ const Header = ({
 												onClick={() =>
 													handleBadgeClick("condition", condition.name)
 												}
+												role="button"
+												tabIndex={0}
+												aria-pressed={selectedCondition.includes(
+													condition.name
+												)}
+												aria-label={`Condition ${condition.name}`}
 											>
 												{condition.name}
 											</Badge>
@@ -136,6 +156,12 @@ const Header = ({
 												onClick={() =>
 													handleBadgeClick("insurance", insurance.name)
 												}
+												role="button"
+												tabIndex={0}
+												aria-pressed={selectedInsurance.includes(
+													insurance.name
+												)}
+												aria-label={`Insurance ${insurance.name}`}
 											>
 												{insurance.name}
 											</Badge>
@@ -159,6 +185,10 @@ const Header = ({
 												onClick={() =>
 													handleBadgeClick("therapy", modality.type)
 												}
+												role="button"
+												tabIndex={0}
+												aria-pressed={selectedTherapy === modality.type}
+												aria-label={`Therapy option ${modality.type}`}
 											>
 												{modality.type}
 											</Badge>

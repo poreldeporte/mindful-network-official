@@ -34,7 +34,6 @@ const SidePanel = ({
 	isLoading,
 }: Props) => {
 	const [selectedCondition, setSelectedCondition] = useState<string[]>([]);
-
 	const [selectedResources, setSelectedResources] = useState<string[]>([]);
 	const [selectedInsurance, setSelectedInsurance] = useState<string[]>([]);
 	const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
@@ -135,7 +134,11 @@ const SidePanel = ({
 	};
 
 	return (
-		<aside className="overflow-hidden z-10 lg:py-5 pb-5 pt-14 lg:absolute lg:left-2.5 lg:top-1/2 lg:-translate-y-1/2 h-max lg:h-[calc(100%-20px)] w-full lg:w-1/2 bg-white rounded-3xl grid grid-rows-[auto_1fr_auto]">
+		<aside
+			className="overflow-hidden z-10 lg:py-5 pb-5 pt-14 lg:absolute lg:left-2.5 lg:top-1/2 lg:-translate-y-1/2 h-max lg:h-[calc(100%-20px)] w-full lg:w-3/4 bg-white rounded-3xl grid grid-rows-[auto_1fr_auto]"
+			role="complementary"
+			aria-labelledby="side-panel-header"
+		>
 			<Header
 				conditions={conditions}
 				handleBadgeClick={handleBadgeClick}
@@ -147,7 +150,11 @@ const SidePanel = ({
 				selectedResources={selectedResources}
 				selectedTherapy={selectedTherapy}
 			/>
-			<div className="overflow-y-auto overflow-x-hidden max-w-full">
+			<div
+				className="overflow-y-auto overflow-x-hidden max-w-full"
+				role="region"
+				aria-live="polite"
+			>
 				{isLoading ? (
 					<>
 						{Array(5)
@@ -157,7 +164,11 @@ const SidePanel = ({
 							))}
 					</>
 				) : filteredProffesionals && filteredProffesionals.length ? (
-					<ul className="px-5 divide-y divide-gray-200">
+					<ul
+						className="px-5 divide-y divide-gray-200"
+						role="list"
+						aria-label="Filtered professionals"
+					>
 						{filteredProffesionals.map((psychologist) => (
 							<PsychologistCard
 								psychologist={psychologist}
@@ -166,7 +177,10 @@ const SidePanel = ({
 						))}
 					</ul>
 				) : (
-					<NoResults title="No results found" />
+					<NoResults
+						title="No results found"
+						aria-label="No results found for the selected filters"
+					/>
 				)}
 			</div>
 

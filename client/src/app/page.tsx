@@ -1,23 +1,26 @@
 import { GetInTouch } from "@/components/forms";
 import {
-  About,
-  BlogContainer,
-  CTASection,
-  Hero,
+	About,
+	BlogContainer,
+	CTASection,
+	Hero,
 } from "@/routes/homepage/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
+import { getLatestBlog } from "@/routes/homepage/services";
+import { BlogModel } from "@/models";
 
-export default function Home() {
-  return (
-    <main>
-      <Topbar />
-      <MobileTopBar />
-      <Hero />
-      <About />
-      <BlogContainer />
-      <CTASection />
-      <GetInTouch />
-      <Footer />
-    </main>
-  );
+export default async function Home() {
+	const blogPosts: BlogModel[] = await getLatestBlog();
+	return (
+		<main aria-labelledby="Landing Page">
+			<Topbar />
+			<MobileTopBar />
+			<Hero />
+			<About />
+			<BlogContainer blogPosts={blogPosts} />
+			<CTASection />
+			<GetInTouch />
+			<Footer />
+		</main>
+	);
 }
