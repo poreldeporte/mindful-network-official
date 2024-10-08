@@ -19,6 +19,110 @@ export const benefits = [
 	},
 ];
 
+export const privacyPolicyContent = [
+	{
+		id: "platform-information",
+		title: "Platform Information",
+		content: `The Mindful Network is an informational platform designed to connect individuals with mental health resources.
+The content on this site is for educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.
+Always seek the advice of your physician or qualified mental health provider with any questions regarding your condition.
+In case of a life-threatening emergency, call 911 or go to your nearest emergency room immediately.
+This platform does not provide direct clinical services.`,
+	},
+	{
+		id: "accessibility-commitment",
+		title: "Accesibility Commitment",
+		content: `The Mindful Network is committed to making our website accessible to individuals with disabilities in compliance with the Americans with Disabilities Act (ADA). If you experience any barriers while using our website or need assistance, please contact us at [Contact Information] so we can assist you.`,
+	},
+	{
+		id: "information-we-collect",
+		title: "Information We Collect",
+		subsections: [
+			{
+				id: "personal-information",
+				title: "Personal Information",
+				content:
+					"We collect personal data such as name, email address, and location.",
+			},
+			{
+				id: "health-information",
+				title: "Health Information",
+				content:
+					"We may collect health-related information, with user consent, for tailored resources.",
+			},
+			{
+				id: "usage-data",
+				title: "Usage Data",
+				content:
+					"We collect usage data automatically, such as browser type, IP address, and usage statistics.",
+			},
+		],
+	},
+	{
+		id: "how-we-use-your-information",
+		title: "How We Use Your Information",
+		content:
+			"We use the information to deliver services, personalize user experiences, communicate updates, and analyze platform usage trends.",
+	},
+	{
+		id: "sharing-your-information",
+		title: "Sharing Your Information",
+		subsections: [
+			{
+				id: "third-party-providers",
+				title: "Third-Party Providers",
+				content:
+					"We share information with third-party providers for hosting, analytics, and other services.",
+			},
+			{
+				id: "legal-compliance",
+				title: "Legal Compliance",
+				content:
+					"Information may be disclosed to comply with legal obligations or protect user safety.",
+			},
+			{
+				id: "no-sale-of-data",
+				title: "No Sale of Data",
+				content:
+					"We assure users that their information will not be sold to third parties.",
+			},
+		],
+	},
+];
+
+export const termsOfServiceContent = [
+	{
+		id: "introduction",
+		title: "Introduction",
+		content:
+			"These terms outline the conditions for using the platform. By using the app, users accept these terms.",
+	},
+	{
+		id: "user-responsibilities",
+		title: "User Responsibilities",
+		subsections: [
+			{
+				id: "account-information",
+				title: "Account Information",
+				content:
+					"Users are responsible for providing accurate information and maintaining account security.",
+			},
+			{
+				id: "prohibited-activities",
+				title: "Prohibited Activities",
+				content:
+					"Prohibited activities include illegal use, harassment, or unauthorized access attempts.",
+			},
+		],
+	},
+	{
+		id: "use-of-services",
+		title: "Use of Services",
+		content:
+			"We provide specific services and reserve the right to modify or discontinue them as necessary.",
+	},
+];
+
 export const resources = [
 	{
 		key: "psychologists",
