@@ -218,3 +218,64 @@ export const psychologistNavigation = [
 		label: "Therapy Options",
 	},
 ];
+
+export const aboutFooter = [
+	{
+		key: "the-why",
+		label: "The Why",
+		link: "/about#the-why",
+	},
+	{
+		key: "useful-links",
+		label: "Useful Links",
+		link: "/about#useful-links",
+	},
+	{
+		key: "privacy-policy",
+		label: "Privacy Policy",
+		link: "/privacy-policy",
+	},
+	{
+		key: "terms-of-service",
+		label: "Terms of Service",
+		link: "/terms-of-service",
+	},
+	{
+		key: "contact",
+		label: "Contact",
+		link: "/contact",
+	},
+];
+
+export const latestBlogArticles = [
+	{
+		key: "article-1",
+		title: "Understanding Anxiety and How to Cope",
+		link: "/blog/understanding-anxiety",
+	},
+	{
+		key: "article-2",
+		title: "10 Tips for Improving Mental Health",
+		link: "/blog/tips-improving-mental-health",
+	},
+	{
+		key: "article-3",
+		title: "The Benefits of Virtual Therapy",
+		link: "/blog/benefits-of-virtual-therapy",
+	},
+	{
+		key: "article-4",
+		title: "Managing Depression: Strategies for Daily Life",
+		link: "/blog/managing-depression",
+	},
+	{
+		key: "article-5",
+		title: "How to Support a Loved One with PTSD",
+		link: "/blog/supporting-loved-one-ptsd",
+	},
+	{
+		key: "article-6",
+		title: "Cognitive Behavioral Therapy: An Overview",
+		link: "/blog/cognitive-behavioral-therapy-overview",
+	},
+];
