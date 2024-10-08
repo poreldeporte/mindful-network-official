@@ -11,7 +11,7 @@ const components: PortableTextComponents = {
 			<Image
 				height={750}
 				width={750}
-				src={value.asset._ref}
+				src={value.asset._ref || ""}
 				alt={value.alt || "Image related to the blog content"}
 				style={{ maxWidth: "100%", height: "auto" }}
 			/>
