@@ -13,13 +13,16 @@ export function ProfileCard({
 	facility,
 }: PsychologistModel) {
 	return (
-		<header className="mb-10 mt-32 justify-center bg-white rounded-2xl p-10 lg:mt-0">
+		<header
+			className="mb-10 mt-32 justify-center bg-white rounded-2xl p-10 lg:mt-0"
+			aria-labelledby="profile-card-heading"
+		>
 			<div className="flex items-center justify-start">
 				<div className="w-24 h-24 lg:h-48 lg:w-48 mr-5">
 					<Image
 						className="rounded-full aspect-square object-cover"
 						src={image ? image : UserImage}
-						alt={name}
+						alt={`Profile picture of ${name}`}
 						width={300}
 						height={300}
 					/>
@@ -30,6 +33,7 @@ export function ProfileCard({
 						as="h2"
 						variant="large"
 						color="black"
+						id="profile-card-heading"
 					>
 						{name}
 					</Typography>
@@ -49,13 +53,13 @@ export function ProfileCard({
 				</div>
 			</div>
 			<div className="my-5">
-				<Typography className="mb-5" as="h2" variant="small" color="darkGray">
+				<Typography className="mb-5" as="p" variant="small" color="darkGray">
 					{description}
 				</Typography>
 			</div>
 			<div className="flex flex-col space-y-3 lg:items-center lg:justify-start lg:flex-row lg:space-x-6 lg:space-y-0">
 				<div className="flex items-center space-x-2">
-					<ShieldPlus className="w-10 h-10" />
+					<ShieldPlus className="w-10 h-10" aria-hidden="true" />
 					<Typography
 						className="font-semibold"
 						as="p"
@@ -70,6 +74,7 @@ export function ProfileCard({
 						alt="Mindful Logo"
 						className="w-10 h-10"
 						src={MindfulIsotype}
+						aria-hidden="true"
 					/>
 					<Typography
 						className="font-semibold"

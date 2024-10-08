@@ -39,7 +39,7 @@ export function Footer() {
 							})}
 						</div>
 					</div>
-					<div>
+					{/* <div>
 						<Typography color="black" as="h2" variant="medium">
 							Navigation
 						</Typography>
@@ -54,7 +54,7 @@ export function Footer() {
 								);
 							})}
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-2">

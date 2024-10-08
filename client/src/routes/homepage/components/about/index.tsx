@@ -11,12 +11,13 @@ interface BenefitCardProps {
 
 const BenefitCard = ({ title, description }: BenefitCardProps) => {
 	return (
-		<article>
+		<article className="mb-4" aria-labelledby={`benefit-title-${title}`}>
 			<Typography
 				className="mb-2 font-semibold"
 				color="black"
 				as="h4"
 				variant="medium"
+				id={`benefit-title-${title}`}
 			>
 				{title}
 			</Typography>
@@ -30,8 +31,17 @@ const BenefitCard = ({ title, description }: BenefitCardProps) => {
 
 export function About() {
 	return (
-		<section className="page-width section-y-padding bg-gray-50">
-			<Typography className="mb-2" color="black" as="h2" variant="title">
+		<section
+			className="page-width section-y-padding bg-gray-50"
+			aria-labelledby="about-section-heading"
+		>
+			<Typography
+				className="mb-2"
+				color="black"
+				as="h2"
+				variant="title"
+				id="about-section-heading"
+			>
 				<span className="text-green-300">We&apos;re here to help</span>{" "}
 				<span className="block" />
 				build your support net
@@ -48,7 +58,7 @@ export function About() {
 						available
 					</Typography>
 
-					<div className="my-5">
+					<div className="my-5" role="list" aria-label="List of benefits">
 						{benefits.map((benefit) => {
 							return (
 								<BenefitCard
@@ -61,21 +71,25 @@ export function About() {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-3 xl:flex gap-5 w-full h-full relative">
+				<div
+					className="grid grid-cols-3 xl:flex gap-5 w-full h-full relative"
+					role="img"
+					aria-label="People illustrations representing support and guidance"
+				>
 					<Image
 						className="w-auto h-auto xl:absolute xl:top-0 xl:left-0 xl:w-[370px] xl:h-auto"
 						src={Person1}
-						alt="Person 1"
+						alt="Person smiling, symbolizing support and positivity"
 					/>
 					<Image
 						className="w-auto h-full xl:absolute xl:-bottom-20 xl:w-[200px] xl:left-1/4 xl:h-auto"
 						src={Person2}
-						alt="Person 2"
+						alt="Person with a thoughtful expression, representing understanding"
 					/>
 					<Image
 						className="w-auto h-auto xl:absolute xl:bottom-20 xl:w-[270px] xl:right-20 xl:h-auto"
 						src={Person3}
-						alt="Person 3"
+						alt="Person with an empathetic look, symbolizing compassion"
 					/>
 				</div>
 			</div>

@@ -13,11 +13,15 @@ interface BlogPostProps {
 export default async function BlogPost({ params }: BlogPostProps) {
 	const post = await getBlogById(params.slug);
 	if (!post) {
-		return <div>Post not found</div>;
+		return (
+			<main>
+				<div>Post not found</div>
+			</main>
+		);
 	}
 
 	return (
-		<>
+		<main aria-labelledby="Blog Page">
 			<Head>
 				<title>{post.seo?.metaTitle || post.title}</title>
 				<meta
@@ -42,7 +46,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 			<Content post={post} />
 
 			<Footer />
-		</>
+		</main>
 	);
 }
 

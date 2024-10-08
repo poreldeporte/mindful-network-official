@@ -29,6 +29,7 @@ interface TypographyProps {
 	color: ColorType;
 	className?: string;
 	children?: React.ReactNode;
+	id?: string;
 }
 
 export const Typography: React.FC<TypographyProps> = ({
@@ -36,6 +37,7 @@ export const Typography: React.FC<TypographyProps> = ({
 	variant,
 	color,
 	className = "",
+	id,
 	...props
 }) => {
 	const variantClass = variantClasses[variant] || "";
@@ -44,7 +46,7 @@ export const Typography: React.FC<TypographyProps> = ({
 
 	return React.createElement(
 		Tag,
-		{ className: classes, ...props },
+		{ className: classes, id, ...props },
 		props.children
 	);
 };

@@ -2,14 +2,14 @@ import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
+import {
+	IconMail,
+	IconShieldCheck,
+	IconStar,
+	IconUser,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-	IconStar,
-	IconShieldCheck,
-	IconUser,
-	IconMail,
-} from "@tabler/icons-react";
 
 const PsychologistCard = ({
 	psychologist,
@@ -28,12 +28,16 @@ const PsychologistCard = ({
 	} = psychologist;
 
 	return (
-		<li className="grid lg:grid-cols-[auto_1fr_auto] w-full py-5 px-2.5 gap-10 items-start border-b border-gray-200">
+		<li
+			className="grid lg:grid-cols-[auto_1fr_auto] w-full py-5 px-2.5 gap-10 items-start border-b border-gray-200"
+			role="article"
+			aria-label={`Profile of psychologist ${name}`}
+		>
 			{/* Image */}
 			<div className="flex items-start">
 				<Image
 					src={image ? image : UserImage}
-					alt={`${name} image`}
+					alt={`Profile image of ${name}`}
 					loading="lazy"
 					width={100}
 					height={100}
@@ -42,7 +46,7 @@ const PsychologistCard = ({
 			</div>
 
 			<div className="flex flex-col gap-4">
-				<div className="flex flex-col w-1/5">
+				<div className="flex flex-col w-full">
 					<Typography
 						className="font-bold"
 						as="h2"
@@ -51,12 +55,21 @@ const PsychologistCard = ({
 					>
 						{name}
 					</Typography>
-					<Badge color="green">{formatType(_type)}</Badge>
+					<Badge
+						className="w-max"
+						color="green"
+						aria-label={`Type: ${formatType(_type)}`}
+					>
+						{formatType(_type)}
+					</Badge>
 				</div>
 
-				<div className="grid grid-cols-2 gap-4">
-					<div className="flex items-center">
-						<IconStar className="h-5 w-5 text-gray-500 mr-2" />
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+					<div className="flex gap-1">
+						<IconStar
+							className="min-h-5 min-w-5 text-gray-500"
+							aria-hidden="true"
+						/>
 						<Typography as="p" color="darkGray" variant="small">
 							<span className="font-semibold">Specialty:</span>{" "}
 							{conditionSpecialty?.length
@@ -67,8 +80,11 @@ const PsychologistCard = ({
 						</Typography>
 					</div>
 
-					<div className="flex items-center">
-						<IconShieldCheck className="h-5 w-5 text-gray-500 mr-2" />
+					<div className="flex gap-1">
+						<IconShieldCheck
+							className="min-h-5 min-w-5 text-gray-500"
+							aria-hidden="true"
+						/>
 						<Typography as="p" color="darkGray" variant="small">
 							<span className="font-semibold">Accepted Insurance:</span>{" "}
 							{insurances?.length
@@ -77,8 +93,11 @@ const PsychologistCard = ({
 						</Typography>
 					</div>
 
-					<div className="flex items-center">
-						<IconUser className="h-5 w-5 text-gray-500 mr-2" />
+					<div className="flex gap-1">
+						<IconUser
+							className="min-h-5 min-w-5 text-gray-500"
+							aria-hidden="true"
+						/>
 						<Typography as="p" color="darkGray" variant="small">
 							<span className="font-semibold">Age Specialty:</span>{" "}
 							{ageSpecialty?.length
@@ -87,8 +106,11 @@ const PsychologistCard = ({
 						</Typography>
 					</div>
 
-					<div className="flex items-center">
-						<IconMail className="h-5 w-5 text-gray-500 mr-2" />
+					<div className="flex gap-1">
+						<IconMail
+							className="min-h-5 min-w-5 text-gray-500"
+							aria-hidden="true"
+						/>
 						<Typography as="p" color="darkGray" variant="small">
 							<span className="font-semibold">Therapy Option:</span>{" "}
 							{therapyOptions?.length
@@ -99,10 +121,11 @@ const PsychologistCard = ({
 				</div>
 			</div>
 
-			<div className="flex justify-center items-end">
+			<div className="flex justify-end items-end h-full">
 				<Link
 					href={`/psychologists/${id}`}
 					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center"
+					aria-label={`View profile of ${name}`}
 				>
 					<Typography as="span" color="white" variant="small">
 						View profile

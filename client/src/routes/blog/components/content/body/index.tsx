@@ -9,7 +9,7 @@ const components: PortableTextComponents = {
 		image: ({ value }) => (
 			<img
 				src={value.asset._ref}
-				alt={value.alt || "Blog Image"}
+				alt={value.alt || "Image related to the blog content"}
 				style={{ maxWidth: "100%", height: "auto" }}
 			/>
 		),
@@ -33,10 +33,14 @@ const components: PortableTextComponents = {
 	},
 	list: {
 		bullet: ({ children }) => (
-			<ul className="list-disc list-inside mb-10">{children}</ul>
+			<ul className="list-disc list-inside mb-10" role="list">
+				{children}
+			</ul>
 		),
 		number: ({ children }) => (
-			<ol className="list-decimal list-inside mb-10">{children}</ol>
+			<ol className="list-decimal list-inside mb-10" role="list">
+				{children}
+			</ol>
 		),
 	},
 	listItem: {
@@ -64,9 +68,10 @@ const components: PortableTextComponents = {
 					target={target}
 					rel={target === "_blank" ? "noopener noreferrer" : undefined}
 					className="text-blue-500 inline-flex underline hover:text-blue-700 items-center gap-1"
+					aria-label={`Link to ${value.href}${target ? ", opens in a new tab" : ""}`}
 				>
 					{children}
-					<ExternalLink className="h-5 w-5" />
+					{target && <ExternalLink className="h-5 w-5" aria-hidden="true" />}
 				</a>
 			);
 		},
@@ -75,7 +80,7 @@ const components: PortableTextComponents = {
 
 export const Body = ({ content }: BlogModel) => {
 	return (
-		<section className="page-width">
+		<section className="page-width" aria-label="Blog content">
 			<PortableText value={content} components={components} />
 		</section>
 	);
