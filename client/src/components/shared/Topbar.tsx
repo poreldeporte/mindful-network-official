@@ -38,7 +38,7 @@ export function Topbar() {
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
-					className="flex content-center space-x-3 items-center py-5 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
+					className="flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
 				>
 					<Image
 						alt="Mindful Logo"
@@ -74,11 +74,11 @@ export function Topbar() {
 					{/* <Link href="">Blog</Link> */}
 				</nav>
 
-				<div className="p-5">
+				<div className="p-2">
 					<Button
 						variant="small"
-						className="py-2 rounded-full px-4 bg-none"
-						form="secondary"
+						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"
+						form="primary"
 					>
 						<Link href={"/search"}>Start Search</Link>
 					</Button>

@@ -16,7 +16,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 		>
 			<div className="mb-10 lg:w-1/2">
 				<Typography
-					className=""
+					className="font-dmSans"
 					color="black"
 					variant="title"
 					as="h2"
@@ -25,7 +25,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 					Get in touch with <span className="block" />
 					<span
 						style={{ textTransform: "capitalize" }}
-						className="text-orange-600"
+						className="text-green-500 font-antic"
 					>
 						{name.toLowerCase()}
 					</span>
