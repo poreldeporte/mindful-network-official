@@ -9,19 +9,11 @@ export default function About() {
 			<Topbar />
 			<MobileTopBar />
 			<section
-				className="grid lg:grid-cols-12 items-center page-width gap-5"
+				className="grid grid-cols-1 lg:grid-cols-12 lg:items-center page-width gap-5 mt-24 lg:mt-36"
 				role="region"
 				aria-labelledby="about-hero-heading"
 			>
-				<div className="h-2/3 w-full lg:col-span-4">
-					<Image
-						src={AboutImage}
-						alt="Group of professionals working together at Mindful Network"
-						className="h-full w-full object-cover object-top rounded-xl"
-					/>
-				</div>
-
-				<div className="col-span-8">
+				<div className="lg:col-span-8 flex flex-col gap-5 order-1 lg:order-2">
 					<Typography
 						id="about-hero-heading"
 						className="font-antic"
@@ -45,6 +37,14 @@ export default function About() {
 						providing people with the tools to thrive. Together, we're ending
 						the silence and lifting each other up on the journey to wellness.
 					</Typography>
+				</div>
+
+				<div className="flex h-full w-full col-span-1 lg:col-span-4 order-2 lg:order-1">
+					<Image
+						src={AboutImage}
+						alt="Professional at Mindful Network"
+						className="h-full w-full object-cover object-top rounded-xl"
+					/>
 				</div>
 			</section>
 			<Footer />

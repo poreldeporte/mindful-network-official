@@ -4,7 +4,7 @@ import { resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "../ui";
 
 import {
@@ -19,17 +19,14 @@ import {
 
 export function Topbar() {
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const handleSelectChange = (value: string) => {
 		const selectedResource = resources.find(
 			(resource) => resource.title === value
 		);
 		if (selectedResource) {
-			router.push(
-				`/search?resource=${encodeURIComponent(
-					selectedResource.path.substring(1)
-				)}`
-			);
+			router.push(selectedResource.path);
 		}
 	};
 
@@ -53,9 +50,16 @@ export function Topbar() {
 				</Link>
 
 				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
-					{/* <Link href="" className="text-green-400 font-bold">
+					<Link
+						href="/about"
+						className={`${
+							pathname === "/about"
+								? "text-gray-400 font-medium"
+								: "text-gray-500 font-normal"
+						}`}
+					>
 						About
-					</Link> */}
+					</Link>
 					<Select onValueChange={handleSelectChange}>
 						<SelectTrigger className="w-[100px] z-50 border-none text-gray-500 px-0">
 							<SelectValue placeholder="Resources" />

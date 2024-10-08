@@ -39,7 +39,6 @@ const Header = ({
 	selectedTherapy,
 }: Props) => {
 	const [headerIsOpen, setHeaderIsOpen] = useState(true);
-
 	const toggleMenu = () => setHeaderIsOpen(!headerIsOpen);
 
 	return (
@@ -62,24 +61,24 @@ const Header = ({
 				Professionals in <span className="text-green-300">South Florida</span>
 			</Typography>
 
+			<button
+				className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full p-0.5 shadow-md"
+				title={headerIsOpen ? "Hide Menu" : "Show Menu"}
+				aria-expanded={headerIsOpen}
+				aria-controls="filter-menu"
+				onClick={toggleMenu}
+			>
+				<span className="sr-only">
+					{headerIsOpen ? "Hide Menu" : "Show Menu"}
+				</span>
+				<ChevronDownIcon
+					className={`h-7 w-7 ${
+						headerIsOpen ? "rotate-180" : "rotate-0"
+					} transition-transform`}
+					aria-hidden="true"
+				/>
+			</button>
 			<AnimatePresence mode="wait">
-				<button
-					className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full p-0.5 shadow-md"
-					title={headerIsOpen ? "Hide Menu" : "Show Menu"}
-					aria-expanded={headerIsOpen}
-					aria-controls="filter-menu"
-					onClick={toggleMenu}
-				>
-					<span className="sr-only">
-						{headerIsOpen ? "Hide Menu" : "Show Menu"}
-					</span>
-					<ChevronDownIcon
-						className={`h-7 w-7 ${
-							headerIsOpen ? "rotate-180" : "rotate-0"
-						} transition-transform`}
-						aria-hidden="true"
-					/>
-				</button>
 				{headerIsOpen && (
 					<motion.div
 						id="filter-menu"
