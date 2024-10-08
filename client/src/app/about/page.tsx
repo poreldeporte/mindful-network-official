@@ -30,12 +30,13 @@ export default function About() {
 						variant="medium"
 					>
 						As a Family Mentor, Certified Recovery Peer Specialist, and Mental
-						Health Advocate, I've partnered with a dedicated team of
+						Health Advocate, I&apos;ve partnered with a dedicated team of
 						professionals to make mental health resources easy and accessible.
-						Through The Mindful Network, we're not just building a
-						community—we're smashing the stigma around mental health and
-						providing people with the tools to thrive. Together, we're ending
-						the silence and lifting each other up on the journey to wellness.
+						Through The Mindful Network, we&apos;re not just building a
+						community—we&apos;re smashing the stigma around mental health and
+						providing people with the tools to thrive. Together, we&apos;re
+						ending the silence and lifting each other up on the journey to
+						wellness.
 					</Typography>
 				</div>
 

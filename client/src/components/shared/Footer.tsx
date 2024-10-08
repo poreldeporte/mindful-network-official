@@ -1,14 +1,14 @@
-import { resources, latestBlogArticles, aboutFooter } from "@/lib/constants";
+import { aboutFooter, latestBlogArticles, resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
-import { ChevronUp, Icon } from "lucide-react";
+import {
+	IconBrandInstagram,
+	IconBrandLinkedin,
+	IconBrandX,
+} from "@tabler/icons-react";
+import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Typography } from "../ui";
-import {
-	IconBrandX,
-	IconBrandInstagram,
-	IconBrandLinkedin,
-} from "@tabler/icons-react";
 
 export function Footer() {
 	return (

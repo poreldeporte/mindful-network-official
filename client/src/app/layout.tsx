@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
-import { Viewport } from "next";
 import "./globals.css";
 
 const anticDidone = Antic_Didone({
