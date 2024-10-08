@@ -19,7 +19,7 @@ export const Hero = ({ post }: SectionProps) => {
 			</div>
 
 			<div
-				className="bg-center bg-cover blurred-overlay"
+				className="relative w-full h-full bg-center bg-cover blurred-overlay"
 				style={{ backgroundImage: `url(${post.featuredImage})` }}
 				aria-hidden="true"
 			>
@@ -28,7 +28,7 @@ export const Hero = ({ post }: SectionProps) => {
 					src={post.featuredImage}
 					width={1024}
 					height={1024}
-					className="w-full h-screen object-contain object-top"
+					className="w-full lg:h-screen lg:object-contain object-top"
 					priority
 				/>
 			</div>

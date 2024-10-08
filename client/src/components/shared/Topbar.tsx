@@ -4,7 +4,7 @@ import { resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "../ui";
 
 import {
@@ -19,17 +19,14 @@ import {
 
 export function Topbar() {
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const handleSelectChange = (value: string) => {
 		const selectedResource = resources.find(
 			(resource) => resource.title === value
 		);
 		if (selectedResource) {
-			router.push(
-				`/search?resource=${encodeURIComponent(
-					selectedResource.path.substring(1)
-				)}`
-			);
+			router.push(selectedResource.path);
 		}
 	};
 
@@ -38,7 +35,7 @@ export function Topbar() {
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
-					className="flex content-center space-x-3 items-center py-5 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
+					className="flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
 				>
 					<Image
 						alt="Mindful Logo"
@@ -53,9 +50,16 @@ export function Topbar() {
 				</Link>
 
 				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
-					{/* <Link href="" className="text-green-400 font-bold">
+					<Link
+						href="/about"
+						className={`${
+							pathname === "/about"
+								? "text-gray-400 font-medium"
+								: "text-gray-500 font-normal"
+						}`}
+					>
 						About
-					</Link> */}
+					</Link>
 					<Select onValueChange={handleSelectChange}>
 						<SelectTrigger className="w-[100px] z-50 border-none text-gray-500 px-0">
 							<SelectValue placeholder="Resources" />
@@ -74,11 +78,11 @@ export function Topbar() {
 					{/* <Link href="">Blog</Link> */}
 				</nav>
 
-				<div className="p-5">
+				<div className="p-2">
 					<Button
 						variant="small"
-						className="py-2 rounded-full px-4 bg-none"
-						form="secondary"
+						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"
+						form="primary"
 					>
 						<Link href={"/search"}>Start Search</Link>
 					</Button>

@@ -19,51 +19,150 @@ export const benefits = [
 	},
 ];
 
+export const privacyPolicyContent = [
+	{
+		id: "platform-information",
+		title: "Platform Information",
+		content: `The Mindful Network is an informational platform designed to connect individuals with mental health resources.
+The content on this site is for educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.
+Always seek the advice of your physician or qualified mental health provider with any questions regarding your condition.
+In case of a life-threatening emergency, call 911 or go to your nearest emergency room immediately.
+This platform does not provide direct clinical services.`,
+	},
+	{
+		id: "accessibility-commitment",
+		title: "Accesibility Commitment",
+		content: `The Mindful Network is committed to making our website accessible to individuals with disabilities in compliance with the Americans with Disabilities Act (ADA). If you experience any barriers while using our website or need assistance, please contact us at [Contact Information] so we can assist you.`,
+	},
+	{
+		id: "information-we-collect",
+		title: "Information We Collect",
+		subsections: [
+			{
+				id: "personal-information",
+				title: "Personal Information",
+				content:
+					"We collect personal data such as name, email address, and location.",
+			},
+			{
+				id: "health-information",
+				title: "Health Information",
+				content:
+					"We may collect health-related information, with user consent, for tailored resources.",
+			},
+			{
+				id: "usage-data",
+				title: "Usage Data",
+				content:
+					"We collect usage data automatically, such as browser type, IP address, and usage statistics.",
+			},
+		],
+	},
+	{
+		id: "how-we-use-your-information",
+		title: "How We Use Your Information",
+		content:
+			"We use the information to deliver services, personalize user experiences, communicate updates, and analyze platform usage trends.",
+	},
+	{
+		id: "sharing-your-information",
+		title: "Sharing Your Information",
+		subsections: [
+			{
+				id: "third-party-providers",
+				title: "Third-Party Providers",
+				content:
+					"We share information with third-party providers for hosting, analytics, and other services.",
+			},
+			{
+				id: "legal-compliance",
+				title: "Legal Compliance",
+				content:
+					"Information may be disclosed to comply with legal obligations or protect user safety.",
+			},
+			{
+				id: "no-sale-of-data",
+				title: "No Sale of Data",
+				content:
+					"We assure users that their information will not be sold to third parties.",
+			},
+		],
+	},
+];
+
+export const termsOfServiceContent = [
+	{
+		id: "introduction",
+		title: "Introduction",
+		content:
+			"These terms outline the conditions for using the platform. By using the app, users accept these terms.",
+	},
+	{
+		id: "user-responsibilities",
+		title: "User Responsibilities",
+		subsections: [
+			{
+				id: "account-information",
+				title: "Account Information",
+				content:
+					"Users are responsible for providing accurate information and maintaining account security.",
+			},
+			{
+				id: "prohibited-activities",
+				title: "Prohibited Activities",
+				content:
+					"Prohibited activities include illegal use, harassment, or unauthorized access attempts.",
+			},
+		],
+	},
+	{
+		id: "use-of-services",
+		title: "Use of Services",
+		content:
+			"We provide specific services and reserve the right to modify or discontinue them as necessary.",
+	},
+];
+
 export const resources = [
 	{
 		key: "psychologists",
 		title: "Psychologists",
-		path: "/psychologists",
+		path: "/search?resource=psychologists",
 	},
 	{
 		key: "backer-act-facilities",
 		title: "Backer Act Facilities",
-		path: "/backer-act-facilities",
+		path: "/search?resource=backer-act-facilities",
 	},
 	{
 		key: "innovative-therapies",
 		title: "Innovative Therapies",
-		path: "/innovative-therapies",
+		path: "/search?resource=innovative-therapies",
 	},
 	{
 		key: "inpatient",
 		title: "Inpatient",
-		path: "/inpatient",
+		path: "/search?resource=inpatient",
 	},
 	{
 		key: "medication",
 		title: "Medication",
-		path: "/medication",
-	},
-	{
-		key: "mental-health",
-		title: "Mental Health",
-		path: "/mental-health",
+		path: "/search?resource=medication",
 	},
 	{
 		key: "mind-body-practices",
 		title: "Mind Body Practices",
-		path: "/mind-body-practices",
+		path: "/search?resource=mind-body-practices",
 	},
 	{
 		key: "outpatient",
 		title: "Outpatient",
-		path: "/outpatient",
+		path: "/search?resource=outpatient",
 	},
 	{
 		key: "psychiatric",
 		title: "Psychiatric",
-		path: "/psychiatric",
+		path: "/search?resource=psychiatric",
 	},
 ];
 
@@ -112,5 +211,66 @@ export const psychologistNavigation = [
 	{
 		key: "#therapy-options",
 		label: "Therapy Options",
+	},
+];
+
+export const aboutFooter = [
+	{
+		key: "the-why",
+		label: "The Why",
+		link: "/about#the-why",
+	},
+	{
+		key: "useful-links",
+		label: "Useful Links",
+		link: "/about#useful-links",
+	},
+	{
+		key: "privacy-policy",
+		label: "Privacy Policy",
+		link: "/privacy-policy",
+	},
+	{
+		key: "terms-of-service",
+		label: "Terms of Service",
+		link: "/terms-of-service",
+	},
+	{
+		key: "contact",
+		label: "Contact",
+		link: "/contact",
+	},
+];
+
+export const latestBlogArticles = [
+	{
+		key: "article-1",
+		title: "Understanding Anxiety and How to Cope",
+		link: "/blog/understanding-anxiety",
+	},
+	{
+		key: "article-2",
+		title: "10 Tips for Improving Mental Health",
+		link: "/blog/tips-improving-mental-health",
+	},
+	{
+		key: "article-3",
+		title: "The Benefits of Virtual Therapy",
+		link: "/blog/benefits-of-virtual-therapy",
+	},
+	{
+		key: "article-4",
+		title: "Managing Depression: Strategies for Daily Life",
+		link: "/blog/managing-depression",
+	},
+	{
+		key: "article-5",
+		title: "How to Support a Loved One with PTSD",
+		link: "/blog/supporting-loved-one-ptsd",
+	},
+	{
+		key: "article-6",
+		title: "Cognitive Behavioral Therapy: An Overview",
+		link: "/blog/cognitive-behavioral-therapy-overview",
 	},
 ];
