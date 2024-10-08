@@ -33,9 +33,15 @@ export function Footer() {
 								Follow us
 							</Typography>
 							<div className="flex items-center space-x-3">
-								<IconBrandInstagram className="w-8 h-8" />
-								<IconBrandLinkedin className="w-8 h-8" />
-								<IconBrandX className="w-8 h-8" />
+								<Link href="#">
+									<IconBrandInstagram className="w-8 h-8 text-gray-700" />
+								</Link>
+								<Link href="#">
+									<IconBrandLinkedin className="w-8 h-8 text-gray-700" />
+								</Link>
+								<Link href="#">
+									<IconBrandX className="w-8 h-8 text-gray-700" />
+								</Link>
 							</div>
 						</div>
 					</div>
