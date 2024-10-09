@@ -10,7 +10,7 @@ import { Typography } from "../ui";
 import { getLatestBlog } from "@/routes/homepage/services";
 
 interface Props {
-	blogPosts: BlogModel[];
+	blogPosts?: BlogModel[];
 }
 
 export async function Footer({ blogPosts }: Props) {
