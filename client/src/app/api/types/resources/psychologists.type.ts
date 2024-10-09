@@ -1,5 +1,6 @@
 export const allPsychologistsQuery = `*[_type == 'psychologist']{
-    ..., 
+    ...,
+    "slug": slug.current,  
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,8 +21,9 @@ export const allPsychologistsQuery = `*[_type == 'psychologist']{
   }`;
 
 export const getPsychologistById = (id: string) => {
-  const query: string = `*[_type == 'psychologist' && _id == "${id}"]{
-    ..., 
+	const query: string = `*[_type == 'psychologist' && _id == "${id}"]{
+    ...,
+    "slug": slug.current,  
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -41,5 +43,5 @@ export const getPsychologistById = (id: string) => {
     "image": image.asset->url
   }`;
 
-  return query;
+	return query;
 };

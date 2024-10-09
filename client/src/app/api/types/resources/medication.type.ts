@@ -1,5 +1,6 @@
 export const allMedicationQuery = `*[_type == 'medicationManagement']{
-    ..., 
+    ...,
+    "slug": slug.current, 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,8 +21,9 @@ export const allMedicationQuery = `*[_type == 'medicationManagement']{
   }`;
 
 export const getMedicationById = (id: string) => {
-  const query: string = `*[_type == 'medicationManagement' && _id == "${id}"]{
-    ..., 
+	const query: string = `*[_type == 'medicationManagement' && _id == "${id}"]{
+    ...,
+    "slug": slug.current, 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -41,5 +43,5 @@ export const getMedicationById = (id: string) => {
     "image": image.asset->url
   }`;
 
-  return query;
+	return query;
 };

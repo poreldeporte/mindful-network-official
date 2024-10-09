@@ -1,5 +1,6 @@
 export const allInnovativeTherapiesQuery = `*[_type == 'innovativeTherapies']{
-    ..., 
+    ...,
+    "slug": slug.current, 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,8 +21,9 @@ export const allInnovativeTherapiesQuery = `*[_type == 'innovativeTherapies']{
   }`;
 
 export const getInnovativeTherapyById = (id: string) => {
-  const query: string = `*[_type == 'innovativeTherapies' && _id == "${id}"]{
-    ..., 
+	const query: string = `*[_type == 'innovativeTherapies' && _id == "${id}"]{
+    ...,
+    "slug": slug.current, 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -41,5 +43,5 @@ export const getInnovativeTherapyById = (id: string) => {
     "image": image.asset->url
   }`;
 
-  return query;
+	return query;
 };

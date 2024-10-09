@@ -1,5 +1,6 @@
 export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacilities']{
     ..., 
+    "slug": slug.current,
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,8 +21,9 @@ export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacilities']{
   }`;
 
 export const getBackerActFacilityById = (id: string) => {
-  const query: string = `*[_type == 'backerActFacilities' && _id == "${id}"]{
+	const query: string = `*[_type == 'backerActFacilities' && _id == "${id}"]{
     ..., 
+    "slug": slug.current,
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -41,5 +43,5 @@ export const getBackerActFacilityById = (id: string) => {
     "image": image.asset->url
   }`;
 
-  return query;
+	return query;
 };
