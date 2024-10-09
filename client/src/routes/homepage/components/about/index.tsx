@@ -2,6 +2,7 @@ import { Typography } from "@/components/ui";
 import Image from "next/image";
 import { Person1, Person2, Person3 } from "@/lib/images";
 import { benefits } from "@/lib/constants";
+import Link from "next/link";
 
 interface BenefitCardProps {
 	key: number;
@@ -69,6 +70,16 @@ export function About() {
 							);
 						})}
 					</div>
+
+					<Link
+						href={"/about"}
+						className="mt-4 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
+						aria-label="Start your search for mental health resources"
+					>
+						<Typography as="span" variant={"small"} color="white">
+							See Why This Means So Much To Us
+						</Typography>
+					</Link>
 				</div>
 
 				<div

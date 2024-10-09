@@ -26,7 +26,7 @@ export const Hero = () => {
 
 			<Link
 				href={"/search"}
-				className="mt-4 py-2 w-max px-4 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center"
+				className="mt-4 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
 				aria-label="Start your search for mental health resources"
 			>
 				<Typography as="span" variant={"small"} color="white">
