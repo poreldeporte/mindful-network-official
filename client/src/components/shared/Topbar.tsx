@@ -78,7 +78,7 @@ export function Topbar() {
 					{/* <Link href="">Blog</Link> */}
 				</nav>
 
-				<div className="p-2">
+				<div className="p-2 pr-5">
 					<Button
 						variant="small"
 						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"

@@ -181,20 +181,6 @@ export const CTACards = [
 	},
 ];
 
-export const navigation = [
-	{ key: "about-us", label: "About Us", path: "/about-us" },
-	{ key: "services", label: "Services", path: "/services" },
-	{
-		key: "search-professional",
-		label: "Search Professional",
-		path: "/search-professional",
-	},
-	{ key: "get-listed", label: "Get Listed and Vetted", path: "/get-listed" },
-	{ key: "resources", label: "Resources", path: "/resources" },
-	{ key: "reviews", label: "Reviews", path: "/reviews" },
-	{ key: "contact", label: "Contact", path: "/contact" },
-];
-
 export const psychologistNavigation = [
 	{
 		key: "#age-specialty",
@@ -218,7 +204,7 @@ export const aboutFooter = [
 	{
 		key: "the-why",
 		label: "The Why",
-		link: "/about#the-why",
+		link: "/about",
 	},
 	{
 		key: "useful-links",
@@ -239,38 +225,5 @@ export const aboutFooter = [
 		key: "contact",
 		label: "Contact",
 		link: "/contact",
-	},
-];
-
-export const latestBlogArticles = [
-	{
-		key: "article-1",
-		title: "Understanding Anxiety and How to Cope",
-		link: "/blog/understanding-anxiety",
-	},
-	{
-		key: "article-2",
-		title: "10 Tips for Improving Mental Health",
-		link: "/blog/tips-improving-mental-health",
-	},
-	{
-		key: "article-3",
-		title: "The Benefits of Virtual Therapy",
-		link: "/blog/benefits-of-virtual-therapy",
-	},
-	{
-		key: "article-4",
-		title: "Managing Depression: Strategies for Daily Life",
-		link: "/blog/managing-depression",
-	},
-	{
-		key: "article-5",
-		title: "How to Support a Loved One with PTSD",
-		link: "/blog/supporting-loved-one-ptsd",
-	},
-	{
-		key: "article-6",
-		title: "Cognitive Behavioral Therapy: An Overview",
-		link: "/blog/cognitive-behavioral-therapy-overview",
 	},
 ];

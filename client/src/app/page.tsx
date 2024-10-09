@@ -20,7 +20,7 @@ export default async function Home() {
 			<BlogContainer blogPosts={blogPosts} />
 			<CTASection />
 			<GetInTouch />
-			<Footer />
+			<Footer blogPosts={blogPosts} />
 		</main>
 	);
 }
