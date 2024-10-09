@@ -3,15 +3,13 @@
 import { aboutFooter, resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import { BlogModel } from "@/models";
+import { getLatestBlog } from "@/routes/homepage/services";
 import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
-import { LinkedinIcon } from "lucide-react";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Typography } from "../ui";
-import { getLatestBlog } from "@/routes/homepage/services";
-import { Button } from "../ui";
 import { useEffect, useState } from "react";
+import { Button, Typography } from "../ui";
 
 interface Props {
 	blogPosts?: BlogModel[];
@@ -32,7 +30,7 @@ export function Footer({ blogPosts }: Props) {
 		if (!blogPosts) {
 			fetchData();
 		} else setPosts(blogPosts);
-	}, []);
+	}, [blogPosts]);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });

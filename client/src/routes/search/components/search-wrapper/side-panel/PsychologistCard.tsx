@@ -13,7 +13,6 @@ const PsychologistCard = ({
 }) => {
 	const {
 		name,
-		id,
 		image,
 		therapyOptions,
 		conditionSpecialty,
