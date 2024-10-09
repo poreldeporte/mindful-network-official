@@ -26,4 +26,5 @@ export interface PsychologistModel {
 	therapyOptions: TherapyModality[];
 	image: string;
 	subtitle: string;
+	slug: string;
 }
