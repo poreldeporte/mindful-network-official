@@ -9,7 +9,7 @@ export default function About() {
 			<Topbar />
 			<MobileTopBar />
 			<section
-				className="grid grid-cols-1 lg:grid-cols-12 lg:items-center page-width gap-5 mt-24 lg:mt-36"
+				className="grid grid-cols-1 lg:grid-cols-12 lg:items-center page-width gap-10 mt-24 lg:mt-36"
 				role="region"
 				aria-labelledby="about-hero-heading"
 			>
