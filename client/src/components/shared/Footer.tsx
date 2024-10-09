@@ -7,12 +7,19 @@ import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Typography } from "../ui";
+import { getLatestBlog } from "@/routes/homepage/services";
 
 interface Props {
 	blogPosts: BlogModel[];
 }
 
 export async function Footer({ blogPosts }: Props) {
+	let posts: BlogModel[] | null;
+	if (!blogPosts) {
+		const latestsPosts: BlogModel[] = await getLatestBlog();
+		posts = latestsPosts;
+	} else posts = [...blogPosts];
+
 	return (
 		<footer>
 			<div className="page-width py-10 mb-5">
@@ -72,8 +79,8 @@ export async function Footer({ blogPosts }: Props) {
 							Blog
 						</Typography>
 						<div className="flex flex-col">
-							{blogPosts && blogPosts.length
-								? blogPosts.map((article, index) => {
+							{posts && posts.length
+								? posts.map((article, index) => {
 										if (index < 6)
 											return (
 												<Link
