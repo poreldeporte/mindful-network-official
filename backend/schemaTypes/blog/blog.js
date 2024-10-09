@@ -26,6 +26,14 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'authorImage',
+      title: 'Author Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: 'publishDate',
       title: 'Publish Date',
       type: 'datetime',

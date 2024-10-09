@@ -1,5 +1,6 @@
 export const allPsychiatricQuery = `*[_type == 'psychiatricAssessment']{
-    ..., 
+    ...,
+    "slug": slug.current,  
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,8 +21,9 @@ export const allPsychiatricQuery = `*[_type == 'psychiatricAssessment']{
   }`;
 
 export const getPsychiatricById = (id: string) => {
-  const query: string = `*[_type == 'psychiatricAssessment' && _id == "${id}"]{
-    ..., 
+	const query: string = `*[_type == 'psychiatricAssessment' && _id == "${id}"]{
+    ...,
+    "slug": slug.current,  
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -41,5 +43,5 @@ export const getPsychiatricById = (id: string) => {
     "image": image.asset->url
   }`;
 
-  return query;
+	return query;
 };

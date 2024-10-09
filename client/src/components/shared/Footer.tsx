@@ -1,29 +1,45 @@
+"use client";
+
 import { aboutFooter, resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import { BlogModel } from "@/models";
+import { getLatestBlog } from "@/routes/homepage/services";
 import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
-import { LinkedinIcon } from "lucide-react";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Typography } from "../ui";
-import { getLatestBlog } from "@/routes/homepage/services";
+import { useEffect, useState } from "react";
+import { Button, Typography } from "../ui";
 
 interface Props {
 	blogPosts?: BlogModel[];
 }
 
-export async function Footer({ blogPosts }: Props) {
-	let posts: BlogModel[] | null;
-	if (!blogPosts) {
-		const latestsPosts: BlogModel[] = await getLatestBlog();
-		posts = latestsPosts;
-	} else posts = [...blogPosts];
+export function Footer({ blogPosts }: Props) {
+	const [posts, setPosts] = useState<BlogModel[] | []>([]);
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const latestsPosts: BlogModel[] = await getLatestBlog();
+				setPosts(latestsPosts);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		if (!blogPosts) {
+			fetchData();
+		} else setPosts(blogPosts);
+	}, [blogPosts]);
+
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
 	return (
 		<footer>
-			<div className="page-width py-10 mb-5">
-				<div className="flex flex-col lg:flex-row items-start justify-between">
+			<div className="page-width py-10">
+				<div className="flex flex-col lg:flex-row items-start justify-between sm:gap-5">
 					<div className="lg:mb-0 space-y-5">
 						<div className="flex content-center space-x-4 items-center">
 							<Image
@@ -38,9 +54,6 @@ export async function Footer({ blogPosts }: Props) {
 							/>
 						</div>
 						<div className="space-y-2">
-							<Typography color="black" as="h2" variant="medium">
-								Follow us
-							</Typography>
 							<div className="flex items-center space-x-3">
 								<a href="#">
 									<IconBrandInstagram className="w-8 h-8 text-gray-500" />
@@ -58,7 +71,7 @@ export async function Footer({ blogPosts }: Props) {
 						<Typography color="black" as="h2" variant="medium">
 							About
 						</Typography>
-						<div className="flex flex-col">
+						<div className="flex flex-col sm:mb-2">
 							{aboutFooter.map((label) => {
 								return (
 									<Link
@@ -78,7 +91,7 @@ export async function Footer({ blogPosts }: Props) {
 						<Typography color="black" as="h2" variant="medium">
 							Blog
 						</Typography>
-						<div className="flex flex-col">
+						<div className="flex flex-col sm:mb-2">
 							{posts && posts.length
 								? posts.map((article, index) => {
 										if (index < 6)
@@ -128,15 +141,16 @@ export async function Footer({ blogPosts }: Props) {
 				<Typography variant="small" color="black" className="p-4">
 					© 2024 The Mindful Network
 				</Typography>
-				<Link
-					href={"/"}
-					className="flex content-center items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
+				<Button
+					onClick={scrollToTop}
+					className="flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
+					variant="small"
 				>
 					<Typography variant="small" as="h3" color="white">
 						Back to top
 					</Typography>
 					<ChevronUp className="h-8 w-8 text-white" />
-				</Link>
+				</Button>
 			</div>
 		</footer>
 	);

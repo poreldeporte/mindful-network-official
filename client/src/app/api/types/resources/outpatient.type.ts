@@ -1,5 +1,6 @@
 export const allOutpatientQuery = `*[_type == 'outpatientProgram']{
-    ..., 
+    ...,
+    "slug": slug.current, 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,8 +21,9 @@ export const allOutpatientQuery = `*[_type == 'outpatientProgram']{
   }`;
 
 export const getOutpatientById = (id: string) => {
-  const query: string = `*[_type == 'outpatientProgram' && _id == "${id}"]{
-    ..., 
+	const query: string = `*[_type == 'outpatientProgram' && _id == "${id}"]{
+    ...,
+    "slug": slug.current, 
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -41,5 +43,5 @@ export const getOutpatientById = (id: string) => {
     "image": image.asset->url
   }`;
 
-  return query;
+	return query;
 };

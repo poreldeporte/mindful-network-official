@@ -3,7 +3,7 @@ import { termsOfServiceContent } from "@/lib/constants";
 
 export const TermsOfServiceBody = () => {
 	return (
-		<section className="page-widthflex flex-col items-center justify-center mt-48">
+		<section className="flex flex-col mt-48 mb-[100px]">
 			<div className="flex flex-col items-center mb-20">
 				<Typography variant="title" as="h1" color="black">
 					Terms of service
@@ -12,9 +12,9 @@ export const TermsOfServiceBody = () => {
 					Last Updated on October, 2024
 				</Typography>
 			</div>
-			<div className="">
+			<div>
 				{termsOfServiceContent.map((section) => (
-					<article key={section.id} className="mb-8">
+					<article key={section.id} className="mb-5">
 						<Typography
 							color="black"
 							as="h2"
@@ -30,7 +30,7 @@ export const TermsOfServiceBody = () => {
 						)}
 
 						{section.subsections && (
-							<ul className="ml-4 list-disc space-y-3">
+							<ul className="ml-4 list-disc space-y-2">
 								{section.subsections.map((subsection) => (
 									<li key={subsection.id}>
 										<Typography

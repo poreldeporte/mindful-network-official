@@ -1,67 +1,36 @@
-import { promises as fs } from "fs";
+import { getPsychologistsAdapter } from "@/adapters";
+import { sanityClient } from "@/api";
+import { PsychologistModel } from "@/models";
 
-export const getAllConditions = async () => {
-  try {
-    const file = await fs.readFile(
-      process.cwd() + "/src/app/db/condition-specialties.json",
-      "utf8"
-    );
-    return JSON.parse(file) || [];
-  } catch (error) {
-    console.error("Error reading conditions data:", error);
-  }
-};
+export const getPsychologistById = async (
+	slug: string
+): Promise<PsychologistModel | null> => {
+	try {
+		const query = `*[slug.current == $slug][0]{
+            ..., 
+            "conditionSpecialty": conditionSpecialty[]->{
+                "id": _id,
+                name
+            },
+            "insurances": insurances[]->{
+                "id": _id,
+                name
+            },
+            "ageSpecialty": ageSpecialty[]->{
+                "id": _id,
+                age
+            },
+            "therapyOptions": therapyOptions[]->{
+                "id": _id,
+                type
+            },
+            "image": image.asset->url
+        }`;
 
-export const getAllTherapyModalities = async () => {
-  try {
-    const file = await fs.readFile(
-      process.cwd() + "/src/app/db/therapy-modality.json",
-      "utf8"
-    );
-    return JSON.parse(file) || [];
-  } catch (error) {
-    console.error("Error reading conditions data:", error);
-  }
-};
-
-export const getAllInsurances = async () => {
-  try {
-    const file = await fs.readFile(
-      process.cwd() + "/src/app/db/insurances.json",
-      "utf8"
-    );
-    return JSON.parse(file) || [];
-  } catch (error) {
-    console.error("Error reading conditions data:", error);
-  }
-};
-export const getAllAgeSpecialties = async () => {
-  try {
-    const file = await fs.readFile(
-      process.cwd() + "/src/app/db/age-specialties.json",
-      "utf8"
-    );
-    return JSON.parse(file) || [];
-  } catch (error) {
-    console.error("Error reading conditions data:", error);
-  }
-};
-
-export const getAllPsychologists = async () => {
-  try {
-    const file = await fs.readFile(
-      process.cwd() + "/src/app/db/psychologists.json",
-      "utf8"
-    );
-    return JSON.parse(file) || [];
-  } catch (error) {
-    console.error("Error reading psychologists data:", error);
-  }
-};
-
-export const getPsychologistsByFilter = async () => {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
+		const data = await sanityClient.fetch(query, { slug });
+		return getPsychologistsAdapter(data);
+	} catch (error) {
+		console.error("Error fetching psychologist data:", error);
+		return null;
+	}
 };

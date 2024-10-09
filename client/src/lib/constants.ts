@@ -1,3 +1,10 @@
+import {
+	IconBriefcase,
+	IconShieldPlus,
+	IconHeadset,
+	IconBuildingHospital,
+} from "@tabler/icons-react";
+
 export const benefits = [
 	{
 		key: 0,
@@ -209,7 +216,7 @@ export const aboutFooter = [
 	{
 		key: "useful-links",
 		label: "Useful Links",
-		link: "/about#useful-links",
+		link: "/useful-links",
 	},
 	{
 		key: "privacy-policy",
@@ -225,5 +232,48 @@ export const aboutFooter = [
 		key: "contact",
 		label: "Contact",
 		link: "/contact",
+	},
+];
+
+export const usefulLinks = [
+	{
+		id: "mental-health-services",
+		title: "Mental Health Services",
+		links: [
+			"Therapy services",
+			"Neuropsychological Assessment",
+			"Outpatient Programs",
+		],
+		icon: IconBriefcase,
+	},
+	{
+		id: "insurance-and-financial-aid",
+		title: "Insurance and Financial Aid",
+		links: [
+			"Accepted Insurance Plans",
+			"Medicaid and Medicare Information",
+			"Guide to Using Insurance for Therapy",
+		],
+		icon: IconShieldPlus,
+	},
+	{
+		id: "mental-health-services",
+		title: "Mental Health Services",
+		links: [
+			"Therapy services",
+			"Neuropsychological Assessment",
+			"Outpatient Programs",
+		],
+		icon: IconHeadset,
+	},
+	{
+		id: "crisis-and-emergency-links",
+		title: "Crisis and Emergency Links",
+		links: [
+			"Suicide Prevention Hotline",
+			"Local Crisis Centers",
+			"Emergency Numbers",
+		],
+		icon: IconBuildingHospital,
 	},
 ];

@@ -13,6 +13,7 @@ export interface BlogModel {
 	excerpt: string;
 	featuredImage: string;
 	tags?: string[];
+	authorImage?: string;
 	seo?: {
 		metaTitle: string;
 		metaDescription: string;

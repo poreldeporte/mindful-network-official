@@ -1,14 +1,13 @@
-"use client";
-import { TermsOfServiceBody } from "@/routes/terms-of-service";
 import { Topbar, Footer, MobileTopBar } from "@/components/shared";
+import { UseFulLinksContent } from "@/routes/useful-links";
 
-export default function TermsOfService() {
+export default function UsefulLinks() {
 	return (
-		<main aria-labelledby="terms-of-service-page">
+		<main aria-labelledby="privacy-policy-page">
 			<Topbar />
 			<MobileTopBar />
 			<section className="h-max mx-auto w-11/12 xl:w-3/4">
-				<TermsOfServiceBody />
+				<UseFulLinksContent />
 			</section>
 
 			<Footer />

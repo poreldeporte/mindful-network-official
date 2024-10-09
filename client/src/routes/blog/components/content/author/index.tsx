@@ -5,7 +5,12 @@ import { UserImage } from "@/lib/images";
 import { Typography, Badge } from "@/components/ui";
 import { formatDateMMDDAAAA } from "@/utilities";
 
-export const Author = ({ author, publishDate, tags }: BlogModel) => {
+export const Author = ({
+	author,
+	publishDate,
+	tags,
+	authorImage,
+}: BlogModel) => {
 	return (
 		<section
 			className="page-width section-y-padding"
@@ -13,7 +18,7 @@ export const Author = ({ author, publishDate, tags }: BlogModel) => {
 		>
 			<div className="flex items-center gap-5 mb-5">
 				<Image
-					src={UserImage}
+					src={authorImage ? authorImage : UserImage}
 					height={100}
 					width={100}
 					alt={`Profile picture of ${author}`}
