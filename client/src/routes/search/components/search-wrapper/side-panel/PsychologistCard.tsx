@@ -20,6 +20,7 @@ const PsychologistCard = ({
 		insurances,
 		ageSpecialty,
 		_type,
+		slug,
 	} = psychologist;
 
 	return (
@@ -117,7 +118,7 @@ const PsychologistCard = ({
 
 			<div className="flex justify-end items-end h-full">
 				<Link
-					href={`/psychologists/${id}`}
+					href={`/psychologists/${slug}`}
 					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
