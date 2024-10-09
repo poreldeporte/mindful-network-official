@@ -1,21 +1,23 @@
-import { aboutFooter, latestBlogArticles, resources } from "@/lib/constants";
+import { aboutFooter, resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
-import {
-	IconBrandInstagram,
-	IconBrandLinkedin,
-	IconBrandX,
-} from "@tabler/icons-react";
+import { BlogModel } from "@/models";
+import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
+import { LinkedinIcon } from "lucide-react";
 import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Typography } from "../ui";
 
-export function Footer() {
+interface Props {
+	blogPosts: BlogModel[];
+}
+
+export async function Footer({ blogPosts }: Props) {
 	return (
 		<footer>
-			<div className="page-width py-10">
+			<div className="page-width py-10 mb-5">
 				<div className="flex flex-col lg:flex-row items-start justify-between">
-					<div className="mb-10 lg:mb-0 space-y-5">
+					<div className="lg:mb-0 space-y-5">
 						<div className="flex content-center space-x-4 items-center">
 							<Image
 								alt="Mindful Logo"
@@ -33,58 +35,78 @@ export function Footer() {
 								Follow us
 							</Typography>
 							<div className="flex items-center space-x-3">
-								<Link href="#">
-									<IconBrandInstagram className="w-8 h-8 text-gray-700" />
-								</Link>
-								<Link href="#">
-									<IconBrandLinkedin className="w-8 h-8 text-gray-700" />
-								</Link>
-								<Link href="#">
-									<IconBrandX className="w-8 h-8 text-gray-700" />
-								</Link>
+								<a href="#">
+									<IconBrandInstagram className="w-8 h-8 text-gray-500" />
+								</a>
+								<a href="#">
+									<LinkedinIcon className="w-8 h-8 text-gray-500" />
+								</a>
+								<a href="#">
+									<IconBrandX className="w-8 h-8 text-gray-500" />
+								</a>
 							</div>
 						</div>
 					</div>
-					<div className="mb-5">
+					<div>
 						<Typography color="black" as="h2" variant="medium">
 							About
 						</Typography>
 						<div className="flex flex-col">
 							{aboutFooter.map((label) => {
 								return (
-									<a href={label.link} key={label.key}>
+									<Link
+										className="hover:underline"
+										href={label.link}
+										key={label.key}
+									>
 										<Typography color="darkGray" as="span" variant="small">
 											{label.label}
 										</Typography>
-									</a>
+									</Link>
 								);
 							})}
 						</div>
 					</div>
-					<div className="mb-5">
+					<div className="max-w-96">
 						<Typography color="black" as="h2" variant="medium">
 							Blog
 						</Typography>
 						<div className="flex flex-col">
-							{latestBlogArticles.map((article) => {
-								return (
-									<a href={article.link} key={article.key}>
-										<Typography color="darkGray" as="span" variant="small">
-											{article.title}
-										</Typography>
-									</a>
-								);
-							})}
+							{blogPosts && blogPosts.length
+								? blogPosts.map((article, index) => {
+										if (index < 6)
+											return (
+												<Link
+													className="hover:underline"
+													href={`/blog/${article.slug}`}
+													key={article.id}
+												>
+													<Typography
+														className=""
+														color="darkGray"
+														as="span"
+														variant="small"
+													>
+														{article.title}
+													</Typography>
+												</Link>
+											);
+									})
+								: ""}
 						</div>
 					</div>
-					<div className="mb-5 grid grid-cols-1 lg:grid-cols-1">
+					<div className="grid grid-cols-1 lg:grid-cols-1">
 						<Typography color="black" as="h2" variant="medium">
 							Resources
 						</Typography>
 						<div className="flex flex-col">
 							{resources.map((resource) => {
 								return (
-									<Link href={resource.path} key={resource.key}>
+									<Link
+										className="hover:underline"
+										href={resource.path}
+										key={resource.key}
+									>
 										<Typography color="darkGray" as="span" variant="small">
 											{resource.title}
 										</Typography>
@@ -95,8 +117,8 @@ export function Footer() {
 					</div>
 				</div>
 			</div>
-			<div className="flex justify-between items-center ">
-				<Typography variant="small" color="black" className="p-5">
+			<div className="flex justify-between items-center">
+				<Typography variant="small" color="black" className="p-4">
 					© 2024 The Mindful Network
 				</Typography>
 				<Link
