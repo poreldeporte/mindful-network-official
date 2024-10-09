@@ -11,17 +11,28 @@ import Link from "next/link";
 import { Typography } from "../ui";
 import { getLatestBlog } from "@/routes/homepage/services";
 import { Button } from "../ui";
+import { useEffect, useState } from "react";
 
 interface Props {
 	blogPosts?: BlogModel[];
 }
 
-export async function Footer({ blogPosts }: Props) {
-	let posts: BlogModel[] | null;
-	if (!blogPosts) {
-		const latestsPosts: BlogModel[] = await getLatestBlog();
-		posts = latestsPosts;
-	} else posts = [...blogPosts];
+export function Footer({ blogPosts }: Props) {
+	const [posts, setPosts] = useState<BlogModel[] | []>([]);
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const latestsPosts: BlogModel[] = await getLatestBlog();
+				setPosts(latestsPosts);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		if (!blogPosts) {
+			fetchData();
+		} else setPosts(blogPosts);
+	}, []);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });

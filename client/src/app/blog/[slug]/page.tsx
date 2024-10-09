@@ -1,7 +1,6 @@
 import { sanityClient } from "@/api";
+import { Content, Hero } from "@/routes/blog";
 import { getBlogById } from "@/routes/homepage/services";
-import { Footer, Topbar, MobileTopBar } from "@/components/shared";
-import { Hero, Content } from "@/routes/blog";
 import Head from "next/head";
 
 interface BlogPostProps {
@@ -46,7 +45,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 	};
 
 	return (
-		<main aria-labelledby="blog-page">
+		<>
 			<Head>
 				<title>{post.seo?.metaTitle || post.title} | Mindful Network</title>
 				<meta
@@ -89,15 +88,9 @@ export default async function BlogPost({ params }: BlogPostProps) {
 				<meta name="robots" content="index, follow" />
 			</Head>
 
-			<MobileTopBar />
-			<Topbar />
-			<MobileTopBar />
-
 			<Hero post={post} />
 			<Content post={post} />
-
-			<Footer />
-		</main>
+		</>
 	);
 }
 

@@ -1,11 +1,18 @@
 import { createClient } from "@sanity/client";
 import { sanityConfig } from "@/config";
+import imageUrlBuilder from "@sanity/image-url";
 
 export const sanityClient = createClient({
-  projectId: sanityConfig.projectId || "",
-  dataset: sanityConfig.dataset || "production",
-  apiVersion: "2024-09-16",
-  useCdn: true,
-  ignoreBrowserTokenWarning: true,
-  token: sanityConfig.token || "",
+	projectId: sanityConfig.projectId || "",
+	dataset: sanityConfig.dataset || "production",
+	apiVersion: "2024-09-16",
+	useCdn: true,
+	ignoreBrowserTokenWarning: true,
+	token: sanityConfig.token || "",
 });
+
+const builder = imageUrlBuilder(sanityClient);
+
+export function urlFor(source) {
+	return builder.image(source);
+}
