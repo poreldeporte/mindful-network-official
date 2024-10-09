@@ -1,12 +1,10 @@
-import { getPsychologistsAdapter } from "@/adapters";
-import { sanityClient } from "@/api";
-import { PsychologistModel } from "@/models";
 import {
 	GetInTouch,
 	ProfileCard,
 	PsychologistAbout,
 	StickyButton,
 } from "@/routes/psychologists/components";
+import { getPsychologistById } from "@/services";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -15,7 +13,7 @@ export default async function PsychologistPage({
 }: {
 	params: { slug: string };
 }) {
-	const psychologist = await fetchPsychologistData(params.slug);
+	const psychologist = await getPsychologistById(params.slug);
 
 	if (!psychologist) {
 		notFound();
@@ -35,45 +33,12 @@ export default async function PsychologistPage({
 	);
 }
 
-async function fetchPsychologistData(
-	slug: string
-): Promise<PsychologistModel | null> {
-	try {
-		const query = `*[_id == $slug][0]{
-            ..., 
-            "conditionSpecialty": conditionSpecialty[]->{
-                "id": _id,
-                name
-            },
-            "insurances": insurances[]->{
-                "id": _id,
-                name
-            },
-            "ageSpecialty": ageSpecialty[]->{
-                "id": _id,
-                age
-            },
-            "therapyOptions": therapyOptions[]->{
-                "id": _id,
-                type
-            },
-            "image": image.asset->url
-        }`;
-
-		const data = await sanityClient.fetch(query, { slug });
-		return getPsychologistsAdapter(data);
-	} catch (error) {
-		console.error("Error fetching psychologist data:", error);
-		return null;
-	}
-}
-
 export async function generateMetadata({
 	params,
 }: {
 	params: { slug: string };
 }): Promise<Metadata> {
-	const psychologist = await fetchPsychologistData(params.slug);
+	const psychologist = await getPsychologistById(params.slug);
 
 	if (!psychologist) {
 		return {
