@@ -54,7 +54,7 @@ export function Topbar() {
 						href="/about"
 						className={`${
 							pathname === "/about"
-								? "text-gray-400 font-medium"
+								? "text-green-500 font-medium"
 								: "text-gray-500 font-normal"
 						}`}
 					>
@@ -79,8 +79,25 @@ export function Topbar() {
 							</SelectGroup>
 						</SelectContent>
 					</Select>
-					<Link href="/useful-links" className="text-gray-500 font-normal">
+					<Link
+						href="/useful-links"
+						className={`${
+							pathname === "/useful-links"
+								? "text-green-500 font-medium"
+								: "text-gray-500 font-normal"
+						}`}
+					>
 						Useful links
+					</Link>
+					<Link
+						href="/blog"
+						className={`${
+							pathname === "/blog"
+								? "text-green-500 font-medium"
+								: "text-gray-500 font-normal"
+						}`}
+					>
+						Blog
 					</Link>
 				</nav>
 
