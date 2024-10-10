@@ -7,7 +7,7 @@ interface BlogProps {
 	blogPosts: BlogModel[];
 }
 
-const BlogCard = ({
+export const BlogCard = ({
 	title,
 	category,
 	featuredImage,

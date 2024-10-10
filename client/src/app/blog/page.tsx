@@ -1,8 +1,7 @@
-import { Topbar, Footer, MobileTopBar } from "@/components/shared";
 import {
-	BlogsHero,
-	BlogsFooter,
 	BlogsContent,
+	BlogsFooter,
+	BlogsHero,
 } from "@/routes/blogs-page/components";
 
 export default function BlogsPage() {
