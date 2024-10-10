@@ -39,17 +39,17 @@ export function Footer({ blogPosts }: Props) {
 	return (
 		<footer>
 			<div className="page-width py-10">
-				<div className="flex flex-col lg:flex-row items-start justify-between sm:gap-5">
-					<div className="lg:mb-0 space-y-5">
+				<div className="gap-5 grid grid-cols-1 lg:grid-cols-[auto_1fr]">
+					<div className="mb-10 lg:mb-0 space-y-5">
 						<div className="flex content-center space-x-4 items-center">
 							<Image
 								alt="Mindful Logo"
-								className="w-24 h-20 lg:w-40 lg:h-32"
+								className="w-24 h-20 xl:w-40 xl:h-32"
 								src={MindfulIsotype}
 							/>
 							<Image
 								alt="Mindful Logo"
-								className="w-32 h-16 lg:w-40 lg:h-16"
+								className="w-32 h-16 xl:w-40 xl:h-16"
 								src={MindfulLogo}
 							/>
 						</div>
@@ -67,72 +67,74 @@ export function Footer({ blogPosts }: Props) {
 							</div>
 						</div>
 					</div>
-					<div>
-						<Typography color="black" as="h2" variant="medium">
-							About
-						</Typography>
-						<div className="flex flex-col sm:mb-2">
-							{aboutFooter.map((label) => {
-								return (
-									<Link
-										className="hover:underline"
-										href={label.link}
-										key={label.key}
-									>
-										<Typography color="darkGray" as="span" variant="small">
-											{label.label}
-										</Typography>
-									</Link>
-								);
-							})}
+					<div className="flex flex-col flex-wrap lg:flex-row items-start justify-around">
+						<div>
+							<Typography color="black" as="h2" variant="medium">
+								About
+							</Typography>
+							<div className="flex flex-col mb-2 lg:mb-0">
+								{aboutFooter.map((label) => {
+									return (
+										<Link
+											className="hover:underline"
+											href={label.link}
+											key={label.key}
+										>
+											<Typography color="darkGray" as="span" variant="small">
+												{label.label}
+											</Typography>
+										</Link>
+									);
+								})}
+							</div>
 						</div>
-					</div>
-					<div className="max-w-96">
-						<Typography color="black" as="h2" variant="medium">
-							Blog
-						</Typography>
-						<div className="flex flex-col sm:mb-2">
-							{posts && posts.length
-								? posts.map((article, index) => {
-										if (index < 6)
-											return (
-												<Link
-													className="hover:underline"
-													href={`/blog/${article.slug}`}
-													key={article.id}
-												>
-													<Typography
-														className=""
-														color="darkGray"
-														as="span"
-														variant="small"
+						<div className="max-w-96">
+							<Typography color="black" as="h2" variant="medium">
+								Blog
+							</Typography>
+							<div className="flex flex-col mb-2 lg:mb-0">
+								{posts && posts.length
+									? posts.map((article, index) => {
+											if (index < 6)
+												return (
+													<Link
+														className="hover:underline"
+														href={`/blog/${article.slug}`}
+														key={article.id}
 													>
-														{article.title}
-													</Typography>
-												</Link>
-											);
-									})
-								: ""}
+														<Typography
+															className=""
+															color="darkGray"
+															as="span"
+															variant="small"
+														>
+															{article.title}
+														</Typography>
+													</Link>
+												);
+										})
+									: ""}
+							</div>
 						</div>
-					</div>
-					<div className="grid grid-cols-1 lg:grid-cols-1">
-						<Typography color="black" as="h2" variant="medium">
-							Resources
-						</Typography>
-						<div className="flex flex-col">
-							{resources.map((resource) => {
-								return (
-									<Link
-										className="hover:underline"
-										href={resource.path}
-										key={resource.key}
-									>
-										<Typography color="darkGray" as="span" variant="small">
-											{resource.title}
-										</Typography>
-									</Link>
-								);
-							})}
+						<div className="grid grid-cols-1 lg:grid-cols-1">
+							<Typography color="black" as="h2" variant="medium">
+								Resources
+							</Typography>
+							<div className="flex flex-col mb-2 lg:mb-0">
+								{resources.map((resource) => {
+									return (
+										<Link
+											className="hover:underline"
+											href={resource.path}
+											key={resource.key}
+										>
+											<Typography color="darkGray" as="span" variant="small">
+												{resource.title}
+											</Typography>
+										</Link>
+									);
+								})}
+							</div>
 						</div>
 					</div>
 				</div>

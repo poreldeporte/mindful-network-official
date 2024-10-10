@@ -53,11 +53,11 @@ export default function BlogLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<main aria-labelledby="blog-page">
+		<>
 			<MobileTopBar />
 			<Topbar />
-			<main>{children};</main>
+			<main aria-labelledby="blog-page">{children};</main>
 			<Footer />
-		</main>
+		</>
 	);
 }

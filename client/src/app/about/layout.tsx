@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 
 export const metadata: Metadata = {
 	title: "About Us - Mindful Network: Mental Health Support in South Florida",
@@ -48,7 +49,6 @@ export const metadata: Metadata = {
 			},
 		],
 	},
-	viewport: "width=device-width, initial-scale=1",
 	robots: "index, follow",
 };
 
@@ -58,12 +58,17 @@ export default function AboutLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<main
-			role="main"
-			aria-label="About Mindful Network"
-			className={`antialiased`}
-		>
-			{children}
-		</main>
+		<>
+			<Topbar />
+			<MobileTopBar />
+			<main
+				role="main"
+				aria-label="About Mindful Network"
+				className={`antialiased`}
+			>
+				{children}
+			</main>
+			<Footer />
+		</>
 	);
 }
