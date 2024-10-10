@@ -259,12 +259,12 @@ export const usefulLinks = [
 		icon: IconShieldPlus,
 	},
 	{
-		id: "mental-health-services",
-		title: "Mental Health Services",
+		id: "support-groups",
+		title: "Support groups",
 		links: [
-			"Therapy services",
-			"Neuropsychological Assessment",
-			"Outpatient Programs",
+			"Peer Support Groups",
+			"Family Counseling Programs",
+			"Community Centers for Mental Wellness",
 		],
 		icon: IconHeadset,
 	},
