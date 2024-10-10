@@ -19,6 +19,13 @@ export default {
       type: 'string',
     },
     {
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+      validation: (Rule) => Rule.email().error('Please enter a valid email address'),
+      description: 'The contact email for the psychologist',
+    },
+    {
       name: 'description',
       title: 'Description',
       type: 'text',
