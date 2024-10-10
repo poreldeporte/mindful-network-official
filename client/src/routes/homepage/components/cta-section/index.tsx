@@ -2,15 +2,17 @@ import { Typography } from "@/components/ui";
 import Image from "next/image";
 import { CTACards } from "@/lib/constants";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 interface Props {
 	image: string;
 	buttonText: string;
+	path: string;
 }
 
-const CTACard = ({ image, buttonText }: Props) => {
+const CTACard = ({ image, buttonText, path }: Props) => {
 	return (
-		<article className="relative w-full h-72 rounded-xl overflow-hidden">
+		<article className="relative w-full h-72 rounded-xl overflow-hidden transition-transform hover:scale-[101%]">
 			<Image
 				className="w-full h-full object-cover"
 				src={image}
@@ -37,6 +39,10 @@ const CTACard = ({ image, buttonText }: Props) => {
 					</Typography>
 				</button>
 			</div>
+
+			<Link className="container-link-overlay" href={path}>
+				<span className="sr-only">Redirect to {buttonText} page</span>
+			</Link>
 		</article>
 	);
 };
@@ -44,17 +50,18 @@ const CTACard = ({ image, buttonText }: Props) => {
 export function CTASection() {
 	return (
 		<section
-			className="page-width section-y-padding"
+			className="bg-white page-width section-y-padding"
 			aria-labelledby="cta-section-heading"
 		>
 			<Typography
 				as="h2"
 				variant="title"
 				color="black"
-				className="sr-only"
+				className="text-green-500 mb-5"
 				id="cta-section-heading"
 			>
-				Call to Action Section
+				Take the first step <span className="block"></span>
+				<span className="text-black">Discover trusted resources</span>
 			</Typography>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 				{CTACards.map((card) => (

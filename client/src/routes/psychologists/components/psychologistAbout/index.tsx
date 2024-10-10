@@ -23,6 +23,7 @@ export function PsychologistAbout({
 	therapyOptions,
 	phone,
 	address,
+	email,
 }: PsychologistModel) {
 	return (
 		<>
@@ -94,7 +95,7 @@ export function PsychologistAbout({
 						id: "email",
 						icon: <AtSign className="h-6 w-6" />,
 						title: "Email",
-						items: [""],
+						items: [email || "The user didn't provide an email"],
 					},
 					{
 						id: "address",

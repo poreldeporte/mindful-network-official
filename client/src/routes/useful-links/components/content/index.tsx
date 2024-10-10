@@ -29,10 +29,10 @@ const CategoryCard = ({ title, links, icon: Icon }: CategoryCardProps) => {
 					{links.map((link, index) => (
 						<li
 							key={index}
-							className="flex items-center space-x-2 space-y-1 border-e-1 underline underline-offset-1"
+							className="flex items-center space-x-2 mb-2 border-e-1 underline underline-offset-1"
 						>
 							<CircleChevronRight className="h-6 w-6 text-gray-700" />
-							<Link href="#">
+							<Link href="#" className="pl-1 lg:pl-2">
 								<Typography variant="small" color="black" as="p">
 									{link}
 								</Typography>

@@ -13,16 +13,16 @@ export const Author = ({
 }: BlogModel) => {
 	return (
 		<section
-			className="page-width section-y-padding"
+			className="section-y-padding"
 			aria-labelledby="author-section-heading"
 		>
 			<div className="flex items-center gap-5 mb-5">
 				<Image
 					src={authorImage ? authorImage : UserImage}
-					height={100}
-					width={100}
+					height={125}
+					width={125}
 					alt={`Profile picture of ${author}`}
-					className="rounded-full object-cover object-center"
+					className="rounded-full aspect-square object-cover object-center"
 				/>
 
 				<div>

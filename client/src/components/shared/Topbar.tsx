@@ -64,18 +64,24 @@ export function Topbar() {
 						<SelectTrigger className="w-[100px] z-50 border-none text-gray-500 px-0">
 							<SelectValue placeholder="Resources" />
 						</SelectTrigger>
-						<SelectContent className="bg-white">
+						<SelectContent className="bg-white p-5">
 							<SelectGroup>
 								<SelectLabel>Resources</SelectLabel>
 								{resources.map((resource) => (
-									<SelectItem key={resource.key} value={resource.title}>
+									<SelectItem
+										className="w-max pr-8"
+										key={resource.key}
+										value={resource.title}
+									>
 										{resource.title}
 									</SelectItem>
 								))}
 							</SelectGroup>
 						</SelectContent>
 					</Select>
-					{/* <Link href="">Blog</Link> */}
+					<Link href="/useful-links" className="text-gray-500 font-normal">
+						Useful links
+					</Link>
 				</nav>
 
 				<div className="p-2 pr-5">

@@ -24,7 +24,7 @@ const PsychologistCard = ({
 
 	return (
 		<li
-			className="grid lg:grid-cols-[auto_1fr_auto] w-full py-5 px-2.5 gap-10 items-start border-b border-gray-200"
+			className="grid lg:grid-cols-[auto_1fr_auto] w-full py-5 px-2.5 gap-2 lg:gap-10 items-start border-b border-gray-200"
 			role="article"
 			aria-label={`Profile of psychologist ${name}`}
 		>
@@ -42,7 +42,7 @@ const PsychologistCard = ({
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-col w-full">
 					<Typography
-						className="font-bold"
+						className="font-bold mb-2"
 						as="h2"
 						color="black"
 						variant="medium"
@@ -115,7 +115,7 @@ const PsychologistCard = ({
 				</div>
 			</div>
 
-			<div className="flex justify-end items-end h-full">
+			<div className="flex justify-end items-end h-full mt-2">
 				<Link
 					href={`/psychologists/${slug}`}
 					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"

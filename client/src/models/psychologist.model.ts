@@ -27,4 +27,5 @@ export interface PsychologistModel {
 	image: string;
 	subtitle: string;
 	slug: string;
+	email?: string;
 }

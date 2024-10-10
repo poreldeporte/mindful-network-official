@@ -179,12 +179,14 @@ export const CTACards = [
 		image:
 			"https://images.unsplash.com/photo-1682687982183-c2937a74257c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		buttonText: "Explore Curated Resources",
+		path: "/search",
 	},
 	{
 		id: "2",
 		image:
 			"https://images.unsplash.com/photo-1655047273143-91261102716f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		buttonText: "Join Our Network",
+		path: "/useful-links",
 	},
 ];
 
@@ -257,12 +259,12 @@ export const usefulLinks = [
 		icon: IconShieldPlus,
 	},
 	{
-		id: "mental-health-services",
-		title: "Mental Health Services",
+		id: "support-groups",
+		title: "Support groups",
 		links: [
-			"Therapy services",
-			"Neuropsychological Assessment",
-			"Outpatient Programs",
+			"Peer Support Groups",
+			"Family Counseling Programs",
+			"Community Centers for Mental Wellness",
 		],
 		icon: IconHeadset,
 	},

@@ -120,10 +120,10 @@ export function GetInTouch({ name }: PsychologistModel) {
 							variant="medium"
 							form="primary"
 							className="p-2 rounded-full mt-5 lg:w-1/4"
-							aria-label="Send message"
+							aria-label="Send Message"
 						>
 							<Typography color="white" variant="small" as="h3">
-								Send Message
+								Send
 							</Typography>
 						</Button>
 					</div>

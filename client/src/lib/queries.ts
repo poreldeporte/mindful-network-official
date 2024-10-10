@@ -13,6 +13,7 @@ export const blogByIdQuery = `*[_type == "blog" && slug.current == $slug][0]{
     body,
     excerpt,
     "featuredImage": featuredImage.asset->url,
+    "authorImage": authorImage.asset->url,
     metaTitle,
     metaDescription
   }`;
