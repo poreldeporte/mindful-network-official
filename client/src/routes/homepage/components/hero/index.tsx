@@ -16,7 +16,7 @@ export const Hero = () => {
 				variant="title"
 			>
 				A network curated for{" "}
-				<span className="text-green-300 block">your path to healing</span>
+				<span className="text-green-500 block">your path to healing</span>
 			</Typography>
 
 			<Typography as="p" className="w-11/12" color="darkGray" variant="medium">

@@ -84,8 +84,8 @@ export const BlogContainer = ({ blogPosts }: BlogProps) => {
 				variant="title"
 				id="blog-section-heading"
 			>
-				Expert articles and resources <span className="block"></span>to
-				<span className="text-green-300"> support your journey</span>
+				Expert articles and resources <span className="block"></span>
+				<span className="text-green-500">to support your journey</span>
 			</Typography>
 
 			<div

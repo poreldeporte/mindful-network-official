@@ -92,7 +92,7 @@ export const Subsection = ({
 			</div>
 
 			<ul
-				className={`space-y-1 my-2 ${
+				className={`space-y-1 my-2 ml-[51px] ${
 					layoutStyle === "row" ? "grid grid-cols-2 gap-4" : "flex flex-col"
 				}`}
 			>

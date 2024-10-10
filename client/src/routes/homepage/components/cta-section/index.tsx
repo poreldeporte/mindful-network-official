@@ -50,17 +50,18 @@ const CTACard = ({ image, buttonText, path }: Props) => {
 export function CTASection() {
 	return (
 		<section
-			className="page-width section-y-padding"
+			className="bg-white page-width section-y-padding"
 			aria-labelledby="cta-section-heading"
 		>
 			<Typography
 				as="h2"
 				variant="title"
 				color="black"
-				className="sr-only"
+				className="text-green-500 mb-5"
 				id="cta-section-heading"
 			>
-				Call to Action Section
+				Take the first step <span className="block"></span>
+				<span className="text-black">Discover trusted resources</span>
 			</Typography>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 				{CTACards.map((card) => (

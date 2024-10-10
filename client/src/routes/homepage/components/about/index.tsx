@@ -43,7 +43,7 @@ export function About() {
 				variant="title"
 				id="about-section-heading"
 			>
-				<span className="text-green-300">We&apos;re here to help</span>{" "}
+				<span className="text-green-500">We&apos;re here to help</span>{" "}
 				<span className="block" />
 				build your support net
 			</Typography>

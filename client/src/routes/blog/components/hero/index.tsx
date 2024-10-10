@@ -5,8 +5,11 @@ import Image from "next/image";
 
 export const Hero = ({ post }: SectionProps) => {
 	return (
-		<section className="h-max mt-24 lg:mt-56" aria-labelledby="hero-heading">
-			<div className="page-width mb-10">
+		<section
+			className="mx-auto w-full h-max mt-24 lg:mt-56"
+			aria-labelledby="hero-heading"
+		>
+			<div className="mx-auto mb-10 w-11/12 xl:w-3/4 ">
 				<Typography
 					id="hero-heading"
 					className="font-antic mb-2"

@@ -18,7 +18,7 @@ export default function About() {
 					color="black"
 					variant="title"
 				>
-					Why We <span className="text-green-300">Rise</span>
+					Why We <span className="text-green-500">Rise</span>
 				</Typography>
 				<Typography
 					id="about-hero-text"

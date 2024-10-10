@@ -6,11 +6,11 @@ import { Typography } from "@/components/ui";
 
 export const Content = ({ post }: SectionProps) => {
 	return (
-		<>
+		<div className="mx-auto w-11/12 xl:w-3/4">
 			<Author {...post} />
 			<Body {...post} />
 
-			<div className="page-width section-y-padding w-10/12">
+			<div className="section-y-padding w-10/12">
 				<Typography as="span" variant="xsmall" color="darkGray">
 					*This blog is for informational purposes only and is not a substitute
 					for professional medical advice, diagnosis, or treatment. Always seek
@@ -18,6 +18,6 @@ export const Content = ({ post }: SectionProps) => {
 					regarding a medical condition.
 				</Typography>
 			</div>
-		</>
+		</div>
 	);
 };

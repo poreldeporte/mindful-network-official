@@ -13,7 +13,7 @@ export const Author = ({
 }: BlogModel) => {
 	return (
 		<section
-			className="page-width section-y-padding"
+			className="section-y-padding"
 			aria-labelledby="author-section-heading"
 		>
 			<div className="flex items-center gap-5 mb-5">
