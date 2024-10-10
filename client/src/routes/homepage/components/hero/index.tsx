@@ -10,13 +10,13 @@ export const Hero = () => {
 		>
 			<Typography
 				id="hero-heading"
-				className="font-antic mb-2"
+				className="font-antic mb-5 leading-none"
 				as="h1"
 				color="black"
 				variant="title"
 			>
-				A network curated for your{" "}
-				<span className="text-green-300">path to healing</span>
+				A network curated for{" "}
+				<span className="text-green-300 block">your path to healing</span>
 			</Typography>
 
 			<Typography as="p" className="w-11/12" color="darkGray" variant="medium">

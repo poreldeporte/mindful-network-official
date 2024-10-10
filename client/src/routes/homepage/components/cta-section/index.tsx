@@ -2,15 +2,17 @@ import { Typography } from "@/components/ui";
 import Image from "next/image";
 import { CTACards } from "@/lib/constants";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 interface Props {
 	image: string;
 	buttonText: string;
+	path: string;
 }
 
-const CTACard = ({ image, buttonText }: Props) => {
+const CTACard = ({ image, buttonText, path }: Props) => {
 	return (
-		<article className="relative w-full h-72 rounded-xl overflow-hidden">
+		<article className="relative w-full h-72 rounded-xl overflow-hidden transition-transform hover:scale-[101%]">
 			<Image
 				className="w-full h-full object-cover"
 				src={image}
@@ -37,6 +39,10 @@ const CTACard = ({ image, buttonText }: Props) => {
 					</Typography>
 				</button>
 			</div>
+
+			<Link className="container-link-overlay" href={path}>
+				<span className="sr-only">Redirect to {buttonText} page</span>
+			</Link>
 		</article>
 	);
 };

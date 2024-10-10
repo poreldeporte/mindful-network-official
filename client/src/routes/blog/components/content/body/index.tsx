@@ -1,8 +1,6 @@
-import React from "react";
-import { BlogModel } from "@/models";
-import { Typography } from "@/components/ui";
-import { ExternalLink } from "lucide-react";
 import { urlFor } from "@/api";
+import { Typography } from "@/components/ui";
+import { BlogModel } from "@/models";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Image from "next/image";
 
@@ -11,9 +9,8 @@ const components: PortableTextComponents = {
 		image: ({ value }) => {
 			const imageUrl = value?.asset?._ref ? urlFor(value.asset).url() : null;
 
-			if (!imageUrl) {
-				return "";
-			}
+			if (!imageUrl) return "";
+
 			return (
 				<Image
 					height={750}
@@ -83,7 +80,6 @@ const components: PortableTextComponents = {
 					aria-label={`Link to ${value.href}${target ? ", opens in a new tab" : ""}`}
 				>
 					{children}
-					{target && <ExternalLink className="h-5 w-5" aria-hidden="true" />}
 				</a>
 			);
 		},
