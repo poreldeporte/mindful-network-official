@@ -1,5 +1,10 @@
 import { PortableTextBlock } from "@portabletext/types";
 
+export interface BlogCategory {
+	title: string;
+	value: string;
+}
+
 export interface BlogModel {
 	id: string;
 	title: string;
