@@ -17,3 +17,32 @@ export const blogByIdQuery = `*[_type == "blog" && slug.current == $slug][0]{
     metaTitle,
     metaDescription
   }`;
+
+export const blogsWithOffsetQuery = ({
+	page = 1,
+	limit = 8,
+	category = "",
+	order = "desc",
+}: {
+	page: number;
+	limit: number;
+	category?: string;
+	order?: string;
+}) => {
+	const offset = (page - 1) * limit;
+	const categoryFilter = category ? `&& category == "${category}"` : "";
+	const sanitizedOrder = order === "asc" ? "asc" : "desc";
+
+	const query = `*[_type == 'blog' ${categoryFilter}] | order(publishedAt ${sanitizedOrder}) [${offset}...${offset + limit}] {
+        _id,
+        category,
+        title,
+        "slug": slug.current,
+        isInternal,
+        "featuredImage": featuredImage.asset->url,
+      }`;
+
+	return query;
+};
+
+export const countBlogsQuery = `count(*[_type == "blog"])`;
