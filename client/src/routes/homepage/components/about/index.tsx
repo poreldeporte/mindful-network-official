@@ -12,7 +12,11 @@ interface BenefitCardProps {
 
 const BenefitCard = ({ title, description }: BenefitCardProps) => {
 	return (
-		<article className="mb-4" aria-labelledby={`benefit-title-${title}`}>
+		<article
+			role="listitem"
+			className="mb-4"
+			aria-labelledby={`benefit-title-${title}`}
+		>
 			<Typography
 				className="mb-2 font-semibold"
 				color="black"
@@ -84,7 +88,6 @@ export function About() {
 
 				<div
 					className="grid grid-cols-3 xl:flex gap-5 w-full h-full relative"
-					role="img"
 					aria-label="People illustrations representing support and guidance"
 				>
 					<Image
