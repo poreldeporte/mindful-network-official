@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Person1, Person2, Person3 } from "@/lib/images";
 import { benefits } from "@/lib/constants";
 import Link from "next/link";
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 
 interface BenefitCardProps {
 	key: number;
@@ -51,7 +52,7 @@ export function About() {
 				<span className="block" />
 				build your support net
 			</Typography>
-			<div className="grid grid-cols-1 xl:grid-cols-2 mt-10 lg:mt-20 gap-5">
+			<div className="grid grid-cols-1 xl:grid-cols-2 mt-10 lg:mt-20 gap-10 lg:gap-5">
 				<div className="flex flex-col gap-5">
 					<Typography
 						className="mb-2 font-medium w-3/4"
@@ -63,7 +64,7 @@ export function About() {
 						available
 					</Typography>
 
-					<div className="my-5" role="list" aria-label="List of benefits">
+					<div className="lg:my-5" role="list" aria-label="List of benefits">
 						{benefits.map((benefit) => {
 							return (
 								<BenefitCard
@@ -77,11 +78,17 @@ export function About() {
 
 					<Link
 						href={"/about"}
-						className="mt-4 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
+						className="lg:mt-4 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
 						aria-label="Start your search for mental health resources"
 					>
-						<Typography as="span" variant={"small"} color="white">
-							See Why This Means So Much To Us
+						<Typography
+							className="flex items-center gap-2"
+							as="span"
+							variant={"small"}
+							color="white"
+						>
+							See Why This Means So Much To Us{" "}
+							<ArrowLongRightIcon className="h-7 w-7" />
 						</Typography>
 					</Link>
 				</div>
