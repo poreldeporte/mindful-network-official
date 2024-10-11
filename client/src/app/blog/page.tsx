@@ -15,7 +15,7 @@ export default async function BlogsPage() {
 			<Suspense fallback={<div>loading...</div>}>
 				<BlogsContent blogAmount={blogAmount} />
 			</Suspense>
-			<BlogsFooter blogAmount={blogAmount} />
+			<BlogsFooter />
 		</>
 	);
 }
