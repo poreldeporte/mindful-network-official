@@ -10,9 +10,8 @@ import MindfulLogo from "@/assets/images/mindful-logos/mindful-logo.png";
 import AboutImage from "@/assets/images/mindful-about-image.webp";
 
 import BlogsHeroImage from "@/assets/images/blog/blog-hero.webp";
-import AvailableArticlesImage from "@/assets/images/blog/available-articles-blog.webp";
-import MindfulPromotionImage from "@/assets/images/blog/mindful-promotion.webp";
-import SearchCtaBlogImage from "@/assets/images/blog/search-cta-blog.webp";
+import AvailableArticlesImage from "@/assets/images/blog/blog-article.webp";
+import SearchCtaBlogImage from "@/assets/images/blog/blog-assistance.webp";
 
 export {
 	Person1,
@@ -25,6 +24,5 @@ export {
 	AboutImage,
 	BlogsHeroImage,
 	AvailableArticlesImage,
-	MindfulPromotionImage,
 	SearchCtaBlogImage,
 };

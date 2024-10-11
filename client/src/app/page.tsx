@@ -12,15 +12,18 @@ import { BlogModel } from "@/models";
 export default async function Home() {
 	const blogPosts: BlogModel[] = await getLatestBlog();
 	return (
-		<main aria-labelledby="Landing Page">
+		<>
 			<Topbar />
 			<MobileTopBar />
-			<Hero />
-			<About />
-			<BlogContainer blogPosts={blogPosts} />
-			<CTASection />
-			<GetInTouch />
+
+			<main aria-labelledby="Landing Page">
+				<Hero />
+				<About />
+				<BlogContainer blogPosts={blogPosts} />
+				<CTASection />
+				<GetInTouch />
+			</main>
 			<Footer blogPosts={blogPosts} />
-		</main>
+		</>
 	);
 }
