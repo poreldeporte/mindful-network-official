@@ -1,16 +1,24 @@
 import { Typography } from "@/components/ui";
-import Image from "next/image";
 import { CTACards } from "@/lib/constants";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
 	image: string;
 	buttonText: string;
 	path: string;
+	isInternalLink: boolean;
+	sectionToScroll: string | null;
 }
 
-const CTACard = ({ image, buttonText, path }: Props) => {
+const CTACard = ({
+	image,
+	buttonText,
+	path,
+	isInternalLink,
+	sectionToScroll,
+}: Props) => {
 	return (
 		<article className="relative w-full h-72 rounded-xl overflow-hidden transition-transform hover:scale-[101%]">
 			<Image
@@ -40,9 +48,15 @@ const CTACard = ({ image, buttonText, path }: Props) => {
 				</button>
 			</div>
 
-			<Link className="container-link-overlay" href={path}>
-				<span className="sr-only">Redirect to {buttonText} page</span>
-			</Link>
+			{isInternalLink ? (
+				<Link className="container-link-overlay" href={path}>
+					<span className="sr-only">Redirect to {buttonText} page</span>
+				</Link>
+			) : (
+				<a className="container-link-overlay" href={`#${sectionToScroll}`}>
+					<span className="sr-only">Redirect to {buttonText} page</span>
+				</a>
+			)}
 		</article>
 	);
 };

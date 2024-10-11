@@ -119,7 +119,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 						<Button
 							variant="medium"
 							form="primary"
-							className="p-2 rounded-full mt-5 lg:w-1/4"
+							className="p-2 rounded-full mt-5 w-full lg:w-1/4"
 							aria-label="Send Message"
 						>
 							<Typography color="white" variant="small" as="h3">

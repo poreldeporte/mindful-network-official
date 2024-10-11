@@ -18,17 +18,17 @@ export const BlogsFooter = ({ blogAmount }: Props) => {
 				<div
 					className="relative flex items-end justify-start p-10 rounded-xl dark-overlay"
 					style={{
-						backgroundImage: `url(${SearchCtaBlogImage})`,
+						backgroundImage: `url(${SearchCtaBlogImage.src})`,
 						backgroundSize: "cover",
 						backgroundPosition: "center",
 					}}
 				>
 					<div className="flex flex-col z-10">
 						<Typography color="white" as="h2" variant="large">
-							Are You Looking For Help?
+							Need assistance?
 						</Typography>
 						<Typography color="white" as="p" variant="small">
-							Try searching in our mental health professionals database
+							Start by exploring our mental health professionals database.
 						</Typography>
 						<Link
 							href={"/search"}
@@ -51,7 +51,7 @@ export const BlogsFooter = ({ blogAmount }: Props) => {
 				<div
 					className="relative flex items-end justify-start p-10 rounded-xl dark-overlay"
 					style={{
-						backgroundImage: `url(${AvailableArticlesImage})`,
+						backgroundImage: `url(${AvailableArticlesImage.src})`,
 						backgroundSize: "cover",
 						backgroundPosition: "center",
 					}}
@@ -69,7 +69,7 @@ export const BlogsFooter = ({ blogAmount }: Props) => {
 			<div
 				className="relative flex items-end lg:items-center lg:justify-center p-10 rounded-xl dark-overlay"
 				style={{
-					backgroundImage: `url(${MindfulPromotionImage})`,
+					backgroundImage: `url(${MindfulPromotionImage.src})`,
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}

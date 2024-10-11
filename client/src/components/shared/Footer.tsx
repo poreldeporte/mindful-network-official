@@ -4,7 +4,7 @@ import { aboutFooter, resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import { BlogModel } from "@/models";
 import { getLatestBlog } from "@/routes/homepage/services";
-import { IconBrandInstagram, IconBrandX } from "@tabler/icons-react";
+import { IconBrandInstagram } from "@tabler/icons-react";
 import { ChevronUp, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,9 +60,6 @@ export function Footer({ blogPosts }: Props) {
 								</a>
 								<a href="#">
 									<LinkedinIcon className="w-8 h-8 text-gray-500" />
-								</a>
-								<a href="#">
-									<IconBrandX className="w-8 h-8 text-gray-500" />
 								</a>
 							</div>
 						</div>
