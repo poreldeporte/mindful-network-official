@@ -47,7 +47,6 @@ export const metadata: Metadata = {
 			"Stay updated with expert insights and resources on mental health and wellness. Explore our blog for tips, articles, and therapeutic advice.",
 		images: "/assets/mental-health-blog-og-image.jpg",
 	},
-	viewport: "width=device-width, initial-scale=1",
 	robots: "index, follow",
 };
 
