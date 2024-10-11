@@ -21,23 +21,28 @@ export const blogByIdQuery = `*[_type == "blog" && slug.current == $slug][0]{
 export const blogsWithOffsetQuery = ({
 	page = 1,
 	limit = 8,
+	category = "",
+	order = "desc",
 }: {
 	page: number;
 	limit: number;
+	category?: string;
+	order?: string;
 }) => {
 	const offset = (page - 1) * limit;
+	const categoryFilter = category ? `&& category == "${category}"` : "";
+	const sanitizedOrder = order === "asc" ? "asc" : "desc";
 
-	const coursesQuery = `*[_type == 'blog'] | order(publishedAt desc) [${offset}...${
-		offset + limit
-	}] {
+	const query = `*[_type == 'blog' ${categoryFilter}] | order(publishedAt ${sanitizedOrder}) [${offset}...${offset + limit}] {
         _id,
         category,
         title,
-        slug,
+        "slug": slug.current,
+        isInternal,
         "featuredImage": featuredImage.asset->url,
       }`;
 
-	return coursesQuery;
+	return query;
 };
 
 export const countBlogsQuery = `count(*[_type == "blog"])`;

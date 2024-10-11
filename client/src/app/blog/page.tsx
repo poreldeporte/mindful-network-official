@@ -3,13 +3,16 @@ import {
 	BlogsFooter,
 	BlogsHero,
 } from "@/routes/blogs-page/components";
+import { getTotalAmount } from "@/routes/blogs-page/services/blogs-page.services";
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+	const blogAmount = await getTotalAmount();
+
 	return (
 		<>
 			<BlogsHero />
-			<BlogsContent />
-			<BlogsFooter />
+			<BlogsContent blogAmount={blogAmount} />
+			<BlogsFooter blogAmount={blogAmount} />
 		</>
 	);
 }

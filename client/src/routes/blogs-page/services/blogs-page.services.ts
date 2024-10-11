@@ -6,13 +6,18 @@ import { BlogModel } from "@/models";
 export const getBlogsWithOffset = async ({
 	page,
 	limit,
+	category,
+	order,
 }: {
 	page: number;
 	limit: number;
+	category?: string;
+	order?: string;
 }) => {
 	try {
+		console.log(order);
 		const result = await sanityClient.fetch(
-			blogsWithOffsetQuery({ page, limit })
+			blogsWithOffsetQuery({ page, limit, category, order })
 		);
 		const adaptedResult: BlogModel[] = result.map(getBlogAdapter);
 		return adaptedResult;

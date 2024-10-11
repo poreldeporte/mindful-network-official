@@ -9,11 +9,11 @@ export const BlogsHero = () => {
 			<Image
 				src={BlogsHeroImage}
 				alt="blogs-hero-image"
-				className="w-[calc(100%-8px)] h-full object-cover object-center rounded-xl absolute left-1/2 -translate-x-1/2"
+				className="w-[calc(100%-8px)] h-[calc(100%-8px)] object-cover object-center rounded-xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
 			/>
 			<div className="flex flex-col z-10">
-				<Typography className="" color="white" as="h2" variant="large">
-					Explorer the wonders of mental health
+				<Typography color="white" as="h1" variant="xlarge">
+					Cuarted articles just for you
 				</Typography>
 			</div>
 		</section>

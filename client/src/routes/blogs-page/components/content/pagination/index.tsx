@@ -4,24 +4,33 @@ interface Props {
 	blogAmount: number;
 	limit: number;
 	setPage: (arg: number) => void;
+	currentPage: number;
 }
 
-export const BlogsPagination = ({ blogAmount, limit, setPage }: Props) => {
+export const BlogsPagination = ({
+	blogAmount,
+	limit,
+	setPage,
+	currentPage,
+}: Props) => {
 	const pagesAmount = Math.ceil(blogAmount / limit);
 
-	console.log(pagesAmount);
-
 	return (
-		<section>
-			{Array(pagesAmount)
-				.fill(1)
-				.map((page) => {
-					return (
-						<Button variant="medium" key={page} onClick={() => setPage(page)}>
-							{page}
-						</Button>
-					);
-				})}
+		<section className="flex items-center justify-center w-full my-10">
+			{Array.from({ length: pagesAmount }, (_, index) => {
+				const pageNumber = index + 1;
+				return (
+					<Button
+						variant="medium"
+						className="px-3 py-0.5 rounded-lg"
+						key={pageNumber}
+						isSelected={pageNumber === currentPage}
+						onClick={() => setPage(pageNumber)}
+					>
+						{pageNumber}
+					</Button>
+				);
+			})}
 		</section>
 	);
 };

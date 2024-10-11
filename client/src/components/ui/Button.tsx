@@ -10,6 +10,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	form?: string;
 	variant: VariantType;
 	isLoading?: boolean;
+	isSelected?: boolean;
 }
 
 export function Button({
@@ -18,12 +19,15 @@ export function Button({
 	variant,
 	form = "primary",
 	isLoading,
+	isSelected = false,
 	...props
 }: Props) {
-	const buttonStyles =
-		form === "primary"
+	const buttonStyles = isSelected
+		? "bg-green-500 hover:bg-green-700 text-white"
+		: form === "primary"
 			? "bg-blue-500 hover:bg-blue-700 text-white"
 			: "border border-gray-500 text-black hover:bg-gray-100";
+
 	return (
 		<button
 			{...props}
