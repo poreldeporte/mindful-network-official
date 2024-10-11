@@ -1,18 +1,24 @@
-import React from "react";
-import { BlogsHeroImage } from "@/lib/images";
-import Image from "next/image";
 import { Typography } from "@/components/ui";
+import { BlogsHeroImage } from "@/lib/images";
 
 export const BlogsHero = () => {
 	return (
-		<section className="h-[60vh] flex items-center justify-center p-2 relative">
-			<Image
-				src={BlogsHeroImage}
-				alt="blogs-hero-image"
-				className="w-[calc(100%-8px)] h-[calc(100%-8px)] object-cover object-center rounded-xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-			/>
-			<div className="flex flex-col z-10">
-				<Typography color="white" as="h1" variant="xlarge">
+		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center p-2">
+			<div
+				className="flex flex-col justify-center items-center h-full w-full rounded-xl relative overflow-hidden px-5"
+				style={{
+					backgroundImage: `url(${BlogsHeroImage.src})`,
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+				}}
+			>
+				<div className="dark-overlay h-full w-full absolute top-0 left-0" />
+				<Typography
+					color="white"
+					as="h1"
+					variant="xlarge"
+					className="text-center md:text-start z-10"
+				>
 					Cuarted articles just for you
 				</Typography>
 			</div>

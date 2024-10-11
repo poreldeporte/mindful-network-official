@@ -4,7 +4,7 @@ import Link from "next/link";
 export const Hero = () => {
 	return (
 		<section
-			className="page-width py-92 lg:mx-auto lg:w-2/3 h-[60vh] lg:h-[63vh-92px] lg:mt-[62px] xs:mt-10 flex lg:items-center lg:text-center justify-center flex-col"
+			className="page-width py-24 lg:mx-auto lg:w-2/3 min-h-[60vh] lg:h-[63vh-92px] lg:mt-[62px] mt-10 flex lg:items-center lg:text-center justify-center flex-col"
 			role="region"
 			aria-labelledby="hero-heading"
 		>
@@ -16,7 +16,7 @@ export const Hero = () => {
 				variant="title"
 			>
 				A network curated for{" "}
-				<span className="text-green-500 block">your path to healing</span>
+				<span className="text-green-500 lg:block">your path to healing</span>
 			</Typography>
 
 			<Typography as="p" className="w-11/12" color="darkGray" variant="medium">

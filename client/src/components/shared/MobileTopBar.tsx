@@ -43,17 +43,41 @@ export function MobileTopBar() {
 						variants={menuVariants}
 						className="absolute top-20 left-0 w-full bg-orange-50 page-width py-5 shadow-lg flex flex-col gap-2"
 					>
-						<Typography variant="large" as="span" color="black">
-							Resources
-						</Typography>
-						<nav className="flex flex-col gap-2">
-							{resources.map((link) => (
-								<Link key={link.key} href={link.path}>
+						<nav className="flex flex-col gap-5">
+							<div className="flex flex-col gap-1">
+								<Typography variant="large" as="span" color="black">
+									Resources
+								</Typography>
+								{resources.map((link) => (
+									<Link key={link.key} href={link.path}>
+										<Typography variant="medium" as="span" color="black">
+											{link.title}
+										</Typography>
+									</Link>
+								))}
+							</div>
+
+							<div className="flex flex-col gap-1">
+								<Typography variant="large" as="span" color="black">
+									Navigation
+								</Typography>
+
+								<Link href="/useful-links">
 									<Typography variant="medium" as="span" color="black">
-										{link.title}
+										Useful links
 									</Typography>
 								</Link>
-							))}
+								<Link href="/blog">
+									<Typography variant="medium" as="span" color="black">
+										Blog
+									</Typography>
+								</Link>
+								<Link href="/about">
+									<Typography variant="medium" as="span" color="black">
+										About
+									</Typography>
+								</Link>
+							</div>
 						</nav>
 
 						<Button

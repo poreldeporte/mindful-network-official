@@ -134,44 +134,46 @@ export const termsOfServiceContent = [
 
 export const resources = [
 	{
+		key: "innovative-therapies",
+		title: "Innovative Therapies",
+		path: "/search?resource=innovative-therapies",
+	},
+	{
 		key: "psychologists",
 		title: "Psychologists",
 		path: "/search?resource=psychologists",
+	},
+	{
+		key: "psychiatric",
+		title: "Psychiatric Management",
+		path: "/search?resource=psychiatric",
+	},
+	{
+		key: "medication",
+		title: "Medication Management",
+		path: "/search?resource=medication",
+	},
+	{
+		key: "outpatient",
+		title: "Outpatient Facilities",
+		path: "/search?resource=outpatient",
 	},
 	{
 		key: "backer-act-facilities",
 		title: "Backer Act Facilities",
 		path: "/search?resource=backer-act-facilities",
 	},
-	{
-		key: "innovative-therapies",
-		title: "Innovative Therapies",
-		path: "/search?resource=innovative-therapies",
-	},
+
 	{
 		key: "inpatient",
-		title: "Inpatient",
+		title: "Inpatient Facilities",
 		path: "/search?resource=inpatient",
 	},
-	{
-		key: "medication",
-		title: "Medication",
-		path: "/search?resource=medication",
-	},
+
 	{
 		key: "mind-body-practices",
 		title: "Mind Body Practices",
 		path: "/search?resource=mind-body-practices",
-	},
-	{
-		key: "outpatient",
-		title: "Outpatient",
-		path: "/search?resource=outpatient",
-	},
-	{
-		key: "psychiatric",
-		title: "Psychiatric",
-		path: "/search?resource=psychiatric",
 	},
 ];
 
@@ -182,6 +184,8 @@ export const CTACards = [
 			"https://images.unsplash.com/photo-1682687982183-c2937a74257c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		buttonText: "Explore Curated Resources",
 		path: "/search",
+		isInternalLink: true,
+		sectionToScroll: null,
 	},
 	{
 		id: "2",
@@ -189,6 +193,8 @@ export const CTACards = [
 			"https://images.unsplash.com/photo-1655047273143-91261102716f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		buttonText: "Join Our Network",
 		path: "/useful-links",
+		isInternalLink: false,
+		sectionToScroll: "get-in-touch-form",
 	},
 ];
 

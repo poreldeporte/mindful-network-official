@@ -3,7 +3,10 @@ import { Button } from "../ui";
 
 export function GetInTouch() {
 	return (
-		<section className="page-width section-y-padding bg-orange-100">
+		<section
+			id="get-in-touch-form"
+			className="page-width section-y-padding bg-orange-100"
+		>
 			<div className="rounded-xl grid grid-cols-1 lg:grid-cols-2">
 				<div>
 					<Typography color="black" as="h2" variant="xlarge">

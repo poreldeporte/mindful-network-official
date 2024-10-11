@@ -15,7 +15,6 @@ export const getBlogsWithOffset = async ({
 	order?: string;
 }) => {
 	try {
-		console.log(order);
 		const result = await sanityClient.fetch(
 			blogsWithOffsetQuery({ page, limit, category, order })
 		);

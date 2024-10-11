@@ -20,7 +20,7 @@ export const BlogCard = ({
 			{isInternal ? (
 				<Link href={`/blog/${slug}`} aria-label={`Read more about ${title}`}>
 					<Image
-						className="w-full aspect-video object-cover mb-4 rounded-md"
+						className="w-full aspect-video object-cover mb-4 rounded-xl"
 						src={featuredImage}
 						width={300}
 						height={300}
