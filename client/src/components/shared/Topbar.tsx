@@ -55,13 +55,13 @@ export function Topbar() {
 						className={`${
 							pathname === "/about"
 								? "text-green-500 font-medium"
-								: "text-gray-500 font-normal"
+								: "text-gray-700 font-normal"
 						}`}
 					>
 						About
 					</Link>
 					<Select onValueChange={handleSelectChange}>
-						<SelectTrigger className="w-[100px] z-50 border-none text-gray-500 px-0">
+						<SelectTrigger className="w-[100px] z-50 border-none text-gray-700 px-0">
 							<SelectValue placeholder="Resources" />
 						</SelectTrigger>
 						<SelectContent className="bg-white p-5">
@@ -84,7 +84,7 @@ export function Topbar() {
 						className={`${
 							pathname === "/useful-links"
 								? "text-green-500 font-medium"
-								: "text-gray-500 font-normal"
+								: "text-gray-700 font-normal"
 						}`}
 					>
 						Useful links
@@ -94,7 +94,7 @@ export function Topbar() {
 						className={`${
 							pathname === "/blog"
 								? "text-green-500 font-medium"
-								: "text-gray-500 font-normal"
+								: "text-gray-700 font-normal"
 						}`}
 					>
 						Blog
