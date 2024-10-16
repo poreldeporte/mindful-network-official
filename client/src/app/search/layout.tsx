@@ -23,13 +23,13 @@ export const metadata: Metadata = {
 			"Find Mental Health Professionals in South Florida - Mindful Network",
 		description:
 			"Discover mental health professionals in South Florida. Use our advanced search filters to find the best match based on location, insurance, age specialty, and condition specialty.",
-		url: "https://www.mindfulnetwork.com/search",
+		url: "https://themindfulnetwork.com/search",
 		type: "website",
 		locale: "en_US",
 		siteName: "Mindful Network",
 		images: [
 			{
-				url: "/images/search-og-image.jpg",
+				url: "/assets/images/mindful-logos/mindful-imagotype.png",
 				width: 1200,
 				height: 630,
 				alt: "Mindful Network - Search Mental Health Professionals",
@@ -43,9 +43,8 @@ export const metadata: Metadata = {
 			"Find Mental Health Professionals in South Florida - Mindful Network",
 		description:
 			"Find the right mental health support in South Florida. Explore licensed professionals with our comprehensive search filters tailored to your needs.",
-		images: "/images/search-og-image.jpg", // Twitter preview image for the search section.
+		images: "/assets/images/mindful-logos/mindful-imagotype.png", // Twitter preview image for the search section.
 	},
-	viewport: "width=device-width, initial-scale=1",
 	robots: "index, follow",
 };
 

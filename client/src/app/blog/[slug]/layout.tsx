@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 		title: "Mental Health and Wellness Blog - Mindful Network",
 		description:
 			"Discover insightful articles and resources on mental health and wellness. Stay updated with the latest in therapy practices and self-care tips.",
-		url: "https://www.mindfulnetwork.com/blog",
+		url: "https://themindfulnetwork.com/blog",
 		type: "website",
 		locale: "en_US",
 		siteName: "Mindful Network",
@@ -43,7 +43,6 @@ export const metadata: Metadata = {
 			"Read our blog for the latest insights on mental health and self-care. Discover articles, tips, and resources tailored to support your well-being.",
 		images: "/images/blog-og-image.jpg",
 	},
-	viewport: "width=device-width, initial-scale=1",
 	robots: "index, follow",
 };
 

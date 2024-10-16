@@ -103,7 +103,7 @@ export function About() {
 						alt="Person smiling, symbolizing support and positivity"
 					/>
 					<Image
-						className="w-auto h-full xl:absolute xl:-bottom-20 xl:w-[200px] xl:left-1/4 xl:h-auto"
+						className="w-auto h-auto xl:absolute xl:-bottom-20 xl:w-[200px] xl:left-1/4 xl:h-auto"
 						src={Person2}
 						alt="Person with a thoughtful expression, representing understanding"
 					/>

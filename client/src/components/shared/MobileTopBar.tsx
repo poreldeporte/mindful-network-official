@@ -83,7 +83,7 @@ export function MobileTopBar() {
 						<Button
 							onClick={handleCloseHeader}
 							variant="small"
-							className="py-2 rounded-full px-4 mt-5"
+							className="py-2 rounded-full px-4 mt-5 bg-green-500 hover:bg-green-600"
 						>
 							<Link href={"/search"}>Start Search</Link>
 						</Button>

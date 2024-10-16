@@ -35,12 +35,12 @@ export default async function BlogPost({ params }: BlogPostProps) {
 			name: "Mindful Network",
 			logo: {
 				"@type": "ImageObject",
-				url: "/assets/mindful-logo.png",
+				url: "/assets/images/mindful-logos/mindful-imagotype.png",
 			},
 		},
 		mainEntityOfPage: {
 			"@type": "WebPage",
-			"@id": `https://www.mindfulnetwork.com/blog/${post.slug}`,
+			"@id": `https://themindfulnetwork.com/blog/${post.slug}`,
 		},
 	};
 
@@ -60,7 +60,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 				<meta property="og:type" content="article" />
 				<meta
 					property="og:url"
-					content={`https://www.mindfulnetwork.com/blog/${post.slug}`}
+					content={`https://themindfulnetwork.com/blog/${post.slug}`}
 				/>
 				{post.featuredImage && (
 					<meta property="og:image" content={post.featuredImage} />

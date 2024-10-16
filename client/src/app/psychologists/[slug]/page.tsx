@@ -8,6 +8,68 @@ import { getPsychologistById } from "@/services";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({
+	params,
+}: {
+	params: { slug: string };
+}): Promise<Metadata> {
+	const psychologist = await getPsychologistById(params.slug);
+
+	if (!psychologist) {
+		return {
+			title: "Psychologist Not Found",
+			description: "The requested psychologist profile is not available.",
+		};
+	}
+
+	const title = `${psychologist.name} - Mental Health Professional`;
+	const description = `${psychologist.subtitle}. Connect with ${psychologist.name}, a licensed mental health professional in South Florida.`;
+	const url = `https://themindfulnetwork.com/psychologist/${params.slug}`;
+
+	return {
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			url,
+			images: [
+				{
+					url: psychologist.image,
+					width: 800,
+					height: 600,
+					alt: psychologist.name,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: [psychologist.image],
+		},
+		alternates: {
+			canonical: url,
+		},
+		other: {
+			"application/ld+json": JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Person",
+				name: psychologist.name,
+				description: psychologist.subtitle,
+				image: psychologist.image,
+				jobTitle: "Mental Health Professional",
+				url: url,
+				worksFor: {
+					"@type": "Organization",
+					name: "Mindful Network",
+					url: "https://themindfulnetwork.com",
+				},
+			}),
+		},
+	};
+}
+
 export default async function PsychologistPage({
 	params,
 }: {
@@ -31,37 +93,4 @@ export default async function PsychologistPage({
 			<GetInTouch {...psychologist} />
 		</div>
 	);
-}
-
-export async function generateMetadata({
-	params,
-}: {
-	params: { slug: string };
-}): Promise<Metadata> {
-	const psychologist = await getPsychologistById(params.slug);
-
-	if (!psychologist) {
-		return {
-			title: "Psychologist Not Found",
-			description:
-				"No psychologist data available for the provided identifier.",
-		};
-	}
-
-	return {
-		title: `Mindful Network - ${psychologist.name}`,
-		description: psychologist.subtitle,
-		openGraph: {
-			title: `Mindful Network - ${psychologist.name}`,
-			description: psychologist.description,
-			images: [
-				{
-					url: psychologist.image,
-					width: 800,
-					height: 600,
-					alt: psychologist.name,
-				},
-			],
-		},
-	};
 }
