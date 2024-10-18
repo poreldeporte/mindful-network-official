@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { opacityVariants } from "@/lib/anim";
 
 interface Props {
@@ -39,6 +39,20 @@ const Header = ({
 	selectedTherapy,
 }: Props) => {
 	const [headerIsOpen, setHeaderIsOpen] = useState(true);
+	const [isDesktop, setIsDesktop] = useState(false);
+
+	useEffect(() => {
+		const checkViewport = () => {
+			setIsDesktop(window.innerWidth >= 1024);
+			setHeaderIsOpen(window.innerWidth >= 1024);
+		};
+
+		checkViewport();
+		window.addEventListener("resize", checkViewport);
+
+		return () => window.removeEventListener("resize", checkViewport);
+	}, []);
+
 	const toggleMenu = () => setHeaderIsOpen(!headerIsOpen);
 
 	return (
@@ -58,21 +72,22 @@ const Header = ({
 				</Typography>
 			</Link>
 			<Typography className="font-antic" as="h1" color="black" variant="title">
-				Professionals in <span className="text-green-300">South Florida</span>
+				Find professionals in{" "}
+				<span className="text-green-300">South Florida</span>
 			</Typography>
 
 			<button
-				className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full p-0.5 shadow-md"
-				title={headerIsOpen ? "Hide Menu" : "Show Menu"}
+				className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full py-2 px-4 shadow-md flex items-center gap-2"
+				title={headerIsOpen ? "Hide filters" : "Show filters"}
 				aria-expanded={headerIsOpen}
 				aria-controls="filter-menu"
 				onClick={toggleMenu}
 			>
-				<span className="sr-only">
-					{headerIsOpen ? "Hide Menu" : "Show Menu"}
+				<span className="text-xs">
+					{headerIsOpen ? "Hide Filters" : "Show Filters"}
 				</span>
 				<ChevronDownIcon
-					className={`h-7 w-7 ${
+					className={`h-5 w-5 ${
 						headerIsOpen ? "rotate-180" : "rotate-0"
 					} transition-transform`}
 					aria-hidden="true"
@@ -89,7 +104,7 @@ const Header = ({
 					>
 						<div className="my-2">
 							<Typography as="p" color="darkGray" variant="small">
-								Resources:
+								Pick your resources:
 							</Typography>
 							<div className="flex items-center flex-wrap gap-2 w-full">
 								{resources.map((resourceKey) => (

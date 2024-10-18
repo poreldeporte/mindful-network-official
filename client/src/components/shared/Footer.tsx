@@ -66,7 +66,12 @@ export function Footer({ blogPosts }: Props) {
 					</div>
 					<div className="flex flex-col flex-wrap lg:flex-row items-start justify-around">
 						<div>
-							<Typography color="black" as="h2" variant="medium">
+							<Typography
+								color="black"
+								as="h2"
+								variant="medium"
+								className="font-bold lg:font-semibold"
+							>
 								About
 							</Typography>
 							<div className="flex flex-col mb-2 lg:mb-0">
@@ -86,7 +91,12 @@ export function Footer({ blogPosts }: Props) {
 							</div>
 						</div>
 						<div className="max-w-96">
-							<Typography color="black" as="h2" variant="medium">
+							<Typography
+								color="black"
+								as="h2"
+								variant="medium"
+								className="font-bold lg:font-semibold"
+							>
 								Blog
 							</Typography>
 							<div className="flex flex-col mb-2 lg:mb-0">
@@ -114,7 +124,12 @@ export function Footer({ blogPosts }: Props) {
 							</div>
 						</div>
 						<div className="grid grid-cols-1 lg:grid-cols-1">
-							<Typography color="black" as="h2" variant="medium">
+							<Typography
+								color="black"
+								as="h2"
+								variant="medium"
+								className="font-bold lg:font-semibold"
+							>
 								Resources
 							</Typography>
 							<div className="flex flex-col mb-2 lg:mb-0">

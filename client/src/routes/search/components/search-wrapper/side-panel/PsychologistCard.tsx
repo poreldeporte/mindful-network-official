@@ -28,7 +28,7 @@ const PsychologistCard = ({
 			role="article"
 			aria-label={`Profile of psychologist ${name}`}
 		>
-			<div className="flex items-start">
+			<div className="flex items-start justify-center md:justify-start w-full">
 				<Image
 					src={image ? image : UserImage}
 					alt={`Profile image of ${name}`}
@@ -40,7 +40,7 @@ const PsychologistCard = ({
 			</div>
 
 			<div className="flex flex-col gap-4">
-				<div className="flex flex-col w-full">
+				<div className="flex flex-col w-full items-center md:items-start">
 					<Typography
 						className="font-bold mb-2"
 						as="h2"
