@@ -7,3 +7,5 @@ export * from "./mind-body-practices.type";
 export * from "./outpatient.type";
 export * from "./psychiatric.type";
 export * from "./psychologists.type";
+export * from "./estate-planning-lawyers.type";
+export * from "./specialized-mental-health-lawyers.type";
