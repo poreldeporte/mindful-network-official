@@ -1,9 +1,12 @@
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
 type ColorType = "orange" | "green" | "blue";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;
 	className?: string;
 	isSelected?: boolean;
+	showIcon?: boolean;
 	color?: ColorType;
 	onClick?: () => void;
 }
@@ -19,6 +22,7 @@ export const Badge = ({
 	className = "",
 	isSelected = true,
 	color = "orange",
+	showIcon = false,
 	onClick,
 	...props
 }: Props) => {
@@ -43,6 +47,7 @@ export const Badge = ({
 			{...props}
 		>
 			{children}
+			{isSelected && showIcon && <XMarkIcon className="w-6 h-6" />}
 		</button>
 	);
 };
