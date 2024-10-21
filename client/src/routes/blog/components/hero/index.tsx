@@ -30,8 +30,8 @@ export const Hero = ({ post }: SectionProps) => {
 					alt={`Featured image for ${post.title}`}
 					src={post.featuredImage}
 					width={1024}
-					height={1024}
-					className="w-full lg:h-screen lg:object-contain object-top"
+					height={512}
+					className="w-full lg:h-[60vh] object-contain object-top"
 					priority
 				/>
 			</div>
