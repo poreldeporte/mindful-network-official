@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { opacityVariants } from "@/lib/anim";
 import { EllipsisIcon } from "lucide-react";
 import { SelectedFilters } from "./SelectedFilters";
+import { Plus } from "lucide-react";
 
 interface Props {
 	resources: ResourcesKey[];
@@ -80,8 +81,8 @@ const Header = ({
 				<span className="text-green-300">South Florida</span>
 			</Typography>
 
-			<div className="flex items-center justify-between lg:hidden">
-				<div className="flex flex-col">
+			<div className="flex items-center justify-between lg:hidden mt-5">
+				<div className="flex flex-col mb-2">
 					<Typography color="black" variant="medium" as="h3">
 						Filters
 					</Typography>
@@ -97,7 +98,7 @@ const Header = ({
 					className="bg-blue-500 rounded-full p-2"
 					onClick={() => setFiltersPanelVisible(true)}
 				>
-					<EllipsisIcon className="text-white cursor-pointer" />
+					<Plus className="text-white cursor-pointer" />
 				</div>
 			</div>
 

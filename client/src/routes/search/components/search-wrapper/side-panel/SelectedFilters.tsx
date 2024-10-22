@@ -1,4 +1,3 @@
-import { Typography } from "@/components/ui";
 import { Badge } from "@/components/ui";
 import { ColorType } from "@/components/ui";
 import { formatType } from "@/utilities";
@@ -27,9 +26,6 @@ export const SelectedFilters: React.FC<{
 			? [{ type: "therapy", value: selectedTherapy, color: "blue" }]
 			: []),
 	].filter((item) => Boolean(item.value));
-
-	if (allSelectedFilters.length == 0)
-		return <Typography color="black" as="h3" variant="medium"></Typography>;
 
 	return (
 		<div className="flex flex-wrap gap-2">

@@ -95,7 +95,7 @@ const FilterItem = ({
 						}}
 						className="overflow-hidden"
 					>
-						<div className="flex items-center flex-wrap gap-2 w-full pt-2">
+						<div className="flex items-center flex-wrap gap-2 w-full pt-5">
 							{options.map((option) => {
 								const key = getKey(option);
 								const label = getLabel(option);
@@ -169,7 +169,7 @@ export const Filters = ({
 				</div>
 			</div>
 
-			<div className="space-y-5">
+			<div className="space-y-8">
 				<FilterItem
 					title="Resources"
 					options={resources}
