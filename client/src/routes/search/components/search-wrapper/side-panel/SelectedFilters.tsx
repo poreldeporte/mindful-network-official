@@ -1,5 +1,7 @@
 import { Typography } from "@/components/ui";
 import { Badge } from "@/components/ui";
+import { ColorType } from "@/components/ui";
+import { formatType } from "@/utilities";
 
 export const SelectedFilters: React.FC<{
 	selectedResources: string[];
@@ -14,35 +16,34 @@ export const SelectedFilters: React.FC<{
 	selectedTherapy,
 	handleBadgeClick,
 }) => {
-	const createFilterItems = (items: string[], type: string) =>
-		items.map((item) => ({ type, value: item }));
+	const createFilterItems = (items: string[], type: string, color: ColorType) =>
+		items.map((item) => ({ type, value: item, color }));
 
 	const allSelectedFilters = [
-		...createFilterItems(selectedResources, "resource"),
-		...createFilterItems(selectedInsurance, "insurance"),
-		...createFilterItems(selectedCondition, "condition"),
-		...(selectedTherapy ? [{ type: "therapy", value: selectedTherapy }] : []),
+		...createFilterItems(selectedResources, "resource", "blue"),
+		...createFilterItems(selectedInsurance, "insurance", "green"),
+		...createFilterItems(selectedCondition, "condition", "orange"),
+		...(selectedTherapy
+			? [{ type: "therapy", value: selectedTherapy, color: "blue" }]
+			: []),
 	].filter((item) => Boolean(item.value));
 
-	if (allSelectedFilters.length === 0) {
-		return (
-			<Typography as="p" color="darkGray" variant="small">
-				No filters apply
-			</Typography>
-		);
-	}
+	if (allSelectedFilters.length == 0)
+		return <Typography color="black" as="h3" variant="medium"></Typography>;
 
 	return (
 		<div className="flex flex-wrap gap-2">
 			{allSelectedFilters.map((filter, index) => (
 				<Badge
 					key={`${filter.value}-${index}`}
-					color=""
+					color={filter.color as ColorType}
 					className="w-max flex bg-none border-gray-700"
 					showIcon={true}
 					onClick={() => handleBadgeClick(filter.type, filter.value)}
+					aria-pressed={selectedResources.includes(filter.value)}
+					aria-label={`Resource ${filter.value}`}
 				>
-					{filter.value}
+					{formatType(filter.value)}
 				</Badge>
 			))}
 		</div>

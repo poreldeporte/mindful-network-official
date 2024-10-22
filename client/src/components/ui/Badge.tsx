@@ -1,6 +1,6 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-type ColorType = "orange" | "green" | "blue";
+export type ColorType = "orange" | "green" | "blue";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;

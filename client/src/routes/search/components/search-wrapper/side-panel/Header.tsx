@@ -85,15 +85,13 @@ const Header = ({
 					<Typography color="black" variant="medium" as="h3">
 						Filters
 					</Typography>
-					<div>
-						<SelectedFilters
-							selectedResources={selectedResources}
-							selectedCondition={selectedCondition}
-							selectedInsurance={selectedInsurance}
-							selectedTherapy={selectedTherapy}
-							handleBadgeClick={handleBadgeClick}
-						/>
-					</div>
+					<SelectedFilters
+						selectedResources={selectedResources}
+						selectedCondition={selectedCondition}
+						selectedInsurance={selectedInsurance}
+						selectedTherapy={selectedTherapy}
+						handleBadgeClick={handleBadgeClick}
+					/>
 				</div>
 				<div
 					className="bg-blue-500 rounded-full p-2"
@@ -125,10 +123,21 @@ const Header = ({
 					{headerIsOpen && (
 						<motion.div
 							id="filter-menu"
-							initial="closed"
-							animate="open"
-							exit="closed"
+							initial={{ height: 0, opacity: 0 }}
+							animate={{ height: "auto", opacity: 1 }}
+							exit={{ height: 0, opacity: 0 }}
+							transition={{
+								height: {
+									duration: 0.3,
+									ease: "easeInOut",
+								},
+								opacity: {
+									duration: 0.2,
+									ease: "easeInOut",
+								},
+							}}
 							variants={opacityVariants}
+							className="overflow-hidden"
 						>
 							<div className="my-2">
 								<Typography as="p" color="darkGray" variant="small">
