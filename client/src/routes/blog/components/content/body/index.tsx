@@ -88,7 +88,7 @@ const components: PortableTextComponents = {
 
 export const Body = ({ content }: BlogModel) => {
 	return (
-		<section aria-label="Blog content">
+		<section aria-label="Blog content" className="mt-10 lg:mt-24">
 			<PortableText value={content} components={components} />
 		</section>
 	);

@@ -12,8 +12,11 @@ import {
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { opacityVariants } from "@/lib/anim";
+import { EllipsisIcon } from "lucide-react";
+import { SelectedFilters } from "./SelectedFilters";
+import { Plus } from "lucide-react";
 
 interface Props {
 	resources: ResourcesKey[];
@@ -25,6 +28,7 @@ interface Props {
 	selectedCondition: string[];
 	selectedInsurance: string[];
 	selectedTherapy: string;
+	setFiltersPanelVisible: (boolean) => void;
 }
 
 const Header = ({
@@ -37,8 +41,23 @@ const Header = ({
 	selectedCondition,
 	selectedInsurance,
 	selectedTherapy,
+	setFiltersPanelVisible,
 }: Props) => {
 	const [headerIsOpen, setHeaderIsOpen] = useState(true);
+	const [isDesktop, setIsDesktop] = useState(false);
+
+	useEffect(() => {
+		const checkViewport = () => {
+			setIsDesktop(window.innerWidth >= 900);
+			setHeaderIsOpen(window.innerWidth >= 900);
+		};
+
+		checkViewport();
+		window.addEventListener("resize", checkViewport);
+
+		return () => window.removeEventListener("resize", checkViewport);
+	}, []);
+
 	const toggleMenu = () => setHeaderIsOpen(!headerIsOpen);
 
 	return (
@@ -58,146 +77,185 @@ const Header = ({
 				</Typography>
 			</Link>
 			<Typography className="font-antic" as="h1" color="black" variant="title">
-				Professionals in <span className="text-green-300">South Florida</span>
+				Find professionals in{" "}
+				<span className="text-green-300">South Florida</span>
 			</Typography>
 
-			<button
-				className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full p-0.5 shadow-md"
-				title={headerIsOpen ? "Hide Menu" : "Show Menu"}
-				aria-expanded={headerIsOpen}
-				aria-controls="filter-menu"
-				onClick={toggleMenu}
-			>
-				<span className="sr-only">
-					{headerIsOpen ? "Hide Menu" : "Show Menu"}
-				</span>
-				<ChevronDownIcon
-					className={`h-7 w-7 ${
-						headerIsOpen ? "rotate-180" : "rotate-0"
-					} transition-transform`}
-					aria-hidden="true"
-				/>
-			</button>
-			<AnimatePresence mode="wait">
-				{headerIsOpen && (
-					<motion.div
-						id="filter-menu"
-						initial="closed"
-						animate="open"
-						exit="closed"
-						variants={opacityVariants}
-					>
-						<div className="my-2">
-							<Typography as="p" color="darkGray" variant="small">
-								Resources:
-							</Typography>
-							<div className="flex items-center flex-wrap gap-2 w-full">
-								{resources.map((resourceKey) => (
-									<Badge
-										key={resourceKey.key}
-										color="blue"
-										className="w-max"
-										isSelected={selectedResources.includes(resourceKey.key)}
-										onClick={() =>
-											handleBadgeClick("resource", resourceKey.key)
-										}
-										role="button"
-										tabIndex={0}
-										aria-pressed={selectedResources.includes(resourceKey.key)}
-										aria-label={`Resource ${resourceKey.label}`}
-									>
-										{resourceKey.label}
-									</Badge>
-								))}
-							</div>
-						</div>
-						<div className="my-2">
-							<Typography as="p" color="darkGray" variant="small">
-								Conditions:
-							</Typography>
-							<div className="flex items-center flex-wrap gap-2 w-full">
-								{conditions && conditions.length
-									? conditions.map((condition) => (
-											<Badge
-												key={condition.id}
-												color="orange"
-												className="w-max"
-												isSelected={selectedCondition.includes(condition.name)}
-												onClick={() =>
-													handleBadgeClick("condition", condition.name)
-												}
-												role="button"
-												tabIndex={0}
-												aria-pressed={selectedCondition.includes(
-													condition.name
-												)}
-												aria-label={`Condition ${condition.name}`}
-											>
-												{condition.name}
-											</Badge>
-										))
-									: ""}
-							</div>
-						</div>
+			<div className="flex items-center justify-between lg:hidden mt-5">
+				<div className="flex flex-col mb-2">
+					<Typography color="black" variant="medium" as="h3">
+						Filters
+					</Typography>
+					<SelectedFilters
+						selectedResources={selectedResources}
+						selectedCondition={selectedCondition}
+						selectedInsurance={selectedInsurance}
+						selectedTherapy={selectedTherapy}
+						handleBadgeClick={handleBadgeClick}
+					/>
+				</div>
+				<div
+					className="bg-blue-500 rounded-full p-2"
+					onClick={() => setFiltersPanelVisible(true)}
+				>
+					<Plus className="text-white cursor-pointer" />
+				</div>
+			</div>
 
-						<div className="mb-2">
-							<Typography as="p" color="darkGray" variant="small">
-								Insurance:
-							</Typography>
-							<div className="flex items-center flex-wrap gap-2 w-full">
-								{insurances && insurances.length
-									? insurances.map((insurance) => (
-											<Badge
-												key={insurance.id}
-												color="green"
-												className="w-max"
-												isSelected={selectedInsurance.includes(insurance.name)}
-												onClick={() =>
-													handleBadgeClick("insurance", insurance.name)
-												}
-												role="button"
-												tabIndex={0}
-												aria-pressed={selectedInsurance.includes(
-													insurance.name
-												)}
-												aria-label={`Insurance ${insurance.name}`}
-											>
-												{insurance.name}
-											</Badge>
-										))
-									: ""}
+			<div className="hidden lg:block">
+				<button
+					className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full py-2 px-4 shadow-md flex items-center gap-2"
+					title={headerIsOpen ? "Hide filters" : "Show filters"}
+					aria-expanded={headerIsOpen}
+					aria-controls="filter-menu"
+					onClick={toggleMenu}
+				>
+					<span className="text-xs">
+						{headerIsOpen ? "Hide Filters" : "Show Filters"}
+					</span>
+					<ChevronDownIcon
+						className={`h-5 w-5 ${
+							headerIsOpen ? "rotate-180" : "rotate-0"
+						} transition-transform`}
+						aria-hidden="true"
+					/>
+				</button>
+				<AnimatePresence mode="wait">
+					{headerIsOpen && (
+						<motion.div
+							id="filter-menu"
+							initial={{ height: 0, opacity: 0 }}
+							animate={{ height: "auto", opacity: 1 }}
+							exit={{ height: 0, opacity: 0 }}
+							transition={{
+								height: {
+									duration: 0.3,
+									ease: "easeInOut",
+								},
+								opacity: {
+									duration: 0.2,
+									ease: "easeInOut",
+								},
+							}}
+							variants={opacityVariants}
+							className="overflow-hidden"
+						>
+							<div className="my-2">
+								<Typography as="p" color="darkGray" variant="small">
+									Pick your resources:
+								</Typography>
+								<div className="flex items-center flex-wrap gap-2 w-full">
+									{resources.map((resourceKey) => (
+										<Badge
+											key={resourceKey.key}
+											color="blue"
+											className="w-max"
+											isSelected={selectedResources.includes(resourceKey.key)}
+											onClick={() =>
+												handleBadgeClick("resource", resourceKey.key)
+											}
+											role="button"
+											tabIndex={0}
+											aria-pressed={selectedResources.includes(resourceKey.key)}
+											aria-label={`Resource ${resourceKey.label}`}
+										>
+											{resourceKey.label}
+										</Badge>
+									))}
+								</div>
 							</div>
-						</div>
+							<div className="my-2">
+								<Typography as="p" color="darkGray" variant="small">
+									Conditions:
+								</Typography>
+								<div className="flex items-center flex-wrap gap-2 w-full">
+									{conditions && conditions.length
+										? conditions.map((condition) => (
+												<Badge
+													key={condition.id}
+													color="orange"
+													className="w-max"
+													isSelected={selectedCondition.includes(
+														condition.name
+													)}
+													onClick={() =>
+														handleBadgeClick("condition", condition.name)
+													}
+													role="button"
+													tabIndex={0}
+													aria-pressed={selectedCondition.includes(
+														condition.name
+													)}
+													aria-label={`Condition ${condition.name}`}
+												>
+													{condition.name}
+												</Badge>
+											))
+										: ""}
+								</div>
+							</div>
 
-						<div className="mt-2">
-							<Typography as="p" color="darkGray" variant="small">
-								Therapy Options:
-							</Typography>
-							<div className="flex items-center flex-wrap gap-2 w-full">
-								{therapyModalities && therapyModalities.length
-									? therapyModalities.map((modality) => (
-											<Badge
-												key={modality.id}
-												color="blue"
-												className="w-max"
-												isSelected={selectedTherapy === modality.type}
-												onClick={() =>
-													handleBadgeClick("therapy", modality.type)
-												}
-												role="button"
-												tabIndex={0}
-												aria-pressed={selectedTherapy === modality.type}
-												aria-label={`Therapy option ${modality.type}`}
-											>
-												{modality.type}
-											</Badge>
-										))
-									: ""}
+							<div className="mb-2">
+								<Typography as="p" color="darkGray" variant="small">
+									Insurance:
+								</Typography>
+								<div className="flex items-center flex-wrap gap-2 w-full">
+									{insurances && insurances.length
+										? insurances.map((insurance) => (
+												<Badge
+													key={insurance.id}
+													color="green"
+													className="w-max"
+													isSelected={selectedInsurance.includes(
+														insurance.name
+													)}
+													onClick={() =>
+														handleBadgeClick("insurance", insurance.name)
+													}
+													role="button"
+													tabIndex={0}
+													aria-pressed={selectedInsurance.includes(
+														insurance.name
+													)}
+													aria-label={`Insurance ${insurance.name}`}
+												>
+													{insurance.name}
+												</Badge>
+											))
+										: ""}
+								</div>
 							</div>
-						</div>
-					</motion.div>
-				)}
-			</AnimatePresence>
+
+							<div className="mt-2">
+								<Typography as="p" color="darkGray" variant="small">
+									Therapy Options:
+								</Typography>
+								<div className="flex items-center flex-wrap gap-2 w-full">
+									{therapyModalities && therapyModalities.length
+										? therapyModalities.map((modality) => (
+												<Badge
+													key={modality.id}
+													color="blue"
+													className="w-max"
+													isSelected={selectedTherapy === modality.type}
+													onClick={() =>
+														handleBadgeClick("therapy", modality.type)
+													}
+													role="button"
+													tabIndex={0}
+													aria-pressed={selectedTherapy === modality.type}
+													aria-label={`Therapy option ${modality.type}`}
+												>
+													{modality.type}
+												</Badge>
+											))
+										: ""}
+								</div>
+							</div>
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</div>
 		</header>
 	);
 };

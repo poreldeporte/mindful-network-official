@@ -144,6 +144,11 @@ export const resources = [
 		path: "/search?resource=psychologists",
 	},
 	{
+		key: "mental-health",
+		title: "Mental Health",
+		path: "/search?resource=mental-health",
+	},
+	{
 		key: "psychiatric",
 		title: "Psychiatric Management",
 		path: "/search?resource=psychiatric",
@@ -174,6 +179,16 @@ export const resources = [
 		key: "mind-body-practices",
 		title: "Mind Body Practices",
 		path: "/search?resource=mind-body-practices",
+	},
+	{
+		key: "estate-planning-lawyers",
+		title: "Estate Planning Lawyers",
+		path: "/search?resource=estate-planning-lawyers",
+	},
+	{
+		key: "specialized-mental-health-lawyers",
+		title: "Specialized Mental Health Lawyers",
+		path: "/search?resource=specialized-mental-health-lawyers",
 	},
 ];
 
