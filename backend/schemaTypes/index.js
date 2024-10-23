@@ -10,6 +10,7 @@ import {
 } from './resources'
 import blog from './blog/blog'
 
+import companyDetail from './company/company-details'
 import ageSpecialties from './age-specialties/ageSpecialties'
 import conditionSpecialties from './condition-specialties/conditionSpecialties'
 import insurances from './insurances/insurances'
@@ -31,4 +32,5 @@ export const schemaTypes = [
   insurances,
   therapyModalities,
   user,
+  companyDetail,
 ]
