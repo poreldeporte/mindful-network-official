@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "../ui";
+import { sortResources } from "@/lib/utils";
 
 interface Props {
 	blogPosts?: BlogModel[];
@@ -133,7 +134,7 @@ export function Footer({ blogPosts }: Props) {
 								Resources
 							</Typography>
 							<div className="flex flex-col mb-2 lg:mb-0">
-								{resources.map((resource) => {
+								{sortResources(resources).map((resource) => {
 									return (
 										<Link
 											className="hover:underline"
