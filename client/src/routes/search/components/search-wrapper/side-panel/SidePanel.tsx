@@ -10,10 +10,10 @@ import {
 } from "@/models";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Filters } from "./Filters";
 import Header from "./Header";
 import PsychologistCard from "./PsychologistCard";
 import { PsychologistCardSkeleton } from "./PsychologistCard.skeleton";
-import { Filters } from "./Filters";
 
 interface Props {
 	proffesionals: PsychologistModel[] | null;
@@ -40,12 +40,8 @@ const SidePanel = ({
 	const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
 	const [filtersPanelVisible, setFiltersPanelVisible] =
 		useState<boolean>(false);
-	const [selectedFilters, setSelectedFilters] = useState([]);
-
 	const searchParams = useSearchParams();
 	const router = useRouter();
-
-	const visibilityClass = filtersPanelVisible ? "lg:hidden md:block" : "hidden";
 
 	useEffect(() => {
 		const conditionParam = searchParams.get("condition");
