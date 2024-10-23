@@ -1,5 +1,5 @@
 import React from "react";
-import { Author } from "./author";
+// import { Author } from "./author";
 import { Body } from "./body";
 import { SectionProps } from "../models";
 import { Typography } from "@/components/ui";

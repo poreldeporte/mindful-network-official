@@ -1,5 +1,6 @@
 "use client";
 import { Badge, Typography } from "@/components/ui";
+import { opacityVariants } from "@/lib/anim";
 import {
 	conditionSpecialty,
 	insurances,
@@ -11,12 +12,10 @@ import {
 	ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { opacityVariants } from "@/lib/anim";
-import { EllipsisIcon } from "lucide-react";
-import { SelectedFilters } from "./SelectedFilters";
 import { Plus } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { SelectedFilters } from "./SelectedFilters";
 
 interface Props {
 	resources: ResourcesKey[];
@@ -44,14 +43,9 @@ const Header = ({
 	setFiltersPanelVisible,
 }: Props) => {
 	const [headerIsOpen, setHeaderIsOpen] = useState(true);
-	const [isDesktop, setIsDesktop] = useState(false);
 
 	useEffect(() => {
-		const checkViewport = () => {
-			setIsDesktop(window.innerWidth >= 900);
-			setHeaderIsOpen(window.innerWidth >= 900);
-		};
-
+		const checkViewport = () => setHeaderIsOpen(window.innerWidth >= 900);
 		checkViewport();
 		window.addEventListener("resize", checkViewport);
 

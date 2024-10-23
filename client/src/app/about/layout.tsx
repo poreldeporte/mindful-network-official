@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 		title: "About Us - Mindful Network: Mental Health Support in South Florida",
 		description:
 			"Get to know Mindful Network, our mission to provide accessible and supportive mental health resources in South Florida. We aim to build a stigma-free community with a focus on mental well-being.",
-		url: "https://www.mindfulnetwork.com/about",
+		url: "https://themindfulnetwork.com/about",
 		type: "website",
 		locale: "en_US",
 		siteName: "Mindful Network",

@@ -13,7 +13,6 @@ import { AnimatePresence, motion } from "framer-motion";
 interface Props {
 	visible: boolean;
 	setVisible: (boolean) => void;
-	setSelectedFilters: () => [];
 	resources: ResourcesKey[];
 	conditions: conditionSpecialty[];
 	insurances: insurances[];
@@ -126,7 +125,6 @@ const FilterItem = ({
 export const Filters = ({
 	visible,
 	setVisible,
-	setSelectedFilters,
 	resources,
 	conditions,
 	insurances,
