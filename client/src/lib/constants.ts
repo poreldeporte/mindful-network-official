@@ -144,11 +144,6 @@ export const resources = [
 		path: "/search?resource=psychologists",
 	},
 	{
-		key: "mental-health",
-		title: "Mental Health",
-		path: "/search?resource=mental-health",
-	},
-	{
 		key: "psychiatric",
 		title: "Psychiatric Management",
 		path: "/search?resource=psychiatric",
@@ -305,7 +300,6 @@ export const usefulLinks = [
 
 export const blogCategories: BlogCategory[] = [
 	{ title: "Health", value: "health" },
-	{ title: "Mental Health", value: "mental-health" },
 	{ title: "Personal Growth", value: "personal-growth" },
 	{ title: "Anxiety", value: "anxiety" },
 	{ title: "Depression", value: "depression" },
