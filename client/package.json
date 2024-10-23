@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@emailjs/browser": "^4.4.1",
 		"@fontsource-variable/dm-sans": "5.1.0",
 		"@fontsource/antic-didone": "5.1.0",
 		"@heroicons/react": "2.1.5",
