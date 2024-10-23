@@ -1,20 +1,22 @@
 import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
 import {
-  allPsychiatricQuery,
-  allBackerActFacilitiesQuery,
-  allInnovativeTherapiesQuery,
-  allInpatientQuery,
-  allOutpatientQuery,
-  allMedicationQuery,
-  allMentalHealthQuery,
-  allPsychologistsQuery,
-  allMindBodyPracticesQuery,
+	allPsychiatricQuery,
+	allBackerActFacilitiesQuery,
+	allInnovativeTherapiesQuery,
+	allInpatientQuery,
+	allOutpatientQuery,
+	allMedicationQuery,
+	allMentalHealthQuery,
+	allPsychologistsQuery,
+	allMindBodyPracticesQuery,
+	allSpecializedMentalHealthLawyers,
+	allEstatePlanningLawyers,
 } from "../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
 export async function GET() {
-  const query = `{
+	const query = `{
     "psychologists": ${allPsychologistsQuery},
     "backerActFacilities": ${allBackerActFacilitiesQuery},
     "innovativeTherapies": ${allInnovativeTherapiesQuery},
@@ -24,35 +26,44 @@ export async function GET() {
     "mindBodyPractices": ${allMindBodyPracticesQuery},
     "outpatient": ${allOutpatientQuery},
     "psychiatric": ${allPsychiatricQuery},
+    "estatePlanningLawyers": ${allEstatePlanningLawyers},
+    "estateSpecializedMentalHealthLawyers": ${allSpecializedMentalHealthLawyers},
   }`;
 
-  try {
-    const data = await sanityClient.fetch(query);
+	try {
+		const data = await sanityClient.fetch(query);
 
-    if (data) {
-      const adaptedData = {
-        psychologists: data.psychologists.map(getPsychologistsAdapter),
-        backerActFacilities: data.backerActFacilities.map(
-          getPsychologistsAdapter
-        ),
-        innovativeTherapies: data.innovativeTherapies.map(
-          getPsychologistsAdapter
-        ),
-        inpatient: data.inpatient.map(getPsychologistsAdapter),
-        medication: data.medication.map(getPsychologistsAdapter),
-        mentalHealth: data.mentalHealth.map(getPsychologistsAdapter),
-        mindBodyPractices: data.mindBodyPractices.map(getPsychologistsAdapter),
-        outpatient: data.outpatient.map(getPsychologistsAdapter),
-        psychiatric: data.psychiatric.map(getPsychologistsAdapter),
-      };
+		if (data) {
+			const adaptedData = {
+				psychologists: data.psychologists.map(getPsychologistsAdapter),
+				backerActFacilities: data.backerActFacilities.map(
+					getPsychologistsAdapter
+				),
+				innovativeTherapies: data.innovativeTherapies.map(
+					getPsychologistsAdapter
+				),
+				inpatient: data.inpatient.map(getPsychologistsAdapter),
+				medication: data.medication.map(getPsychologistsAdapter),
+				mentalHealth: data.mentalHealth.map(getPsychologistsAdapter),
+				mindBodyPractices: data.mindBodyPractices.map(getPsychologistsAdapter),
+				outpatient: data.outpatient.map(getPsychologistsAdapter),
+				psychiatric: data.psychiatric.map(getPsychologistsAdapter),
+				estatePlanningLawyers: data.estatePlanningLawyers.map(
+					getPsychologistsAdapter
+				),
+				estateSpecializedMentalHealthLawyers:
+					data.estateSpecializedMentalHealthLawyers.map(
+						getPsychologistsAdapter
+					),
+			};
 
-      return NextResponse.json(adaptedData);
-    }
-  } catch (error) {
-    console.error("Error fetching all schemas:", error);
-    return NextResponse.json(
-      { error: "Error reading psychologists data" },
-      { status: 500 }
-    );
-  }
+			return NextResponse.json(adaptedData);
+		}
+	} catch (error) {
+		console.error("Error fetching all schemas:", error);
+		return NextResponse.json(
+			{ error: "Error reading psychologists data" },
+			{ status: 500 }
+		);
+	}
 }

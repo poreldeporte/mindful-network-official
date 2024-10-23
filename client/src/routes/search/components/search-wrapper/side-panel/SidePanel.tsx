@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import PsychologistCard from "./PsychologistCard";
 import { PsychologistCardSkeleton } from "./PsychologistCard.skeleton";
+import { Filters } from "./Filters";
 
 interface Props {
 	proffesionals: PsychologistModel[] | null;
@@ -37,9 +38,14 @@ const SidePanel = ({
 	const [selectedResources, setSelectedResources] = useState<string[]>([]);
 	const [selectedInsurance, setSelectedInsurance] = useState<string[]>([]);
 	const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
+	const [filtersPanelVisible, setFiltersPanelVisible] =
+		useState<boolean>(false);
+	const [selectedFilters, setSelectedFilters] = useState([]);
 
 	const searchParams = useSearchParams();
 	const router = useRouter();
+
+	const visibilityClass = filtersPanelVisible ? "lg:hidden md:block" : "hidden";
 
 	useEffect(() => {
 		const conditionParam = searchParams.get("condition");
@@ -139,6 +145,19 @@ const SidePanel = ({
 			role="complementary"
 			aria-labelledby="side-panel-header"
 		>
+			<Filters
+				visible={filtersPanelVisible}
+				insurances={insurances}
+				conditions={conditions}
+				resources={resources}
+				therapyModalities={therapyModalities}
+				selectedCondition={selectedCondition}
+				selectedInsurance={selectedInsurance}
+				selectedResources={selectedResources}
+				selectedTherapy={selectedTherapy}
+				setVisible={setFiltersPanelVisible}
+				handleBadgeClick={handleBadgeClick}
+			/>
 			<Header
 				conditions={conditions}
 				handleBadgeClick={handleBadgeClick}
@@ -149,6 +168,7 @@ const SidePanel = ({
 				selectedInsurance={selectedInsurance}
 				selectedResources={selectedResources}
 				selectedTherapy={selectedTherapy}
+				setFiltersPanelVisible={setFiltersPanelVisible}
 			/>
 			<div
 				className="overflow-y-auto overflow-x-hidden max-w-full"

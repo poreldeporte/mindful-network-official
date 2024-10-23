@@ -16,10 +16,13 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/Shadcn-select";
+import { sortResources } from "@/lib/utils";
 
 export function Topbar() {
 	const router = useRouter();
 	const pathname = usePathname();
+
+	const sortedResources = sortResources(resources);
 
 	const handleSelectChange = (value: string) => {
 		const selectedResource = resources.find(
@@ -67,7 +70,7 @@ export function Topbar() {
 						<SelectContent className="bg-white p-5">
 							<SelectGroup>
 								<SelectLabel>Resources</SelectLabel>
-								{resources.map((resource) => (
+								{sortedResources.map((resource) => (
 									<SelectItem
 										className="w-max pr-8"
 										key={resource.key}
