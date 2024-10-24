@@ -12,7 +12,11 @@ import {
 } from "@tabler/icons-react";
 import emailjs from "@emailjs/browser";
 
-function ContactForm() {
+interface Props {
+	psychologistName: string;
+}
+
+function ContactForm({ psychologistName }: Props) {
 	const toast = useToast();
 
 	const [userInput, setUserInput] = useState({
@@ -21,6 +25,7 @@ function ContactForm() {
 		user_email: "",
 		message: "",
 		user_phone: "",
+		psychologistName: psychologistName,
 	});
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -106,10 +111,11 @@ function ContactForm() {
 				<input
 					type="text"
 					id="name"
-					name="name"
+					name="from_name"
 					placeholder="Name"
 					className="rounded-full p-2 pl-10 w-full outline-0"
 					aria-required="true"
+					onChange={handleChange}
 				/>
 				<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
 					<IconUser className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -122,9 +128,10 @@ function ContactForm() {
 				<input
 					type="text"
 					id="phone"
-					name="phone"
+					name="user_phone"
 					placeholder="Number"
 					className="rounded-full p-2 pl-10 w-full outline-0"
+					onChange={handleChange}
 					aria-required="true"
 				/>
 				<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
@@ -138,9 +145,10 @@ function ContactForm() {
 				<input
 					type="email"
 					id="email"
-					name="email"
+					name="user_email"
 					placeholder="Email"
 					className="rounded-full p-2 pl-10 w-full outline-0"
+					onChange={handleChange}
 					aria-required="true"
 				/>
 				<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
@@ -157,6 +165,7 @@ function ContactForm() {
 					placeholder="Message"
 					className="rounded-xl p-2 pl-10 w-full resize-none outline-0"
 					rows={4}
+					onChange={handleChange}
 					aria-required="true"
 				></textarea>
 				<span className="absolute left-3 top-3">
@@ -165,14 +174,12 @@ function ContactForm() {
 			</div>
 			<div className="flex items-center justify-end">
 				<Button
-					variant="medium"
-					form="primary"
-					className="p-2 rounded-full mt-5 w-full lg:w-1/4"
-					aria-label="Send Message"
+					className="py-2 px-4 mt-10 rounded-full w-auto"
+					variant="small"
+					type="submit"
+					disabled={isSubmitting}
 				>
-					<Typography color="white" variant="small" as="h3">
-						Send
-					</Typography>
+					{isSubmitting ? "Sending..." : "Send Message"}
 				</Button>
 			</div>
 		</form>
@@ -207,7 +214,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 			<div className="bg-orange-100 rounded-2xl w-full lg:flex-grow p-5 lg:w-1/2 lg:p-10 flex flex-col items-center justify-center">
 				<div className="flex flex-col gap-y-2 w-full">
 					<ToastProvider>
-						<ContactForm />
+						<ContactForm psychologistName={name} />
 					</ToastProvider>
 				</div>
 			</div>
