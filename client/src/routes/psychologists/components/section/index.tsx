@@ -1,16 +1,17 @@
 "use client";
 
 import { Typography } from "@/components/ui";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariants } from "@/lib/anim";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface SectionProps {
 	id: string;
 	title: string;
-	subsections: Array<SubsectionProps>;
+	subsections?: Array<SubsectionProps>;
 	emptyMessage: string;
+	profileVideo?: string;
 }
 
 interface SubsectionProps {
@@ -25,6 +26,7 @@ export function Section({
 	id,
 	title,
 	subsections,
+	profileVideo,
 	emptyMessage,
 }: SectionProps) {
 	const [isOpen, setIsOpen] = useState(true);
@@ -48,6 +50,11 @@ export function Section({
 			<AnimatePresence mode="wait">
 				{isOpen && (
 					<SectionContent id={`${id}-content`}>
+						{profileVideo && (
+							<video controls className="w-full rounded-lg">
+								<source src={profileVideo} type="video/mp4" />
+							</video>
+						)}
 						{subsections && subsections.length ? (
 							subsections.map((subsection) => (
 								<Subsection key={subsection.id} {...subsection} />
