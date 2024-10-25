@@ -9,7 +9,6 @@ export function ProfileCard({
 	image,
 	name,
 	description,
-	video
 	_type,
 	facility,
 }: PsychologistModel) {
