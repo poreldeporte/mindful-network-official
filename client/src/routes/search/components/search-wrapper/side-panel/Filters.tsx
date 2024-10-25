@@ -1,14 +1,13 @@
-import { Button, ColorType, Typography } from "@/components/ui";
-import { ChevronDown, XIcon } from "lucide-react";
-import { useState } from "react";
-import { Badge } from "@/components/ui";
+import { Badge, Button, ColorType, Typography } from "@/components/ui";
 import {
 	ResourcesKey,
+	TherapyModality,
 	conditionSpecialty,
 	insurances,
-	TherapyModality,
 } from "@/models";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
 	visible: boolean;

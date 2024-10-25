@@ -58,6 +58,13 @@ const ToastContainer = () => {
 	const { toasts, removeToast } = useContext(ToastContext)!;
 	const [hoveredId, setHoveredId] = useState<string | null>(null);
 
+	const handleRemoveToast = useCallback(
+		(id: string) => {
+			removeToast(id);
+		},
+		[removeToast]
+	);
+
 	const getPositionClasses = (position: ToastPosition): string => {
 		const baseClasses = "fixed z-50 w-full sm:max-w-xs m-4";
 		const positionClasses = {
@@ -190,7 +197,7 @@ const ToastContainer = () => {
 										</div>
 									)}
 									<button
-										onClick={() => removeToast(toast.id)}
+										onClick={() => handleRemoveToast(toast.id)}
 										className={`absolute right-2 top-2 p-1 text-gray-400 hover:text-gray-600 rounded-full transition-opacity duration-200 ${
 											hoveredId === toast.id ? "opacity-100" : "opacity-0"
 										}`}

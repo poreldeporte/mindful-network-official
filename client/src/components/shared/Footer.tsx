@@ -23,7 +23,6 @@ export function Footer({ blogPosts }: Props) {
 	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
 		null
 	);
-	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -42,13 +41,10 @@ export function Footer({ blogPosts }: Props) {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				setIsLoading(true);
 				const data = await getCompanyDetails();
 				setCompanyDetails(data);
 			} catch (error) {
 				console.log(error);
-			} finally {
-				setIsLoading(false);
 			}
 		}
 		fetchData();

@@ -20,7 +20,7 @@ function ContactForm({ psychologistName }: Props) {
 	const toast = useToast();
 
 	const initialFormState = {
-		to_email: "martin@poreldeporte.com",
+		to_email: "contact@themindfulnetwork.com",
 		profesional_name: psychologistName,
 		from_name: "",
 		user_email: "",

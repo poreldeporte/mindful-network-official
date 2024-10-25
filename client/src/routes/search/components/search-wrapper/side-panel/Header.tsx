@@ -2,10 +2,10 @@
 import { Badge, Typography } from "@/components/ui";
 import { opacityVariants } from "@/lib/anim";
 import {
-	conditionSpecialty,
-	insurances,
 	ResourcesKey,
 	TherapyModality,
+	conditionSpecialty,
+	insurances,
 } from "@/models";
 import {
 	ArrowLongLeftIcon,
@@ -14,7 +14,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SelectedFilters } from "./SelectedFilters";
 
 interface Props {

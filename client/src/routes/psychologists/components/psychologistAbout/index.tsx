@@ -6,6 +6,7 @@ import { Section } from "../section";
 
 import {
 	Armchair,
+	AtSign,
 	Brain,
 	HeartPulse,
 	Languages,
@@ -13,7 +14,6 @@ import {
 	PersonStanding,
 	Phone,
 	Wallet,
-	AtSign,
 } from "lucide-react";
 
 export function PsychologistAbout({
@@ -28,12 +28,14 @@ export function PsychologistAbout({
 }: PsychologistModel) {
 	return (
 		<>
-			<Section
-				id="profile-video"
-				title="Personal Introduction"
-				emptyMessage=""
-				profileVideo={video}
-			/>
+			{video && (
+				<Section
+					id="profile-video"
+					title="Introduction Video"
+					emptyMessage=""
+					profileVideo={video}
+				/>
+			)}
 			<Section
 				id="expertise"
 				title="Expertise"

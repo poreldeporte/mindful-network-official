@@ -1,10 +1,10 @@
 "use client";
 
 import { Typography } from "@/components/ui";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariants } from "@/lib/anim";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface SectionProps {
 	id: string;
