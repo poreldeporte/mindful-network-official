@@ -19,14 +19,16 @@ interface Props {
 function ContactForm({ psychologistName }: Props) {
 	const toast = useToast();
 
-	const [userInput, setUserInput] = useState({
-		to_email: "martin@poreldeporte.com",
+	const initialFormState = {
+		to_email: "contact@themindfulnetwork.com",
+		profesional_name: psychologistName,
 		from_name: "",
 		user_email: "",
 		message: "",
 		user_phone: "",
-		psychologistName: psychologistName,
-	});
+	};
+
+	const [userInput, setUserInput] = useState(initialFormState);
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -36,6 +38,10 @@ function ContactForm({ psychologistName }: Props) {
 			...userInput,
 			[name]: value,
 		});
+	};
+
+	const resetForm = () => {
+		setUserInput(initialFormState);
 	};
 
 	const validateForm = () => {
@@ -90,6 +96,8 @@ function ContactForm({ psychologistName }: Props) {
 					message: "",
 					user_phone: "",
 				});
+
+				resetForm();
 			}
 		} catch (error) {
 			toast.error("Error", {
@@ -103,7 +111,11 @@ function ContactForm({ psychologistName }: Props) {
 	};
 
 	return (
-		<form className="flex flex-col w-full space-y-5" aria-label="Contact form">
+		<form
+			onSubmit={handleSubmit}
+			className="flex flex-col w-full space-y-5"
+			aria-label="Contact form"
+		>
 			<div className="relative">
 				<label htmlFor="name" className="sr-only">
 					Name
@@ -113,6 +125,7 @@ function ContactForm({ psychologistName }: Props) {
 					id="name"
 					name="from_name"
 					placeholder="Name"
+					value={userInput.from_name}
 					className="rounded-full p-2 pl-10 w-full outline-0"
 					aria-required="true"
 					onChange={handleChange}
@@ -131,6 +144,7 @@ function ContactForm({ psychologistName }: Props) {
 					name="user_phone"
 					placeholder="Number"
 					className="rounded-full p-2 pl-10 w-full outline-0"
+					value={userInput.user_phone}
 					onChange={handleChange}
 					aria-required="true"
 				/>
@@ -148,6 +162,7 @@ function ContactForm({ psychologistName }: Props) {
 					name="user_email"
 					placeholder="Email"
 					className="rounded-full p-2 pl-10 w-full outline-0"
+					value={userInput.user_email}
 					onChange={handleChange}
 					aria-required="true"
 				/>
@@ -165,6 +180,7 @@ function ContactForm({ psychologistName }: Props) {
 					placeholder="Message"
 					className="rounded-xl p-2 pl-10 w-full resize-none outline-0"
 					rows={4}
+					value={userInput.message}
 					onChange={handleChange}
 					aria-required="true"
 				></textarea>

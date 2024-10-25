@@ -47,18 +47,6 @@ export default {
       options: {
         accept: 'video/*',
       },
-      fields: [
-        {
-          name: 'caption',
-          type: 'string',
-          title: 'Caption',
-        },
-        {
-          name: 'attribution',
-          type: 'string',
-          title: 'Attribution',
-        },
-      ],
     },
     {
       name: 'facility',

@@ -24,7 +24,8 @@ export const getPsychologistById = async (
                 "id": _id,
                 type
             },
-            "image": image.asset->url
+            "image": image.asset->url,
+            "video": video.asset->url,
         }`;
 
 		const data = await sanityClient.fetch(query, { slug });

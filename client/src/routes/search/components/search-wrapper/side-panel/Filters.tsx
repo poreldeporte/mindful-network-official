@@ -1,14 +1,13 @@
-import { ColorType, Typography } from "@/components/ui";
-import { ChevronDown, XIcon } from "lucide-react";
-import { useState } from "react";
-import { Badge } from "@/components/ui";
+import { Badge, Button, ColorType, Typography } from "@/components/ui";
 import {
 	ResourcesKey,
+	TherapyModality,
 	conditionSpecialty,
 	insurances,
-	TherapyModality,
 } from "@/models";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
 	visible: boolean;
@@ -94,14 +93,14 @@ const FilterItem = ({
 						}}
 						className="overflow-hidden"
 					>
-						<div className="flex items-center flex-wrap gap-2 w-full pt-5">
+						<div className="flex items-start flex-wrap gap-2 w-full pt-5">
 							{options.map((option) => {
 								const key = getKey(option);
 								const label = getLabel(option);
 								return (
 									<Badge
 										key={key}
-										className="w-max"
+										className="w-max h-8 items-center"
 										isSelected={selectedOptions.includes(key)}
 										onClick={() => onBadgeClick(key)}
 										color={color as ColorType}
@@ -144,17 +143,20 @@ export const Filters = ({
 		  fixed inset-0 z-50
 		  lg:relative lg:inset-auto lg:z-auto
 		  bg-blue-50
-		  w-full h-full
+		  w-full
+		  min-h-screen h-[-webkit-fill-available]
+		  flex flex-col
+          overflow-y-auto
 		  p-10
 		`}
 		>
 			<div className="flex items-center relative border-b border-b-gray mb-5 pb-2">
-				<div className="absolute left-0">
+				{/* <div className="absolute left-0">
 					<XIcon
 						className="w-6 h-6 cursor-pointer"
 						onClick={() => setVisible(false)}
 					/>
-				</div>
+				</div> */}
 				<div className="flex-grow flex justify-center">
 					<Typography
 						variant="medium"
@@ -167,46 +169,61 @@ export const Filters = ({
 				</div>
 			</div>
 
-			<div className="space-y-8">
-				<FilterItem
-					title="Resources"
-					options={resources}
-					selectedOptions={selectedResources}
-					color="blue"
-					onBadgeClick={(key) => handleBadgeClick("resource", key)}
-					getKey={(option) => option.key}
-					getLabel={(option) => option.label}
-				/>
+			<div className="flex flex-col">
+				<div className="flex-1 space-y-8">
+					<FilterItem
+						title="Resources"
+						options={resources}
+						selectedOptions={selectedResources}
+						color="blue"
+						onBadgeClick={(key) => handleBadgeClick("resource", key)}
+						getKey={(option) => option.key}
+						getLabel={(option) => option.label}
+					/>
 
-				<FilterItem
-					title="Conditions"
-					options={conditions}
-					color="orange"
-					selectedOptions={selectedCondition}
-					onBadgeClick={(key) => handleBadgeClick("condition", key)}
-					getKey={(option) => option.name}
-					getLabel={(option) => option.name}
-				/>
+					<FilterItem
+						title="Conditions"
+						options={conditions}
+						color="orange"
+						selectedOptions={selectedCondition}
+						onBadgeClick={(key) => handleBadgeClick("condition", key)}
+						getKey={(option) => option.name}
+						getLabel={(option) => option.name}
+					/>
 
-				<FilterItem
-					title="Insurance"
-					options={insurances}
-					color="green"
-					selectedOptions={selectedInsurance}
-					onBadgeClick={(key) => handleBadgeClick("insurance", key)}
-					getKey={(option) => option.name}
-					getLabel={(option) => option.name}
-				/>
+					<FilterItem
+						title="Insurance"
+						options={insurances}
+						color="green"
+						selectedOptions={selectedInsurance}
+						onBadgeClick={(key) => handleBadgeClick("insurance", key)}
+						getKey={(option) => option.name}
+						getLabel={(option) => option.name}
+					/>
 
-				<FilterItem
-					title="Therapy Options"
-					options={therapyModalities}
-					color="blue"
-					selectedOptions={[selectedTherapy]}
-					onBadgeClick={(key) => handleBadgeClick("therapy", key)}
-					getKey={(option) => option.type}
-					getLabel={(option) => option.type}
-				/>
+					<FilterItem
+						title="Therapy Options"
+						options={therapyModalities}
+						color="blue"
+						selectedOptions={[selectedTherapy]}
+						onBadgeClick={(key) => handleBadgeClick("therapy", key)}
+						getKey={(option) => option.type}
+						getLabel={(option) => option.type}
+					/>
+				</div>
+
+				<div className="flex justify-end mt-10">
+					<Button
+						className="py-2 px-4 rounded-full w-auto"
+						variant="small"
+						onClick={() => {
+							setVisible(false);
+							document.body.style.overflow = "unset";
+						}}
+					>
+						Update results
+					</Button>
+				</div>
 			</div>
 		</section>
 	);
