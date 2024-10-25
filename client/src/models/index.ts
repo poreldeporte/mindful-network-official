@@ -8,3 +8,4 @@ export * from "./resources.model";
 export * from "./therapy-modality.model";
 export * from "./type-with-key.model";
 export * from "./variant.model";
+export * from "./company-details.model";

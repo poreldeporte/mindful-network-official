@@ -2,7 +2,6 @@ export * from "./backer-act-facility.type";
 export * from "./innovative-therapies.type";
 export * from "./inpatient.type";
 export * from "./medication.type";
-export * from "./mental-health.type";
 export * from "./mind-body-practices.type";
 export * from "./outpatient.type";
 export * from "./psychiatric.type";
