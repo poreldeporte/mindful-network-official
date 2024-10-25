@@ -42,15 +42,7 @@ const Header = ({
 	selectedTherapy,
 	setFiltersPanelVisible,
 }: Props) => {
-	const [headerIsOpen, setHeaderIsOpen] = useState(true);
-
-	useEffect(() => {
-		const checkViewport = () => setHeaderIsOpen(window.innerWidth >= 900);
-		checkViewport();
-		window.addEventListener("resize", checkViewport);
-
-		return () => window.removeEventListener("resize", checkViewport);
-	}, []);
+	const [headerIsOpen, setHeaderIsOpen] = useState(false);
 
 	const toggleMenu = () => setHeaderIsOpen(!headerIsOpen);
 
@@ -70,8 +62,13 @@ const Header = ({
 					Back to Home
 				</Typography>
 			</Link>
-			<Typography className="font-antic" as="h1" color="black" variant="title">
-				Find professionals in{" "}
+			<Typography
+				className="font-antic xs:!text-[40px]"
+				as="h1"
+				color="black"
+				variant="title"
+			>
+				Find Professionals in{" "}
 				<span className="text-green-300">South Florida</span>
 			</Typography>
 

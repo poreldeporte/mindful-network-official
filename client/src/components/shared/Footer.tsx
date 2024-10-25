@@ -5,12 +5,14 @@ import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import { BlogModel } from "@/models";
 import { getLatestBlog } from "@/routes/homepage/services";
 import { IconBrandInstagram } from "@tabler/icons-react";
-import { ChevronUp, LinkedinIcon } from "lucide-react";
+import { ChevronUp, LinkedinIcon, Phone, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "../ui";
 import { sortResources } from "@/lib/utils";
+import { CompanyDetails } from "@/models/company-details.model";
+import { getCompanyDetails } from "@/services/company-details.service";
 
 interface Props {
 	blogPosts?: BlogModel[];
@@ -18,6 +20,10 @@ interface Props {
 
 export function Footer({ blogPosts }: Props) {
 	const [posts, setPosts] = useState<BlogModel[] | []>([]);
+	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
+		null
+	);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -32,6 +38,21 @@ export function Footer({ blogPosts }: Props) {
 			fetchData();
 		} else setPosts(blogPosts);
 	}, [blogPosts]);
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				setIsLoading(true);
+				const data = await getCompanyDetails();
+				setCompanyDetails(data);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+		fetchData();
+	}, []);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,8 +75,8 @@ export function Footer({ blogPosts }: Props) {
 								src={MindfulLogo}
 							/>
 						</div>
-						<div className="space-y-2">
-							<div className="flex items-center space-x-3">
+						<div className="flex flex-col items-start space-y-3">
+							<div className="flex space-x-3">
 								<a href="#">
 									<IconBrandInstagram className="w-8 h-8 text-gray-500" />
 								</a>
@@ -63,6 +84,23 @@ export function Footer({ blogPosts }: Props) {
 									<LinkedinIcon className="w-8 h-8 text-gray-500" />
 								</a>
 							</div>
+							{companyDetails && companyDetails.phoneNumber && (
+								<div className="flex items-center space-x-3">
+									<Phone className="w-8 h-8 text-gray-500" />
+									<Typography variant="small" as="h3" color="black">
+										{companyDetails.phoneNumber}
+									</Typography>
+								</div>
+							)}
+
+							{companyDetails && companyDetails.email && (
+								<div className="flex items-center space-x-3">
+									<Mail className="w-8 h-8 text-gray-500" />
+									<Typography variant="small" as="h3" color="black">
+										{companyDetails.email}
+									</Typography>
+								</div>
+							)}
 						</div>
 					</div>
 					<div className="flex flex-col flex-wrap lg:flex-row items-start justify-around">
