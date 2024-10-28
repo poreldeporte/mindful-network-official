@@ -31,36 +31,11 @@ export function PsychologistAbout({
 			{video && (
 				<Section
 					id="profile-video"
-					title="Introduction Video"
+					title="Get to know me"
 					emptyMessage=""
 					profileVideo={video}
 				/>
 			)}
-			<Section
-				id="expertise"
-				title="Expertise"
-				emptyMessage=""
-				subsections={[
-					{
-						id: "age-specialties",
-						icon: <PersonStanding className="h-6 w-6" />,
-						title: "Age Specialties",
-						items: ageSpecialty.map((age) => age.age),
-					},
-					{
-						id: "condition-specialties",
-						icon: <Brain className="h-6 w-6" />,
-						title: "Condition Specialty",
-						items: conditionSpecialty.map((condition) => condition.name),
-					},
-					{
-						id: "therapy-options",
-						icon: <Armchair className="h-6 w-6" />,
-						title: "Therapy options",
-						items: therapyOptions.map((option) => option.type),
-					},
-				]}
-			/>
 			<Section
 				id="expertise"
 				title="Expertise"
