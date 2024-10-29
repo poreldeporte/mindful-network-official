@@ -7,7 +7,7 @@ import {
 } from "@/models";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
 	visible: boolean;
@@ -133,98 +133,110 @@ export const Filters = ({
 	selectedTherapy,
 	selectedInsurance,
 	handleBadgeClick,
-}: Props) => {
+}) => {
 	const visibilityClass = visible ? "lg:hidden md:block" : "hidden";
 
+	useEffect(() => {
+		if (visible) {
+			document.body.style.overflow = "hidden";
+			document.documentElement.style.position = "fixed";
+			document.documentElement.style.width = "100%";
+		} else {
+			document.body.style.overflow = "unset";
+			document.documentElement.style.position = "";
+			document.documentElement.style.width = "";
+		}
+
+		return () => {
+			document.body.style.overflow = "unset";
+			document.documentElement.style.position = "";
+			document.documentElement.style.width = "";
+		};
+	}, [visible]);
+
 	return (
-		<section
+		<div
 			className={`
 		  ${visibilityClass}
 		  fixed inset-0 z-50
 		  lg:relative lg:inset-auto lg:z-auto
 		  bg-blue-50
 		  w-full
-		  min-h-screen h-[-webkit-fill-available]
 		  flex flex-col
-          overflow-y-auto
-		  p-10
 		`}
 		>
-			<div className="flex items-center relative border-b border-b-gray mb-5 pb-2">
-				{/* <div className="absolute left-0">
-					<XIcon
-						className="w-6 h-6 cursor-pointer"
-						onClick={() => setVisible(false)}
-					/>
-				</div> */}
-				<div className="flex-grow flex justify-center">
-					<Typography
-						variant="medium"
-						color="black"
-						as="h3"
-						className="font-semibold"
-					>
-						Filters
-					</Typography>
-				</div>
-			</div>
-
-			<div className="flex flex-col">
-				<div className="flex-1 space-y-8">
-					<FilterItem
-						title="Resources"
-						options={resources}
-						selectedOptions={selectedResources}
-						color="blue"
-						onBadgeClick={(key) => handleBadgeClick("resource", key)}
-						getKey={(option) => option.key}
-						getLabel={(option) => option.label}
-					/>
-
-					<FilterItem
-						title="Conditions"
-						options={conditions}
-						color="orange"
-						selectedOptions={selectedCondition}
-						onBadgeClick={(key) => handleBadgeClick("condition", key)}
-						getKey={(option) => option.name}
-						getLabel={(option) => option.name}
-					/>
-
-					<FilterItem
-						title="Insurance"
-						options={insurances}
-						color="green"
-						selectedOptions={selectedInsurance}
-						onBadgeClick={(key) => handleBadgeClick("insurance", key)}
-						getKey={(option) => option.name}
-						getLabel={(option) => option.name}
-					/>
-
-					<FilterItem
-						title="Therapy Options"
-						options={therapyModalities}
-						color="blue"
-						selectedOptions={[selectedTherapy]}
-						onBadgeClick={(key) => handleBadgeClick("therapy", key)}
-						getKey={(option) => option.type}
-						getLabel={(option) => option.type}
-					/>
+			<div className="flex flex-col h-full max-h-screen">
+				<div className="flex items-center px-6 py-4 border-b border-gray-200">
+					<div className="flex-grow flex justify-center">
+						<Typography
+							variant="medium"
+							color="black"
+							as="h3"
+							className="font-semibold"
+						>
+							Filters
+						</Typography>
+					</div>
 				</div>
 
-				<div className="flex justify-end mt-10">
+				<div className="flex-1 overflow-y-auto px-6 py-4">
+					<div className="space-y-8">
+						<FilterItem
+							title="Resources"
+							options={resources}
+							selectedOptions={selectedResources}
+							color="blue"
+							onBadgeClick={(key) => handleBadgeClick("resource", key)}
+							getKey={(option) => option.key}
+							getLabel={(option) => option.label}
+						/>
+
+						<FilterItem
+							title="Conditions"
+							options={conditions}
+							color="orange"
+							selectedOptions={selectedCondition}
+							onBadgeClick={(key) => handleBadgeClick("condition", key)}
+							getKey={(option) => option.name}
+							getLabel={(option) => option.name}
+						/>
+
+						<FilterItem
+							title="Insurance"
+							options={insurances}
+							color="green"
+							selectedOptions={selectedInsurance}
+							onBadgeClick={(key) => handleBadgeClick("insurance", key)}
+							getKey={(option) => option.name}
+							getLabel={(option) => option.name}
+						/>
+
+						<FilterItem
+							title="Therapy Options"
+							options={therapyModalities}
+							color="blue"
+							selectedOptions={[selectedTherapy]}
+							onBadgeClick={(key) => handleBadgeClick("therapy", key)}
+							getKey={(option) => option.type}
+							getLabel={(option) => option.type}
+						/>
+					</div>
+				</div>
+
+				<div className="border-t border-gray-200 p-4 bg-blue-50">
 					<Button
-						className="py-2 px-4 rounded-full w-auto"
+						className="w-full py-2 px-4 rounded-full"
 						variant="small"
 						onClick={() => {
 							setVisible(false);
-							document.body.style.overflow = "unset";
 						}}
 					>
 						Update results
 					</Button>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 };
+
+export default Filters;
