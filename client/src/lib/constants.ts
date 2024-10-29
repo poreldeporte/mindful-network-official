@@ -181,9 +181,9 @@ export const resources = [
 		path: "/search?resource=estate-planning-lawyers",
 	},
 	{
-		key: "specialized-mental-health-lawyers",
-		title: "Specialized Mental Health Lawyers",
-		path: "/search?resource=specialized-mental-health-lawyers",
+		key: "estate-specialized-mental-health-lawyers",
+		title: "Estate Specialized Mental Health Lawyers",
+		path: "/search?resource=estate-specialized-mental-health-lawyers",
 	},
 ];
 

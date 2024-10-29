@@ -16,7 +16,7 @@ const resourceOrder = [
 	"Outpatient Facilities",
 	"Psychiatric Management",
 	"Estate Planning Lawyers",
-	"Specialized Mental Health Lawyers",
+	"Estate Specialized Mental Health Lawyers",
 ];
 
 const customSort = (a, b) => {
