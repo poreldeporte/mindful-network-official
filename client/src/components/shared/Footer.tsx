@@ -4,8 +4,12 @@ import { aboutFooter, resources } from "@/lib/constants";
 import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import { BlogModel } from "@/models";
 import { getLatestBlog } from "@/routes/homepage/services";
-import { IconBrandInstagram } from "@tabler/icons-react";
-import { ChevronUp, LinkedinIcon, Phone, Mail } from "lucide-react";
+import { ChevronUp, Phone, Mail, MapPin } from "lucide-react";
+import {
+	IconBrandX,
+	IconBrandLinkedin,
+	IconBrandInstagram,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -72,17 +76,17 @@ export function Footer({ blogPosts }: Props) {
 							/>
 						</div>
 						<div className="flex flex-col items-start space-y-3">
-							<div className="flex space-x-3">
-								<a href="#">
-									<IconBrandInstagram className="w-8 h-8 text-gray-500" />
-								</a>
-								<a href="#">
-									<LinkedinIcon className="w-8 h-8 text-gray-500" />
-								</a>
-							</div>
+							{companyDetails && companyDetails.address && (
+								<div className="flex items-center space-x-3">
+									<MapPin className="w-6 h-6 text-gray-500" />
+									<Typography variant="small" as="h3" color="black">
+										{companyDetails.address}
+									</Typography>
+								</div>
+							)}
 							{companyDetails && companyDetails.phoneNumber && (
 								<div className="flex items-center space-x-3">
-									<Phone className="w-8 h-8 text-gray-500" />
+									<Phone className="w-6 h-6 text-gray-500" />
 									<Typography variant="small" as="h3" color="black">
 										{companyDetails.phoneNumber}
 									</Typography>
@@ -91,10 +95,33 @@ export function Footer({ blogPosts }: Props) {
 
 							{companyDetails && companyDetails.email && (
 								<div className="flex items-center space-x-3">
-									<Mail className="w-8 h-8 text-gray-500" />
+									<Mail className="w-6 h-6 text-gray-500" />
 									<Typography variant="small" as="h3" color="black">
 										{companyDetails.email}
 									</Typography>
+								</div>
+							)}
+
+							{companyDetails && companyDetails.socialLinks && (
+								<div className="flex space-x-3">
+									{companyDetails.socialLinks.map((socialMedia) => (
+										<a
+											key={socialMedia.url}
+											href={socialMedia.url}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{socialMedia.platform === "instagram" && (
+												<IconBrandInstagram className="w-8 h-8 text-gray-500" />
+											)}
+											{socialMedia.platform === "linkedin" && (
+												<IconBrandLinkedin className="w-8 h-8 text-gray-500" />
+											)}
+											{socialMedia.platform === "twitter" && (
+												<IconBrandX className="w-8 h-8 text-gray-500" />
+											)}
+										</a>
+									))}
 								</div>
 							)}
 						</div>

@@ -8,6 +8,7 @@ interface SocialLink {
 export interface CompanyDetails {
 	name: string;
 	email: string;
-	phoneNumber?: string;
-	socialLinks?: SocialLink[];
+	address: string;
+	phoneNumber: string;
+	socialLinks: SocialLink[];
 }
