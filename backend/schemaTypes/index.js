@@ -17,6 +17,7 @@ import insurances from './insurances/insurances'
 import therapyModalities from './therapy-modalities/therapyModalities'
 import user from './user/user'
 import usefulLinks from './useful-links/usefulLinks'
+import blogCategories from './blog/blogCategories'
 
 export const schemaTypes = [
   psychologists,
@@ -35,4 +36,5 @@ export const schemaTypes = [
   user,
   companyDetail,
   usefulLinks,
+  blogCategories,
 ]

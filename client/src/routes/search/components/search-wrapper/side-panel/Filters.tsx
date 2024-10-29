@@ -133,7 +133,7 @@ export const Filters = ({
 	selectedTherapy,
 	selectedInsurance,
 	handleBadgeClick,
-}) => {
+}: Props) => {
 	const visibilityClass = visible ? "lg:hidden md:block" : "hidden";
 
 	useEffect(() => {
