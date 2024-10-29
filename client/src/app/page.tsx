@@ -11,6 +11,7 @@ import { BlogModel } from "@/models";
 
 export default async function Home() {
 	const blogPosts: BlogModel[] = await getLatestBlog();
+
 	return (
 		<>
 			<Topbar />

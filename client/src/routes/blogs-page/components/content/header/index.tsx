@@ -1,6 +1,7 @@
 "use client";
 import { Badge, Typography } from "@/components/ui";
-import { blogCategories } from "@/lib/constants";
+import { getBlogCategories } from "@/routes/blogs-page/services/blogs-page.services";
+import { useEffect, useState } from "react";
 
 interface Props {
 	selectedCategory: string;
@@ -13,6 +14,16 @@ export const ContentHeader = ({
 	setSelectedCategory,
 	// setSelectedFilter,
 }: Props) => {
+	const [blogCategories, setBlogCategories] = useState([]);
+	useEffect(() => {
+		const fetchCategories = async () => {
+			const categories = await getBlogCategories();
+			setBlogCategories(categories);
+		};
+
+		fetchCategories();
+	}, []);
+
 	const handleCategoryClick = (categoryValue: string) => {
 		if (categoryValue === selectedCategory) {
 			setSelectedCategory("");

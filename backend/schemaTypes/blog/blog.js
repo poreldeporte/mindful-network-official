@@ -42,21 +42,9 @@ export default {
     {
       name: 'category',
       title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Health', value: 'health'},
-          {title: 'Mental Health', value: 'mental-health'},
-          {title: 'Personal Growth', value: 'personal-growth'},
-          {title: 'Anxiety', value: 'anxiety'},
-          {title: 'Depression', value: 'depression'},
-          {title: 'Mindfulness', value: 'mindfulness'},
-          {title: 'Self-care', value: 'self-care'},
-          {title: 'Stress Management', value: 'stress-management'},
-          {title: 'Emotional Well-being', value: 'emotional-well-being'},
-          {title: 'Cognitive Behavioral Therapy', value: 'cbt'},
-        ],
-      },
+      type: 'reference',
+      to: [{type: 'blogCategories'}],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'isInternal',
@@ -146,7 +134,7 @@ export default {
   preview: {
     select: {
       title: 'title',
-      subtitle: 'category',
+      subtitle: 'category.title',
       media: 'featuredImage',
     },
   },

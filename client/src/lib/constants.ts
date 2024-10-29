@@ -5,8 +5,6 @@ import {
 	IconBuildingHospital,
 } from "@tabler/icons-react";
 
-import { BlogCategory } from "@/models";
-
 export const benefits = [
 	{
 		key: 0,
@@ -181,9 +179,9 @@ export const resources = [
 		path: "/search?resource=estate-planning-lawyers",
 	},
 	{
-		key: "specialized-mental-health-lawyers",
-		title: "Specialized Mental Health Lawyers",
-		path: "/search?resource=specialized-mental-health-lawyers",
+		key: "estate-specialized-mental-health-lawyers",
+		title: "Estate Specialized Mental Health Lawyers",
+		path: "/search?resource=estate-specialized-mental-health-lawyers",
 	},
 ];
 
@@ -296,16 +294,4 @@ export const usefulLinks = [
 		],
 		icon: IconBuildingHospital,
 	},
-];
-
-export const blogCategories: BlogCategory[] = [
-	{ title: "Health", value: "health" },
-	{ title: "Personal Growth", value: "personal-growth" },
-	{ title: "Anxiety", value: "anxiety" },
-	{ title: "Depression", value: "depression" },
-	{ title: "Mindfulness", value: "mindfulness" },
-	{ title: "Self-care", value: "self-care" },
-	{ title: "Stress Management", value: "stress-management" },
-	{ title: "Emotional Well-being", value: "emotional-well-being" },
-	{ title: "Cognitive Behavioral Therapy", value: "cbt" },
 ];

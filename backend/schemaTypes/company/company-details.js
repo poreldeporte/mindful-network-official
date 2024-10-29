@@ -10,6 +10,12 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'address',
+      title: 'Company Address',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'email',
       title: 'Email',
       type: 'string',
@@ -35,7 +41,7 @@ export default {
               options: {
                 list: [
                   {title: 'Twitter', value: 'twitter'},
-                  {title: 'LinkedIn', value: 'linkedin'},
+                  {title: 'Linkedin', value: 'linkedin'},
                   {title: 'Instagram', value: 'instagram'},
                 ],
               },
