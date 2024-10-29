@@ -61,7 +61,7 @@ export function Footer({ blogPosts }: Props) {
 	return (
 		<footer>
 			<div className="page-width py-10">
-				<div className="gap-5 grid grid-cols-1 lg:grid-cols-[auto_1fr]">
+				<div className="lg:gap-5 grid grid-cols-1 lg:grid-cols-[auto_1fr]">
 					<div className="mb-10 lg:mb-0 space-y-5">
 						<div className="flex content-center space-x-4 items-center">
 							<Image
