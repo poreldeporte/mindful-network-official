@@ -12,6 +12,8 @@ import {
 } from "@tabler/icons-react";
 import emailjs from "@emailjs/browser";
 
+emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
+
 interface Props {
 	psychologistName: string;
 }
