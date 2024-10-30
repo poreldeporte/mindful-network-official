@@ -33,7 +33,7 @@ export const SelectedFilters: React.FC<{
 				<Badge
 					key={`${filter.value}-${index}`}
 					color={filter.color as ColorType}
-					className="w-max flex bg-none border-gray-700"
+					className="w-max flex bg-none border-gray-700 capitalize"
 					showIcon={true}
 					onClick={() => handleBadgeClick(filter.type, filter.value)}
 					aria-pressed={selectedResources.includes(filter.value)}

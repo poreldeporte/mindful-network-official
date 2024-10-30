@@ -1,6 +1,6 @@
-export const allMedicationQuery = `*[_type == 'medicationManagement']{
-    ...,
-    "slug": slug.current, 
+export const allBakerActFacilitiesQuery = `*[_type == 'bakerActFacilities']{
+    ..., 
+    "slug": slug.current,
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,10 +20,10 @@ export const allMedicationQuery = `*[_type == 'medicationManagement']{
     "image": image.asset->url
   }`;
 
-export const getMedicationById = (id: string) => {
-	const query: string = `*[_type == 'medicationManagement' && _id == "${id}"]{
-    ...,
-    "slug": slug.current, 
+export const getBakerActFacilityById = (id: string) => {
+	const query: string = `*[_type == 'bakerActFacilities' && _id == "${id}"]{
+    ..., 
+    "slug": slug.current,
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name

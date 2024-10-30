@@ -2,30 +2,28 @@ import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
 import {
 	allPsychiatricQuery,
-	allBackerActFacilitiesQuery,
+	allBakerActFacilitiesQuery,
 	allInnovativeTherapiesQuery,
 	allInpatientQuery,
 	allOutpatientQuery,
-	allMedicationQuery,
 	allPsychologistsQuery,
 	allMindBodyPracticesQuery,
-	allSpecializedMentalHealthLawyers,
+	allMentalHealthLawyers,
 	allEstatePlanningLawyers,
 } from "../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
 export async function GET() {
 	const query = `{
+	"innovativeTherapies": ${allInnovativeTherapiesQuery},
     "psychologists": ${allPsychologistsQuery},
-    "backerActFacilities": ${allBackerActFacilitiesQuery},
-    "innovativeTherapies": ${allInnovativeTherapiesQuery},
-    "inpatient": ${allInpatientQuery},
-    "medication": ${allMedicationQuery},
-    "mindBodyPractices": ${allMindBodyPracticesQuery},
-    "outpatient": ${allOutpatientQuery},
-    "psychiatric": ${allPsychiatricQuery},
+	"psychiatry": ${allPsychiatricQuery},
+	"outpatientFacilities": ${allOutpatientQuery},
+	"inpatientFacilities": ${allInpatientQuery},
+    "bakerActFacilities": ${allBakerActFacilitiesQuery},
     "estatePlanningLawyers": ${allEstatePlanningLawyers},
-    "estateSpecializedMentalHealthLawyers": ${allSpecializedMentalHealthLawyers},
+    "mindBodyPractices": ${allMindBodyPracticesQuery},
+    "mentalHealthLawyers": ${allMentalHealthLawyers},
   }`;
 
 	try {
@@ -33,25 +31,28 @@ export async function GET() {
 
 		if (data) {
 			const adaptedData = {
-				psychologists: data.psychologists.map(getPsychologistsAdapter),
-				backerActFacilities: data.backerActFacilities.map(
-					getPsychologistsAdapter
-				),
 				innovativeTherapies: data.innovativeTherapies.map(
 					getPsychologistsAdapter
 				),
-				inpatient: data.inpatient.map(getPsychologistsAdapter),
-				medication: data.medication.map(getPsychologistsAdapter),
-				mindBodyPractices: data.mindBodyPractices.map(getPsychologistsAdapter),
-				outpatient: data.outpatient.map(getPsychologistsAdapter),
-				psychiatric: data.psychiatric.map(getPsychologistsAdapter),
+				psychologists: data.psychologists.map(getPsychologistsAdapter),
+				psychiatry: data.psychiatry.map(getPsychologistsAdapter),
+
+				outpatientFacilities: data.outpatientFacilities.map(
+					getPsychologistsAdapter
+				),
+				inpatientFacilities: data.inpatientFacilities.map(
+					getPsychologistsAdapter
+				),
+				bakerActFacilities: data.bakerActFacilities.map(
+					getPsychologistsAdapter
+				),
 				estatePlanningLawyers: data.estatePlanningLawyers.map(
 					getPsychologistsAdapter
 				),
-				estateSpecializedMentalHealthLawyers:
-					data.estateSpecializedMentalHealthLawyers.map(
-						getPsychologistsAdapter
-					),
+				mentalHealthLawyers: data.mentalHealthLawyers.map(
+					getPsychologistsAdapter
+				),
+				mindBodyPractices: data.mindBodyPractices.map(getPsychologistsAdapter),
 			};
 
 			return NextResponse.json(adaptedData);

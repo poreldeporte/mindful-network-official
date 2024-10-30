@@ -1,6 +1,6 @@
 export default {
-  name: 'backerActFacilities',
-  title: '👨‍⚕️ Backer Act Facilities',
+  name: 'bakerActFacilities',
+  title: '👨‍⚕️ Baker Act Facilities',
   type: 'document',
   fields: [
     {
