@@ -6,6 +6,8 @@ import { useState } from "react";
 import { ToastProvider, useToast } from "../ui/Toasts";
 import emailjs from "@emailjs/browser";
 
+emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
+
 function ContactForm() {
 	const toast = useToast();
 
