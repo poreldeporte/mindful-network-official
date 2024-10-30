@@ -1,12 +1,13 @@
 import {
   psychologists,
-  backerActFacilities,
+  bakerActFacilities,
   innovativeTherapies,
   inpatient,
-  medication,
   mindBodyPractices,
   outpatient,
-  psychiatric,
+  mentalHealthLawyers,
+  psychiatry,
+  estatePlanningLawyers,
 } from './resources'
 import blog from './blog/blog'
 
@@ -20,14 +21,15 @@ import usefulLinks from './useful-links/usefulLinks'
 import blogCategories from './blog/blogCategories'
 
 export const schemaTypes = [
-  psychologists,
-  backerActFacilities,
   innovativeTherapies,
-  inpatient,
-  medication,
-  mindBodyPractices,
+  psychologists,
+  psychiatry,
   outpatient,
-  psychiatric,
+  inpatient,
+  bakerActFacilities,
+  estatePlanningLawyers,
+  mentalHealthLawyers,
+  mindBodyPractices,
   blog,
   ageSpecialties,
   conditionSpecialties,

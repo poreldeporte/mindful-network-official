@@ -1,6 +1,6 @@
 export default {
-  name: 'medicationManagement',
-  title: '👨‍⚕️ Medication Management',
+  name: 'mentalHealthLawyers',
+  title: '👨‍⚕️ Mental Health Lawyers',
   type: 'document',
   fields: [
     {

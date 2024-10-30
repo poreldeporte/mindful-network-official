@@ -1,6 +1,6 @@
-export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacilities']{
-    ..., 
-    "slug": slug.current,
+export const allPsychiatricQuery = `*[_type == 'psychiatry']{
+    ...,
+    "slug": slug.current,  
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
@@ -20,10 +20,10 @@ export const allBackerActFacilitiesQuery = `*[_type == 'backerActFacilities']{
     "image": image.asset->url
   }`;
 
-export const getBackerActFacilityById = (id: string) => {
-	const query: string = `*[_type == 'backerActFacilities' && _id == "${id}"]{
-    ..., 
-    "slug": slug.current,
+export const getPsychiatricById = (id: string) => {
+	const query: string = `*[_type == 'psychiatry' && _id == "${id}"]{
+    ...,
+    "slug": slug.current,  
     "conditionSpecialty": conditionSpecialty[]->{
       "id": _id,
       name
