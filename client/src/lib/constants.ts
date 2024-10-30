@@ -5,8 +5,6 @@ import {
 	IconBuildingHospital,
 } from "@tabler/icons-react";
 
-import { BlogCategory } from "@/models";
-
 export const benefits = [
 	{
 		key: 0,
@@ -144,36 +142,24 @@ export const resources = [
 		path: "/search?resource=psychologists",
 	},
 	{
-		key: "psychiatric",
-		title: "Psychiatric Management",
+		key: "psychiatry",
+		title: "Psychiatry",
 		path: "/search?resource=psychiatric",
-	},
-	{
-		key: "medication",
-		title: "Medication Management",
-		path: "/search?resource=medication",
 	},
 	{
 		key: "outpatient",
 		title: "Outpatient Facilities",
-		path: "/search?resource=outpatient",
+		path: "/search?resource=outpatient-facilities",
 	},
-	{
-		key: "backer-act-facilities",
-		title: "Backer Act Facilities",
-		path: "/search?resource=backer-act-facilities",
-	},
-
 	{
 		key: "inpatient",
 		title: "Inpatient Facilities",
-		path: "/search?resource=inpatient",
+		path: "/search?resource=inpatient-facilities",
 	},
-
 	{
-		key: "mind-body-practices",
-		title: "Mind Body Practices",
-		path: "/search?resource=mind-body-practices",
+		key: "baker-act-facilities",
+		title: "Baker Act Facilities",
+		path: "/search?resource=baker-act-facilities",
 	},
 	{
 		key: "estate-planning-lawyers",
@@ -181,9 +167,14 @@ export const resources = [
 		path: "/search?resource=estate-planning-lawyers",
 	},
 	{
-		key: "specialized-mental-health-lawyers",
-		title: "Specialized Mental Health Lawyers",
-		path: "/search?resource=specialized-mental-health-lawyers",
+		key: "mental-health-lawyers",
+		title: "Mental Health Lawyers",
+		path: "/search?resource=mental-health-lawyers",
+	},
+	{
+		key: "mind-body-practices",
+		title: "Mind Body Practices",
+		path: "/search?resource=mind-body-practices",
 	},
 ];
 
@@ -296,16 +287,4 @@ export const usefulLinks = [
 		],
 		icon: IconBuildingHospital,
 	},
-];
-
-export const blogCategories: BlogCategory[] = [
-	{ title: "Health", value: "health" },
-	{ title: "Personal Growth", value: "personal-growth" },
-	{ title: "Anxiety", value: "anxiety" },
-	{ title: "Depression", value: "depression" },
-	{ title: "Mindfulness", value: "mindfulness" },
-	{ title: "Self-care", value: "self-care" },
-	{ title: "Stress Management", value: "stress-management" },
-	{ title: "Emotional Well-being", value: "emotional-well-being" },
-	{ title: "Cognitive Behavioral Therapy", value: "cbt" },
 ];

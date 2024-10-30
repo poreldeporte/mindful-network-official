@@ -6,17 +6,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const resourceOrder = [
-	"Psychologists",
-	"Backer Act Facilities",
 	"Innovative Therapies",
-	"Inpatient Facilities",
-	"Medication Management",
-	"Mental Health",
-	"Mind Body Practices",
+	"Psychologists",
+	"Psychiatry",
 	"Outpatient Facilities",
-	"Psychiatric Management",
+	"Inpatient Facilities",
+	"Baker Act Facilities",
 	"Estate Planning Lawyers",
-	"Specialized Mental Health Lawyers",
+	"Mental Health Lawyers",
+	"Mind Body Practices",
 ];
 
 const customSort = (a, b) => {

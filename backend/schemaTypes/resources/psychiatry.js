@@ -1,6 +1,6 @@
 export default {
-  name: 'psychiatricAssessment',
-  title: '👨‍⚕️ Psychiatric Assessment',
+  name: 'psychiatry',
+  title: '👨‍⚕️ Psychiatry',
   type: 'document',
   fields: [
     {

@@ -12,4 +12,6 @@ export const getCompanyDetailsAdapter = (
 	id: companyDetails._id,
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,
+	address: companyDetails.address,
+	socialLinks: companyDetails.socialLinks,
 });

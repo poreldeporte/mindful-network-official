@@ -2,7 +2,7 @@ import { PortableTextBlock } from "@portabletext/types";
 
 export interface BlogCategory {
 	title: string;
-	value: string;
+	slug: string;
 }
 
 export interface BlogModel {
@@ -11,7 +11,7 @@ export interface BlogModel {
 	slug: string;
 	author: string;
 	publishDate: string;
-	category: string;
+	category: BlogCategory;
 	isInternal: boolean;
 	externalLink?: string;
 	content: PortableTextBlock;

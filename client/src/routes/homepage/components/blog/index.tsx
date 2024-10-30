@@ -27,7 +27,7 @@ export const BlogCard = ({
 						alt={`Featured image for ${title}`}
 					/>
 					<Typography color="darkGray" as="h3" variant="xsmall">
-						{category.replaceAll("-", " ").toUpperCase()}
+						{category.slug.replaceAll("-", " ").toUpperCase()}
 					</Typography>
 					<Typography
 						className="mb-2 font-semibold"
@@ -54,7 +54,7 @@ export const BlogCard = ({
 						alt={`Featured image for ${title}`}
 					/>
 					<Typography color="darkGray" as="h3" variant="xsmall">
-						{category.replaceAll("-", " ").toUpperCase()}
+						{category.slug.replaceAll("-", " ").toUpperCase()}
 					</Typography>
 					<Typography
 						className="mb-2 font-semibold"

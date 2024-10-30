@@ -1,6 +1,6 @@
 export default {
-  name: 'outpatientProgram',
-  title: '👨‍⚕️ Outpatient Program',
+  name: 'outpatientFacilities',
+  title: '👨‍⚕️ Outpatient Facilities',
   type: 'document',
   fields: [
     {

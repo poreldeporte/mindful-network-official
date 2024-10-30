@@ -89,7 +89,6 @@ const Header = ({
 					className="bg-blue-500 rounded-full p-2"
 					onClick={() => {
 						setFiltersPanelVisible(true);
-						document.body.style.overflow = "hidden";
 					}}
 				>
 					<Plus className="text-white cursor-pointer" />

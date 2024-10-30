@@ -1,4 +1,4 @@
-export const allSpecializedMentalHealthLawyers = `*[_type == 'estatePlanningLawyers']{
+export const allMentalHealthLawyers = `*[_type == 'mentalHealthLawyers']{
     ..., 
     "slug": slug.current,
     "conditionSpecialty": conditionSpecialty[]->{
