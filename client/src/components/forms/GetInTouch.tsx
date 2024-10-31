@@ -10,15 +10,10 @@ function ContactForm() {
 
 	useEffect(() => {
 		emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
-		console.log("EmailJS initialized with:", {
-			publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-			serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-			templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-		});
 	}, []);
 
 	const [userInput, setUserInput] = useState({
-		to_email: "martin@poreldeporte.com",
+		to_email: "contact@themindfulnetwork.com",
 		from_name: "",
 		user_email: "",
 		message: "",
@@ -44,14 +39,14 @@ function ContactForm() {
 		) {
 			toast.error("Error", {
 				description: "All fields are required.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			return false;
 		}
 		if (!/\S+@\S+\.\S+/.test(userInput.user_email)) {
 			toast.error("Error", {
 				description: "Invalid email address.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			return false;
 		}

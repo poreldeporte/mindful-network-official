@@ -10,9 +10,7 @@ import {
 	IconPhone,
 	IconUser,
 } from "@tabler/icons-react";
-import { useState } from "react";
-
-emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+import { useEffect, useState } from "react";
 
 interface Props {
 	psychologistName: string;
@@ -21,8 +19,12 @@ interface Props {
 function ContactForm({ psychologistName }: Props) {
 	const toast = useToast();
 
+	useEffect(() => {
+		emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+	}, []);
+
 	const initialFormState = {
-		to_email: "martin@poreldeporte.com",
+		to_email: "contact@themindfulnetwork.com",
 		profesional_name: psychologistName,
 		from_name: "",
 		user_email: "",
@@ -55,14 +57,14 @@ function ContactForm({ psychologistName }: Props) {
 		) {
 			toast.error("Error", {
 				description: "All fields are required.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			return false;
 		}
 		if (!/\S+@\S+\.\S+/.test(userInput.user_email)) {
 			toast.error("Error", {
 				description: "Invalid email address.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			return false;
 		}
@@ -80,15 +82,9 @@ function ContactForm({ psychologistName }: Props) {
 
 		const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 		const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-		const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 		try {
-			const res = await emailjs.send(
-				serviceID,
-				templateID,
-				userInput,
-				publicKey
-			);
+			const res = await emailjs.send(serviceID, templateID, userInput);
 
 			if (res.status === 200) {
 				toast.success("Success", {
