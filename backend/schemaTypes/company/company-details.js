@@ -4,12 +4,6 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'name',
-      title: 'Company Name',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    },
-    {
       name: 'address',
       title: 'Company Address',
       type: 'string',

@@ -8,7 +8,6 @@ export interface CompanyDetailsExtended
 export const getCompanyDetailsAdapter = (
 	companyDetails: CompanyDetailsExtended
 ) => ({
-	name: companyDetails.name,
 	id: companyDetails._id,
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,

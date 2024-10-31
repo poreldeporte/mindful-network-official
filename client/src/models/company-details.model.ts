@@ -6,7 +6,6 @@ interface SocialLink {
 }
 
 export interface CompanyDetails {
-	name: string;
 	email: string;
 	address: string;
 	phoneNumber: string;
