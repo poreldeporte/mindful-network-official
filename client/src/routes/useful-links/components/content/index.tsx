@@ -45,8 +45,30 @@ const CategoryCard = (useFulLinkSection: UseFulLinkSection) => {
 	);
 };
 
+const CategoryCardSkeleton = ({ numberOfLinks = 4 }) => {
+	return (
+		<article className="bg-white p-10 rounded-xl shadow-sm border border-gray-100 animate-pulse">
+			<div className="mb-5 flex items-center space-x-2">
+				<div className="h-6 bg-gray-200 rounded w-48"></div>
+			</div>
+
+			<div className="pl-1">
+				<ul className="space-y-2">
+					{Array.from({ length: numberOfLinks }).map((_, index) => (
+						<li key={index} className="flex items-center space-x-2">
+							<div className="h-6 w-6 bg-gray-200 rounded-full"></div>
+
+							<div className="h-4 bg-gray-200 rounded w-3/4 pl-1 lg:pl-2"></div>
+						</li>
+					))}
+				</ul>
+			</div>
+		</article>
+	);
+};
+
 export const UseFulLinksContent = ({
-	usefulLinksSections,
+	usefulLinksSections = [],
 }: {
 	usefulLinksSections: UseFulLinkSection[];
 }) => {
@@ -56,12 +78,14 @@ export const UseFulLinksContent = ({
 				Useful links
 			</Typography>
 			<div className="grid lg:grid-cols-2 gap-5">
-				{usefulLinksSections.map((usefulLinkSection) => (
-					<CategoryCard
-						key={usefulLinkSection.sectionTitle}
-						{...usefulLinkSection}
-					/>
-				))}
+				{usefulLinksSections.length
+					? usefulLinksSections.map((usefulLinkSection) => (
+							<CategoryCard
+								key={usefulLinkSection.sectionTitle}
+								{...usefulLinkSection}
+							/>
+						))
+					: [1, 2, 3, 4].map((item) => <CategoryCardSkeleton key={item} />)}
 			</div>
 		</section>
 	);

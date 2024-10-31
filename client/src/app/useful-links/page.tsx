@@ -6,7 +6,7 @@ import { UseFulLinksContent } from "@/routes/useful-links";
 import { getUsefulLinks } from "@/services";
 import { useState, useEffect } from "react";
 
-export default async function UsefulLinks() {
+export default function UsefulLinks() {
 	const [usefulLinksSections, setUsefulLinksSections] = useState<
 		UseFulLinkSection[] | []
 	>([]);
