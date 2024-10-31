@@ -4,29 +4,49 @@ import { menuVariants } from "@/lib/anim";
 import { resources } from "@/lib/constants";
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
-import { MindfulIsotype, MindfulLogo } from "@/lib/images";
+import { CompanyDetails } from "@/models";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Typography } from "../ui";
 import Image from "next/image";
 import { sortResources } from "@/lib/utils";
+import { getCompanyDetails } from "@/services/company-details.service";
 
 export function MobileTopBar() {
+	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
+		null
+	);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const sortedResources = sortResources(resources);
 
 	const handleCloseHeader = () => setIsOpen(!isOpen);
 
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const data = await getCompanyDetails();
+				setCompanyDetails(data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
+	}, []);
+
 	return (
 		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
 			<Link href={"/"} className="flex content-center space-x-3 items-center">
-				<Image
-					alt="Mindful Logo"
-					className="w-auto h-12"
-					src={MindfulIsotype}
-				/>
-				<Image alt="Mindful Logo" className="w-auto h-10" src={MindfulLogo} />
+				{companyDetails?.logo && (
+					<Image
+						alt="Mindful Logo"
+						className="w-auto h-12"
+						src={companyDetails.logo}
+						width={400}
+						height={400}
+						priority
+					/>
+				)}
 			</Link>
 
 			<div onClick={() => setIsOpen(!isOpen)}>

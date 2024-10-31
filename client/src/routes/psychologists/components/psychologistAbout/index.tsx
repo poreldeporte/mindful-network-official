@@ -26,6 +26,16 @@ export function PsychologistAbout({
 	email,
 	video,
 }: PsychologistModel) {
+	const getItemsOrDefault = (
+		items: any[] | undefined,
+		defaultMessage: string
+	) => {
+		if (!items?.length) {
+			return [defaultMessage];
+		}
+		return items;
+	};
+
 	return (
 		<>
 			{video && (
@@ -45,19 +55,28 @@ export function PsychologistAbout({
 						id: "age-specialties",
 						icon: <PersonStanding className="h-6 w-6" />,
 						title: "Age Specialties",
-						items: ageSpecialty.map((age) => age.age),
+						items: getItemsOrDefault(
+							ageSpecialty?.map((age) => age.age),
+							"No age specialties"
+						),
 					},
 					{
 						id: "condition-specialties",
 						icon: <Brain className="h-6 w-6" />,
 						title: "Condition Specialty",
-						items: conditionSpecialty.map((condition) => condition.name),
+						items: getItemsOrDefault(
+							conditionSpecialty?.map((condition) => condition.name),
+							"No condition specialties"
+						),
 					},
 					{
 						id: "therapy-options",
 						icon: <Armchair className="h-6 w-6" />,
 						title: "Therapy options",
-						items: therapyOptions.map((option) => option.type),
+						items: getItemsOrDefault(
+							therapyOptions?.map((option) => option.type),
+							"No therapy options"
+						),
 					},
 				]}
 			/>
@@ -71,7 +90,10 @@ export function PsychologistAbout({
 						id: "insurances",
 						icon: <HeartPulse className="h-6 w-6" />,
 						title: "Insurances",
-						items: insurances.map((insurance) => insurance.name),
+						items: getItemsOrDefault(
+							insurances?.map((insurance) => insurance.name),
+							"No insurances"
+						),
 						layoutStyle: "row",
 					},
 					{
@@ -110,13 +132,13 @@ export function PsychologistAbout({
 						id: "address",
 						icon: <MapPinned className="h-6 w-6" />,
 						title: "Address",
-						items: [address.address],
+						items: [address?.address || "The user didn't provide an address"],
 					},
 					{
 						id: "phone",
 						icon: <Phone className="h-6 w-6" />,
 						title: "Phone",
-						items: [phone],
+						items: [phone || "The user didn't provide a phone"],
 					},
 				]}
 			/>

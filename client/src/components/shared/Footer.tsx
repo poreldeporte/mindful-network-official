@@ -1,7 +1,6 @@
 "use client";
 
 import { aboutFooter, resources } from "@/lib/constants";
-import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import { BlogModel } from "@/models";
 import { getLatestBlog } from "@/routes/homepage/services";
 import { ChevronUp, Phone, Mail, MapPin } from "lucide-react";
@@ -58,22 +57,24 @@ export function Footer({ blogPosts }: Props) {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
+	console.log(companyDetails);
+
 	return (
 		<footer>
 			<div className="page-width py-10">
 				<div className="lg:gap-5 grid grid-cols-1 lg:grid-cols-[auto_1fr]">
 					<div className="mb-10 lg:mb-0 space-y-5">
 						<div className="flex content-center space-x-4 items-center">
-							<Image
-								alt="Mindful Logo"
-								className="w-24 h-20 xl:w-40 xl:h-32"
-								src={MindfulIsotype}
-							/>
-							<Image
-								alt="Mindful Logo"
-								className="w-32 h-16 xl:w-40 xl:h-16"
-								src={MindfulLogo}
-							/>
+							{companyDetails?.logo && (
+								<Image
+									alt="Mindful Logo"
+									className="w-54 h-16 xl:w-56 xl:h-20"
+									src={companyDetails.logo}
+									width={200}
+									height={150}
+									priority
+								/>
+							)}
 						</div>
 						<div className="flex flex-col items-start space-y-3">
 							{companyDetails && companyDetails.address && (
