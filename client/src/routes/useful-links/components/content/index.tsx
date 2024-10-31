@@ -73,7 +73,7 @@ export const UseFulLinksContent = ({
 	usefulLinksSections: UseFulLinkSection[];
 }) => {
 	return (
-		<section className="flex flex-col mt-24 lg:mt-48 lg:mb-[100px]">
+		<section className="h-max mx-auto w-11/12 xl:w-3/4 flex flex-col mt-24 lg:mt-48 lg:mb-[100px]">
 			<Typography variant="title" as="h1" color="black" className="mb-5">
 				Useful links
 			</Typography>
