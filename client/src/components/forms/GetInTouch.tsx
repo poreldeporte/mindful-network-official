@@ -1,18 +1,17 @@
 "use client";
 
-import { Typography } from "../ui";
-import { Button } from "../ui";
-import { useState } from "react";
-import { ToastProvider, useToast } from "../ui/Toasts";
 import emailjs from "@emailjs/browser";
+import { useState } from "react";
+import { Button, Typography } from "../ui";
+import { ToastProvider, useToast } from "../ui/Toasts";
 
-emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
 
 function ContactForm() {
 	const toast = useToast();
 
 	const [userInput, setUserInput] = useState({
-		to_email: "contact@themindfulnetwork.com",
+		to_email: "martin@poreldeporte.com",
 		from_name: "",
 		user_email: "",
 		message: "",
@@ -61,12 +60,17 @@ function ContactForm() {
 			return;
 		}
 
-		const serviceID = process.env.EMAILJS_SERVICE_ID;
-		const templateID = process.env.EMAILJS_TEMPLATE_ID;
-		const userID = process.env.EMAILJS_PUBLIC_KEY;
+		const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+		const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+		const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 		try {
-			const res = await emailjs.send(serviceID, templateID, userInput, userID);
+			const res = await emailjs.send(
+				serviceID,
+				templateID,
+				userInput,
+				publicKey
+			);
 
 			if (res.status === 200) {
 				toast.success("Success", {
@@ -85,7 +89,7 @@ function ContactForm() {
 		} catch (error) {
 			toast.error("Error", {
 				description: "Failed to send message. Please try again later.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			console.error(error);
 		} finally {

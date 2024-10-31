@@ -1,18 +1,18 @@
 "use client";
 
 import { Button, Typography } from "@/components/ui";
-import { PsychologistModel } from "@/models";
-import { useState } from "react";
 import { ToastProvider, useToast } from "@/components/ui/Toasts";
+import { PsychologistModel } from "@/models";
+import emailjs from "@emailjs/browser";
 import {
 	IconMail,
 	IconMessage,
 	IconPhone,
 	IconUser,
 } from "@tabler/icons-react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
-emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
 
 interface Props {
 	psychologistName: string;
@@ -22,7 +22,7 @@ function ContactForm({ psychologistName }: Props) {
 	const toast = useToast();
 
 	const initialFormState = {
-		to_email: "contact@themindfulnetwork.com",
+		to_email: "martin@poreldeporte.com",
 		profesional_name: psychologistName,
 		from_name: "",
 		user_email: "",
@@ -78,12 +78,17 @@ function ContactForm({ psychologistName }: Props) {
 			return;
 		}
 
-		const serviceID = process.env.EMAILJS_SERVICE_ID;
-		const templateID = process.env.EMAILJS_TEMPLATE_ID;
-		const userID = process.env.EMAILJS_PUBLIC_KEY;
+		const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+		const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+		const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 		try {
-			const res = await emailjs.send(serviceID, templateID, userInput, userID);
+			const res = await emailjs.send(
+				serviceID,
+				templateID,
+				userInput,
+				publicKey
+			);
 
 			if (res.status === 200) {
 				toast.success("Success", {

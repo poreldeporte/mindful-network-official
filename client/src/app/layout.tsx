@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
 import "./globals.css";
-import emailjs from "@emailjs/browser";
 
 const anticDidone = Antic_Didone({
 	weight: "400",
@@ -73,8 +72,6 @@ export const metadata: Metadata = {
 	},
 	robots: "index, follow",
 };
-
-emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
 
 export default function RootLayout({
 	children,
