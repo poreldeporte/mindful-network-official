@@ -1,14 +1,21 @@
 "use client";
 
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Typography } from "../ui";
 import { ToastProvider, useToast } from "../ui/Toasts";
 
-emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
-
 function ContactForm() {
 	const toast = useToast();
+
+	useEffect(() => {
+		emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+		console.log("EmailJS initialized with:", {
+			publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+			serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+			templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+		});
+	}, []);
 
 	const [userInput, setUserInput] = useState({
 		to_email: "martin@poreldeporte.com",
@@ -60,16 +67,11 @@ function ContactForm() {
 			return;
 		}
 
-		const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-		const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-		const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
 		try {
 			const res = await emailjs.send(
-				serviceID,
-				templateID,
-				userInput,
-				publicKey
+				process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+				process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+				userInput
 			);
 
 			if (res.status === 200) {
@@ -87,11 +89,11 @@ function ContactForm() {
 				});
 			}
 		} catch (error) {
+			console.error("EmailJS Error:", error);
 			toast.error("Error", {
-				description: "Failed to send message. Please try again later.",
+				description: `Failed to send message: ${error.message}`,
 				position: "bottom-right",
 			});
-			console.error(error);
 		} finally {
 			setIsSubmitting(false);
 		}
