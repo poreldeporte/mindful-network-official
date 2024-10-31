@@ -1,15 +1,16 @@
 "use client";
 
-import { Typography } from "../ui";
-import { Button } from "../ui";
-import { useState } from "react";
-import { ToastProvider, useToast } from "../ui/Toasts";
 import emailjs from "@emailjs/browser";
-
-emailjs.init(process.env.EMAILJS_PUBLIC_KEY);
+import { useEffect, useState } from "react";
+import { Button, Typography } from "../ui";
+import { ToastProvider, useToast } from "../ui/Toasts";
 
 function ContactForm() {
 	const toast = useToast();
+
+	useEffect(() => {
+		emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+	}, []);
 
 	const [userInput, setUserInput] = useState({
 		to_email: "contact@themindfulnetwork.com",
@@ -38,14 +39,14 @@ function ContactForm() {
 		) {
 			toast.error("Error", {
 				description: "All fields are required.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			return false;
 		}
 		if (!/\S+@\S+\.\S+/.test(userInput.user_email)) {
 			toast.error("Error", {
 				description: "Invalid email address.",
-				position: "top-right",
+				position: "bottom-right",
 			});
 			return false;
 		}
@@ -61,12 +62,12 @@ function ContactForm() {
 			return;
 		}
 
-		const serviceID = process.env.EMAILJS_SERVICE_ID;
-		const templateID = process.env.EMAILJS_TEMPLATE_ID;
-		const userID = process.env.EMAILJS_PUBLIC_KEY;
-
 		try {
-			const res = await emailjs.send(serviceID, templateID, userInput, userID);
+			const res = await emailjs.send(
+				process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+				process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+				userInput
+			);
 
 			if (res.status === 200) {
 				toast.success("Success", {
@@ -83,11 +84,11 @@ function ContactForm() {
 				});
 			}
 		} catch (error) {
+			console.error("EmailJS Error:", error);
 			toast.error("Error", {
-				description: "Failed to send message. Please try again later.",
-				position: "top-right",
+				description: `Failed to send message: ${error.message}`,
+				position: "bottom-right",
 			});
-			console.error(error);
 		} finally {
 			setIsSubmitting(false);
 		}
