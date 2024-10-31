@@ -43,6 +43,8 @@ const SidePanel = ({
 	const searchParams = useSearchParams();
 	const router = useRouter();
 
+	console.log(proffesionals, conditions, insurances, therapyModalities);
+
 	useEffect(() => {
 		const conditionParam = searchParams.get("condition");
 		const insuranceParam = searchParams.get("insurance");
