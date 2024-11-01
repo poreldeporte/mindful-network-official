@@ -57,8 +57,6 @@ export function Footer({ blogPosts }: Props) {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
-	console.log(companyDetails);
-
 	return (
 		<footer>
 			<div className="page-width py-10">
