@@ -73,7 +73,7 @@ export default {
       name: 'languages',
       title: 'Languages',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'admitedLanguages'}]}],
+      of: [{type: 'reference', to: [{type: 'admittedLanguages'}]}],
     },
     {
       name: 'degree',

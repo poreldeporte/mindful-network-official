@@ -19,7 +19,7 @@ import therapyModalities from './therapy-modalities/therapyModalities'
 import user from './user/user'
 import usefulLinks from './useful-links/usefulLinks'
 import blogCategories from './blog/blogCategories'
-import admitedLanguages from './admited-languages/admitedLanguages'
+import admittedLanguages from './admitted-languages/admittedLanguages'
 
 export const schemaTypes = [
   innovativeTherapies,
@@ -31,14 +31,14 @@ export const schemaTypes = [
   estatePlanningLawyers,
   mentalHealthLawyers,
   mindBodyPractices,
+  usefulLinks,
   blog,
   blogCategories,
   ageSpecialties,
   conditionSpecialties,
   insurances,
   therapyModalities,
-  admitedLanguages,
+  admittedLanguages,
   user,
   companyDetail,
-  usefulLinks,
 ]

@@ -1,6 +1,6 @@
 export default {
-  name: 'admitedLanguages',
-  title: '⚙️ Admited Languages',
+  name: 'admittedLanguages',
+  title: '⚙️ Admitted Languages',
   type: 'document',
   fields: [
     {
