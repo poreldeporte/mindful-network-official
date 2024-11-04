@@ -4,6 +4,15 @@ export default {
   type: 'document',
   fields: [
     {
+      name: 'logo',
+      title: 'Image Company Logo',
+      description: 'Suggestion: Ensure the image size is under 1MB. Logo for topbar and footer',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: 'address',
       title: 'Company Address',
       type: 'string',

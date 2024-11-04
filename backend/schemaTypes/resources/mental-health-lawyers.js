@@ -77,17 +77,19 @@ export default {
       ],
     },
     {
-      name: 'position',
-      title: 'Position',
-      type: 'object',
-      fields: [
-        {name: 'lat', title: 'Latitude', type: 'number'},
-        {name: 'lng', title: 'Longitude', type: 'number'},
-      ],
-    },
-    {
       name: 'phone',
       title: 'Phone',
+      type: 'string',
+    },
+    {
+      name: 'languages',
+      title: 'Languages',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'admittedLanguages'}]}],
+    },
+    {
+      name: 'degree',
+      title: 'Degree Type',
       type: 'string',
     },
     {

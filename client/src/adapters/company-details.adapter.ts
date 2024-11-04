@@ -9,6 +9,7 @@ export const getCompanyDetailsAdapter = (
 	companyDetails: CompanyDetailsExtended
 ) => ({
 	id: companyDetails._id,
+	logo: companyDetails.logo,
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,
 	address: companyDetails.address,

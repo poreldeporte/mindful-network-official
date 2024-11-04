@@ -5,7 +5,15 @@ import { UseFulLinkSection } from "@/models";
 
 export const getUsefulLinks = async (): Promise<UseFulLinkSection[] | null> => {
 	try {
-		const usefulLinks = await sanityClient.fetch(allUsefulLinks);
+		const usefulLinks = await sanityClient.fetch(
+			allUsefulLinks,
+			{},
+			{
+				next: {
+					revalidate: 0,
+				},
+			}
+		);
 		const usefulLinksAdapter = usefulLinks.map(getUsefulLinksAdapter);
 		return usefulLinksAdapter;
 	} catch (error) {
