@@ -55,7 +55,11 @@ export async function GET() {
 				mindBodyPractices: data.mindBodyPractices.map(getPsychologistsAdapter),
 			};
 
-			return NextResponse.json(adaptedData);
+			return NextResponse.json(adaptedData, {
+				headers: {
+					"Cache-Control": "no-store",
+				},
+			});
 		}
 	} catch (error) {
 		console.error("Error fetching all schemas:", error);
