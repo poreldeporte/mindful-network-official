@@ -29,7 +29,11 @@ export const getPsychologistById = async (
             "video": video.asset->url,
         }`;
 
-		const data = await sanityClient.fetch(query, { slug });
+		const data = await sanityClient.fetch(
+			query,
+			{ slug },
+			{ cache: "no-store" }
+		);
 		return getPsychologistsAdapter(data);
 	} catch (error) {
 		console.error("Error fetching psychologist data:", error);
