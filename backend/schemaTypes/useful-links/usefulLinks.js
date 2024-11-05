@@ -36,8 +36,8 @@ export default {
             {
               name: 'url',
               title: 'URL',
-              type: 'url',
-              validation: (Rule) => Rule.required().uri(),
+              type: 'string',
+              validation: (Rule) => Rule.required(),
             },
           ],
         },
