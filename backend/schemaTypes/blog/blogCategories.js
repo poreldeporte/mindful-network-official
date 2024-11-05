@@ -1,6 +1,6 @@
 export default {
   name: 'blogCategories',
-  title: '📑 Blog Categories',
+  title: '⚙️ Blog Categories',
   type: 'document',
   fields: [
     {

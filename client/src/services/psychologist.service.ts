@@ -24,6 +24,7 @@ export const getPsychologistById = async (
                 "id": _id,
                 type
             },
+            "languages": languages[]->.language,
             "image": image.asset->url,
             "video": video.asset->url,
         }`;

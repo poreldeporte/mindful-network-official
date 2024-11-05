@@ -97,7 +97,7 @@ const Header = ({
 
 			<div className="hidden lg:block">
 				<button
-					className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-gray-100 border border-gray-100 rounded-full py-2 px-4 shadow-md flex items-center gap-2"
+					className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-gray-500 text-white hover:bg-gray-600 border rounded-full py-2 px-4 shadow-md flex items-center gap-2"
 					title={headerIsOpen ? "Hide filters" : "Show filters"}
 					aria-expanded={headerIsOpen}
 					aria-controls="filter-menu"
@@ -113,6 +113,7 @@ const Header = ({
 						aria-hidden="true"
 					/>
 				</button>
+
 				<AnimatePresence mode="wait">
 					{headerIsOpen && (
 						<motion.div
@@ -157,6 +158,7 @@ const Header = ({
 									))}
 								</div>
 							</div>
+
 							<div className="my-2">
 								<Typography as="p" color="darkGray" variant="small">
 									Conditions:

@@ -1,11 +1,13 @@
 "use client";
 
 import { resources } from "@/lib/constants";
-import { MindfulIsotype, MindfulLogo } from "@/lib/images";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "../ui";
+import { getCompanyDetails } from "@/services/company-details.service";
+import { useState, useEffect } from "react";
+import { CompanyDetails } from "@/models";
 
 import {
 	Select,
@@ -19,6 +21,9 @@ import {
 import { sortResources } from "@/lib/utils";
 
 export function Topbar() {
+	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
+		null
+	);
 	const router = useRouter();
 	const pathname = usePathname();
 
@@ -33,23 +38,35 @@ export function Topbar() {
 		}
 	};
 
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const data = await getCompanyDetails();
+				setCompanyDetails(data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
+	}, []);
+
 	return (
 		<header className="fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden lg:block z-50">
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
-					className="flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
+					className="w-80 h-20 flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
 				>
-					<Image
-						alt="Mindful Logo"
-						className="w-16 h-14 filter invert brightness-0"
-						src={MindfulIsotype}
-					/>
-					<Image
-						alt="Mindful Logo"
-						className="w-28 h-12 filter invert brightness-0"
-						src={MindfulLogo}
-					/>
+					{companyDetails?.logo && (
+						<Image
+							alt="Mindful Logo"
+							className="w-full h-full filter invert brightness-0 object-contain"
+							src={companyDetails.logo}
+							width={400}
+							height={400}
+							priority
+						/>
+					)}
 				</Link>
 
 				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
