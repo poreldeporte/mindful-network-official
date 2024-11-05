@@ -13,6 +13,7 @@ import { getValidationError } from "@/utilities";
 import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getAllResources } from "@/services";
 import SidePanel from "./side-panel/SidePanel";
 
 export const SearchWrapper = () => {
@@ -52,15 +53,14 @@ export const SearchWrapper = () => {
 					fetch("/api/conditions"),
 					fetch("/api/insurances"),
 					fetch("/api/therapy-modalities"),
-					fetch("/api/resources"),
+					getAllResources(),
 				]);
 
 				const conditionsData = await conditionsRes.json();
 				const insurancesData = await insurancesRes.json();
 				const therapyModalitiesData = await therapyModalitiesRes.json();
-				const proffesionalsData = await proffesionals.json();
 
-				setAllProffesionals(proffesionalsData);
+				setAllProffesionals(proffesionals);
 				setConditions(conditionsData);
 				setInsurances(insurancesData);
 				setTherapyModalities(therapyModalitiesData);

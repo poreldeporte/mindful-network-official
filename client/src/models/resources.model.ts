@@ -6,17 +6,17 @@ export interface ResourcesKey {
 }
 
 export interface ResourcesModel {
-	psychologists: PsychologistModel[];
-	backerActFacilities: PsychologistModel[];
 	innovativeTherapies: PsychologistModel[];
-	inpatient: PsychologistModel[];
-	medication: PsychologistModel[];
-	mentalHealth: PsychologistModel[];
+	psychologists: PsychologistModel[];
+	psychiatry: PsychologistModel[];
+	outpatientFacilities: PsychologistModel[];
+	inpatientFacilities: PsychologistModel[];
+	bakerActFacilities: PsychologistModel[];
+	estatePlanningLawyers: PsychologistModel[];
 	mindBodyPractices: PsychologistModel[];
-	outpatient: PsychologistModel[];
-	psychiatric: PsychologistModel[];
-	ageSpecialties: PsychologistModel[];
-	conditionSpecialties: PsychologistModel[];
-	insurances: PsychologistModel[];
-	therapyModalities: PsychologistModel[];
+	mentalHealthLawyers: PsychologistModel[];
+	ageSpecialties?: PsychologistModel[];
+	conditionSpecialties?: PsychologistModel[];
+	insurances?: PsychologistModel[];
+	therapyModalities?: PsychologistModel[];
 }
