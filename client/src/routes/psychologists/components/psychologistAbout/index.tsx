@@ -19,6 +19,7 @@ import {
 export function PsychologistAbout({
 	ageSpecialty,
 	insurances,
+	slidingScale,
 	conditionSpecialty,
 	therapyOptions,
 	phone,
@@ -73,7 +74,7 @@ export function PsychologistAbout({
 			id: "sliding-scale",
 			icon: <Wallet className="h-6 w-6" />,
 			title: "Sliding scale",
-			items: ["Available based on financial need"],
+			items: [slidingScale || "Not yet defined"],
 		});
 	}
 

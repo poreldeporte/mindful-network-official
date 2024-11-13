@@ -25,6 +25,7 @@ export interface PsychologistModel {
 	conditionSpecialty: conditionSpecialty[];
 	therapyOptions: TherapyModality[];
 	degree: string;
+	slidingScale: string;
 	languages: string[];
 	image: string;
 	subtitle: string;

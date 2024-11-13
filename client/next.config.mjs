@@ -4,7 +4,6 @@ const nextConfig = {
 		domains: ["plus.unsplash.com", "images.unsplash.com", "cdn.sanity.io"],
 		unoptimized: true,
 	},
-	cache: false,
 };
 
 export default nextConfig;

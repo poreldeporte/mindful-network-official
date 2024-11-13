@@ -11,7 +11,14 @@ export default {
         source: 'name',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((slug) => {
+          if (!slug) return true
+          if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug.current)) {
+            return "The slug should be in lower case and use hyphens to separate words. Example: 'my-slug-example'"
+          }
+          return true
+        }),
     },
     {
       name: 'name',
@@ -85,6 +92,11 @@ export default {
       title: 'Insurances',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'insurance'}]}],
+    },
+    {
+      name: 'slidingScale',
+      title: 'Sliding Scale',
+      type: 'string',
     },
     {
       name: 'ageSpecialty',
