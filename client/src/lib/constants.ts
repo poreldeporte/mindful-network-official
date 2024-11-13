@@ -144,7 +144,7 @@ export const resources = [
 	{
 		key: "psychiatry",
 		title: "Psychiatry",
-		path: "/search?resource=psychiatric",
+		path: "/search?resource=psychiatry",
 	},
 	{
 		key: "outpatient",
