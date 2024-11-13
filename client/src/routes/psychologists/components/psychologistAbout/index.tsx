@@ -69,15 +69,15 @@ export function PsychologistAbout({
 			items: insurances.map((insurance) => insurance.name),
 			layoutStyle: "row",
 		});
-
+	}
+	if (slidingScale) {
 		insuranceSubsections.push({
 			id: "sliding-scale",
 			icon: <Wallet className="h-6 w-6" />,
 			title: "Sliding scale",
-			items: [slidingScale || "Not yet defined"],
+			items: [slidingScale],
 		});
 	}
-
 	if (languages) {
 		moreInfoSubsections.push({
 			id: "languages",
