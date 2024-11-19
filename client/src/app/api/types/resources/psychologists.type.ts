@@ -42,6 +42,10 @@ export const getPsychologistById = (id: string) => {
     },
     "image": image.asset->url,
     "video": video.asset->url,
+    "imagesGallery": imagesGallery[]-> {
+      ...,
+      "url": asset->url
+    }
   }`;
 
 	return query;

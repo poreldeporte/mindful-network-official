@@ -28,6 +28,7 @@ export interface PsychologistModel {
 	slidingScale: string;
 	languages: string[];
 	image: string;
+	imagesGallery: string[];
 	subtitle: string;
 	video: string;
 	slug: string;
