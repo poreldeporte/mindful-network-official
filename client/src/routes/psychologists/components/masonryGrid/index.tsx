@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Typography } from "@/components/ui";
+import { X } from "lucide-react";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -79,7 +79,10 @@ interface ImageViewer {
 
 const ImageViewer = ({ image, setIsVisible }: ImageViewer) => {
 	return (
-		<div className="fixed top-0 left-0 z-[100] w-full h-screen bg-black/80">
+		<div
+			className="fixed top-0 left-0 z-[100] w-full h-screen bg-black/80"
+			onClick={() => setIsVisible(false)}
+		>
 			<div className="mx-auto flex items-center h-full max-w-7xl flex-col justify-center">
 				<div className="relative overflow-hidden">
 					<Image
@@ -88,16 +91,13 @@ const ImageViewer = ({ image, setIsVisible }: ImageViewer) => {
 						className="aspect-[3/3] object-cover rounded-lg"
 						width={720}
 						height={480}
-					/>
-				</div>
-
-				<div
-					onClick={() => setIsVisible(false)}
-					className="bg-blue-50/30 rounded-full px-4 py-2 flex space-x-2 items-center justify-between mt-5 cursor-pointer hover:bg-blue-50/40"
-				>
-					<Typography color="white" variant="small">
-						Close Image
-					</Typography>
+					></Image>
+					<div
+						onClick={() => setIsVisible(false)}
+						className="absolute top-0 right-5 bg-blue-50/30 shadow-sm rounded-full p-3 flex space-x-2 items-center justify-between mt-5 cursor-pointer hover:bg-blue-50/40"
+					>
+						<X className="w-6 h-6"></X>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -136,8 +136,8 @@ export function MasonryGrid({ images }: Props) {
 							}}
 							alt={`Image ${index}`}
 							style={{ transform: "translate3d(0, 0, 0)" }}
-							className={`w-full transform rounded-lg brightness-90 transition group-hover:brightness-110 object-cover cursor-pointer duration-200 hover:lg:brightness-[0.8] ${
-								isHorizontal ? "h-[196px]" : "h-[400px]"
+							className={`h-[196px] w-full transform rounded-lg brightness-90 transition group-hover:brightness-110 object-cover cursor-pointer duration-200 hover:lg:brightness-[0.8] ${
+								isHorizontal ? "h-[196px]" : "lg:h-[400px]"
 							}`}
 							src={src}
 							width={720}
