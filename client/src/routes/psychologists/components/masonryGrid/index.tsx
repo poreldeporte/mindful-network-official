@@ -77,13 +77,22 @@ interface ImageViewer {
 // 	);
 // };
 
-const ImageViewer = ({ image, setIsVisible }: ImageViewer) => {
+const ImageViewer = ({ image, setIsVisible }) => {
+	const handleBackdropClick = (e) => {
+		if (e.target === e.currentTarget) {
+			setIsVisible(false);
+		}
+	};
+
 	return (
 		<div
 			className="fixed top-0 left-0 z-[100] w-full h-screen bg-black/80"
-			onClick={() => setIsVisible(false)}
+			onClick={handleBackdropClick}
 		>
-			<div className="mx-auto flex items-center h-full max-w-7xl flex-col justify-center">
+			<div
+				className="mx-auto flex items-center h-full max-w-7xl flex-col justify-center"
+				onClick={handleBackdropClick}
+			>
 				<div className="relative overflow-hidden">
 					<Image
 						alt={`Image ${image}`}
@@ -91,12 +100,15 @@ const ImageViewer = ({ image, setIsVisible }: ImageViewer) => {
 						className="aspect-[3/3] object-cover rounded-lg"
 						width={720}
 						height={480}
-					></Image>
+					/>
 					<div
-						onClick={() => setIsVisible(false)}
+						onClick={(e) => {
+							e.stopPropagation();
+							setIsVisible(false);
+						}}
 						className="absolute top-0 right-5 bg-blue-50/30 shadow-sm rounded-full p-3 flex space-x-2 items-center justify-between mt-5 cursor-pointer hover:bg-blue-50/40"
 					>
-						<X className="w-6 h-6"></X>
+						<X className="w-6 h-6" />
 					</div>
 				</div>
 			</div>
@@ -104,49 +116,91 @@ const ImageViewer = ({ image, setIsVisible }: ImageViewer) => {
 	);
 };
 
+export default ImageViewer;
+
 export function MasonryGrid({ images }: Props) {
-	const [aspectRatios, setAspectRatios] = useState({});
+	const [aspectRatios, setAspectRatios] = useState([]);
 	const [isVisible, setIsVisible] = useState(false);
+	const [sortedImages, setSortedImages] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const [image, setImage] = useState("");
 
 	useEffect(() => {
+		setIsLoading(true);
+		const tempRatios = [];
+		let loadedCount = 0;
+
 		images.forEach((src, index) => {
 			const img = new window.Image();
 			img.onload = () => {
-				setAspectRatios((prev) => ({
-					...prev,
-					[index]: img.width / img.height,
-				}));
+				tempRatios[index] = img.width / img.height;
+				loadedCount++;
+
+				if (loadedCount === images.length) {
+					const sorted = [...images].sort((a, b) => {
+						const indexA = images.indexOf(a);
+						const indexB = images.indexOf(b);
+						const isVerticalA = tempRatios[indexA] < 1;
+						const isVerticalB = tempRatios[indexB] < 1;
+
+						if (isVerticalA && !isVerticalB) return -1;
+						if (!isVerticalA && isVerticalB) return 1;
+						return tempRatios[indexA] - tempRatios[indexB];
+					});
+
+					setAspectRatios(tempRatios);
+					setSortedImages(sorted);
+					setIsLoading(false);
+				}
 			};
 			img.src = src;
 		});
 	}, [images]);
 
 	return (
-		<div className="columns-1 sm:columns-2 lg:columns-3 gap-2">
-			{images.map((src, index) => {
-				const isHorizontal = aspectRatios[index] > 1;
+		<div
+			className={`columns-1 sm:columns-2 ${
+				images.length === 4 &&
+				(aspectRatios.every((ratio) => ratio > 1 === aspectRatios[0] > 1)
+					? "lg:columns-4"
+					: aspectRatios.filter((ratio) => ratio > 1 === aspectRatios[0] > 1)
+								.length >= 3
+						? "lg:columns-2"
+						: "lg:columns-3")
+			} ${
+				images.length === 3 &&
+				aspectRatios.every((ratio) => ratio > 1 === aspectRatios[0] > 1)
+					? "lg:columns-3"
+					: aspectRatios.filter((ratio) => ratio > 1 === aspectRatios[0] > 1)
+								.length >= 2
+						? "lg:columns-3"
+						: "lg:columns-2"
+			} ${images.length === 2 ? "lg:columns-2" : ""} gap-2`}
+		>
+			{!isLoading &&
+				sortedImages.map((src, index) => {
+					const originalIndex = images.indexOf(src);
+					const isHorizontal = aspectRatios[originalIndex] > 1;
 
-				return (
-					<div key={index} className="mb-2 break-inside-avoid">
-						<Image
-							onClick={() => {
-								setIsVisible(true);
-								setImage(src);
-							}}
-							alt={`Image ${index}`}
-							style={{ transform: "translate3d(0, 0, 0)" }}
-							className={`h-[196px] w-full transform rounded-lg brightness-90 transition group-hover:brightness-110 object-cover cursor-pointer duration-200 hover:lg:brightness-[0.8] ${
-								isHorizontal ? "h-[196px]" : "lg:h-[400px]"
-							}`}
-							src={src}
-							width={720}
-							height={480}
-							loading={index < 4 ? "eager" : "lazy"}
-						/>
-					</div>
-				);
-			})}
+					return (
+						<div key={index} className="mb-2 break-inside-avoid">
+							<Image
+								onClick={() => {
+									setIsVisible(true);
+									setImage(src);
+								}}
+								alt={`Image ${index}`}
+								style={{ transform: "translate3d(0, 0, 0)" }}
+								className={`h-[196px] w-full transform rounded-lg brightness-90 transition group-hover:brightness-110 object-cover cursor-pointer duration-200 hover:lg:brightness-[0.8] ${
+									isHorizontal ? "h-[196px]" : "lg:h-[400px]"
+								}`}
+								src={src}
+								width={720}
+								height={480}
+							/>
+						</div>
+					);
+				})}
 			{/* <div className="flex items-center justify-end">
 				<Button
 					variant="small"
