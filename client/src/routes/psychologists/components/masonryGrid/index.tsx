@@ -159,23 +159,33 @@ export function MasonryGrid({ images }: Props) {
 
 	return (
 		<div
-			className={`columns-1 sm:columns-2 ${
-				images.length === 4 &&
-				(aspectRatios.every((ratio) => ratio > 1 === aspectRatios[0] > 1)
-					? "lg:columns-4"
-					: aspectRatios.filter((ratio) => ratio > 1 === aspectRatios[0] > 1)
-								.length >= 3
-						? "lg:columns-2"
-						: "lg:columns-3")
-			} ${
-				images.length === 3 &&
-				aspectRatios.every((ratio) => ratio > 1 === aspectRatios[0] > 1)
-					? "lg:columns-3"
-					: aspectRatios.filter((ratio) => ratio > 1 === aspectRatios[0] > 1)
-								.length >= 2
-						? "lg:columns-3"
-						: "lg:columns-2"
-			} ${images.length === 2 ? "lg:columns-2" : ""} gap-2`}
+			className={`columns-1 sm:columns-2 gap-2 ${(() => {
+				const sameOrientation = aspectRatios.every(
+					(ratio) => ratio > 1 === aspectRatios[0] > 1
+				);
+				const similarCount = aspectRatios.filter(
+					(ratio) => ratio > 1 === aspectRatios[0] > 1
+				).length;
+
+				switch (images.length) {
+					case 4:
+						return sameOrientation
+							? "lg:columns-4"
+							: similarCount >= 3
+								? "lg:columns-2"
+								: "lg:columns-3";
+					case 3:
+						return sameOrientation
+							? "lg:columns-3"
+							: similarCount >= 2
+								? "lg:columns-2"
+								: "lg:columns-3";
+					case 2:
+						return "lg:columns-2";
+					default:
+						return "";
+				}
+			})()}`}
 		>
 			{!isLoading &&
 				sortedImages.map((src, index) => {
