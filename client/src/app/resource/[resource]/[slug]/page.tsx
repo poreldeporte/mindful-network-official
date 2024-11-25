@@ -7,6 +7,7 @@ import {
 import { getPsychologistById } from "@/services";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { generateSlugFromCamelCase } from "@/utilities";
 
 export async function generateMetadata({
 	params,
@@ -24,7 +25,7 @@ export async function generateMetadata({
 
 	const title = `${psychologist.name} - Mental Health Professional`;
 	const description = `${psychologist.subtitle}. Connect with ${psychologist.name}, a licensed mental health professional in South Florida.`;
-	const url = `https://themindfulnetwork.com/psychologist/${params.slug}`;
+	const url = `https://themindfulnetwork.com/resource/${generateSlugFromCamelCase(psychologist._type)}/${params.slug}`;
 
 	return {
 		title,
