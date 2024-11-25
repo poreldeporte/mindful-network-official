@@ -2,6 +2,7 @@ import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
+import { generateSlugFromCamelCase } from "@/utilities";
 import { Armchair, Brain, HeartPulse, PersonStanding } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -117,7 +118,7 @@ const PsychologistCard = ({
 
 			<div className="flex justify-end items-end h-full mt-2">
 				<Link
-					href={`/psychologists/${slug}`}
+					href={`/resource/${generateSlugFromCamelCase(_type)}/${slug}`}
 					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
