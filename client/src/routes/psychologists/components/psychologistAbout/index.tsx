@@ -3,6 +3,7 @@
 import { PsychologistModel } from "@/models";
 import { IconCertificate } from "@tabler/icons-react";
 import { Section } from "../section";
+import { urlFor } from "@/api";
 
 import {
 	Armchair,
@@ -26,6 +27,7 @@ export function PsychologistAbout({
 	address,
 	languages,
 	degree,
+	imagesGallery,
 	email,
 	video,
 }: PsychologistModel) {
@@ -131,6 +133,17 @@ export function PsychologistAbout({
 					title="Get to know me"
 					emptyMessage=""
 					profileVideo={video}
+				/>
+			)}
+
+			{imagesGallery && (
+				<Section
+					id="profile-gallery"
+					title="Gallery"
+					emptyMessage=""
+					profileGallery={imagesGallery
+						.slice(0, 4)
+						.map((image) => urlFor(image).url())}
 				/>
 			)}
 

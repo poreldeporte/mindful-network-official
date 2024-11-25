@@ -68,6 +68,13 @@ export default {
       ],
     },
     {
+      name: 'imagesGallery',
+      title: 'Images Gallery',
+      type: 'array',
+      validation: (Rule) => Rule.max(4),
+      of: [{type: 'image'}],
+    },
+    {
       name: 'facility',
       title: 'Facility',
       type: 'string',

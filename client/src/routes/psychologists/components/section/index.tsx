@@ -5,6 +5,7 @@ import { opacityVariants } from "@/lib/anim";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { MasonryGrid } from "..";
 
 interface SectionProps {
 	id: string;
@@ -12,6 +13,7 @@ interface SectionProps {
 	subsections?: Array<SubsectionProps>;
 	emptyMessage: string;
 	profileVideo?: string;
+	profileGallery?: string[];
 }
 
 interface SubsectionProps {
@@ -27,6 +29,7 @@ export function Section({
 	title,
 	subsections,
 	profileVideo,
+	profileGallery,
 	emptyMessage,
 }: SectionProps) {
 	const [isOpen, setIsOpen] = useState(true);
@@ -55,6 +58,7 @@ export function Section({
 								<source src={profileVideo} type="video/mp4" />
 							</video>
 						)}
+						{profileGallery && <MasonryGrid images={profileGallery} />}
 						{subsections && subsections.length ? (
 							subsections.map((subsection) => (
 								<Subsection key={subsection.id} {...subsection} />
