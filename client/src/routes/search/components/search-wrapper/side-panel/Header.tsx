@@ -48,7 +48,7 @@ const Header = ({
 
 	return (
 		<header
-			className="px-5 pb-5 w-full border-b border-gray-200 relative"
+			className="px-5 pb-10 w-full border-b border-gray-200 relative"
 			aria-label="Header with navigation options and filters"
 		>
 			<Link href={"/"}>
