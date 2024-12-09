@@ -13,7 +13,12 @@ import { getValidationError } from "@/utilities";
 import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getAllResources } from "@/services";
+import {
+	getAllResources,
+	getAllConditions,
+	getAllInsurances,
+	getAllTherapyOptions,
+} from "@/services";
 import SidePanel from "./side-panel/SidePanel";
 
 export const SearchWrapper = () => {
@@ -50,20 +55,16 @@ export const SearchWrapper = () => {
 					therapyModalitiesRes,
 					proffesionals,
 				] = await Promise.all([
-					fetch("/api/conditions"),
-					fetch("/api/insurances"),
-					fetch("/api/therapy-modalities"),
+					getAllConditions(),
+					getAllInsurances(),
+					getAllTherapyOptions(),
 					getAllResources(),
 				]);
 
-				const conditionsData = await conditionsRes.json();
-				const insurancesData = await insurancesRes.json();
-				const therapyModalitiesData = await therapyModalitiesRes.json();
-
 				setAllProffesionals(proffesionals);
-				setConditions(conditionsData);
-				setInsurances(insurancesData);
-				setTherapyModalities(therapyModalitiesData);
+				setConditions(conditionsRes);
+				setInsurances(insurancesRes);
+				setTherapyModalities(therapyModalitiesRes);
 
 				setLoading(false);
 			} catch (error) {
