@@ -204,7 +204,7 @@ export function MasonryGrid({ images }: Props) {
 								className={`h-[196px] w-full transform rounded-lg brightness-90 transition group-hover:brightness-110 object-cover cursor-pointer duration-200 hover:lg:brightness-[0.8] ${
 									isHorizontal ? "h-[196px]" : "lg:h-[400px]"
 								}`}
-								src={src}
+								src={src || ""}
 								width={720}
 								height={480}
 							/>
