@@ -62,7 +62,7 @@ export const BlogsContent = ({ blogAmount }: Props) => {
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
 			/>
-			<section className="h-max gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+			<section className="h-max gap-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
 				{isLoading ? (
 					<>Loading...</>
 				) : blogs && blogs.length ? (

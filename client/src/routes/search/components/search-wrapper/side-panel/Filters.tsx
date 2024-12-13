@@ -156,14 +156,7 @@ export const Filters = ({
 
 	return (
 		<div
-			className={`
-		  ${visibilityClass}
-		  fixed inset-0 z-50
-		  lg:relative lg:inset-auto lg:z-auto
-		  bg-blue-50
-		  w-full
-		  flex flex-col
-		`}
+			className={`${visibilityClass} fixed inset-0 z-50 lg:relative lg:inset-auto lg:z-auto bg-blue-50 w-full flex flex-col`}
 		>
 			<div className="flex flex-col h-full max-h-screen">
 				<div className="flex items-center px-6 py-4 border-b border-gray-200">

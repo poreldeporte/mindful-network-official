@@ -28,7 +28,7 @@ export const SelectedFilters: React.FC<{
 	].filter((item) => Boolean(item.value));
 
 	return (
-		<div className="flex flex-wrap gap-2">
+		<div className="flex flex-wrap gap-2 h-full overflow-y-auto">
 			{allSelectedFilters.map((filter, index) => (
 				<Badge
 					key={`${filter.value}-${index}`}
