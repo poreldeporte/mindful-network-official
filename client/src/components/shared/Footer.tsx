@@ -78,7 +78,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.address && (
 								<div className="flex items-center space-x-3">
 									<MapPin className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="h3" color="black">
+									<Typography variant="small" as="p" color="black">
 										{companyDetails.address}
 									</Typography>
 								</div>
@@ -86,7 +86,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.phoneNumber && (
 								<div className="flex items-center space-x-3">
 									<Phone className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="h3" color="black">
+									<Typography variant="small" as="p" color="black">
 										{companyDetails.phoneNumber}
 									</Typography>
 								</div>
@@ -95,8 +95,15 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.email && (
 								<div className="flex items-center space-x-3">
 									<Mail className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="h3" color="black">
-										{companyDetails.email}
+									<Typography
+										variant="small"
+										as="p"
+										color="black"
+										className="hover:underline underline-offset-4"
+									>
+										<a href={`mailto:${companyDetails.email}`}>
+											{companyDetails.email}
+										</a>
 									</Typography>
 								</div>
 							)}
