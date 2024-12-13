@@ -124,10 +124,12 @@ export function Topbar() {
 				<div className="p-2 pr-5">
 					<Button
 						variant="small"
-						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"
+						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
 						form="primary"
 					>
-						<Link href={"/search"}>Start Search</Link>
+						<Link className="expandable-tag-link" href={"/search"}>
+							Start Search
+						</Link>
 					</Button>
 				</div>
 			</div>

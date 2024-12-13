@@ -134,117 +134,121 @@ const Header = ({
 							variants={opacityVariants}
 							className="overflow-hidden"
 						>
-							<div className="my-2">
-								<Typography as="p" color="darkGray" variant="small">
-									Pick your resources:
-								</Typography>
-								<div className="flex items-center flex-wrap gap-2 w-full">
-									{resources.map((resourceKey) => (
-										<Badge
-											key={resourceKey.key}
-											color="blue"
-											className="w-max"
-											isSelected={selectedResources.includes(resourceKey.key)}
-											onClick={() =>
-												handleBadgeClick("resource", resourceKey.key)
-											}
-											role="button"
-											tabIndex={0}
-											aria-pressed={selectedResources.includes(resourceKey.key)}
-											aria-label={`Resource ${resourceKey.label}`}
-										>
-											{resourceKey.label}
-										</Badge>
-									))}
+							<div className="h-[55vh] overflow-y-auto">
+								<div className="my-2">
+									<Typography as="p" color="darkGray" variant="small">
+										Pick your resources:
+									</Typography>
+									<div className="flex items-center flex-wrap gap-2 w-full">
+										{resources.map((resourceKey) => (
+											<Badge
+												key={resourceKey.key}
+												color="blue"
+												className="w-max"
+												isSelected={selectedResources.includes(resourceKey.key)}
+												onClick={() =>
+													handleBadgeClick("resource", resourceKey.key)
+												}
+												role="button"
+												tabIndex={0}
+												aria-pressed={selectedResources.includes(
+													resourceKey.key
+												)}
+												aria-label={`Resource ${resourceKey.label}`}
+											>
+												{resourceKey.label}
+											</Badge>
+										))}
+									</div>
 								</div>
-							</div>
 
-							<div className="my-2">
-								<Typography as="p" color="darkGray" variant="small">
-									Conditions:
-								</Typography>
-								<div className="flex items-center flex-wrap gap-2 w-full">
-									{conditions && conditions.length
-										? conditions.map((condition) => (
-												<Badge
-													key={condition.id}
-													color="orange"
-													className="w-max"
-													isSelected={selectedCondition.includes(
-														condition.name
-													)}
-													onClick={() =>
-														handleBadgeClick("condition", condition.name)
-													}
-													role="button"
-													tabIndex={0}
-													aria-pressed={selectedCondition.includes(
-														condition.name
-													)}
-													aria-label={`Condition ${condition.name}`}
-												>
-													{condition.name}
-												</Badge>
-											))
-										: ""}
+								<div className="my-2">
+									<Typography as="p" color="darkGray" variant="small">
+										Conditions:
+									</Typography>
+									<div className="flex items-center flex-wrap gap-2 w-full">
+										{conditions && conditions.length
+											? conditions.map((condition) => (
+													<Badge
+														key={condition.id}
+														color="orange"
+														className="w-max"
+														isSelected={selectedCondition.includes(
+															condition.name
+														)}
+														onClick={() =>
+															handleBadgeClick("condition", condition.name)
+														}
+														role="button"
+														tabIndex={0}
+														aria-pressed={selectedCondition.includes(
+															condition.name
+														)}
+														aria-label={`Condition ${condition.name}`}
+													>
+														{condition.name}
+													</Badge>
+												))
+											: ""}
+									</div>
 								</div>
-							</div>
 
-							<div className="mb-2">
-								<Typography as="p" color="darkGray" variant="small">
-									Insurance:
-								</Typography>
-								<div className="flex items-center flex-wrap gap-2 w-full">
-									{insurances && insurances.length
-										? insurances.map((insurance) => (
-												<Badge
-													key={insurance.id}
-													color="green"
-													className="w-max"
-													isSelected={selectedInsurance.includes(
-														insurance.name
-													)}
-													onClick={() =>
-														handleBadgeClick("insurance", insurance.name)
-													}
-													role="button"
-													tabIndex={0}
-													aria-pressed={selectedInsurance.includes(
-														insurance.name
-													)}
-													aria-label={`Insurance ${insurance.name}`}
-												>
-													{insurance.name}
-												</Badge>
-											))
-										: ""}
+								<div className="mb-2">
+									<Typography as="p" color="darkGray" variant="small">
+										Insurance:
+									</Typography>
+									<div className="flex items-center flex-wrap gap-2 w-full">
+										{insurances && insurances.length
+											? insurances.map((insurance) => (
+													<Badge
+														key={insurance.id}
+														color="green"
+														className="w-max"
+														isSelected={selectedInsurance.includes(
+															insurance.name
+														)}
+														onClick={() =>
+															handleBadgeClick("insurance", insurance.name)
+														}
+														role="button"
+														tabIndex={0}
+														aria-pressed={selectedInsurance.includes(
+															insurance.name
+														)}
+														aria-label={`Insurance ${insurance.name}`}
+													>
+														{insurance.name}
+													</Badge>
+												))
+											: ""}
+									</div>
 								</div>
-							</div>
 
-							<div className="mt-2">
-								<Typography as="p" color="darkGray" variant="small">
-									Therapy Options:
-								</Typography>
-								<div className="flex items-center flex-wrap gap-2 w-full">
-									{therapyModalities && therapyModalities.length
-										? therapyModalities.map((modality) => (
-												<Badge
-													key={modality.id}
-													color="blue"
-													className="w-max"
-													isSelected={selectedTherapy === modality.type}
-													onClick={() =>
-														handleBadgeClick("therapy", modality.type)
-													}
-													role="button"
-													tabIndex={0}
-													aria-pressed={selectedTherapy === modality.type}
-													aria-label={`Therapy option ${modality.type}`}
-												>
-													{modality.type}
-												</Badge>
-											))
-										: ""}
+								<div className="mt-2">
+									<Typography as="p" color="darkGray" variant="small">
+										Therapy Options:
+									</Typography>
+									<div className="flex items-center flex-wrap gap-2 w-full">
+										{therapyModalities && therapyModalities.length
+											? therapyModalities.map((modality) => (
+													<Badge
+														key={modality.id}
+														color="blue"
+														className="w-max"
+														isSelected={selectedTherapy === modality.type}
+														onClick={() =>
+															handleBadgeClick("therapy", modality.type)
+														}
+														role="button"
+														tabIndex={0}
+														aria-pressed={selectedTherapy === modality.type}
+														aria-label={`Therapy option ${modality.type}`}
+													>
+														{modality.type}
+													</Badge>
+												))
+											: ""}
+									</div>
 								</div>
 							</div>
 						</motion.div>

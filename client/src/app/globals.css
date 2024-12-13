@@ -42,6 +42,14 @@ html {
 	z-index: 1;
 }
 
+.expandable-tag-link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 5;
+	cursor: pointer;
+}
+
 .dark-overlay::before {
 	content: "";
 	position: absolute;

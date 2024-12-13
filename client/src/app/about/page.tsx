@@ -40,7 +40,7 @@ export default function About() {
 				<Image
 					src={AboutImage}
 					alt="Professional at Mindful Network"
-					className="md:w-1/2 lg:w-full h-full w-full object-cover object-top rounded-xl"
+					className="w-full sm:w-1/2 lg:w-full h-full object-cover object-top rounded-xl"
 					priority
 				/>
 			</div>
