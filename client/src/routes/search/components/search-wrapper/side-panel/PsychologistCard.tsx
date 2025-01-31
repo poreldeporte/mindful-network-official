@@ -18,7 +18,6 @@ const PsychologistCard = ({
 		conditionSpecialty,
 		insurances,
 		ageSpecialty,
-		_type,
 		slug,
 		resource,
 	} = psychologist;

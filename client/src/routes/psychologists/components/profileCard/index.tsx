@@ -1,7 +1,6 @@
 import { Badge, Typography } from "@/components/ui";
 import { MindfulIsotype, UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
-import { formatType } from "@/utilities";
 import { HeartPulse } from "lucide-react";
 import Image from "next/image";
 

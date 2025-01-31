@@ -39,9 +39,6 @@ export const SearchWrapper = () => {
 	const [allProfessionals, setAllProfessionals] = useState<
 		PsychologistModel[] | null
 	>(null);
-	const [allResources, setAllResources] = useState<ResourcesModel[] | null>(
-		null
-	);
 	const [isLoading, setLoading] = useState(false);
 
 	const searchParams = useSearchParams();
@@ -67,7 +64,6 @@ export const SearchWrapper = () => {
 				const resourceKeys = generateResourceKeys(resources);
 				setAllResourceKeys(resourceKeys);
 
-				setAllResources(resources);
 				setAllProfessionals(professionals);
 				setConditions(conditionsRes);
 				setInsurances(insurancesRes);
