@@ -6,20 +6,19 @@ import {
 	insurances,
 	PsychologistModel,
 	ResourcesKey,
-	ResourcesModel,
 	TherapyModality,
 } from "@/models";
+import {
+	getAllConditions,
+	getAllInsurances,
+	getAllProfessionals,
+	getAllResources,
+	getAllTherapyOptions,
+} from "@/services";
 import { getValidationError } from "@/utilities";
 import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-	getAllResources,
-	getAllConditions,
-	getAllInsurances,
-	getAllTherapyOptions,
-	getAllProfessionals,
-} from "@/services";
 import SidePanel from "./side-panel/SidePanel";
 
 export const SearchWrapper = () => {
