@@ -5,7 +5,7 @@ import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
-  title: 'Mindful Network',
+  title: 'The Mindful Network',
 
   projectId: '3wiy7t9r',
   dataset: 'dev',
