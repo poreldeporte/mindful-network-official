@@ -18,6 +18,7 @@ import {
 	getAllConditions,
 	getAllInsurances,
 	getAllTherapyOptions,
+	getAllProfessionals,
 } from "@/services";
 import SidePanel from "./side-panel/SidePanel";
 
@@ -32,15 +33,15 @@ export const SearchWrapper = () => {
 	const [allResourceKeys, setAllResourceKeys] = useState<ResourcesKey[] | []>(
 		[]
 	);
-	const [filteredProffesionals, setFilteredProffesionals] = useState<
+	const [filteredProfessionals, setFilteredProfessionals] = useState<
 		PsychologistModel[] | null
 	>(null);
-	const [allProffesionals, setAllProffesionals] =
-		useState<ResourcesModel | null>(null);
-	const [allCombinedProfessionals, setAllCombinedProfessionals] = useState<
-		PsychologistModel[]
-	>([]);
-
+	const [allProfessionals, setAllProfessionals] = useState<
+		PsychologistModel[] | null
+	>(null);
+	const [allResources, setAllResources] = useState<ResourcesModel[] | null>(
+		null
+	);
 	const [isLoading, setLoading] = useState(false);
 
 	const searchParams = useSearchParams();
@@ -53,19 +54,21 @@ export const SearchWrapper = () => {
 					conditionsRes,
 					insurancesRes,
 					therapyModalitiesRes,
-					proffesionals,
+					resources,
+					professionals,
 				] = await Promise.all([
 					getAllConditions(),
 					getAllInsurances(),
 					getAllTherapyOptions(),
 					getAllResources(),
+					getAllProfessionals(),
 				]);
 
-				setAllProffesionals(proffesionals);
+				setAllProfessionals(professionals);
+				setAllResources(resources);
 				setConditions(conditionsRes);
 				setInsurances(insurancesRes);
 				setTherapyModalities(therapyModalitiesRes);
-
 				setLoading(false);
 			} catch (error) {
 				console.log(error);
@@ -76,38 +79,30 @@ export const SearchWrapper = () => {
 	}, []);
 
 	useEffect(() => {
-		if (allProffesionals) {
-			const combinedProfessionals = Object.values(allProffesionals).flat();
-			setAllCombinedProfessionals(combinedProfessionals);
-
+		if (allProfessionals) {
 			const resourceParam = searchParams.get("resource");
 			const conditionParam = searchParams.get("condition");
 			const insuranceParam = searchParams.get("insurance");
 			const therapyParam = searchParams.get("therapy");
 			const searchQuery = searchParams.get("search");
 
-			let result: PsychologistModel[] = [];
+			let result = [...allProfessionals];
 
 			if (resourceParam) {
 				const selectedResources = resourceParam.split(",");
-
-				result = selectedResources.flatMap((resource) => {
-					const camelCaseResource = resource.replace(/-([a-z])/g, (g) =>
-						g[1].toUpperCase()
-					);
-					return (
-						allProffesionals?.[camelCaseResource as keyof ResourcesModel] || []
-					);
-				});
-			} else {
-				result = Object.values(allProffesionals).flat();
+				result = result.filter((professional) =>
+					professional.resource.some((res) =>
+						selectedResources.includes(
+							res.title.toLowerCase().replace(/\s+/g, "-")
+						)
+					)
+				);
 			}
 
 			if (conditionParam) {
 				const selectedConditions = conditionParam.split(",");
-
-				result = result.filter((psychologist) =>
-					psychologist.conditionSpecialty.some((specialty) =>
+				result = result.filter((professional) =>
+					professional.conditionSpecialty.some((specialty) =>
 						selectedConditions.includes(specialty.name)
 					)
 				);
@@ -115,16 +110,16 @@ export const SearchWrapper = () => {
 
 			if (insuranceParam) {
 				const selectedInsurances = insuranceParam.split(",");
-				result = result.filter((psychologist) =>
-					psychologist.insurances.some((insurance) =>
+				result = result.filter((professional) =>
+					professional.insurances.some((insurance) =>
 						selectedInsurances.includes(insurance.name)
 					)
 				);
 			}
 
 			if (therapyParam) {
-				result = result.filter((psychologist) =>
-					psychologist.therapyOptions.some(
+				result = result.filter((professional) =>
+					professional.therapyOptions.some(
 						(modality) => modality.type === therapyParam
 					)
 				);
@@ -133,29 +128,28 @@ export const SearchWrapper = () => {
 			if (searchQuery) {
 				const query = searchQuery.toLowerCase();
 				result = result.filter(
-					(psychologist) =>
-						psychologist.name.toLowerCase().includes(query) ||
-						psychologist.insurances.some((insurance) =>
+					(professional) =>
+						professional.name.toLowerCase().includes(query) ||
+						professional.insurances.some((insurance) =>
 							insurance.name.toLowerCase().includes(query)
 						) ||
-						psychologist.therapyOptions.some((modality) =>
+						professional.therapyOptions.some((modality) =>
 							modality.type.toLowerCase().includes(query)
 						)
 				);
 			}
 
-			const resourceKeys = generateResourceKeys(allProffesionals);
+			const resourceKeys = generateResourceKeys(allResources);
 			setAllResourceKeys(resourceKeys);
-
-			setFilteredProffesionals(result);
+			setFilteredProfessionals(result);
 		}
-	}, [searchParams, allProffesionals]);
+	}, [searchParams, allProfessionals]);
 
 	return (
 		<>
 			<SidePanel
-				proffesionals={allCombinedProfessionals}
-				filteredProffesionals={filteredProffesionals}
+				proffesionals={allProfessionals || []}
+				filteredProffesionals={filteredProfessionals}
 				conditions={conditions}
 				insurances={insurances}
 				therapyModalities={therapyModalities}
