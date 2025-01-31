@@ -40,3 +40,42 @@ export const getPsychologistById = async (
 		return null;
 	}
 };
+
+export const getAllProfessionals = async () => {
+	try {
+		const data = await sanityClient.fetch(`*[_type == 'professionals']{
+			...,
+			"slug": slug.current, 
+			"conditionSpecialty": conditionSpecialty[]->{
+				"id": _id,
+				name
+			},
+			"insurances": insurances[]->{
+				"id": _id,
+				name
+			},
+			"ageSpecialty": ageSpecialty[]->{
+				"id": _id,
+				age
+			},
+			"therapyOptions": therapyOptions[]->{
+				"id": _id,
+				type
+			},
+			"resource": resource[]->{
+				_id,
+				title
+			},
+			"image": image.asset->url
+		}`);
+
+		if (data) {
+			const adaptedData = data.map(getPsychologistsAdapter);
+
+			return adaptedData;
+		}
+	} catch (error) {
+		console.error("Error fetching all schemas:", error);
+		return error;
+	}
+};
