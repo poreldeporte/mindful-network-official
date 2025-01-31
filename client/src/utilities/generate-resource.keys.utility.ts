@@ -1,4 +1,4 @@
-import { PsychologistModel, ResourcesModel } from "@/models";
+import { ResourcesModel } from "@/models";
 
 export const generateResourceKeys = (resources: ResourcesModel[]) => {
 	const uniqueResources = new Set(

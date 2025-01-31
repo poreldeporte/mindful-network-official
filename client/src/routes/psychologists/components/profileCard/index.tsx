@@ -9,7 +9,7 @@ export function ProfileCard({
 	image,
 	name,
 	description,
-	_type,
+	resource,
 	facility,
 }: PsychologistModel) {
 	return (
@@ -45,10 +45,19 @@ export function ProfileCard({
 					>
 						{facility}
 					</Typography>
-					<div>
-						<Badge className="mr-2 mb-2" color="blue" isSelected={false}>
-							{formatType(_type)}
-						</Badge>
+					<div className="space-x-1">
+						{resource && resource.length
+							? resource.map((res) => (
+									<Badge
+										key={res.title}
+										className="w-max"
+										color="green"
+										aria-label={`Type: ${res.title}`}
+									>
+										{res.title}
+									</Badge>
+								))
+							: ""}
 					</div>
 				</div>
 			</div>

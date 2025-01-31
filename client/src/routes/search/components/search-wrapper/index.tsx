@@ -64,8 +64,11 @@ export const SearchWrapper = () => {
 					getAllProfessionals(),
 				]);
 
-				setAllProfessionals(professionals);
+				const resourceKeys = generateResourceKeys(resources);
+				setAllResourceKeys(resourceKeys);
+
 				setAllResources(resources);
+				setAllProfessionals(professionals);
 				setConditions(conditionsRes);
 				setInsurances(insurancesRes);
 				setTherapyModalities(therapyModalitiesRes);
@@ -90,38 +93,42 @@ export const SearchWrapper = () => {
 
 			if (resourceParam) {
 				const selectedResources = resourceParam.split(",");
-				result = result.filter((professional) =>
-					professional.resource.some((res) =>
-						selectedResources.includes(
-							res.title.toLowerCase().replace(/\s+/g, "-")
-						)
-					)
+				result = result.filter(
+					(professional) =>
+						professional.resource?.some?.((res) =>
+							selectedResources.includes(
+								res.title.toLowerCase().replace(/\s+/g, "-")
+							)
+						) ?? false
 				);
 			}
 
 			if (conditionParam) {
 				const selectedConditions = conditionParam.split(",");
-				result = result.filter((professional) =>
-					professional.conditionSpecialty.some((specialty) =>
-						selectedConditions.includes(specialty.name)
-					)
+				result = result.filter(
+					(professional) =>
+						professional.conditionSpecialty?.some?.((specialty) =>
+							selectedConditions.includes(specialty.name)
+						) ?? false
 				);
 			}
 
 			if (insuranceParam) {
 				const selectedInsurances = insuranceParam.split(",");
-				result = result.filter((professional) =>
-					professional.insurances.some((insurance) =>
-						selectedInsurances.includes(insurance.name)
-					)
+				result = result.filter(
+					(professional) =>
+						professional.insurances?.some?.((insurance) =>
+							selectedInsurances.includes(insurance.name)
+						) ?? false
 				);
 			}
 
 			if (therapyParam) {
-				result = result.filter((professional) =>
-					professional.therapyOptions.some(
-						(modality) => modality.type === therapyParam
-					)
+				result = result.filter(
+					(professional) =>
+						professional.therapyOptions?.some?.(
+							(modality) => modality.type === therapyParam
+						) ?? false
 				);
 			}
 
@@ -129,18 +136,16 @@ export const SearchWrapper = () => {
 				const query = searchQuery.toLowerCase();
 				result = result.filter(
 					(professional) =>
-						professional.name.toLowerCase().includes(query) ||
-						professional.insurances.some((insurance) =>
-							insurance.name.toLowerCase().includes(query)
+						professional.name?.toLowerCase().includes(query) ||
+						professional.insurances?.some?.((insurance) =>
+							insurance.name?.toLowerCase().includes(query)
 						) ||
-						professional.therapyOptions.some((modality) =>
-							modality.type.toLowerCase().includes(query)
+						professional.therapyOptions?.some?.((modality) =>
+							modality.type?.toLowerCase().includes(query)
 						)
 				);
 			}
 
-			const resourceKeys = generateResourceKeys(allResources);
-			setAllResourceKeys(resourceKeys);
 			setFilteredProfessionals(result);
 		}
 	}, [searchParams, allProfessionals]);

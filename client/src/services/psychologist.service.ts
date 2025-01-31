@@ -6,7 +6,7 @@ export const getPsychologistById = async (
 	slug: string
 ): Promise<PsychologistModel | null> => {
 	try {
-		const query = `*[slug.current == $slug][0]{
+		const query = `*[_type == 'professionals' && slug.current == $slug][0]{
             ..., 
             "conditionSpecialty": conditionSpecialty[]->{
                 "id": _id,
@@ -24,6 +24,10 @@ export const getPsychologistById = async (
                 "id": _id,
                 type
             },
+			"resource": resource[]->{
+				_id,
+				title
+			},
             "languages": languages[]->.language,
             "image": image.asset->url,
             "video": video.asset->url,
@@ -34,6 +38,8 @@ export const getPsychologistById = async (
 			{ slug },
 			{ cache: "no-store" }
 		);
+
+		console.log(data);
 		return getPsychologistsAdapter(data);
 	} catch (error) {
 		console.error("Error fetching psychologist data:", error);
