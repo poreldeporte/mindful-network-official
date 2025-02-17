@@ -1,15 +1,8 @@
-import {
-  psychologists,
-  bakerActFacilities,
-  innovativeTherapies,
-  inpatient,
-  mindBodyPractices,
-  outpatient,
-  mentalHealthLawyers,
-  psychiatry,
-  estatePlanningLawyers,
-} from './resources'
 import blog from './blog/blog'
+
+import professionals from './professionals/professionals'
+
+import resources from './resources/resources'
 
 import companyDetail from './company/company-details'
 import ageSpecialties from './age-specialties/ageSpecialties'
@@ -22,18 +15,11 @@ import blogCategories from './blog/blogCategories'
 import admittedLanguages from './admitted-languages/admittedLanguages'
 
 export const schemaTypes = [
-  innovativeTherapies,
-  psychologists,
-  psychiatry,
-  outpatient,
-  inpatient,
-  bakerActFacilities,
-  estatePlanningLawyers,
-  mentalHealthLawyers,
-  mindBodyPractices,
+  professionals,
   usefulLinks,
   blog,
   blogCategories,
+  resources,
   ageSpecialties,
   conditionSpecialties,
   insurances,

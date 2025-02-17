@@ -1,7 +1,6 @@
 import { Badge, Typography } from "@/components/ui";
 import { MindfulIsotype, UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
-import { formatType } from "@/utilities";
 import { HeartPulse } from "lucide-react";
 import Image from "next/image";
 
@@ -9,7 +8,7 @@ export function ProfileCard({
 	image,
 	name,
 	description,
-	_type,
+	resource,
 	facility,
 }: PsychologistModel) {
 	return (
@@ -45,10 +44,19 @@ export function ProfileCard({
 					>
 						{facility}
 					</Typography>
-					<div>
-						<Badge className="mr-2 mb-2" color="blue" isSelected={false}>
-							{formatType(_type)}
-						</Badge>
+					<div className="space-x-1">
+						{resource && resource.length
+							? resource.map((res) => (
+									<Badge
+										key={res.title}
+										className="w-max"
+										color="green"
+										aria-label={`Type: ${res.title}`}
+									>
+										{res.title}
+									</Badge>
+								))
+							: ""}
 					</div>
 				</div>
 			</div>

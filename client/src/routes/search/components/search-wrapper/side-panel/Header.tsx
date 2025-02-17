@@ -170,7 +170,7 @@ const Header = ({
 										{conditions && conditions.length
 											? conditions.map((condition) => (
 													<Badge
-														key={condition.id}
+														key={condition.name}
 														color="orange"
 														className="w-max"
 														isSelected={selectedCondition.includes(
@@ -201,7 +201,7 @@ const Header = ({
 										{insurances && insurances.length
 											? insurances.map((insurance) => (
 													<Badge
-														key={insurance.id}
+														key={insurance.name}
 														color="green"
 														className="w-max"
 														isSelected={selectedInsurance.includes(
@@ -232,7 +232,7 @@ const Header = ({
 										{therapyModalities && therapyModalities.length
 											? therapyModalities.map((modality) => (
 													<Badge
-														key={modality.id}
+														key={modality.type}
 														color="blue"
 														className="w-max"
 														isSelected={selectedTherapy === modality.type}

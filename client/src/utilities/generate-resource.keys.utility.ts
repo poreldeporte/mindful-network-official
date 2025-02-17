@@ -1,13 +1,12 @@
-import { ResourcesModel, ResourcesKey } from "@/models";
+import { ResourcesModel } from "@/models";
 
-export const generateResourceKeys = (resources: ResourcesModel) => {
-	return Object.keys(resources).map((key) => {
-		const label = key
-			.replace(/([A-Z])/g, " $1")
-			.replace(/^./, (str) => str.toUpperCase());
+export const generateResourceKeys = (resources: ResourcesModel[]) => {
+	const uniqueResources = new Set(
+		resources.flatMap((resource) => ({
+			key: resource.title.toLowerCase().replace(/\s+/g, "-"),
+			label: resource.title,
+		}))
+	);
 
-		const urlKey = key.replace(/([A-Z])/g, "-$1").toLowerCase();
-		const resource: ResourcesKey = { key: urlKey, label };
-		return resource;
-	});
+	return Array.from(uniqueResources);
 };

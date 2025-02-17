@@ -3,6 +3,7 @@ import { conditionSpecialty } from "./condition-specialty.model";
 import { insurances } from "./insurances.model";
 import { Positions } from "./positions.model";
 import { TherapyModality } from "./therapy-modality.model";
+import { ResourcesModel } from "./resources.model";
 
 interface Address {
 	address: string;
@@ -22,6 +23,7 @@ export interface PsychologistModel {
 	phone: string;
 	insurances: insurances[];
 	ageSpecialty: ageSpecialty[];
+	resource: ResourcesModel[];
 	conditionSpecialty: conditionSpecialty[];
 	therapyOptions: TherapyModality[];
 	degree: string;
