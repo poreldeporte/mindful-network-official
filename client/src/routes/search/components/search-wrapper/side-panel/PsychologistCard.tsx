@@ -2,7 +2,6 @@ import { Badge, Typography } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
-import { generateSlugFromCamelCase } from "@/utilities";
 import { Armchair, Brain, HeartPulse, PersonStanding } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,8 +18,8 @@ const PsychologistCard = ({
 		conditionSpecialty,
 		insurances,
 		ageSpecialty,
-		_type,
 		slug,
+		resource,
 	} = psychologist;
 
 	return (
@@ -50,13 +49,21 @@ const PsychologistCard = ({
 					>
 						{name}
 					</Typography>
-					<Badge
-						className="w-max"
-						color="green"
-						aria-label={`Type: ${formatType(_type)}`}
-					>
-						{formatType(_type)}
-					</Badge>
+
+					<div className="space-x-1">
+						{resource && resource.length
+							? resource.map((res) => (
+									<Badge
+										key={res.title}
+										className="w-max"
+										color="green"
+										aria-label={`Type: ${formatType(res.title)}`}
+									>
+										{formatType(res.title)}
+									</Badge>
+								))
+							: ""}
+					</div>
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -118,7 +125,7 @@ const PsychologistCard = ({
 
 			<div className="flex justify-end items-end h-full mt-2">
 				<Link
-					href={`/resource/${generateSlugFromCamelCase(_type)}/${slug}`}
+					href={`/professional/${slug}`}
 					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
