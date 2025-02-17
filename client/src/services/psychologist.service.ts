@@ -49,7 +49,8 @@ export const getPsychologistById = async (
 
 export const getAllProfessionals = async () => {
 	try {
-		const data = await sanityClient.fetch(`*[_type == 'professionals']{
+		const data = await sanityClient.fetch(
+			`*[_type == 'professionals']{
 			...,
 			"slug": slug.current, 
 			"conditionSpecialty": conditionSpecialty[]->{
@@ -73,7 +74,10 @@ export const getAllProfessionals = async () => {
 				title
 			},
 			"image": image.asset->url
-		}`);
+		}`,
+			{},
+			{ cache: "no-store" }
+		);
 
 		if (data) {
 			const adaptedData = data.map(getPsychologistsAdapter);
