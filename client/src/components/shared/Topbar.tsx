@@ -1,13 +1,14 @@
 "use client";
 
-import { resources } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "../ui";
 import { getCompanyDetails } from "@/services/company-details.service";
+import { getAllResources } from "@/services";
 import { useState, useEffect } from "react";
-import { CompanyDetails } from "@/models";
+import { CompanyDetails, ResourcesKey } from "@/models";
+import { generateResourceKeys } from "@/utilities";
 
 import {
 	Select,
@@ -18,31 +19,35 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/Shadcn-select";
-import { sortResources } from "@/lib/utils";
 
 export function Topbar() {
 	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
 		null
 	);
+	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const router = useRouter();
 	const pathname = usePathname();
 
-	const sortedResources = sortResources(resources);
-
 	const handleSelectChange = (value: string) => {
 		const selectedResource = resources.find(
-			(resource) => resource.title === value
+			(resource) => resource.label === value
 		);
 		if (selectedResource) {
-			router.push(selectedResource.path);
+			router.push(`/search?resource=${selectedResource.key}`);
 		}
 	};
 
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const data = await getCompanyDetails();
-				setCompanyDetails(data);
+				const [company, resources] = await Promise.all([
+					getCompanyDetails(),
+					getAllResources(),
+				]);
+
+				const resourceKeys = generateResourceKeys(resources);
+				setResources(resourceKeys);
+				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
@@ -87,13 +92,13 @@ export function Topbar() {
 						<SelectContent className="bg-white p-5">
 							<SelectGroup>
 								<SelectLabel>Resources</SelectLabel>
-								{sortedResources.map((resource) => (
+								{resources.map((resource) => (
 									<SelectItem
 										className="w-max pr-8"
 										key={resource.key}
-										value={resource.title}
+										value={resource.label}
 									>
-										{resource.title}
+										{resource.label}
 									</SelectItem>
 								))}
 							</SelectGroup>
