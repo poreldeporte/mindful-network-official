@@ -130,54 +130,6 @@ export const termsOfServiceContent = [
 	},
 ];
 
-export const resources = [
-	{
-		key: "innovative-therapies",
-		title: "Innovative Therapies",
-		path: "/search?resource=innovative-therapies",
-	},
-	{
-		key: "psychologists",
-		title: "Psychologists",
-		path: "/search?resource=psychologists",
-	},
-	{
-		key: "psychiatry",
-		title: "Psychiatry",
-		path: "/search?resource=psychiatry",
-	},
-	{
-		key: "outpatient",
-		title: "Outpatient Facilities",
-		path: "/search?resource=outpatient-facilities",
-	},
-	{
-		key: "inpatient",
-		title: "Inpatient Facilities",
-		path: "/search?resource=inpatient-facilities",
-	},
-	{
-		key: "baker-act-facilities",
-		title: "Baker Act Facilities",
-		path: "/search?resource=baker-act-facilities",
-	},
-	{
-		key: "estate-planning-lawyers",
-		title: "Estate Planning Lawyers",
-		path: "/search?resource=estate-planning-lawyers",
-	},
-	{
-		key: "mental-health-lawyers",
-		title: "Mental Health Lawyers",
-		path: "/search?resource=mental-health-lawyers",
-	},
-	{
-		key: "mind-body-practices",
-		title: "Mind Body Practices",
-		path: "/search?resource=mind-body-practices",
-	},
-];
-
 export const CTACards = [
 	{
 		id: "1",

@@ -1,7 +1,7 @@
 "use client";
 
-import { aboutFooter, resources } from "@/lib/constants";
-import { BlogModel } from "@/models";
+import { aboutFooter } from "@/lib/constants";
+import { BlogModel, ResourcesKey } from "@/models";
 import { getLatestBlog } from "@/routes/homepage/services";
 import { ChevronUp, Phone, Mail, MapPin } from "lucide-react";
 import {
@@ -11,9 +11,10 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getAllResources } from "@/services";
+import { generateResourceKeys } from "@/utilities";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "../ui";
-import { sortResources } from "@/lib/utils";
 import { CompanyDetails } from "@/models/company-details.model";
 import { getCompanyDetails } from "@/services/company-details.service";
 
@@ -23,6 +24,7 @@ interface Props {
 
 export function Footer({ blogPosts }: Props) {
 	const [posts, setPosts] = useState<BlogModel[] | []>([]);
+	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
 		null
 	);
@@ -44,8 +46,14 @@ export function Footer({ blogPosts }: Props) {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const data = await getCompanyDetails();
-				setCompanyDetails(data);
+				const [company, resources] = await Promise.all([
+					getCompanyDetails(),
+					getAllResources(),
+				]);
+
+				const resourceKeys = generateResourceKeys(resources);
+				setResources(resourceKeys);
+				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
@@ -201,15 +209,15 @@ export function Footer({ blogPosts }: Props) {
 								Resources
 							</Typography>
 							<div className="flex flex-col mb-2 lg:mb-0">
-								{sortResources(resources).map((resource) => {
+								{resources.map((resource) => {
 									return (
 										<Link
 											className="hover:underline"
-											href={resource.path}
+											href={`/search?resource=${resource.key}`}
 											key={resource.key}
 										>
 											<Typography color="darkGray" as="span" variant="small">
-												{resource.title}
+												{resource.label}
 											</Typography>
 										</Link>
 									);

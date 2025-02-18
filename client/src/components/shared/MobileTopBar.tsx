@@ -1,32 +1,37 @@
 "use client";
 
 import { menuVariants } from "@/lib/anim";
-import { resources } from "@/lib/constants";
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
-import { CompanyDetails } from "@/models";
+import { CompanyDetails, ResourcesKey } from "@/models";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button, Typography } from "../ui";
 import Image from "next/image";
-import { sortResources } from "@/lib/utils";
+import { getAllResources } from "@/services";
+import { generateResourceKeys } from "@/utilities";
 import { getCompanyDetails } from "@/services/company-details.service";
 
 export function MobileTopBar() {
 	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
 		null
 	);
+	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
-
-	const sortedResources = sortResources(resources);
 
 	const handleCloseHeader = () => setIsOpen(!isOpen);
 
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const data = await getCompanyDetails();
-				setCompanyDetails(data);
+				const [company, resources] = await Promise.all([
+					getCompanyDetails(),
+					getAllResources(),
+				]);
+
+				const resourceKeys = generateResourceKeys(resources);
+				setResources(resourceKeys);
+				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
@@ -71,10 +76,10 @@ export function MobileTopBar() {
 								<Typography variant="large" as="span" color="black">
 									Resources
 								</Typography>
-								{sortedResources.map((link) => (
-									<Link key={link.key} href={link.path}>
+								{resources.map((link) => (
+									<Link key={link.key} href={`/search?resource=${link.key}`}>
 										<Typography variant="medium" as="span" color="black">
-											{link.title}
+											{link.label}
 										</Typography>
 									</Link>
 								))}
