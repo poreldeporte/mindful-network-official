@@ -50,7 +50,7 @@ const PsychologistCard = ({
 						{name}
 					</Typography>
 
-					<div className="space-x-1">
+					<div className="space-x-1 space-y-1">
 						{resource && resource.length
 							? resource.map((res) => (
 									<Badge
