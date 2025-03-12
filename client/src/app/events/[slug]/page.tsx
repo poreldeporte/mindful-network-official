@@ -1,58 +1,38 @@
-import { getBlogById } from "@/routes/homepage/services";
+import { eventbriteEvents } from "@/lib/constants";
+import { EventDetailsAbout } from "@/routes/events/pages/event-details/components/about";
+import { EventDetailsHero } from "@/routes/events/pages/event-details/components/hero";
+import { generateSlug } from "@/utilities";
 import Head from "next/head";
 
-interface BlogPostProps {
-	params: {
-		slug: string;
-	};
-}
-
-export default async function BlogPost({ params }: BlogPostProps) {
-	const post = await getBlogById(params.slug);
+export default async function EventDetails() {
+	const post = eventbriteEvents.events[0];
 
 	return (
 		<>
 			<Head>
-				<title>{post.seo?.metaTitle || post.title} | Mindful Network</title>
-				<meta
-					name="description"
-					content={post.seo?.metaDescription || post.excerpt}
-				/>
-				<meta property="og:title" content={post.seo?.metaTitle || post.title} />
-				<meta
-					property="og:description"
-					content={post.seo?.metaDescription || post.excerpt}
-				/>
+				<title>{post.name.text} | Mindful Network Event</title>
+				<meta name="description" content={post.summary} />
+				<meta property="og:title" content={post.name.text} />
+				<meta property="og:description" content={post.summary} />
 				<meta property="og:type" content="article" />
 				<meta
 					property="og:url"
-					content={`https://themindfulnetwork.com/blog/${post.slug}`}
+					content={`https://themindfulnetwork.com/events/${generateSlug(post.name.text)}`}
 				/>
-				{post.featuredImage && (
-					<meta property="og:image" content={post.featuredImage} />
-				)}
-				{post.publishDate && (
-					<meta property="article:published_time" content={post.publishDate} />
+				{post.logo.url && <meta property="og:image" content={post.logo.url} />}
+				{post.start.utc && (
+					<meta property="article:published_time" content={post.start.utc} />
 				)}
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta
-					name="twitter:title"
-					content={post.seo?.metaTitle || post.title}
-				/>
-				<meta
-					name="twitter:description"
-					content={post.seo?.metaDescription || post.excerpt}
-				/>
-				{post.featuredImage && (
-					<meta name="twitter:image" content={post.featuredImage} />
-				)}
+				<meta name="twitter:title" content={post.name.text} />
+				<meta name="twitter:description" content={post.description.text} />
+				{post.logo.url && <meta name="twitter:image" content={post.logo.url} />}
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="robots" content="index, follow" />
 			</Head>
 
-			<section>Event Page</section>
+			<EventDetailsHero event={post} />
+			<EventDetailsAbout event={post} />
 		</>
 	);
 }
-
-export async function generateStaticParams() {}
