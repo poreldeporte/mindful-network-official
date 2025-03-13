@@ -1,10 +1,29 @@
+"use client";
+
 import { Typography } from "@/components/ui";
 import { EventbriteEvent } from "@/models/eventbrite.model";
 import { formatEventDate } from "@/utilities/format-event-date.utility";
 import { Button } from "@/components/ui";
 import { ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
 export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
+	const navbarRef = useRef(null);
+
+	const scrollToSection = (e, sectionId) => {
+		e.preventDefault();
+
+		const section = document.getElementById(sectionId);
+
+		if (section) {
+			const offsetPosition = section.offsetTop - 110;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth",
+			});
+		}
+	};
 	return (
 		<section className="min-h-screen">
 			<div
@@ -60,11 +79,31 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 						</div>
 					</div>
 
-					<nav className="flex items-center gap-5 text-[14px] font-bold pt-2.5">
-						<a href="#location">Location</a>
-						<a href="#refund-policy">Refund Policy</a>
-						<a href="#about-this-event">About This Event</a>
-						<a href="#organized-by">Organized By</a>
+					<nav
+						ref={navbarRef}
+						className="flex items-center gap-5 text-[14px] font-bold pt-2.5 z-10"
+					>
+						<a href="#location" onClick={(e) => scrollToSection(e, "location")}>
+							Location
+						</a>
+						<a
+							href="#refund-policy"
+							onClick={(e) => scrollToSection(e, "refund-policy")}
+						>
+							Refund Policy
+						</a>
+						<a
+							href="#about-this-event"
+							onClick={(e) => scrollToSection(e, "about-this-event")}
+						>
+							About This Event
+						</a>
+						<a
+							href="#organized-by"
+							onClick={(e) => scrollToSection(e, "organized-by")}
+						>
+							Organized By
+						</a>
 					</nav>
 				</div>
 			</div>
