@@ -1,6 +1,7 @@
 import { eventbriteEvents } from "@/lib/constants";
 import { EventDetailsAbout } from "@/routes/events/pages/event-details/components/about";
 import { EventDetailsHero } from "@/routes/events/pages/event-details/components/hero";
+import { MoreEvents } from "@/routes/events/pages/event-details/components/more-events";
 import { generateSlug } from "@/utilities";
 import Head from "next/head";
 
@@ -33,6 +34,7 @@ export default async function EventDetails() {
 
 			<EventDetailsHero event={post} />
 			<EventDetailsAbout event={post} />
+			<MoreEvents events={eventbriteEvents.events} />
 		</>
 	);
 }

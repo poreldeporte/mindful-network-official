@@ -48,7 +48,13 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 								className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
 								form="primary"
 							>
-								Get Tickets Now
+								<a
+									aria-label={`Get tickets for ${event.name.text}`}
+									href={event.url}
+									className="expandable-tag-link"
+								>
+									Get Tickets Now
+								</a>
 								<ChevronRight size={20} />
 							</Button>
 						</div>
