@@ -10,9 +10,9 @@ import { useRef } from "react";
 export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 	const navbarRef = useRef(null);
 
-	const scrollToSection = (e, sectionId) => {
-		e.preventDefault();
+	console.log(event);
 
+	const scrollToSection = (sectionId: string) => {
 		const section = document.getElementById(sectionId);
 
 		if (section) {
@@ -28,7 +28,7 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 		<section className="min-h-screen">
 			<div
 				style={{
-					backgroundImage: `url(${event.logo.url})`,
+					backgroundImage: `url(${event.logo.original.url})`,
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}
@@ -53,7 +53,7 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 								<strong>{formatEventDate(event.start.utc)}</strong>
 							</Typography>
 							<Typography as="p" color="black" variant="small">
-								{event.venue.address.address_1}
+								{event.venue.address.localized_address_display}
 							</Typography>
 						</div>
 
@@ -71,6 +71,7 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 									aria-label={`Get tickets for ${event.name.text}`}
 									href={event.url}
 									className="expandable-tag-link"
+									target="_blank"
 								>
 									Get Tickets Now
 								</a>
@@ -83,27 +84,34 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 						ref={navbarRef}
 						className="flex items-center gap-5 text-[14px] font-bold pt-2.5 z-10"
 					>
-						<a href="#location" onClick={(e) => scrollToSection(e, "location")}>
+						<button
+							type="button"
+							className="cursor-pointer"
+							onClick={() => scrollToSection("location")}
+						>
 							Location
-						</a>
-						<a
-							href="#refund-policy"
-							onClick={(e) => scrollToSection(e, "refund-policy")}
+						</button>
+						<button
+							type="button"
+							className="cursor-pointer"
+							onClick={() => scrollToSection("refund-policy")}
 						>
 							Refund Policy
-						</a>
-						<a
-							href="#about-this-event"
-							onClick={(e) => scrollToSection(e, "about-this-event")}
+						</button>
+						<button
+							type="button"
+							className="cursor-pointer"
+							onClick={() => scrollToSection("about-this-event")}
 						>
 							About This Event
-						</a>
-						<a
-							href="#organized-by"
-							onClick={(e) => scrollToSection(e, "organized-by")}
+						</button>
+						<button
+							type="button"
+							className="cursor-pointer"
+							onClick={() => scrollToSection("organized-by")}
 						>
 							Organized By
-						</a>
+						</button>
 					</nav>
 				</div>
 			</div>

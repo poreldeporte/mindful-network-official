@@ -1,5 +1,3 @@
-// Interfaces for Eventbrite API Response
-
 export interface EventbriteEventsResponse {
 	pagination: Pagination;
 	events: EventbriteEvent[];
@@ -91,6 +89,9 @@ export interface Address {
 	country: string;
 	latitude: string;
 	longitude: string;
+	localized_address_display: string;
+	localized_area_display: string;
+	localized_multi_line_address_display: string[];
 }
 
 export interface OnlineEventDetails {
@@ -123,6 +124,9 @@ export interface PriceRange {
 
 export interface Logo {
 	url: string;
+	original: {
+		url: string;
+	};
 }
 
 // Optional: Define more specific types for string enums if needed

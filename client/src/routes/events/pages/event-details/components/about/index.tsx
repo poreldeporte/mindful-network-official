@@ -41,7 +41,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 		setShowShareModal(!showShareModal);
 	};
 
-	const shareVia = (platform) => {
+	const shareVia = (platform: string) => {
 		const shareUrl = window.location.href;
 		const eventTitle = event.name.text;
 		const encodedUrl = encodeURIComponent(shareUrl);
@@ -89,18 +89,9 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 						</div>
 						Location
 					</Typography>
-
 					<p className="mt-5 font-bold">{event.venue.name}</p>
-					<p>
-						{event.venue.address.address_1 +
-							", " +
-							event.venue.address.city +
-							", " +
-							event.venue.address.region +
-							", " +
-							event.venue.address.country}
-					</p>
 
+					<p>{event.venue.address.localized_address_display}</p>
 					<div id="action-icons" className="flex items-center gap-2 mt-5">
 						<ActionButton
 							icon={Map}
@@ -118,11 +109,10 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 						<ActionButton
 							icon={Share2}
 							onClick={toggleShareModal}
-							tooltipText="Share Location"
+							tooltipText="Share Event Location"
 							ariaLabel="Share event location"
 						/>
 					</div>
-
 					<AnimatePresence>
 						{showShareModal && (
 							<>
@@ -354,6 +344,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 							aria-label={`Get tickets for ${event.name.text}`}
 							href={event.url}
 							className="expandable-tag-link"
+							target="_blank"
 						>
 							Get Tickets Now
 						</a>
