@@ -5,8 +5,6 @@ import { EventDetailsAbout } from "@/routes/events/pages/event-details/component
 import { EventDetailsHero } from "@/routes/events/pages/event-details/components/hero";
 import { MoreEvents } from "@/routes/events/pages/event-details/components/more-events";
 import { generateSlug } from "@/utilities";
-import { formatEventDate } from "@/utilities/format-event-date.utility";
-import { truncateText } from "@/utilities/truncate-text.utility";
 import Head from "next/head";
 
 interface Props {
@@ -14,77 +12,6 @@ interface Props {
 		slug: string;
 	};
 }
-
-const generateEventSchema = (event: any) => {
-	return {
-		"@context": "https://schema.org",
-		"@type": "Event",
-		name: event.name.text,
-		description: event.summary || event.description.text,
-		startDate: event.start.utc,
-		endDate: event.end.utc,
-		image: event.logo?.url || "",
-		location: event.venue
-			? {
-					"@type": "Place",
-					name: event.venue.name,
-					address: {
-						"@type": "PostalAddress",
-						streetAddress: event.venue.address?.address_1 || "",
-						addressLocality: event.venue.address?.city || "",
-						postalCode: event.venue.address?.postal_code || "",
-						addressCountry: event.venue.address?.country || "",
-					},
-				}
-			: {},
-		organizer: {
-			"@type": "Organization",
-			name: "The Mindful Network",
-			url: "https://themindfulnetwork.com",
-		},
-		offers: {
-			"@type": "Offer",
-			url: event.url,
-			availability: "https://schema.org/InStock",
-			price: event.ticket_classes?.[0]?.cost?.value || "0",
-			priceCurrency: event.ticket_classes?.[0]?.cost?.currency || "USD",
-		},
-	};
-};
-
-export const generateMetadata = async ({ params }: Props) => {
-	const eventId = params.slug.split("_")[1];
-	const { privateToken } = EventbriteKeys;
-	const eventbrite = new Eventbrite(privateToken as string);
-	const event = await eventbrite.getEventWithVenue(eventId as string);
-
-	if (!event) return { title: "Event Not Found" };
-
-	const description =
-		event.summary || truncateText(event.description.text, 160);
-	const url = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}_${event.id}`;
-
-	return {
-		title: `${event.name.text} | Mindful Network Event`,
-		description,
-		alternates: {
-			canonical: url,
-		},
-		openGraph: {
-			title: event.name.text,
-			description,
-			url,
-			images: event.logo?.url ? [{ url: event.logo.url }] : [],
-			publishedTime: event.start.utc,
-		},
-		twitter: {
-			card: "summary_large_image",
-			title: event.name.text,
-			description,
-			images: event.logo?.url ? [event.logo.url] : [],
-		},
-	};
-};
 
 export default async function EventDetails({ params }: Props) {
 	const eventId = params.slug.split("_")[1];
@@ -111,28 +38,55 @@ export default async function EventDetails({ params }: Props) {
 
 	const eventCategory = event.category?.name || "Event";
 
-	const eventDate = event.start?.utc ? formatEventDate(event.start.utc) : "";
-
 	const locationText = event.venue?.address?.city
 		? ` in ${event.venue.address.city}`
 		: "";
-	const pageTitle = `${event.name.text}${locationText} | ${eventDate} | Mindful Network`;
+	const pageTitle = `${event.name.text}${locationText} | Mindful Network Event`;
 
 	const metaDescription =
-		event.summary ||
-		truncateText(
-			`Join us for ${event.name.text}${locationText} on ${eventDate}. ${event.description.text}`,
-			160
-		);
+		event.summary || event.description?.text?.substring(0, 157) + "...";
 
-	const eventSchema = generateEventSchema(event);
+	const canonicalUrl = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}_${event.id}`;
 
 	const otherEvents = await eventbrite.getAllEvents(organizationId as string);
 	const filteredEvents = otherEvents.events.filter(
 		(otherEvent: EventbriteEvent) => otherEvent.id !== event.id
 	);
 
-	const canonicalUrl = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}_${event.id}`;
+	const eventSchema = {
+		"@context": "https://schema.org",
+		"@type": "Event",
+		name: event.name.text,
+		description: event.summary || event.description.text,
+		startDate: event.start.utc,
+		endDate: event.end.utc,
+		image: event.logo?.url || "",
+		location: event.venue
+			? {
+					"@type": "Place",
+					name: event.venue.name,
+					address: {
+						"@type": "PostalAddress",
+						streetAddress: event.venue.address?.address_1 || "",
+						addressLocality: event.venue.address?.city || "",
+						postalCode: event.venue.address?.postal_code || "",
+						addressCountry: event.venue.address?.country || "",
+					},
+				}
+			: {},
+		organizer: {
+			"@type": "Organization",
+			name: "Mindful Network",
+			url: "https://themindfulnetwork.com",
+		},
+		offers: {
+			"@type": "Offer",
+			url: event.url,
+			availability: "https://schema.org/InStock",
+			price: event.ticket_classes?.[0]?.cost?.value || "0",
+			priceCurrency: event.ticket_classes?.[0]?.cost?.currency || "USD",
+		},
+	};
 
 	return (
 		<>
@@ -195,17 +149,4 @@ export default async function EventDetails({ params }: Props) {
 	);
 }
 
-export async function generateStaticParams() {
-	const { privateToken, organizationId } = EventbriteKeys;
-	const eventbrite = new Eventbrite(privateToken as string);
-
-	try {
-		const events = await eventbrite.getAllEvents(organizationId as string);
-		return events.events?.map((event: EventbriteEvent) => ({
-			slug: `${generateSlug(event.name.text)}_${event.id}`,
-		}));
-	} catch (error) {
-		console.error("Error fetching events for static generation:", error);
-		return [];
-	}
-}
+export const dynamic = "force-dynamic";
