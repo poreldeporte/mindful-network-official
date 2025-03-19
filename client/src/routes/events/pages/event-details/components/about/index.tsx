@@ -244,7 +244,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 											/>
 											<button
 												className="bg-green-500 text-white rounded-r-md px-4 hover:bg-green-600 flex items-center gap-1"
-												onClick={(e) => {
+												onClick={() => {
 													navigator.clipboard.writeText(window.location.href);
 												}}
 											>
