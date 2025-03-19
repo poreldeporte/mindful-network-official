@@ -39,7 +39,7 @@ const generateEventSchema = (event: any) => {
 			: {},
 		organizer: {
 			"@type": "Organization",
-			name: "Mindful Network",
+			name: "The Mindful Network",
 			url: "https://themindfulnetwork.com",
 		},
 		offers: {

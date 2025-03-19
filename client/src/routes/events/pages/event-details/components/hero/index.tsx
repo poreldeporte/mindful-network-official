@@ -10,8 +10,6 @@ import { useRef } from "react";
 export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 	const navbarRef = useRef(null);
 
-	console.log(event);
-
 	const scrollToSection = (sectionId: string) => {
 		const section = document.getElementById(sectionId);
 

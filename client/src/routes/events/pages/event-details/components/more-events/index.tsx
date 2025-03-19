@@ -6,11 +6,11 @@ import { EventCard } from "@/components/shared";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui";
 
-export const MoreEvents = ({ events }: { events: EventbriteEvent[] }) => {
+export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [itemsToShow, setItemsToShow] = useState(4);
 	const carouselRef = useRef<HTMLDivElement>(null);
-	const showSlider = events.length > 4;
+	const showSlider = events && events.length > 4;
 
 	useEffect(() => {
 		const handleResize = () => {
