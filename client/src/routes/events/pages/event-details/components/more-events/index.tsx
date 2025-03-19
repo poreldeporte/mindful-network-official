@@ -93,7 +93,6 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 				</div>
 
 				{!showSlider ? (
-					// Grid estático para 4 eventos o menos
 					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
 						{events.map((event, index) => (
 							<div key={event.id}>
@@ -102,7 +101,6 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 						))}
 					</div>
 				) : (
-					// Slider para más de 4 eventos
 					<div className="overflow-hidden">
 						<motion.div
 							ref={carouselRef}

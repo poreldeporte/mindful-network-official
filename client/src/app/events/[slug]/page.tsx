@@ -201,7 +201,7 @@ export async function generateStaticParams() {
 
 	try {
 		const events = await eventbrite.getAllEvents(organizationId as string);
-		return events.events.map((event: EventbriteEvent) => ({
+		return events.events?.map((event: EventbriteEvent) => ({
 			slug: `${generateSlug(event.name.text)}_${event.id}`,
 		}));
 	} catch (error) {
