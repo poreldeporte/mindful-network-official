@@ -100,6 +100,11 @@ export function MobileTopBar() {
 										Blog
 									</Typography>
 								</Link>
+								<Link href="/events">
+									<Typography variant="medium" as="span" color="black">
+										Events
+									</Typography>
+								</Link>
 								<Link href="/about">
 									<Typography variant="medium" as="span" color="black">
 										About

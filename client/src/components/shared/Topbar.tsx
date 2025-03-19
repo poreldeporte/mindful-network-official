@@ -124,6 +124,16 @@ export function Topbar() {
 					>
 						Blog
 					</Link>
+					<Link
+						href="/events"
+						className={`${
+							pathname === "/events"
+								? "text-green-500 font-medium"
+								: "text-gray-700 font-normal"
+						}`}
+					>
+						Events
+					</Link>
 				</nav>
 
 				<div className="p-2 pr-5">

@@ -1,8 +1,8 @@
 import {
 	IconBriefcase,
-	IconShieldPlus,
-	IconHeadset,
 	IconBuildingHospital,
+	IconHeadset,
+	IconShieldPlus,
 } from "@tabler/icons-react";
 
 export const benefits = [
