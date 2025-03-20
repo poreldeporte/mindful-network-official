@@ -6,6 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
+interface BlogProps {
+	blogPosts: BlogModel[];
+}
+
 export const BlogCard = ({
 	title,
 	category,
@@ -102,5 +106,37 @@ export const BlogCard = ({
 				</a>
 			)}
 		</motion.article>
+	);
+};
+
+export const BlogContainer = ({ blogPosts }: BlogProps) => {
+	return (
+		<section
+			className="page-width section-y-padding"
+			aria-labelledby="blog-section-heading"
+		>
+			<Typography
+				className="mb-20 font-medium leading-tight"
+				color="black"
+				as="h2"
+				variant="title"
+				id="blog-section-heading"
+			>
+				Expert articles and resources <span className="block"></span>
+				<span className="text-green-500">to support your journey</span>
+			</Typography>
+
+			<div
+				className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-5"
+				role="list"
+				aria-label="Blog posts list"
+			>
+				{blogPosts && blogPosts.length
+					? blogPosts.map((blogPost, index) => (
+							<BlogCard key={blogPost.slug} {...blogPost} index={index} />
+						))
+					: ""}
+			</div>
+		</section>
 	);
 };
