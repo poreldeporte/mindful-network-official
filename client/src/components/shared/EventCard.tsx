@@ -49,51 +49,50 @@ const EventCard = ({
 		},
 	};
 
+	const eventUrl = `/events/${generateSlug(event.name.text)}_${event.id}`;
+
 	return (
-		<motion.article
-			initial="offscreen"
-			whileInView="onscreen"
-			viewport={{ once: true, amount: 0.3 }}
-			variants={cardVariants}
-			className="w-full h-full flex flex-col"
-		>
-			<motion.div
-				variants={imageVariants}
-				className="w-full h-64 overflow-hidden rounded-3xl border"
+		<Link href={eventUrl}>
+			<motion.article
+				initial="offscreen"
+				whileInView="onscreen"
+				viewport={{ once: true, amount: 0.3 }}
+				variants={cardVariants}
+				className="w-full h-full flex flex-col"
 			>
-				<Image
-					src={event.logo.url}
-					alt={event.name.text}
-					width={250}
-					height={250}
-					loading="lazy"
-					className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-				/>
-			</motion.div>
-
-			<div className="mt-2.5">
-				<span className="text-green-500 text-[14px]">
-					{formatEventDate(event.start.utc)}
-				</span>
-				<h2 className="font-bold text-sm leading-tight">{event.name.text}</h2>
-				<p className="text-xs line-clamp-2">{event.summary}</p>
-			</div>
-
-			<div className="flex flex-grow items-end justify-end mt-5">
-				<Button
-					variant="small"
-					className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative transition-all duration-300 hover:shadow-md"
-					form="primary"
+				<motion.div
+					variants={imageVariants}
+					className="w-full h-64 overflow-hidden rounded-3xl border"
 				>
-					<Link
-						className="expandable-tag-link"
-						href={`/events/${generateSlug(event.name.text)}_${event.id}`}
+					<Image
+						src={event.logo.url}
+						alt={event.name.text}
+						width={250}
+						height={250}
+						loading="lazy"
+						className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+					/>
+				</motion.div>
+
+				<div className="mt-2.5">
+					<span className="text-green-500 text-[14px]">
+						{formatEventDate(event.start.utc)}
+					</span>
+					<h2 className="font-bold text-sm leading-tight">{event.name.text}</h2>
+					<p className="text-xs line-clamp-2">{event.summary}</p>
+				</div>
+
+				<div className="flex flex-grow items-end justify-end mt-5">
+					<Button
+						variant="small"
+						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative transition-all duration-300 hover:shadow-md"
+						form="primary"
 					>
 						See Event
-					</Link>
-				</Button>
-			</div>
-		</motion.article>
+					</Button>
+				</div>
+			</motion.article>
+		</Link>
 	);
 };
 

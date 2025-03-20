@@ -52,10 +52,6 @@ export const BlogsContent = ({ blogAmount }: Props) => {
 		router.push(`/blog?page=${newPage}`);
 	};
 
-	// Array.from({ length: limit }).map((_, index) => (
-	// 		<Skeleton key={index} className="h-64 w-full" />
-	// 	))
-
 	return (
 		<div className="mx-auto w-11/12 xl:w-3/4">
 			<ContentHeader
@@ -66,7 +62,9 @@ export const BlogsContent = ({ blogAmount }: Props) => {
 				{isLoading ? (
 					<>Loading...</>
 				) : blogs && blogs.length ? (
-					blogs.map((blog) => <BlogCard key={blog._id} {...blog} />)
+					blogs.map((blog, blogIdx) => (
+						<BlogCard index={blogIdx} key={blog._id} {...blog} />
+					))
 				) : (
 					""
 				)}
