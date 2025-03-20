@@ -6,10 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
-interface BlogProps {
-	blogPosts: BlogModel[];
-}
-
 export const BlogCard = ({
 	title,
 	category,
@@ -17,7 +13,7 @@ export const BlogCard = ({
 	slug,
 	isInternal,
 	externalLink,
-	index = 0, // Añadido index con un valor predeterminado
+	index = 0,
 }: BlogModel & { index?: number }) => {
 	const cardVariants: Variants = {
 		offscreen: {
