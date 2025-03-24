@@ -40,7 +40,7 @@ export function MobileTopBar() {
 	}, []);
 
 	return (
-		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-10">
+		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-50">
 			<Link href={"/"} className="flex content-center space-x-3 items-center">
 				{companyDetails?.logo && (
 					<Image
