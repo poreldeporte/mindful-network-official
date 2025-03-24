@@ -70,7 +70,7 @@ export const EventsFooter = () => {
 							Search through support links to help you on your path
 						</Typography>
 						<Link
-							href={"/useful-links"}
+							href={"/support-links"}
 							className="mt-4 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
 							aria-label="Start your search for mental health resources"
 						>
