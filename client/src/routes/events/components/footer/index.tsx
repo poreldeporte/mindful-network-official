@@ -64,10 +64,11 @@ export const EventsFooter = () => {
 							variant="large"
 							className="font-semibold"
 						>
-							Find articles for you
+							Find what you need
 						</Typography>
 						<Typography color="white" variant="small">
-							Search through support links to help you on your path
+							Search through support groups, services, books, and the latest in
+							mental health research
 						</Typography>
 						<Link
 							href={"/support-links"}
