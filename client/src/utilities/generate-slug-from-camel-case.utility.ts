@@ -7,3 +7,15 @@ export const generateSlugFromCamelCase = (input: string): string => {
 
 	return slug;
 };
+
+export const generateSlug = (input: string): string => {
+	const slug = input
+		.toLowerCase()
+		.replace(/\s+/g, "-")
+		.replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+		.replace(/[^a-z0-9-]/g, "")
+		.replace(/-+/g, "-")
+		.replace(/^-+|-+$/g, "");
+
+	return slug;
+};

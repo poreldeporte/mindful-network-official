@@ -13,6 +13,8 @@ import BlogsHeroImage from "@/assets/images/blog/blog-hero.webp";
 import AvailableArticlesImage from "@/assets/images/blog/blog-article.webp";
 import SearchCtaBlogImage from "@/assets/images/blog/blog-assistance.webp";
 
+import EventsHeroImage from "@/assets/images/events/events-hero-bkg.webp";
+
 export {
 	Person1,
 	Person2,
@@ -25,4 +27,5 @@ export {
 	BlogsHeroImage,
 	AvailableArticlesImage,
 	SearchCtaBlogImage,
+	EventsHeroImage,
 };

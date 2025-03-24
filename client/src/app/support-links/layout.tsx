@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Mental Health Useful Links | Mindful Network",
+	title: "Mental Health Support Links | Mindful Network",
 	description:
 		"Access curated mental health resources, educational materials, crisis hotlines, support groups, and wellness tools. Find valuable information and support for your mental health journey.",
 	keywords: [
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
 		"mental health blogs",
 	],
 	openGraph: {
-		title: "Mental Health Useful Links | Mindful Network",
+		title: "Mental Health Support Links | Mindful Network",
 		description:
 			"Discover comprehensive mental health resources including crisis support, educational materials, support groups, and wellness tools to support your mental health journey.",
-		url: "https://themindfulnetwork.com/useful-links",
+		url: "https://themindfulnetwork.com/support-links",
 		type: "website",
 		locale: "en_US",
 		siteName: "Mindful Network",
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
 				url: "/android-chrome-512x512.png",
 				width: 1200,
 				height: 630,
-				alt: "The Mindful Network - Mental Health Useful Links Hub",
+				alt: "The Mindful Network - Mental Health Support Links Hub",
 			},
 		],
 	},
 	alternates: {
-		canonical: "https://themindfulnetwork.com/useful-links",
+		canonical: "https://themindfulnetwork.com/support-links",
 	},
 	robots: {
 		index: true,
@@ -67,10 +67,10 @@ export const metadata: Metadata = {
 		},
 	},
 	authors: [{ name: "The Mindful Network" }],
-	category: "Mental Health Useful Links",
+	category: "Mental Health Support Links",
 };
 
-export default function UsefulLinksLayout({
+export default function SupportLinksLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;

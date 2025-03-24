@@ -1,10 +1,9 @@
-import React from "react";
 import { Typography } from "@/components/ui";
-import Link from "next/link";
+import { AvailableArticlesImage, SearchCtaBlogImage } from "@/lib/images";
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
-import { SearchCtaBlogImage, AvailableArticlesImage } from "@/lib/images";
+import Link from "next/link";
 
-export const BlogsFooter = () => {
+export const EventsFooter = () => {
 	return (
 		<section className="grid grid-cols-1 lg:grid-cols-2 p-2 h-[60vh] gap-2">
 			<div className="relative overflow-hidden rounded-xl group">

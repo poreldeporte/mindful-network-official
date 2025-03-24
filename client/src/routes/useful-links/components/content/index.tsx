@@ -75,7 +75,7 @@ export const UseFulLinksContent = ({
 	return (
 		<section className="h-max mx-auto w-11/12 xl:w-3/4 flex flex-col mt-24 lg:mt-48 lg:mb-[100px]">
 			<Typography variant="title" as="h1" color="black" className="mb-5">
-				Useful links
+				Support Links
 			</Typography>
 			<div className="grid lg:grid-cols-2 gap-5">
 				{usefulLinksSections.length

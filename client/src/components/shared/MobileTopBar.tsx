@@ -90,14 +90,19 @@ export function MobileTopBar() {
 									Navigation
 								</Typography>
 
-								<Link href="/useful-links">
+								<Link href="/support-links">
 									<Typography variant="medium" as="span" color="black">
-										Useful links
+										Support Links
 									</Typography>
 								</Link>
 								<Link href="/blog">
 									<Typography variant="medium" as="span" color="black">
 										Blog
+									</Typography>
+								</Link>
+								<Link href="/events">
+									<Typography variant="medium" as="span" color="black">
+										Events
 									</Typography>
 								</Link>
 								<Link href="/about">
