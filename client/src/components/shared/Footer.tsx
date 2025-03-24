@@ -229,11 +229,26 @@ export function Footer({ blogPosts }: Props) {
 			</div>
 			<div className="flex justify-between items-center">
 				<Typography variant="small" color="black" className="p-4">
-					© 2024 The Mindful Network
+					© {new Date().getFullYear()} The Mindful Network
 				</Typography>
+
+				<a
+					href="https://www.violacreative.com/"
+					className="flex flex-col lg:flex-row lg:items-center gap-1"
+				>
+					<span className="text-[12px] text-gray-500">Developed by</span>
+					<Image
+						src={"/images/viola-creative-black.webp"}
+						alt="Viola Creative Logo"
+						height={15}
+						width={100}
+						loading="lazy"
+					/>
+				</a>
+
 				<Button
 					onClick={scrollToTop}
-					className="flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
+					className="hidden lg:flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
 					variant="small"
 				>
 					<Typography variant="small" as="h3" color="white">

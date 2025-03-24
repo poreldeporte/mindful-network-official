@@ -16,9 +16,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
 	title:
-		"Mindful Network - Your Guide to Mental Health Resources in South Florida",
+		"The Mindful Network - Your Guide to Mental Health Resources in South Florida",
 	description:
-		"Mindful Network is your comprehensive guide to finding and connecting with mental health resources in South Florida. Explore therapy options, medication management, outpatient and inpatient programs, and innovative therapies tailored for individuals aged 40 and above.",
+		"The Mindful Network is your comprehensive guide to finding and connecting with mental health resources in South Florida. Explore therapy options, medication management, outpatient and inpatient programs, and innovative therapies tailored for individuals aged 40 and above.",
 	alternates: {
 		canonical: "https://themindfulnetwork.com",
 	},
@@ -39,38 +39,39 @@ export const metadata: Metadata = {
 	],
 	openGraph: {
 		title:
-			"Mindful Network - Your Guide to Mental Health Resources in South Florida",
+			"The Mindful Network - Your Guide to Mental Health Resources in South Florida",
 		description:
 			"Discover mental health services tailored to your needs in South Florida. Find therapy options, outpatient programs, and support for various conditions such as depression, anxiety, PTSD, and more.",
 		url: "https://themindfulnetwork.com",
 		type: "website",
 		locale: "en_US",
-		siteName: "Mindful Network",
+		siteName: "The Mindful Network",
 		images: [
 			{
 				url: "/assets/images/mindful-logos/mindful-imagotype.png",
 				width: 1200,
 				height: 630,
-				alt: "Mindful Network - Mental Health Resources",
+				alt: "The Mindful Network - Mental Health Resources",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
 		site: "@MindfulNetwork",
-		title: "Mindful Network - Your Guide to Mental Health Resources",
+		title: "The Mindful Network - Your Guide to Mental Health Resources",
 		description:
-			"Mindful Network helps individuals in South Florida find mental health resources tailored to their needs. Explore our platform to access therapy options, outpatient and inpatient programs, and more.",
+			"The Mindful Network helps individuals in South Florida find mental health resources tailored to their needs. Explore our platform to access therapy options, outpatient and inpatient programs, and more.",
 		images: [
 			{
 				url: "/assets/images/mindful-logos/mindful-imagotype.png",
 				width: 1200,
 				height: 630,
-				alt: "Mindful Network - Mental Health Resources",
+				alt: "The Mindful Network - Mental Health Resources",
 			},
 		],
 	},
 	robots: "index, follow",
+	authors: [{ name: "Viola Creative", url: "https://www.violacreative.com/" }],
 };
 
 export default function RootLayout({
@@ -81,9 +82,13 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				<meta name="author" content="Mindful Network Team" />
+				<meta name="author" content="The Mindful Network Team" />
 				<meta name="theme-color" content="#fef9ef" />
 				<meta name="msapplication-TileColor" content="#fef9ef" />
+
+				<meta name="developer" content="Viola Creative" />
+				<meta name="developer-url" content="https://www.violacreative.com/" />
+				<meta name="developer-email" content="franco@poreldeporte.com" />
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
