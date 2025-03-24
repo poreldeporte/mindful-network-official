@@ -10,7 +10,7 @@ export const benefits = [
 		key: 0,
 		title: "Trusted and Verified Resources",
 		description:
-			"We thoroughly vet and verify evOery mental health resource in our network, ensuring you only have access to reputable and reliable options.",
+			"We thoroughly vet and verify every mental health resource in our network, ensuring you only have access to reputable and reliable options.",
 	},
 	{
 		key: 1,
