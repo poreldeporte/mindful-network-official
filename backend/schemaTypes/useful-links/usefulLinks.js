@@ -1,6 +1,6 @@
 export default {
   name: 'usefulLinks',
-  title: '📄 Useful Links',
+  title: '📄 Support Links',
   type: 'document',
   fields: [
     {
