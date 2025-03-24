@@ -177,9 +177,9 @@ export const aboutFooter = [
 		link: "/about",
 	},
 	{
-		key: "useful-links",
-		label: "Useful Links",
-		link: "/useful-links",
+		key: "support-links",
+		label: "Support Links",
+		link: "/support-links",
 	},
 	{
 		key: "privacy-policy",

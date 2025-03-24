@@ -27,7 +27,7 @@ export default function UsefulLinks() {
 		<>
 			<Topbar />
 			<MobileTopBar />
-			<main aria-labelledby="useful-links-page">
+			<main aria-labelledby="support-links-page">
 				<UseFulLinksContent usefulLinksSections={usefulLinksSections} />
 			</main>
 			<Footer />

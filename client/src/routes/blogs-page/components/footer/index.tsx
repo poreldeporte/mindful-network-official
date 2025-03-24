@@ -68,7 +68,7 @@ export const BlogsFooter = () => {
 							Find articles for you
 						</Typography>
 						<Typography color="white" variant="small">
-							Search through useful links to help you on your path
+							Search through support links to help you on your path
 						</Typography>
 						<Link
 							href={"/useful-links"}
