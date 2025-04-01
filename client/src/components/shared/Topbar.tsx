@@ -60,7 +60,7 @@ export function Topbar() {
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
-					className="w-80 h-20 flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
+					className="w-60 h-14 xl:w-80 xl:h-20 flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-green-500 hover:bg-green-600 transition-colors rounded-ee-full"
 				>
 					{companyDetails?.logo && (
 						<Image

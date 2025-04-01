@@ -166,7 +166,7 @@ export function Footer({ blogPosts }: Props) {
 								})}
 							</div>
 						</div>
-						<div className="max-w-96">
+						<div className="max-w-72">
 							<Typography
 								color="black"
 								as="h2"
@@ -199,7 +199,7 @@ export function Footer({ blogPosts }: Props) {
 									: ""}
 							</div>
 						</div>
-						<div className="grid grid-cols-1 lg:grid-cols-1">
+						<div className="max-w-72">
 							<Typography
 								color="black"
 								as="h2"
@@ -234,7 +234,7 @@ export function Footer({ blogPosts }: Props) {
 
 				<a
 					href="https://www.violacreative.com/"
-					className="flex flex-col lg:flex-row lg:items-center gap-1"
+					className="flex items-center gap-1 p-4 lg:p-0"
 				>
 					<span className="text-[12px] text-gray-500">Developed by</span>
 					<Image
