@@ -5,11 +5,72 @@ import { EventDetailsAbout } from "@/routes/events/pages/event-details/component
 import { EventDetailsHero } from "@/routes/events/pages/event-details/components/hero";
 import { MoreEvents } from "@/routes/events/pages/event-details/components/more-events";
 import { generateSlug } from "@/utilities";
-import Head from "next/head";
+import { Metadata } from "next";
 
 interface Props {
 	params: {
 		slug: string;
+	};
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const eventId = params.slug.split("_")[1];
+	const { privateToken } = EventbriteKeys;
+	const eventbrite = new Eventbrite(privateToken as string);
+	const event = await eventbrite.getEventWithVenue(eventId as string);
+
+	if (!event) {
+		return {
+			title: "Event Not Found | Mindful Network",
+			description: "The requested event could not be found.",
+			robots: "noindex, follow",
+		};
+	}
+
+	const locationText = event.venue?.address?.city
+		? ` in ${event.venue.address.city}`
+		: "";
+	const pageTitle = `${event.name.text}${locationText} | Mindful Network Event`;
+	const metaDescription =
+		event.summary || event.description?.text?.substring(0, 157) + "...";
+	const canonicalUrl = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}_${event.id}`;
+	const eventCategory = event.category?.name || "Event";
+
+	return {
+		title: pageTitle,
+		description: metaDescription,
+		keywords: `mindful network, ${eventCategory.toLowerCase()}, ${event.name.text.toLowerCase()}, mindfulness, events${locationText.toLowerCase()}`,
+		alternates: {
+			canonical: canonicalUrl,
+		},
+		openGraph: {
+			locale: "en_US",
+			siteName: "The Mindful Network",
+			title: event.name.text,
+			description: metaDescription,
+			type: "website",
+			url: canonicalUrl,
+			...(event.logo?.url && {
+				images: [
+					{
+						url: event.logo.url,
+						alt: `${event.name.text} event image`,
+					},
+				],
+			}),
+		},
+		twitter: {
+			card: "summary_large_image",
+			site: "@mindfulnetwork",
+			title: event.name.text,
+			description: metaDescription,
+			...(event.logo?.url && {
+				images: [event.logo.url],
+			}),
+		},
+		robots:
+			"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+		viewport: "width=device-width, initial-scale=1",
 	};
 }
 
@@ -21,32 +82,8 @@ export default async function EventDetails({ params }: Props) {
 	const event = await eventbrite.getEventWithVenue(eventId as string);
 
 	if (!event) {
-		return (
-			<>
-				<Head>
-					<title>Event Not Found | Mindful Network</title>
-					<meta
-						name="description"
-						content="The requested event could not be found."
-					/>
-					<meta name="robots" content="noindex, follow" />
-				</Head>
-				<div>Event not found</div>
-			</>
-		);
+		return <div>Event not found</div>;
 	}
-
-	const eventCategory = event.category?.name || "Event";
-
-	const locationText = event.venue?.address?.city
-		? ` in ${event.venue.address.city}`
-		: "";
-	const pageTitle = `${event.name.text}${locationText} | Mindful Network Event`;
-
-	const metaDescription =
-		event.summary || event.description?.text?.substring(0, 157) + "...";
-
-	const canonicalUrl = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}_${event.id}`;
 
 	const otherEvents = await eventbrite.getAllEvents(organizationId as string);
 	const filteredEvents = otherEvents.events.filter(
@@ -89,63 +126,15 @@ export default async function EventDetails({ params }: Props) {
 	};
 
 	return (
-		<>
-			<Head>
-				<title>{pageTitle}</title>
-				<meta name="description" content={metaDescription} />
-				<meta
-					name="keywords"
-					content={`mindful network, ${eventCategory.toLowerCase()}, ${event.name.text.toLowerCase()}, mindfulness, events${locationText.toLowerCase()}`}
-				/>
-				<link rel="canonical" href={canonicalUrl} />
-
-				<meta property="og:locale" content="en_US" />
-
-				<meta property="og:site_name" content="Mindful Network" />
-				<meta property="og:title" content={event.name.text} />
-				<meta property="og:description" content={metaDescription} />
-				<meta property="og:type" content="event" />
-				<meta property="og:url" content={canonicalUrl} />
-				{event.logo?.url && (
-					<meta property="og:image" content={event.logo.url} />
-				)}
-				{event.logo?.url && (
-					<meta
-						property="og:image:alt"
-						content={`${event.name.text} event image`}
-					/>
-				)}
-				{event.start?.utc && (
-					<meta property="article:published_time" content={event.start.utc} />
-				)}
-
-				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@mindfulnetwork" />
-				<meta name="twitter:title" content={event.name.text} />
-				<meta name="twitter:description" content={metaDescription} />
-				{event.logo?.url && (
-					<meta name="twitter:image" content={event.logo.url} />
-				)}
-
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta
-					name="robots"
-					content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-				/>
-
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
-				/>
-			</Head>
-
-			<main>
-				<h1 className="sr-only">{event.name.text} - Mindful Network Event</h1>
-				<EventDetailsHero event={event} />
-				<EventDetailsAbout event={event} />
-				<MoreEvents events={filteredEvents} />
-			</main>
-		</>
+		<main>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+			/>
+			<EventDetailsHero event={event} />
+			<EventDetailsAbout event={event} />
+			<MoreEvents events={filteredEvents} />
+		</main>
 	);
 }
 

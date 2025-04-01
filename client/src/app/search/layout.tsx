@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 		siteName: "Mindful Network",
 		images: [
 			{
-				url: "/assets/images/mindful-logos/mindful-imagotype.png",
+				url: "/images/logo.png",
 				width: 1200,
 				height: 630,
 				alt: "Mindful Network - Search Mental Health Professionals",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 			"Find Mental Health Professionals in South Florida - Mindful Network",
 		description:
 			"Find the right mental health support in South Florida. Explore licensed professionals with our comprehensive search filters tailored to your needs.",
-		images: "/assets/images/mindful-logos/mindful-imagotype.png", // Twitter preview image for the search section.
+		images: "/images/logo.png", // Twitter preview image for the search section.
 	},
 	robots: "index, follow",
 };

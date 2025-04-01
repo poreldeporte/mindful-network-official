@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 		siteName: "The Mindful Network",
 		images: [
 			{
-				url: "/assets/images/mindful-logos/mindful-imagotype.png",
+				url: "/images/logo.png",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Events",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 		title: "Mental Health Events & Workshops - The Mindful Network",
 		description:
 			"Join our community events, workshops, and support groups focused on mental health awareness and education in South Florida.",
-		images: "/assets/images/mindful-logos/mindful-imagotype.png",
+		images: "/images/logo.png",
 	},
 	robots: "index, follow",
 };
