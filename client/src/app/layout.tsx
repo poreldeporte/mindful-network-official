@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const anticDidone = Antic_Didone({
@@ -48,10 +49,11 @@ export const metadata: Metadata = {
 		siteName: "The Mindful Network",
 		images: [
 			{
-				url: "/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.png",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
+				type: "image/png",
 			},
 		],
 	},
@@ -63,10 +65,11 @@ export const metadata: Metadata = {
 			"The Mindful Network helps individuals in South Florida find mental health resources tailored to their needs. Explore our platform to access therapy options, outpatient and inpatient programs, and more.",
 		images: [
 			{
-				url: "/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.png",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
+				type: "image/png",
 			},
 		],
 	},
@@ -85,7 +88,6 @@ export default function RootLayout({
 				<meta name="author" content="The Mindful Network" />
 				<meta name="theme-color" content="#fef9ef" />
 				<meta name="msapplication-TileColor" content="#fef9ef" />
-
 				<meta name="developer" content="Viola Creative" />
 				<meta name="developer-url" content="https://www.violacreative.com/" />
 				<meta name="developer-email" content="franco@poreldeporte.com" />
@@ -112,6 +114,7 @@ export default function RootLayout({
 				className={`${anticDidone.className} ${dmSans.className} antialiased`}
 			>
 				{children}
+				<Analytics />
 			</body>
 		</html>
 	);

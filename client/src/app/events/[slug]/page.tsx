@@ -113,7 +113,7 @@ export default async function EventDetails({ params }: Props) {
 			: {},
 		organizer: {
 			"@type": "Organization",
-			name: "Mindful Network",
+			name: "The Mindful Network",
 			url: "https://themindfulnetwork.com",
 		},
 		offers: {
