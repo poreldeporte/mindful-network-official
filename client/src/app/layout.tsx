@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 		siteName: "The Mindful Network",
 		images: [
 			{
-				url: "/assets/images/mindful-logos/mindful-imagotype.png",
+				url: "/images/logo.png",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 			"The Mindful Network helps individuals in South Florida find mental health resources tailored to their needs. Explore our platform to access therapy options, outpatient and inpatient programs, and more.",
 		images: [
 			{
-				url: "/assets/images/mindful-logos/mindful-imagotype.png",
+				url: "/images/logo.png",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
@@ -82,7 +82,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				<meta name="author" content="The Mindful Network Team" />
+				<meta name="author" content="The Mindful Network" />
 				<meta name="theme-color" content="#fef9ef" />
 				<meta name="msapplication-TileColor" content="#fef9ef" />
 
