@@ -35,7 +35,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 			name: "Mindful Network",
 			logo: {
 				"@type": "ImageObject",
-				url: "/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.png",
 			},
 		},
 		mainEntityOfPage: {
