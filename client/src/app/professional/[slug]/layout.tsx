@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 		siteName: "Mindful Network",
 		images: [
 			{
-				url: "https://themindfulnetwork.com/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
 				alt: "Mindful Network - Mental Health Professional Directory",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 			"Browse comprehensive profiles of licensed therapists and psychologists. Compare specialties, education, and accepted insurance to find your perfect mental health match.",
 		images: [
 			{
-				url: "https://themindfulnetwork.com/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
 				alt: "Mindful Network - Mental Health Professional Search",
