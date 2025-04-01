@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 		siteName: "Mindful Network",
 		images: [
 			{
-				url: "https://themindfulnetwork.com/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
 				alt: "Mindful Network - Comprehensive Mental Health Blog",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 		title: "Comprehensive Mental Health Blog - Mindful Network",
 		description:
 			"Stay updated with expert insights and resources on mental health and wellness. Explore our blog for tips, articles, and therapeutic advice.",
-		images: "https://themindfulnetwork.com/images/logo.png",
+		images: "https://themindfulnetwork.com/images/logo.webp",
 	},
 	robots: "index, follow",
 };

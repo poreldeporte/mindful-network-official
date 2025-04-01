@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 		siteName: "The Mindful Network",
 		images: [
 			{
-				url: "https://themindfulnetwork.com/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 			"The Mindful Network helps individuals in South Florida find mental health resources tailored to their needs. Explore our platform to access therapy options, outpatient and inpatient programs, and more.",
 		images: [
 			{
-				url: "https://themindfulnetwork.com/images/logo.png",
+				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
