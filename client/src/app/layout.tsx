@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import Script from "next/script";
 
 const anticDidone = Antic_Didone({
 	weight: "400",
@@ -109,6 +110,18 @@ export default function RootLayout({
 					href="/favicon-16x16.png"
 				/>
 				<link rel="manifest" href="/manifest.json" />
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-X4B78HK48X"
+					strategy="afterInteractive"
+				/>
+				<Script id="gtag-init" strategy="afterInteractive">
+					{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-X4B78HK48X');
+          `}
+				</Script>
 			</head>
 			<body
 				className={`${anticDidone.className} ${dmSans.className} antialiased`}
