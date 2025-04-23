@@ -111,16 +111,17 @@ export default function RootLayout({
 				/>
 				<link rel="manifest" href="/manifest.json" />
 				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-X4B78HK48X"
+					src="https://www.googletagmanager.com/gtag/js?id=G-B1CP0XGKGW"
 					strategy="afterInteractive"
 				/>
 				<Script id="gtag-init" strategy="afterInteractive">
 					{`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-X4B78HK48X');
-          `}
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'G-B1CP0XGKGW');
+					`}
 				</Script>
 			</head>
 			<body
