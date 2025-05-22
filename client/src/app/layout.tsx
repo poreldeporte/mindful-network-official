@@ -91,7 +91,7 @@ export default function RootLayout({
 				<meta name="msapplication-TileColor" content="#fef9ef" />
 				<meta name="developer" content="Viola Creative" />
 				<meta name="developer-url" content="https://www.violacreative.com/" />
-				<meta name="developer-email" content="franco@poreldeporte.com" />
+				<meta name="developer-email" content="franco@violacreative.com" />
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
