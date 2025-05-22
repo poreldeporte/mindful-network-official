@@ -82,6 +82,7 @@ export const Subsection = ({
 	items,
 	layoutStyle = "column",
 }: SubsectionProps) => {
+	const isEmail = items.some((item) => item.includes("@"));
 	return (
 		<div className="flex flex-col" aria-labelledby={`${id}-title`}>
 			<div className="flex items-center space-x-2 mb-2">
@@ -109,9 +110,25 @@ export const Subsection = ({
 			>
 				{items.map((item, index) => (
 					<li key={index}>
-						<Typography as="p" variant="small" color="darkGray">
-							{item}
-						</Typography>
+						{isEmail ? (
+							<Typography
+								as="p"
+								variant="small"
+								color="darkGray"
+								className="xs:max-w-full xs:text-wrap break-all whitespace-pre-wrap"
+							>
+								{item}
+							</Typography>
+						) : (
+							<Typography
+								as="p"
+								variant="small"
+								color="darkGray"
+								className="xs:max-w-full xs:text-wrap"
+							>
+								{item}
+							</Typography>
+						)}
 					</li>
 				))}
 			</ul>
