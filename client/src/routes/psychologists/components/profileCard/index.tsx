@@ -1,7 +1,7 @@
 import { Badge, Typography } from "@/components/ui";
 import { MindfulIsotype, UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
-import { HeartPulse } from "lucide-react";
+import { HeartPulse, Wallet } from "lucide-react";
 import Image from "next/image";
 
 export function ProfileCard({
@@ -10,6 +10,7 @@ export function ProfileCard({
 	description,
 	resource,
 	facility,
+	showInsurances,
 }: PsychologistModel) {
 	return (
 		<header
@@ -44,7 +45,7 @@ export function ProfileCard({
 					>
 						{facility}
 					</Typography>
-					<div className="space-x-1">
+					<div className="space-x-1 space-y-1">
 						{resource && resource.length
 							? resource.map((res) => (
 									<Badge
@@ -66,17 +67,31 @@ export function ProfileCard({
 				</Typography>
 			</div>
 			<div className="flex flex-col space-y-3 lg:items-center lg:justify-start lg:flex-row lg:space-x-6 lg:space-y-0">
-				<div className="flex items-center space-x-2">
-					<HeartPulse className="w-10 h-10" aria-hidden="true" />
-					<Typography
-						className="font-semibold"
-						as="p"
-						variant="small"
-						color="darkGray"
-					>
-						Accepts Insurance
-					</Typography>
-				</div>
+				{showInsurances ? (
+					<div className="flex items-center space-x-2">
+						<HeartPulse className="w-10 h-10" aria-hidden="true" />
+						<Typography
+							className="font-semibold"
+							as="p"
+							variant="small"
+							color="darkGray"
+						>
+							Accepts Insurance
+						</Typography>
+					</div>
+				) : (
+					<div className="flex items-center space-x-2">
+						<Wallet className="w-10 h-10" aria-hidden="true" />
+						<Typography
+							className="font-semibold"
+							as="p"
+							variant="small"
+							color="darkGray"
+						>
+							Self-pay - Insurance not accepted
+						</Typography>
+					</div>
+				)}
 				<div className="flex items-center space-x-2">
 					<Image
 						alt="Mindful Logo"

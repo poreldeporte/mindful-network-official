@@ -107,10 +107,22 @@ export default {
       type: 'string',
     },
     {
+      name: 'showInsurances',
+      title: 'Show Insurances Section',
+      type: 'boolean',
+      initialValue: true,
+      default: true,
+      options: {
+        layout: 'switch',
+      },
+      description: 'Toggle to show/hide the insurances section',
+    },
+    {
       name: 'insurances',
       title: 'Insurances',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'insurance'}]}],
+      hidden: ({document}) => !document?.showInsurances,
     },
     {
       name: 'slidingScale',

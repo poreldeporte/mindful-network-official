@@ -50,7 +50,7 @@ export const getPsychologistById = async (
 export const getAllProfessionals = async () => {
 	try {
 		const data = await sanityClient.fetch(
-			`*[_type == 'professionals']{
+			`*[_type == 'professionals'] | order(orderRank asc) {
 			...,
 			"slug": slug.current, 
 			"conditionSpecialty": conditionSpecialty[]->{
