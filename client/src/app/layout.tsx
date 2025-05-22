@@ -110,6 +110,10 @@ export default function RootLayout({
 					href="/favicon-16x16.png"
 				/>
 				<link rel="manifest" href="/manifest.json" />
+				<meta
+					name="google-site-verification"
+					content="MRYzoaKzfBfpS_gQkReJAjD6Q_b7IXW2G-QFSp_vYeE"
+				/>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-TLP8D1GLB5"
 					strategy="afterInteractive"
