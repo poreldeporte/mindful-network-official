@@ -20,6 +20,7 @@ const PsychologistCard = ({
 		ageSpecialty,
 		slug,
 		resource,
+		showInsurances,
 	} = psychologist;
 
 	return (
@@ -78,7 +79,7 @@ const PsychologistCard = ({
 								? conditionSpecialty
 										.map((condition) => condition.name)
 										.join(", ")
-								: "N/A"}
+								: "Call to verify specialty"}
 						</Typography>
 					</div>
 
@@ -89,9 +90,15 @@ const PsychologistCard = ({
 						/>
 						<Typography as="p" color="darkGray" variant="small">
 							<span className="font-semibold">Accepted Insurance:</span>{" "}
-							{insurances?.length
-								? insurances.map((insurance) => insurance.name).join(", ")
-								: "N/A"}
+							{showInsurances ? (
+								<>
+									{insurances?.length
+										? insurances.map((insurance) => insurance.name).join(", ")
+										: "Call to verify coverage"}
+								</>
+							) : (
+								"Self-pay - Insurance not accepted"
+							)}
 						</Typography>
 					</div>
 
@@ -104,7 +111,7 @@ const PsychologistCard = ({
 							<span className="font-semibold">Age Specialty:</span>{" "}
 							{ageSpecialty?.length
 								? ageSpecialty.map((specialty) => specialty.age).join(", ")
-								: "N/A"}
+								: "Call to verify age"}
 						</Typography>
 					</div>
 

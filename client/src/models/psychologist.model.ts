@@ -21,6 +21,7 @@ export interface PsychologistModel {
 	position?: Positions;
 	description: string;
 	phone: string;
+	showInsurances: boolean;
 	insurances: insurances[];
 	ageSpecialty: ageSpecialty[];
 	resource: ResourcesModel[];

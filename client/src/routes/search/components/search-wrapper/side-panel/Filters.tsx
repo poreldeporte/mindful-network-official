@@ -100,7 +100,7 @@ const FilterItem = ({
 								return (
 									<Badge
 										key={key}
-										className="w-max h-8 items-center"
+										className="w-max h-max items-center"
 										isSelected={selectedOptions.includes(key)}
 										onClick={() => onBadgeClick(key)}
 										color={color as ColorType}

@@ -140,7 +140,7 @@ export function Footer({ blogPosts }: Props) {
 							)}
 						</div>
 					</div>
-					<div className="flex flex-col flex-wrap lg:flex-row items-start justify-around">
+					<div className="flex flex-col flex-wrap lg:flex-row items-start justify-between xl:justify-around">
 						<div>
 							<Typography
 								color="black"
@@ -227,8 +227,8 @@ export function Footer({ blogPosts }: Props) {
 					</div>
 				</div>
 			</div>
-			<div className="flex justify-between items-center">
-				<Typography variant="small" color="black" className="p-4">
+			<div className="flex flex-col md:flex-row justify-between items-center">
+				<Typography variant="small" color="black" className="p-0 md:p-4">
 					© {new Date().getFullYear()} The Mindful Network
 				</Typography>
 

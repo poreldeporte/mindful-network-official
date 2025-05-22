@@ -30,6 +30,7 @@ export function PsychologistAbout({
 	imagesGallery,
 	email,
 	video,
+	showInsurances,
 }: PsychologistModel) {
 	const hasValidItems = (arr?: any[]) => arr && arr.length > 0;
 	const expertiseSubsections = [];
@@ -156,7 +157,7 @@ export function PsychologistAbout({
 				/>
 			)}
 
-			{insuranceSubsections.length > 0 && (
+			{showInsurances && insuranceSubsections.length > 0 && (
 				<Section
 					id="insurances"
 					title="Check your insurances"
