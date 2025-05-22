@@ -3,7 +3,7 @@ import { sanityClient } from "@/api";
 export const getAllResources = async () => {
 	try {
 		const data = await sanityClient.fetch(
-			`*[_type == 'resources']`,
+			`*[_type == 'resources'] | order(orderRank asc)`,
 			{},
 			{
 				cache: "no-store",
