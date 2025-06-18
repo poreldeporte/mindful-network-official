@@ -49,7 +49,7 @@ const EventCard = ({
 		},
 	};
 
-	const eventUrl = `/events/${generateSlug(event.name.text)}_${event.id}`;
+	const eventUrl = `/events/${generateSlug(event.name.text)}-${event.id}`;
 
 	return (
 		<Link href={eventUrl}>

@@ -103,7 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			const events = await eventbrite.getAllEvents(organizationId as string);
 
 			eventUrls = events.events.map((event: any) => ({
-				url: `${baseUrl}/events/${generateSlug(event.name.text)}_${event.id}`,
+				url: `${baseUrl}/events/${generateSlug(event.name.text)}-${event.id}`,
 				lastModified: event.changed ? new Date(event.changed) : currentDate,
 				changeFrequency: "weekly" as const,
 				priority: 0.7,
