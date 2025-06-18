@@ -19,3 +19,8 @@ export const generateSlug = (input: string): string => {
 
 	return slug;
 };
+
+export const extractEventIdFromSlug = (slug: string): string => {
+	const slugParts = slug.split("-");
+	return slugParts[slugParts.length - 1];
+};
