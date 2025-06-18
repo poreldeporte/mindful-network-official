@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title:
-		"Find & Connect with Mental Health Professionals in South Florida | Mindful Network",
+		"Find & Connect with Mental Health Professionals in South Florida | The Mindful Network",
 	description:
 		"Discover and connect with licensed mental health professionals in South Florida. View detailed profiles, education, specialties, accepted insurance, and contact information. Find the perfect match for your mental health needs.",
 	keywords: [
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
 	],
 	openGraph: {
 		title:
-			"Connect with Mental Health Professionals in South Florida | Mindful Network",
+			"Connect with Mental Health Professionals in South Florida | The Mindful Network",
 		description:
 			"Explore detailed profiles of licensed mental health professionals in South Florida. View education, specialties, accepted insurance, and easily connect with the right therapist for your needs.",
 		url: "https://themindfulnetwork.com/psychologist",
 		type: "website",
 		locale: "en_US",
-		siteName: "Mindful Network",
+		siteName: "The Mindful Network",
 		images: [
 			{
 				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
-				alt: "Mindful Network - Mental Health Professional Directory",
+				alt: "The Mindful Network - Mental Health Professional Directory",
 			},
 		],
 	},
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 				url: "https://themindfulnetwork.com/images/logo.webp",
 				width: 1200,
 				height: 630,
-				alt: "Mindful Network - Mental Health Professional Search",
+				alt: "The Mindful Network - Mental Health Professional Search",
 			},
 		],
 	},
