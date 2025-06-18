@@ -1,6 +1,6 @@
 {
-	"name": "Mindful Network - Mental Health Resources",
-	"short_name": "MindfulNet",
+	"name": "The Mindful Network - Mental Health Resources",
+	"short_name": "The Mindful Network",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",
@@ -33,7 +33,7 @@
 	"display": "standalone",
 	"start_url": "/",
 	"scope": "/",
-	"description": "Mindful Network is your comprehensive guide to finding and connecting with mental health resources in South Florida. Explore therapy options, medication management, and mental health support tailored to your needs.",
+	"description": "The Mindful Network is your comprehensive guide to finding and connecting with mental health resources in South Florida. Explore therapy options, medication management, and mental health support tailored to your needs.",
 	"orientation": "portrait",
 	"lang": "en-US"
 }
