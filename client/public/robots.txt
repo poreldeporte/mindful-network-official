@@ -1,2 +1,39 @@
+# Permitir acceso a todos los bots de búsqueda
 User-agent: *
-Disallow: /admin
+Allow: /
+
+# Bloquear acceso a directorios administrativos y archivos sensibles
+Disallow: /admin/
+Disallow: /temp/
+Disallow: /*.log$
+Disallow: /cgi-bin/
+
+# Permitir páginas de búsqueda con filtros válidos
+Allow: /search?resource=*
+Allow: /search?condition=*
+Allow: /search?insurance=*
+Allow: /search?therapy=*
+Allow: /search?*
+
+# Bloquear acceso a páginas de búsqueda vacías o problemáticas
+Disallow: /search?$
+Disallow: /search?&
+Disallow: /*?s=*
+Disallow: /*&s=*
+Disallow: /*?filter=*
+
+# Permitir acceso específico a archivos CSS y JS (importantes para el renderizado)
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Configuración específica para bots de imágenes
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Retrasar rastreo para evitar sobrecargar el servidor (en segundos)
+Crawl-delay: 1
+
+# REFERENCIA AL SITEMAP
+Sitemap: https://themindfulnetwork.com/sitemap.xml
