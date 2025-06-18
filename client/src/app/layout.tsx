@@ -21,9 +21,6 @@ export const metadata: Metadata = {
 		"The Mindful Network - Your Guide to Mental Health Resources in South Florida",
 	description:
 		"The Mindful Network is your comprehensive guide to finding and connecting with mental health resources in South Florida. Explore therapy options, medication management, outpatient and inpatient programs, and innovative therapies tailored for individuals aged 40 and above.",
-	alternates: {
-		canonical: "https://themindfulnetwork.com",
-	},
 	keywords: [
 		"mental health resources",
 		"South Florida mental health",
@@ -38,6 +35,12 @@ export const metadata: Metadata = {
 		"innovative therapies",
 		"mind-body practices",
 		"mental health legal support",
+		"Facilities",
+		"Services",
+		"Clinics",
+		"Counselor",
+		"Hospitals",
+		"Retreats",
 	],
 	openGraph: {
 		title:
