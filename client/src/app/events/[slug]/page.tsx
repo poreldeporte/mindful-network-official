@@ -4,7 +4,7 @@ import { EventbriteEvent } from "@/models/eventbrite.model";
 import { EventDetailsAbout } from "@/routes/events/pages/event-details/components/about";
 import { EventDetailsHero } from "@/routes/events/pages/event-details/components/hero";
 import { MoreEvents } from "@/routes/events/pages/event-details/components/more-events";
-import { generateSlug } from "@/utilities";
+import { generateSlug, extractEventIdFromSlug } from "@/utilities";
 import { Metadata } from "next";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const eventId = params.slug.split("_")[1];
+	const eventId = extractEventIdFromSlug(params.slug);
 	const { privateToken } = EventbriteKeys;
 	const eventbrite = new Eventbrite(privateToken as string);
 	const event = await eventbrite.getEventWithVenue(eventId as string);
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const pageTitle = `${event.name.text}${locationText} | Mindful Network Event`;
 	const metaDescription =
 		event.summary || event.description?.text?.substring(0, 157) + "...";
-	const canonicalUrl = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}_${event.id}`;
+	const canonicalUrl = `https://themindfulnetwork.com/events/${generateSlug(event.name.text)}-${event.id}`;
 	const eventCategory = event.category?.name || "Event";
 
 	return {
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function EventDetails({ params }: Props) {
-	const eventId = params.slug.split("_")[1];
+	const eventId = extractEventIdFromSlug(params.slug);
 
 	const { privateToken, organizationId } = EventbriteKeys;
 	const eventbrite = new Eventbrite(privateToken as string);

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Mental Health Support Links | Mindful Network",
+	title: "Mental Health Support Links | The Mindful Network",
 	description:
 		"Access curated mental health resources, educational materials, crisis hotlines, support groups, and wellness tools. Find valuable information and support for your mental health journey.",
 	keywords: [
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
 		"mental health blogs",
 	],
 	openGraph: {
-		title: "Mental Health Support Links | Mindful Network",
+		title: "Mental Health Support Links | The Mindful Network",
 		description:
 			"Discover comprehensive mental health resources including crisis support, educational materials, support groups, and wellness tools to support your mental health journey.",
 		url: "https://themindfulnetwork.com/support-links",
 		type: "website",
 		locale: "en_US",
-		siteName: "Mindful Network",
+		siteName: "The Mindful Network",
 		images: [
 			{
 				url: "/android-chrome-512x512.png",
 				width: 1200,
 				height: 630,
-				alt: "Mindful Network - Mental Health Resources Directory",
+				alt: "The Mindful Network - Mental Health Resources Directory",
 			},
 		],
 	},
@@ -53,21 +53,8 @@ export const metadata: Metadata = {
 			},
 		],
 	},
-	alternates: {
-		canonical: "https://themindfulnetwork.com/support-links",
-	},
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-		},
-	},
+	robots: "index, follow",
 	authors: [{ name: "The Mindful Network" }],
-	category: "Mental Health Support Links",
 };
 
 export default function SupportLinksLayout({

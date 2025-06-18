@@ -191,11 +191,6 @@ export const aboutFooter = [
 		label: "Terms of Service",
 		link: "/terms-of-service",
 	},
-	{
-		key: "contact",
-		label: "Contact",
-		link: "/contact",
-	},
 ];
 
 export const usefulLinks = [

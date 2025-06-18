@@ -86,15 +86,15 @@ export function Topbar() {
 						About
 					</Link>
 					<Select onValueChange={handleSelectChange}>
-						<SelectTrigger className="w-[100px] z-50 border-none text-gray-700 px-0">
-							<SelectValue placeholder="Resources" />
+						<SelectTrigger className="w-[160px] z-50 border-none text-gray-700 px-0">
+							<SelectValue placeholder="Find Professionals" />
 						</SelectTrigger>
 						<SelectContent className="bg-white p-5">
 							<SelectGroup>
-								<SelectLabel>Resources</SelectLabel>
+								<SelectLabel>Find Professionals</SelectLabel>
 								{resources.map((resource) => (
 									<SelectItem
-										className="w-max pr-8"
+										className="w-max pr-8 cursor-pointer"
 										key={resource.key}
 										value={resource.label}
 									>
@@ -105,14 +105,14 @@ export function Topbar() {
 						</SelectContent>
 					</Select>
 					<Link
-						href="/support-links"
+						href="/resource-links"
 						className={`${
-							pathname === "/support-links"
+							pathname === "/resource-links"
 								? "text-green-500 font-medium"
 								: "text-gray-700 font-normal"
 						}`}
 					>
-						Support Links
+						Resource Links
 					</Link>
 					<Link
 						href="/blog"
