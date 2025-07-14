@@ -1,7 +1,13 @@
 import React from "react";
 import { VariantType } from "@/models";
 
-type ColorType = "white" | "black" | "darkGray" | "lightGray" | "blue";
+type ColorType =
+	| "white"
+	| "black"
+	| "darkGray"
+	| "lightGray"
+	| "blue"
+	| "green";
 
 const variantClasses: Record<VariantType, string> = {
 	xxlarge: "text-xl md:text-2xl xl:text-3xl leading-tight",
@@ -19,6 +25,7 @@ const colorClasses: Record<ColorType, string> = {
 	white: "text-white",
 	black: "text-gray-950",
 	blue: "text-blue-500",
+	green: "text-green-500",
 	darkGray: "text-gray-700",
 	lightGray: "text-gray-400",
 };

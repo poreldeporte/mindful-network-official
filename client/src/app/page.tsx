@@ -4,6 +4,9 @@ import {
 	BlogContainer,
 	CTASection,
 	Hero,
+	OurMission,
+	MentalHealthCrisis,
+	CaregiverCoaching,
 } from "@/routes/homepage/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 import { getLatestBlog } from "@/routes/homepage/services";
@@ -20,6 +23,9 @@ export default async function Home() {
 			<main aria-labelledby="Landing Page">
 				<Hero />
 				<About />
+				<OurMission />
+				<MentalHealthCrisis />
+				<CaregiverCoaching />
 				<BlogContainer blogPosts={blogPosts} />
 				<CTASection />
 				<GetInTouch />

@@ -20,8 +20,8 @@ export const Hero = () => {
 			</Typography>
 
 			<Typography as="p" className="w-11/12" color="darkGray" variant="medium">
-				Explore our mindfully curated network of trusted mental health resources
-				to find the support you need, when you need it.
+				Explore our network of trusted mental health resources to find the
+				support you need, when you need it.
 			</Typography>
 
 			<Link
