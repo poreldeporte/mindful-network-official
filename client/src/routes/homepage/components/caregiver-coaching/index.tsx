@@ -1,5 +1,4 @@
 import { Typography } from "@/components/ui";
-import Link from "next/link";
 
 export const CaregiverCoaching = () => {
 	return (
@@ -43,15 +42,16 @@ export const CaregiverCoaching = () => {
 				you.
 			</Typography>
 
-			<Link
-				href={"/search"}
+			<a
+				href="mailto:contact@themindfulnetwork.com"
+				target="_blank"
 				className="mt-10 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
 				aria-label="Start your search for mental health resources"
 			>
 				<Typography as="span" variant={"small"} color="white">
 					Schedule Your Free Call
 				</Typography>
-			</Link>
+			</a>
 		</section>
 	);
 };
