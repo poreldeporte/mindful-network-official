@@ -105,14 +105,14 @@ export function Topbar() {
 						</SelectContent>
 					</Select>
 					<Link
-						href="/resource-links"
+						href="/support-links"
 						className={`${
-							pathname === "/resource-links"
+							pathname === "/support-links"
 								? "text-green-500 font-medium"
 								: "text-gray-700 font-normal"
 						}`}
 					>
-						Resource Links
+						Support Links
 					</Link>
 					<Link
 						href="/blog"

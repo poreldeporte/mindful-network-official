@@ -13,6 +13,8 @@ import BlogsHeroImage from "@/assets/images/blog/blog-hero.webp";
 import AvailableArticlesImage from "@/assets/images/blog/blog-article.webp";
 import SearchCtaBlogImage from "@/assets/images/blog/blog-assistance.webp";
 
+import MentalHealthCrisisImage from "@/assets/images/mental-health-crisis.webp";
+
 import EventsHeroImage from "@/assets/images/events/events-hero-bkg.webp";
 
 export {
@@ -27,5 +29,6 @@ export {
 	BlogsHeroImage,
 	AvailableArticlesImage,
 	SearchCtaBlogImage,
+	MentalHealthCrisisImage,
 	EventsHeroImage,
 };
