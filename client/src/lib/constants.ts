@@ -10,19 +10,19 @@ export const benefits = [
 		key: 0,
 		title: "Trusted and Verified Resources",
 		description:
-			"We thoroughly vet and verify every mental health resource in our network, ensuring you only have access to reputable and reliable options.",
+			"We thoroughly vet and verify every provider in our network, ensuring you only have access to reputable and reliable options to tackle mental health conditions.",
 	},
 	{
 		key: 1,
 		title: "Up-to-Date Information",
 		description:
-			"Our team continuously monitors and updates our listings, so you can always count on receiving the most current and relevant information.",
+			"Our team regularly monitors and updates listings and resources so you connect with the best mental health crisis services, mental health treatments, and support for a range of mental health disorders and mood disorders.",
 	},
 	{
 		key: 2,
 		title: "Personalized Search Options",
 		description:
-			"With our advanced filters, you can easily find mental health services tailored to your specific needs, whether it’s based on location, type of therapy, insurance coverage, or condition specialty.",
+			"Use our advanced filters to find services tailored to your specific mental health concern. Whether you're navigating traumatic events, caring for a loved one in a suicidal crisis, or simply raising your mental health awareness.",
 	},
 ];
 

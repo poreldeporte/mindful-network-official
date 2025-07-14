@@ -1,39 +1,8 @@
 import { Typography } from "@/components/ui";
 import Image from "next/image";
 import { Person1, Person2, Person3 } from "@/lib/images";
-import { benefits } from "@/lib/constants";
 import Link from "next/link";
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
-
-interface BenefitCardProps {
-	key: number;
-	title: string;
-	description: string;
-}
-
-const BenefitCard = ({ title, description }: BenefitCardProps) => {
-	return (
-		<article
-			role="listitem"
-			className="mb-4"
-			aria-labelledby={`benefit-title-${title}`}
-		>
-			<Typography
-				className="mb-2 font-semibold"
-				color="black"
-				as="h4"
-				variant="medium"
-				id={`benefit-title-${title}`}
-			>
-				{title}
-			</Typography>
-
-			<Typography className="mb-2" color="darkGray" as="p" variant="small">
-				{description}
-			</Typography>
-		</article>
-	);
-};
 
 export function About() {
 	return (
@@ -48,9 +17,9 @@ export function About() {
 				variant="title"
 				id="about-section-heading"
 			>
-				<span className="text-green-500">We&apos;re here to help</span>{" "}
+				<span className="text-green-500">Mental Health Resources</span>{" "}
 				<span className="block" />
-				build your support net
+				to build your support network
 			</Typography>
 			<div className="grid grid-cols-1 xl:grid-cols-2 mt-10 lg:mt-20 gap-10 lg:gap-5">
 				<div className="flex flex-col gap-5">
@@ -60,20 +29,120 @@ export function About() {
 						as="h3"
 						variant="large"
 					>
-						Access the most reliable and reputable mental health resources
-						available
+						Access to reliable & reputable mental health care and emotional
+						health resources.
 					</Typography>
 
 					<div className="lg:my-5" role="list" aria-label="List of benefits">
-						{benefits.map((benefit) => {
-							return (
-								<BenefitCard
-									key={benefit.key}
-									title={benefit.title}
-									description={benefit.description}
-								/>
-							);
-						})}
+						<article
+							role="listitem"
+							className="mb-4"
+							aria-labelledby={`benefit-title-Trusted and Verified Resources`}
+						>
+							<Typography
+								className="mb-2 font-semibold"
+								color="black"
+								as="h4"
+								variant="medium"
+								id={`benefit-title-Trusted and Verified Resources`}
+							>
+								Trusted and Verified Resources
+							</Typography>
+
+							<Typography
+								className="mb-2"
+								color="darkGray"
+								as="p"
+								variant="small"
+							>
+								We thoroughly vet and verify every provider in our network,
+								ensuring you only have access to reputable and reliable options
+								to tackle mental health conditions.
+								<br />
+								<br />
+								Find:
+							</Typography>
+							<ul className="list-disc list-inside">
+								<li>Licensed Therapists</li>
+								<li>Psychiatrist/Medication Management</li>
+								<li>
+									Crisis Counseling for Youth Mental & Substance Use Disorders
+								</li>
+								<li>Peer-led Support Groups</li>
+								<li>Innovative Therapies</li>
+								<li>And more</li>
+							</ul>
+						</article>
+
+						<article
+							role="listitem"
+							className="mb-4"
+							aria-labelledby={`benefit-title-Up-to-Date Information`}
+						>
+							<Typography
+								className="mb-2 font-semibold"
+								color="black"
+								as="h4"
+								variant="medium"
+								id={`benefit-title-Up-to-Date Information`}
+							>
+								Up-to-Date Information
+							</Typography>
+
+							<ul className="list-disc list-inside">
+								<li>Listings of South Florida Professionals</li>
+								<li>Online Resources: Support Links and Educational Blogs</li>
+							</ul>
+							<Typography
+								className="mb-2"
+								color="darkGray"
+								as="p"
+								variant="small"
+							>
+								<br />
+								Our team regularly monitors and updates listings and resources
+								so you connect with the best mental health crisis services,
+								mental health treatments, and support for a range of mental
+								health disorders and mood disorders.
+							</Typography>
+						</article>
+
+						<article
+							role="listitem"
+							className="mb-4"
+							aria-labelledby={`benefit-title-Personalized Search Options`}
+						>
+							<Typography
+								className="mb-2 font-semibold"
+								color="black"
+								as="h4"
+								variant="medium"
+								id={`benefit-title-Personalized Search Options`}
+							>
+								Personalized Search Options
+							</Typography>
+
+							<Typography
+								className="mb-2"
+								color="darkGray"
+								as="p"
+								variant="small"
+							>
+								Use our advanced filters to find services tailored to your
+								specific mental health concern. Whether you're navigating
+								traumatic events, caring for a loved one in a suicidal crisis,
+								or simply raising your mental health awareness.
+								<br />
+								<br />
+								Search By:
+							</Typography>
+							<ul className="list-disc list-inside">
+								<li>Condition</li>
+								<li>Type of therapy</li>
+								<li>Health care provider</li>
+								<li>Insurance</li>
+							</ul>
+						</article>
 					</div>
 
 					<Link
