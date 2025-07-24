@@ -14,7 +14,6 @@ export const ResourcesContainer = () => {
 			aria-label="List of benefits"
 		>
 			<article
-				role="listitem"
 				className="grid grid-cols-1 xl:grid-cols-2 items-center"
 				aria-labelledby={`benefit-title-Trusted and Verified Resources`}
 			>
@@ -109,7 +108,6 @@ export const ResourcesContainer = () => {
 			</article>
 
 			<article
-				role="listitem"
 				className="grid grid-cols-1 xl:grid-cols-2 items-center"
 				aria-labelledby={`benefit-title-Up-to-Date Information`}
 			>
@@ -163,7 +161,6 @@ export const ResourcesContainer = () => {
 			</article>
 
 			<article
-				role="listitem"
 				className="grid grid-cols-1 xl:grid-cols-2 items-center"
 				aria-labelledby={`benefit-title-Personalized Search Options`}
 			>

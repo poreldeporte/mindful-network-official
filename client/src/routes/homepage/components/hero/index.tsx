@@ -12,6 +12,7 @@ export const Hero = () => {
 				backgroundImage: `url(${HeroImage.src})`,
 				backgroundSize: "cover",
 				backgroundPosition: "center",
+				backgroundAttachment: "fixed",
 			}}
 		>
 			<Typography

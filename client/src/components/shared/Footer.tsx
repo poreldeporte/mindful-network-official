@@ -124,6 +124,7 @@ export function Footer({ blogPosts }: Props) {
 											href={socialMedia.url}
 											target="_blank"
 											rel="noopener noreferrer"
+											aria-label={`Go to ${socialMedia.platform.charAt(0).toUpperCase() + socialMedia.platform.slice(1)}`}
 										>
 											{socialMedia.platform === "instagram" && (
 												<IconBrandInstagram className="w-8 h-8 text-gray-500" />

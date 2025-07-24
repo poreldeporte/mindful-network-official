@@ -150,7 +150,6 @@ export const BlogContainer = ({ blogPosts }: BlogProps) => {
 					</button>
 				</div>
 				<Swiper
-					onSlideChange={() => console.log("slide change")}
 					modules={[Navigation, A11y, Keyboard]}
 					slidesPerView={1}
 					spaceBetween={20}
@@ -165,9 +164,7 @@ export const BlogContainer = ({ blogPosts }: BlogProps) => {
 						1280: { slidesPerView: 4 },
 					}}
 					aria-live="polite"
-					role="listbox"
 					className="w-full"
-					onSwiper={(swiper) => console.log(swiper)}
 				>
 					{blogPosts.map((blogPost, index) => (
 						<SwiperSlide
