@@ -13,7 +13,7 @@ const variantClasses: Record<VariantType, string> = {
 	xxlarge: "text-xl md:text-2xl xl:text-3xl leading-tight",
 	xlarge: "text-base md:text-lg xl:text-xl leading-tight",
 	large: "text-sm md:text-base xl:text-lg leading-tight",
-	medium: "text-xs xl:text-sm",
+	medium: "text-xs xl:text-[20px]",
 	small: "text-xs text-[20px]",
 	xsmall: "text-[14px] lg:text-xs",
 	title: "text-xl md:text-2xl xl:text-3xl font-antic leading-tight",
@@ -23,10 +23,10 @@ const variantClasses: Record<VariantType, string> = {
 
 const colorClasses: Record<ColorType, string> = {
 	white: "text-white",
-	black: "text-gray-950",
+	black: "text-[#3C3D42]",
 	blue: "text-blue-500",
 	green: "text-green-500",
-	darkGray: "text-gray-700",
+	darkGray: "text-[#3C3D42]",
 	lightGray: "text-gray-400",
 };
 

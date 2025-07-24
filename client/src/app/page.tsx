@@ -23,8 +23,8 @@ export default async function Home() {
 			<main aria-labelledby="Landing Page">
 				<Hero />
 				<About />
-				<OurMission />
 				<MentalHealthCrisis />
+				<OurMission />
 				<CaregiverCoaching />
 				<BlogContainer blogPosts={blogPosts} />
 				<CTASection />
