@@ -97,6 +97,7 @@ export function Topbar() {
 										className="w-max pr-8 cursor-pointer"
 										key={resource.key}
 										value={resource.label}
+										aria-label={`Search for ${resource.label} professionals`}
 									>
 										{resource.label}
 									</SelectItem>
