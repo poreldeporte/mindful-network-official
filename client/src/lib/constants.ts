@@ -4,6 +4,10 @@ import {
 	IconHeadset,
 	IconShieldPlus,
 } from "@tabler/icons-react";
+import {
+	ExploreCuratedResourcesImage,
+	JoinOurNetworkImage,
+} from "@/lib/images";
 
 export const benefits = [
 	{
@@ -133,8 +137,7 @@ export const termsOfServiceContent = [
 export const CTACards = [
 	{
 		id: "1",
-		image:
-			"https://images.unsplash.com/photo-1682687982183-c2937a74257c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		image: ExploreCuratedResourcesImage,
 		buttonText: "Explore Curated Resources",
 		path: "/search",
 		isInternalLink: true,
@@ -142,8 +145,7 @@ export const CTACards = [
 	},
 	{
 		id: "2",
-		image:
-			"https://images.unsplash.com/photo-1655047273143-91261102716f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		image: JoinOurNetworkImage,
 		buttonText: "Join Our Network",
 		path: "/useful-links",
 		isInternalLink: false,

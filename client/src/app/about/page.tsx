@@ -1,4 +1,4 @@
-import { AboutImage } from "@/lib/images";
+import { CoachingAndSupportImage } from "@/lib/images";
 
 import Image from "next/image";
 import { Typography } from "@/components/ui";
@@ -6,7 +6,7 @@ import { Typography } from "@/components/ui";
 export default function About() {
 	return (
 		<section
-			className="grid grid-cols-1 lg:grid-cols-12 lg:items-center page-width gap-10 mt-24 lg:mt-36"
+			className="grid grid-cols-1 lg:grid-cols-12 lg:items-center page-width gap-10 mt-24 lg:mt-36 py-10"
 			role="region"
 			aria-labelledby="about-hero-heading"
 		>
@@ -38,9 +38,9 @@ export default function About() {
 
 			<div className="flex h-full w-full col-span-1 lg:col-span-4 order-2 lg:order-1">
 				<Image
-					src={AboutImage}
+					src={CoachingAndSupportImage}
 					alt="Professional at Mindful Network"
-					className="w-full sm:w-1/2 lg:w-full h-full object-cover object-top rounded-xl"
+					className="w-full sm:w-1/2 lg:w-full h-full object-cover object-top"
 					priority
 				/>
 			</div>

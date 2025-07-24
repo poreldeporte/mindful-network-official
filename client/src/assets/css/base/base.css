@@ -1,24 +1,24 @@
 :root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #fef9ef;
-  color: #3c3d42;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #f5f5f5;
+	color: #3c3d42;
 }
 
 p {
-  text-wrap: balance;
+	text-wrap: balance;
 }
 
 h1,
 h2,
 h3 {
-  text-wrap: pretty;
+	text-wrap: pretty;
 }
 
 br {
-  display: block;
-  content: "";
-  margin-top: 10px;
+	display: block;
+	content: "";
+	margin-top: 10px;
 }

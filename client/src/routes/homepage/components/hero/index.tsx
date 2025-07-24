@@ -1,12 +1,18 @@
 import { Typography } from "@/components/ui";
+import { HeroImage } from "@/lib/images";
 import Link from "next/link";
 
 export const Hero = () => {
 	return (
 		<section
-			className="page-width py-24 lg:mx-auto lg:w-2/3 min-h-[60vh] lg:h-[63vh-92px] lg:mt-[62px] mt-10 flex lg:items-center lg:text-center justify-center flex-col"
+			className="page-width pt-10 mx-auto min-h-[90vh] flex lg:items-center lg:text-center justify-center flex-col"
 			role="region"
 			aria-labelledby="hero-heading"
+			style={{
+				backgroundImage: `url(${HeroImage.src})`,
+				backgroundSize: "cover",
+				backgroundPosition: "center",
+			}}
 		>
 			<Typography
 				id="hero-heading"
@@ -19,7 +25,7 @@ export const Hero = () => {
 				<span className="text-green-500 lg:block">your path to healing</span>
 			</Typography>
 
-			<Typography as="p" className="w-11/12" color="darkGray" variant="medium">
+			<Typography as="p" className="lg:w-1/2" color="darkGray" variant="medium">
 				Explore our network of trusted mental health resources to find the
 				support you need, when you need it.
 			</Typography>

@@ -1,11 +1,11 @@
 import { Typography } from "@/components/ui";
 import { CTACards } from "@/lib/constants";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 interface Props {
-	image: string;
+	image: StaticImageData;
 	buttonText: string;
 	path: string;
 	isInternalLink: boolean;
@@ -20,10 +20,10 @@ const CTACard = ({
 	sectionToScroll,
 }: Props) => {
 	return (
-		<article className="relative w-full h-72 rounded-xl overflow-hidden transition-transform hover:scale-[101%]">
+		<article className="relative w-full h-[450px] overflow-hidden transition-transform hover:scale-[101%]">
 			<Image
 				className="w-full h-full object-cover"
-				src={image}
+				src={image.src}
 				width={500}
 				height={200}
 				alt={`Image for ${buttonText}`}
@@ -64,7 +64,7 @@ const CTACard = ({
 export function CTASection() {
 	return (
 		<section
-			className="bg-white page-width section-y-padding"
+			className="page-width section-y-padding"
 			aria-labelledby="cta-section-heading"
 		>
 			<Typography

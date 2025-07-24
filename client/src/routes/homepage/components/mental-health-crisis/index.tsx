@@ -6,16 +6,6 @@ import Link from "next/link";
 export const MentalHealthCrisis = () => {
 	return (
 		<section className="page-width py-24 grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
-			<picture className="col-span-1">
-				<Image
-					src={MentalHealthCrisisImage.src}
-					alt="Mental Health Crisis"
-					className="w-full h-full object-cover col-span-1 rounded-lg"
-					width={500}
-					height={500}
-				/>
-			</picture>
-
 			<div className="flex flex-col items-start justify-center col-span-1">
 				<Typography
 					as="h2"
@@ -29,13 +19,19 @@ export const MentalHealthCrisis = () => {
 
 				<ul className="list-disc list-inside">
 					<li>
-						<strong>National Suicide Prevention Hotline:</strong> 988
+						<Typography as="span" variant="medium" color="darkGray">
+							<strong>National Suicide Prevention Hotline:</strong> 988
+						</Typography>
 					</li>
 					<li>
-						<strong>Crisis Text Line :</strong> Text SHARE to 741741
+						<Typography as="span" variant="medium" color="darkGray">
+							<strong>Crisis Text Line :</strong> Text SHARE to 741741
+						</Typography>
 					</li>
 					<li>
-						<strong>Mobile Crisis Unit:</strong> 800-435-7968
+						<Typography as="span" variant="medium" color="darkGray">
+							<strong>Mobile Crisis Unit:</strong> 800-435-7968
+						</Typography>
 					</li>
 				</ul>
 				<Typography as="p" className="mb-5" color="darkGray" variant="medium">
@@ -53,6 +49,16 @@ export const MentalHealthCrisis = () => {
 					here.
 				</Typography>
 			</div>
+
+			<picture className="col-span-1">
+				<Image
+					src={MentalHealthCrisisImage.src}
+					alt="Mental Health Crisis"
+					className="w-full h-full object-cover col-span-1"
+					width={500}
+					height={500}
+				/>
+			</picture>
 		</section>
 	);
 };
