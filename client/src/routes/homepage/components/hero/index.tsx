@@ -5,7 +5,7 @@ import Link from "next/link";
 export const Hero = () => {
 	return (
 		<section
-			className="page-width pt-10 mx-auto min-h-[90vh] flex lg:items-center lg:text-center justify-center flex-col"
+			className="page-width pt-10 mx-auto h-[80vh] lg:h-[90vh] flex lg:items-center lg:text-center justify-center flex-col"
 			role="region"
 			aria-labelledby="hero-heading"
 			style={{
