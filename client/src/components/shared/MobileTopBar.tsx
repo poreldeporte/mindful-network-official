@@ -40,7 +40,7 @@ export function MobileTopBar() {
 	}, []);
 
 	return (
-		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-50">
+		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-white top-0 py-5 z-50">
 			<Link href={"/"} className="flex content-center space-x-3 items-center">
 				{companyDetails?.logo && (
 					<Image
@@ -69,7 +69,7 @@ export function MobileTopBar() {
 						animate="open"
 						exit="closed"
 						variants={menuVariants}
-						className="absolute top-20 left-0 w-full bg-orange-50 page-width py-5 shadow-lg flex flex-col gap-2"
+						className="absolute top-20 left-0 w-full bg-white page-width py-5 shadow-lg flex flex-col gap-2"
 					>
 						<nav className="flex flex-col gap-5">
 							<div className="flex flex-col gap-1">
