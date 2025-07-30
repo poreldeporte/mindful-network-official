@@ -49,7 +49,7 @@ export const CaregiverCoaching = () => {
 				<Image
 					src={CoachingAndSupportImage}
 					alt="Caregiver Coaching"
-					className="w-full h-[650px] object-cover object-center"
+					className="w-full h-[400px] lg:h-[650px] object-cover object-center"
 				/>
 			</div>
 		</section>

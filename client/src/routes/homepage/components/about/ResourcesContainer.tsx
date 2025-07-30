@@ -17,7 +17,7 @@ export const ResourcesContainer = () => {
 				className="grid grid-cols-1 xl:grid-cols-2 items-center"
 				aria-labelledby={`benefit-title-Trusted and Verified Resources`}
 			>
-				<div className="xl:order-1 p-10">
+				<div className="xl:order-1 py-10 lg:p-10">
 					<Typography
 						className="mb-2 font-semibold"
 						color="black"
@@ -111,7 +111,7 @@ export const ResourcesContainer = () => {
 				className="grid grid-cols-1 xl:grid-cols-2 items-center"
 				aria-labelledby={`benefit-title-Up-to-Date Information`}
 			>
-				<div className="p-10">
+				<div className="py-10 lg:p-10">
 					<Typography
 						className="mb-2 font-semibold"
 						color="black"
@@ -164,7 +164,7 @@ export const ResourcesContainer = () => {
 				className="grid grid-cols-1 xl:grid-cols-2 items-center"
 				aria-labelledby={`benefit-title-Personalized Search Options`}
 			>
-				<div className="xl:order-1 p-10">
+				<div className="xl:order-1 py-10 lg:p-10">
 					<Typography
 						className="mb-2 font-semibold"
 						color="black"
