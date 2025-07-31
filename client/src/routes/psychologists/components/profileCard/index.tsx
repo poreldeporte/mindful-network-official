@@ -37,12 +37,7 @@ export function ProfileCard({
 					>
 						{name}
 					</Typography>
-					<Typography
-						className="font-medium mb-2"
-						as="p"
-						variant="small"
-						color="darkGray"
-					>
+					<Typography className="mb-2" as="p" variant="small" color="darkGray">
 						{facility}
 					</Typography>
 					<div className="space-x-1 space-y-1">
@@ -61,8 +56,8 @@ export function ProfileCard({
 					</div>
 				</div>
 			</div>
-			<div className="my-5">
-				<Typography className="mb-5" as="p" variant="small" color="darkGray">
+			<div className="my-10">
+				<Typography className="mb-5" as="p" variant="xsmall" color="darkGray">
 					{description}
 				</Typography>
 			</div>
@@ -73,7 +68,7 @@ export function ProfileCard({
 						<Typography
 							className="font-semibold"
 							as="p"
-							variant="small"
+							variant="xsmall"
 							color="darkGray"
 						>
 							Accepts Insurance

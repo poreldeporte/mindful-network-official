@@ -86,7 +86,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.address && (
 								<div className="flex items-center space-x-3">
 									<MapPin className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="p" color="black">
+									<Typography variant="xsmall" as="p" color="black">
 										{companyDetails.address}
 									</Typography>
 								</div>
@@ -94,7 +94,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.phoneNumber && (
 								<div className="flex items-center space-x-3">
 									<Phone className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="p" color="black">
+									<Typography variant="xsmall" as="p" color="black">
 										{companyDetails.phoneNumber}
 									</Typography>
 								</div>
@@ -104,7 +104,7 @@ export function Footer({ blogPosts }: Props) {
 								<div className="flex items-center space-x-3">
 									<Mail className="w-6 h-6 text-gray-500" />
 									<Typography
-										variant="small"
+										variant="xsmall"
 										as="p"
 										color="black"
 										className="hover:underline underline-offset-4"
@@ -159,7 +159,7 @@ export function Footer({ blogPosts }: Props) {
 											href={label.link}
 											key={label.key}
 										>
-											<Typography color="darkGray" as="span" variant="small">
+											<Typography color="darkGray" as="span" variant="xsmall">
 												{label.label}
 											</Typography>
 										</Link>
@@ -190,7 +190,7 @@ export function Footer({ blogPosts }: Props) {
 															className=""
 															color="darkGray"
 															as="span"
-															variant="small"
+															variant="xsmall"
 														>
 															{article.title}
 														</Typography>
@@ -217,7 +217,7 @@ export function Footer({ blogPosts }: Props) {
 											href={`/search?resource=${resource.key}`}
 											key={resource.key}
 										>
-											<Typography color="darkGray" as="span" variant="small">
+											<Typography color="darkGray" as="span" variant="xsmall">
 												{resource.label}
 											</Typography>
 										</Link>
@@ -229,7 +229,7 @@ export function Footer({ blogPosts }: Props) {
 				</div>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between items-center">
-				<Typography variant="small" color="black" className="p-0 md:p-4">
+				<Typography variant="xsmall" color="black" className="p-0 md:p-4">
 					© {new Date().getFullYear()} The Mindful Network
 				</Typography>
 
@@ -250,9 +250,9 @@ export function Footer({ blogPosts }: Props) {
 				<Button
 					onClick={scrollToTop}
 					className="hidden lg:flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
-					variant="small"
+					variant="xsmall"
 				>
-					<Typography variant="small" as="h3" color="white">
+					<Typography variant="xsmall" as="h3" color="white">
 						Back to top
 					</Typography>
 					<ChevronUp className="h-8 w-8 text-white" />

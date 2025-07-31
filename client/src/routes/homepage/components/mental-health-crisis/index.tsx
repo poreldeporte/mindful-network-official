@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const MentalHealthCrisis = () => {
 	return (
-		<section className="page-width py-24 grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
+		<section className="page-width py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 			<div className="flex flex-col items-start justify-center col-span-1">
 				<Typography
 					as="h2"

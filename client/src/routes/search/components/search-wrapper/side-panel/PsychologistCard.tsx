@@ -73,7 +73,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="xsmall">
 							<span className="font-semibold">Specialty:</span>{" "}
 							{conditionSpecialty?.length
 								? conditionSpecialty
@@ -88,7 +88,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="xsmall">
 							<span className="font-semibold">Accepted Insurance:</span>{" "}
 							{showInsurances ? (
 								<>
@@ -107,7 +107,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="xsmall">
 							<span className="font-semibold">Age Specialty:</span>{" "}
 							{ageSpecialty?.length
 								? ageSpecialty.map((specialty) => specialty.age).join(", ")
@@ -120,7 +120,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="xsmall">
 							<span className="font-semibold">Therapy Option:</span>{" "}
 							{therapyOptions?.length
 								? therapyOptions.map((option) => option.type).join(", ")
@@ -136,7 +136,7 @@ const PsychologistCard = ({
 					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
-					<Typography as="span" color="white" variant="small">
+					<Typography as="span" color="white" variant="xsmall">
 						View profile
 					</Typography>
 				</Link>

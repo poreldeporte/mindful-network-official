@@ -26,13 +26,13 @@ const CategoryCard = (useFulLinkSection: UseFulLinkSection) => {
 							<CircleChevronRight className="h-6 w-6 text-gray-700" />
 							{type === "internal" ? (
 								<Link href={url} className="pl-1 lg:pl-2">
-									<Typography variant="small" color="black" as="p">
+									<Typography variant="xsmall" color="black" as="p">
 										{label}
 									</Typography>
 								</Link>
 							) : (
 								<a href={url} className="pl-1 lg:pl-2">
-									<Typography variant="small" color="black" as="p">
+									<Typography variant="xsmall" color="black" as="p">
 										{label}
 									</Typography>
 								</a>
