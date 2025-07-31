@@ -113,7 +113,7 @@ export const Subsection = ({
 						{isEmail ? (
 							<Typography
 								as="p"
-								variant="small"
+								variant="xsmall"
 								color="darkGray"
 								className="xs:max-w-full xs:text-wrap break-all whitespace-pre-wrap"
 							>
@@ -122,7 +122,7 @@ export const Subsection = ({
 						) : (
 							<Typography
 								as="p"
-								variant="small"
+								variant="xsmall"
 								color="darkGray"
 								className="xs:max-w-full xs:text-wrap"
 							>

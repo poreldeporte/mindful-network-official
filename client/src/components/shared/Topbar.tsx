@@ -139,7 +139,7 @@ export function Topbar() {
 
 				<div className="p-2 pr-5">
 					<Button
-						variant="small"
+						variant="xsmall"
 						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
 						form="primary"
 					>

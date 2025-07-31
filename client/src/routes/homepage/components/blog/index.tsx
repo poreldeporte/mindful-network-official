@@ -117,7 +117,7 @@ export const BlogCard = ({
 export const BlogContainer = ({ blogPosts }: BlogProps) => {
 	return (
 		<section
-			className="pl-5 pr-5 xl:pr-0 xl:pl-[70px] 3xl:pl-[140px] section-y-padding"
+			className="pl-5 pr-5 xl:pl-[70px] 3xl:pl-[140px] section-y-padding"
 			aria-labelledby="blog-section-heading"
 			role="region"
 		>

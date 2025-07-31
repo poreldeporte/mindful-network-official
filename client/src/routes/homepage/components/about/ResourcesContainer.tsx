@@ -19,7 +19,7 @@ export const ResourcesContainer = () => {
 			>
 				<div className="xl:order-1 py-10 lg:p-10">
 					<Typography
-						className="mb-2 font-semibold"
+						className="mb-5 font-semibold"
 						color="black"
 						as="h4"
 						variant="large"
@@ -113,7 +113,7 @@ export const ResourcesContainer = () => {
 			>
 				<div className="py-10 lg:p-10">
 					<Typography
-						className="mb-2 font-semibold"
+						className="mb-5 font-semibold"
 						color="black"
 						as="h4"
 						variant="large"
@@ -166,7 +166,7 @@ export const ResourcesContainer = () => {
 			>
 				<div className="xl:order-1 py-10 lg:p-10">
 					<Typography
-						className="mb-2 font-semibold"
+						className="mb-5 font-semibold"
 						color="black"
 						as="h4"
 						variant="large"
