@@ -3,7 +3,6 @@
 import { PsychologistModel } from "@/models";
 import { IconCertificate } from "@tabler/icons-react";
 import { Section } from "../section";
-import { urlFor } from "@/api";
 
 import {
 	Armchair,
@@ -126,6 +125,8 @@ export function PsychologistAbout({
 		});
 	}
 
+	console.log(imagesGallery);
+
 	return (
 		<>
 			{video && (
@@ -137,14 +138,14 @@ export function PsychologistAbout({
 				/>
 			)}
 
-			{imagesGallery && (
+			{imagesGallery && imagesGallery.length > 0 && (
 				<Section
 					id="profile-gallery"
 					title="Gallery"
 					emptyMessage=""
 					profileGallery={imagesGallery
-						.slice(0, 4)
-						.map((image) => urlFor(image).url())}
+						.filter((image) => image && image.url)
+						.slice(0, 4)}
 				/>
 			)}
 

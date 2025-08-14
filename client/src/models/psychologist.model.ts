@@ -12,6 +12,11 @@ interface Address {
 	zip: string;
 }
 
+interface ImageWithAlt {
+	url: string;
+	alt?: string;
+}
+
 export interface PsychologistModel {
 	_type: string;
 	id: string;
@@ -31,7 +36,8 @@ export interface PsychologistModel {
 	slidingScale: string;
 	languages: string[];
 	image: string;
-	imagesGallery: string[];
+	imageAlt?: string;
+	imagesGallery: ImageWithAlt[];
 	subtitle: string;
 	video: string;
 	slug: string;

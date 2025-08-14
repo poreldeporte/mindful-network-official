@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export function ProfileCard({
 	image,
+	imageAlt,
 	name,
 	description,
 	resource,
@@ -22,7 +23,7 @@ export function ProfileCard({
 					<Image
 						className="rounded-full aspect-square object-cover"
 						src={image ? image : UserImage}
-						alt={`Profile picture of ${name}`}
+						alt={imageAlt || `Profile picture of ${name}`}
 						width={300}
 						height={300}
 					/>

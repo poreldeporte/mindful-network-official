@@ -39,7 +39,7 @@ export async function generateMetadata({
 					url: psychologist.image,
 					width: 800,
 					height: 600,
-					alt: psychologist.name,
+					alt: psychologist.imageAlt || psychologist.name,
 				},
 			],
 		},

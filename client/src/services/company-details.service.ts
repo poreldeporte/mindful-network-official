@@ -1,10 +1,19 @@
 import { sanityClient } from "@/api";
-import { allCompanyDetailsQuery } from "@/app/api/types";
 import { getCompanyDetailsAdapter } from "@/adapters";
 import { CompanyDetails } from "@/models";
 
 export const getCompanyDetails = async (): Promise<CompanyDetails | null> => {
 	try {
+		const allCompanyDetailsQuery = `*[_type == "companyDetails"][0] {
+			_id,
+			"logo": logo.asset->url,
+			"logoAlt": logo.alt,
+			email,
+			phoneNumber,
+			address,
+			socialLinks
+		}`;
+
 		const companyDetails = await sanityClient.fetch(allCompanyDetailsQuery);
 		const companyDetailsAdapter = getCompanyDetailsAdapter(companyDetails);
 		return companyDetailsAdapter;
