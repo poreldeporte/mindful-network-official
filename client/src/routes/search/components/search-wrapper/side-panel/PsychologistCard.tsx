@@ -32,7 +32,7 @@ const PsychologistCard = ({
 			<div className="flex items-start justify-center md:justify-start w-full">
 				<Image
 					src={image ? image : UserImage}
-					alt={`Profile image of ${name}`}
+					alt={psychologist.imageAlt || `Profile image of ${name}`}
 					loading="lazy"
 					width={100}
 					height={100}

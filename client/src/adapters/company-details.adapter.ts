@@ -10,6 +10,7 @@ export const getCompanyDetailsAdapter = (
 ) => ({
 	id: companyDetails._id,
 	logo: companyDetails.logo,
+	logoAlt: companyDetails.logoAlt,
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,
 	address: companyDetails.address,

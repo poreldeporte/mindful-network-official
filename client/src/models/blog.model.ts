@@ -17,8 +17,10 @@ export interface BlogModel {
 	content: PortableTextBlock;
 	excerpt: string;
 	featuredImage: string;
+	featuredImageAlt?: string;
 	tags?: string[];
 	authorImage?: string;
+	authorImageAlt?: string;
 	seo?: {
 		metaTitle: string;
 		metaDescription: string;

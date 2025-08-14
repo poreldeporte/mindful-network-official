@@ -10,6 +10,7 @@ export const Author = ({
 	publishDate,
 	tags,
 	authorImage,
+	authorImageAlt,
 }: BlogModel) => {
 	return (
 		<section
@@ -21,7 +22,7 @@ export const Author = ({
 					src={authorImage ? authorImage : UserImage}
 					height={125}
 					width={125}
-					alt={`Profile picture of ${author}`}
+					alt={authorImageAlt || `Profile picture of ${author}`}
 					className="rounded-full aspect-square object-cover object-center"
 				/>
 

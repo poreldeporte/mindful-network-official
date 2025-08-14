@@ -44,7 +44,7 @@ export function MobileTopBar() {
 			<Link href={"/"} className="flex content-center space-x-3 items-center">
 				{companyDetails?.logo && (
 					<Image
-						alt="Mindful Logo"
+						alt={companyDetails.logoAlt || "The Mindful Network Logo"}
 						className="w-auto h-12"
 						src={companyDetails.logo}
 						width={400}
