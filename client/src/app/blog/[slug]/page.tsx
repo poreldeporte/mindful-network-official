@@ -47,7 +47,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 	return (
 		<>
 			<Head>
-				<title>{post.seo?.metaTitle || post.title} | Mindful Network</title>
+				<title>{post.seo?.metaTitle || post.title} | The Mindful Network</title>
 				<meta
 					name="description"
 					content={post.seo?.metaDescription || post.excerpt}
