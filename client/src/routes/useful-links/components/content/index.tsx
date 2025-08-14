@@ -31,7 +31,12 @@ const CategoryCard = (useFulLinkSection: UseFulLinkSection) => {
 									</Typography>
 								</Link>
 							) : (
-								<a href={url} className="pl-1 lg:pl-2">
+								<a
+									rel="noopener noreferrer"
+									target="_blank"
+									href={url}
+									className="pl-1 lg:pl-2"
+								>
 									<Typography variant="xsmall" color="black" as="p">
 										{label}
 									</Typography>
