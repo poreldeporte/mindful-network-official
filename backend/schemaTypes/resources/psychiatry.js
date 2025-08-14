@@ -1,3 +1,5 @@
+import {imageWithAlt, imageArrayWithAlt} from '../helpers/imageWithAlt'
+
 export default {
   name: 'psychiatry',
   title: '👨‍⚕️ Psychiatry',
@@ -41,10 +43,7 @@ export default {
       name: 'image',
       title: 'Image',
       description: 'Suggestion: Ensure the image size is under 1MB.',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      ...imageWithAlt(),
     },
     {
       name: 'video',
@@ -70,9 +69,7 @@ export default {
     {
       name: 'imagesGallery',
       title: 'Images Gallery',
-      type: 'array',
-      validation: (Rule) => Rule.max(4),
-      of: [{type: 'image'}],
+      ...imageArrayWithAlt({validation: (Rule) => Rule.max(4)}),
     },
     {
       name: 'facility',

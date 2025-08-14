@@ -1,3 +1,5 @@
+import {imageWithAlt} from '../helpers/imageWithAlt'
+
 export default {
   name: 'blog',
   title: '📄 Blog',
@@ -28,10 +30,7 @@ export default {
     {
       name: 'authorImage',
       title: 'Author Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      ...imageWithAlt(),
     },
     {
       name: 'publishDate',
@@ -99,10 +98,7 @@ export default {
     {
       name: 'featuredImage',
       title: 'Featured Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      ...imageWithAlt(),
     },
     {
       name: 'tags',
@@ -123,10 +119,7 @@ export default {
         {
           name: 'openGraphImage',
           title: 'Open Graph Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
+          ...imageWithAlt(),
         },
       ],
     },

@@ -1,3 +1,5 @@
+import {imageWithAlt} from '../helpers/imageWithAlt'
+
 export default {
   name: 'companyDetails',
   title: '⚙️ Company Details',
@@ -7,10 +9,7 @@ export default {
       name: 'logo',
       title: 'Image Company Logo',
       description: 'Suggestion: Ensure the image size is under 1MB. Logo for topbar and footer',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      ...imageWithAlt(),
     },
     {
       name: 'address',
