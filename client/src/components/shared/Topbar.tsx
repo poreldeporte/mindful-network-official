@@ -63,7 +63,7 @@ export function Topbar() {
 				>
 					{companyDetails?.logo && (
 						<Image
-							alt="Mindful Logo"
+							alt={companyDetails.logoAlt || "The Mindful Network Logo"}
 							className="w-full h-full filter invert brightness-0 object-contain"
 							src={companyDetails.logo}
 							width={400}

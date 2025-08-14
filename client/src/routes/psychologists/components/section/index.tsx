@@ -7,13 +7,18 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { MasonryGrid } from "..";
 
+interface ImageWithAlt {
+	url: string;
+	alt?: string;
+}
+
 interface SectionProps {
 	id: string;
 	title: string;
 	subsections?: Array<SubsectionProps>;
 	emptyMessage: string;
 	profileVideo?: string;
-	profileGallery?: string[];
+	profileGallery?: ImageWithAlt[];
 }
 
 interface SubsectionProps {

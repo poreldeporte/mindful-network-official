@@ -19,6 +19,7 @@ export const BlogCard = ({
 	title,
 	category,
 	featuredImage,
+	featuredImageAlt,
 	slug,
 	isInternal,
 	externalLink,
@@ -66,7 +67,7 @@ export const BlogCard = ({
 					src={featuredImage}
 					width={300}
 					height={300}
-					alt={`Featured image for ${title}`}
+					alt={featuredImageAlt || `Featured image for ${title}`}
 				/>
 			</motion.div>
 			<Typography color="darkGray" as="h3" variant="bodySmall">

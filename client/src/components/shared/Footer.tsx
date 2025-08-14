@@ -73,7 +73,7 @@ export function Footer({ blogPosts }: Props) {
 						<div className="flex content-center space-x-4 items-center">
 							{companyDetails?.logo && (
 								<Image
-									alt="Mindful Logo"
+									alt={companyDetails.logoAlt || "The Mindful Network Logo"}
 									className="w-54 h-16 xl:w-56 xl:h-20"
 									src={companyDetails.logo}
 									width={200}
