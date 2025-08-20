@@ -243,6 +243,8 @@ export function Footer({ blogPosts }: Props) {
 
 				<a
 					href="https://www.violacreative.com/"
+					rel="noopener noreferrer"
+					target="_blank"
 					className="flex items-center gap-1 p-4 lg:p-0"
 				>
 					<span className="text-[12px] text-gray-500">Developed by</span>
