@@ -2,7 +2,6 @@
 
 import { CompanyDetails, ResourcesKey } from "@/models";
 import { getAllResources } from "@/services";
-import { getCompanyDetails } from "@/services/company-details.service";
 import { generateResourceKeys } from "@/utilities";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,10 +18,7 @@ import {
 	SelectTrigger,
 } from "@/components/ui/Shadcn-select";
 
-export function Topbar() {
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
+export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const router = useRouter();
 	const pathname = usePathname();
@@ -39,20 +35,16 @@ export function Topbar() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	return (
 		<header className="fixed top-5 left-1/2 -translate-x-1/2 w-11/12 2xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden xl:block z-50">
@@ -76,7 +68,7 @@ export function Topbar() {
 				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
 					<Link href="/about">
 						<Typography
-							variant="bodySmall"
+							variant="bodyXSmall"
 							color={pathname === "/about" ? "green" : "darkGray"}
 							className={pathname === "/about" ? "font-medium" : ""}
 						>
@@ -84,9 +76,9 @@ export function Topbar() {
 						</Typography>
 					</Link>
 					<Select onValueChange={handleSelectChange}>
-						<SelectTrigger className="w-[180px] z-50 border-none text-gray-700 px-0">
+						<SelectTrigger className="w-max z-50 border-none text-gray-700 px-0">
 							<Typography
-								variant="bodySmall"
+								variant="bodyXSmall"
 								color={pathname === "/search" ? "green" : "darkGray"}
 								className={pathname === "/search" ? "font-medium" : ""}
 							>
@@ -111,7 +103,7 @@ export function Topbar() {
 					</Select>
 					<Link href="/support-links">
 						<Typography
-							variant="bodySmall"
+							variant="bodyXSmall"
 							color={pathname === "/support-links" ? "green" : "darkGray"}
 							className={pathname === "/support-links" ? "font-medium" : ""}
 						>
@@ -120,7 +112,7 @@ export function Topbar() {
 					</Link>
 					<Link href="/blog">
 						<Typography
-							variant="bodySmall"
+							variant="bodyXSmall"
 							color={pathname === "/blog" ? "green" : "darkGray"}
 							className={pathname === "/blog" ? "font-medium" : ""}
 						>
@@ -129,7 +121,7 @@ export function Topbar() {
 					</Link>
 					<Link href="/events">
 						<Typography
-							variant="bodySmall"
+							variant="bodyXSmall"
 							color={pathname === "/events" ? "green" : "darkGray"}
 							className={pathname === "/events" ? "font-medium" : ""}
 						>
@@ -140,7 +132,7 @@ export function Topbar() {
 
 				<div className="p-2 pr-5">
 					<Button
-						variant="bodySmall"
+						variant="bodyXSmall"
 						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
 						form="primary"
 					>

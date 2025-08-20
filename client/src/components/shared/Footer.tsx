@@ -16,18 +16,15 @@ import { generateResourceKeys } from "@/utilities";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "../ui";
 import { CompanyDetails } from "@/models/company-details.model";
-import { getCompanyDetails } from "@/services/company-details.service";
 
 interface Props {
 	blogPosts?: BlogModel[];
+	companyDetails?: CompanyDetails;
 }
 
-export function Footer({ blogPosts }: Props) {
+export function Footer({ blogPosts, companyDetails }: Props) {
 	const [posts, setPosts] = useState<BlogModel[] | []>([]);
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -46,20 +43,16 @@ export function Footer({ blogPosts }: Props) {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });

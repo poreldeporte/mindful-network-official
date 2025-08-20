@@ -10,18 +10,20 @@ import {
 } from "@/routes/homepage/components";
 import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 import { getLatestBlog } from "@/routes/homepage/services";
-import { BlogModel } from "@/models";
+import { BlogModel, CompanyDetails } from "@/models";
+import { getCompanyDetails } from "@/services/company-details.service";
 
 export default async function Home() {
-	const blogPosts: BlogModel[] = await getLatestBlog();
+	const [blogPosts, companyDetails]: [BlogModel[], CompanyDetails] =
+		await Promise.all([getLatestBlog(), getCompanyDetails()]);
 
 	return (
 		<>
-			<Topbar />
-			<MobileTopBar />
+			<Topbar companyDetails={companyDetails} />
+			<MobileTopBar companyDetails={companyDetails} />
 
 			<main aria-labelledby="Landing Page">
-				<Hero />
+				<Hero companyDetails={companyDetails} />
 				<About />
 				<MentalHealthCrisis />
 				<OurMission />
@@ -30,7 +32,7 @@ export default async function Home() {
 				<CTASection />
 				<GetInTouch />
 			</main>
-			<Footer blogPosts={blogPosts} />
+			<Footer blogPosts={blogPosts} companyDetails={companyDetails} />
 		</>
 	);
 }

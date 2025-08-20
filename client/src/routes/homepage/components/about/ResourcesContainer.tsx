@@ -1,10 +1,11 @@
 import { Typography } from "@/components/ui";
-import Image from "next/image";
 import {
 	PersonalizedSearchOptionsImage,
 	TrustedAndVerifiedResourcesImage,
 	UpToDateInformationImage,
 } from "@/lib/images";
+import Image from "next/image";
+import Link from "next/link";
 
 export const ResourcesContainer = () => {
 	return (
@@ -41,7 +42,7 @@ export const ResourcesContainer = () => {
 						<br />
 						Find:
 					</Typography>
-					<ul className="list-disc list-inside">
+					<ul className="list-disc list-inside mb-10">
 						<li>
 							<Typography
 								className="mb-2"
@@ -103,6 +104,13 @@ export const ResourcesContainer = () => {
 							</Typography>
 						</li>
 					</ul>
+
+					<Link
+						className="text-green-500 underline underline-offset-4"
+						href="/about"
+					>
+						Learn more
+					</Link>
 				</div>
 
 				<Image
@@ -150,7 +158,7 @@ export const ResourcesContainer = () => {
 						</li>
 					</ul>
 					<Typography
-						className="mb-2"
+						className="mb-10"
 						color="darkGray"
 						as="p"
 						variant="bodySmall"
@@ -161,6 +169,13 @@ export const ResourcesContainer = () => {
 						health treatments, and support for a range of mental health
 						disorders and mood disorders.
 					</Typography>
+
+					<Link
+						className="text-green-500 underline underline-offset-4"
+						href="/about"
+					>
+						Learn more
+					</Link>
 				</div>
 
 				<Image
@@ -199,7 +214,7 @@ export const ResourcesContainer = () => {
 						<br />
 						Search By:
 					</Typography>
-					<ul className="list-disc list-inside">
+					<ul className="list-disc list-inside mb-10">
 						<li>
 							<Typography
 								className="mb-2"
@@ -241,6 +256,13 @@ export const ResourcesContainer = () => {
 							</Typography>
 						</li>
 					</ul>
+
+					<Link
+						className="text-green-500 underline underline-offset-4"
+						href="/about"
+					>
+						Learn more
+					</Link>
 				</div>
 
 				<Image

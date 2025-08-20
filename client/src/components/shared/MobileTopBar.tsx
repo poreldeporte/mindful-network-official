@@ -10,12 +10,12 @@ import { Button, Typography } from "../ui";
 import Image from "next/image";
 import { getAllResources } from "@/services";
 import { generateResourceKeys } from "@/utilities";
-import { getCompanyDetails } from "@/services/company-details.service";
 
-export function MobileTopBar() {
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
+export function MobileTopBar({
+	companyDetails,
+}: {
+	companyDetails: CompanyDetails;
+}) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -24,20 +24,16 @@ export function MobileTopBar() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	return (
 		<header className="transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 py-5 z-50">
