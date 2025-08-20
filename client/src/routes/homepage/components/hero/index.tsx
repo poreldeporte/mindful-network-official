@@ -1,15 +1,19 @@
 import { Typography } from "@/components/ui";
-import { HeroImage } from "@/lib/images";
+import { CompanyDetails } from "@/models";
 import Link from "next/link";
 
-export const Hero = () => {
+export const Hero = ({
+	companyDetails,
+}: {
+	companyDetails: CompanyDetails;
+}) => {
 	return (
 		<section
 			className="pt-10 mx-auto h-[80vh] lg:h-[90vh] flex lg:items-center lg:text-center justify-center flex-col"
 			role="region"
 			aria-labelledby="hero-heading"
 			style={{
-				backgroundImage: `url(${HeroImage.src})`,
+				backgroundImage: `url(${companyDetails.heroBackground})`,
 				backgroundSize: "cover",
 				backgroundPosition: "center",
 				backgroundAttachment: "fixed",
