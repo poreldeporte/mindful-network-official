@@ -37,7 +37,7 @@ const CTACard = ({
 						color="white"
 						as="p"
 						variant="body"
-						className="text-lg font-bold mr-5 flex items-center gap-2"
+						className="font-bold mr-5 flex items-center gap-2"
 					>
 						{buttonText}
 						<ArrowRightCircleIcon
@@ -63,10 +63,7 @@ const CTACard = ({
 
 export function CTASection() {
 	return (
-		<section
-			className="page-width section-y-padding"
-			aria-labelledby="cta-section-heading"
-		>
+		<section className="page-width " aria-labelledby="cta-section-heading">
 			<Typography
 				as="h2"
 				variant="h2"
