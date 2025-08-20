@@ -20,7 +20,7 @@ const CTACard = ({
 	sectionToScroll,
 }: Props) => {
 	return (
-		<article className="relative w-full h-[450px] overflow-hidden transition-transform hover:scale-[101%]">
+		<article className="relative w-full h-[250px] xl:h-[450px] overflow-hidden transition-transform hover:scale-[101%]">
 			<Image
 				className="w-full h-full object-cover"
 				src={image.src}

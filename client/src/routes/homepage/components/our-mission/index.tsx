@@ -2,8 +2,8 @@ import { Typography } from "@/components/ui";
 
 export const OurMission = () => {
 	return (
-		<section className="page-width py-24 my-10 grid place-items-center min-h-[80vh]">
-			<div className="flex flex-col items-center justify-center">
+		<section className="page-width py-24 my-10 grid place-items-center xl:min-h-[80vh]">
+			<div className="flex flex-col xl:items-center xl:justify-center">
 				<Typography
 					as="h2"
 					className="font-antic mb-5 leading-none"
@@ -15,7 +15,7 @@ export const OurMission = () => {
 
 				<Typography
 					as="p"
-					className="mb-5 text-center"
+					className="mb-5 xl:text-center"
 					color="darkGray"
 					variant="body"
 				>
@@ -25,7 +25,7 @@ export const OurMission = () => {
 				</Typography>
 				<Typography
 					as="p"
-					className="mb-5 text-center"
+					className="mb-5 xl:text-center"
 					color="darkGray"
 					variant="body"
 				>

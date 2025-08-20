@@ -55,7 +55,7 @@ export const Hero = ({
 
 				<Link
 					href={"/search"}
-					className="mt-10 py-2 w-max px-4 rounded-full border border-white hover:bg-white hover:text-black transition-colors text-white text-center text-[1.125rem] leading-relaxed"
+					className="mt-10 py-2 w-max px-4 rounded-full border border-white hover:bg-white hover:text-black transition-colors text-white text-center text-[1.25rem] leading-tight sm:text-[1.5rem] md:text-[1.75rem] lg:text-[1.875rem] xl:text-[2rem]"
 					aria-label="Start your search for mental health resources"
 				>
 					Start Search
