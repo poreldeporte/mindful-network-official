@@ -1,10 +1,9 @@
 "use client";
 
-import { Topbar, Footer, MobileTopBar } from "@/components/shared";
 import { UseFulLinkSection } from "@/models";
 import { UseFulLinksContent } from "@/routes/useful-links";
 import { getUsefulLinks } from "@/services";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function UsefulLinks() {
 	const [usefulLinksSections, setUsefulLinksSections] = useState<
@@ -23,14 +22,5 @@ export default function UsefulLinks() {
 		fetchData();
 	}, []);
 
-	return (
-		<>
-			<Topbar />
-			<MobileTopBar />
-			<main aria-labelledby="support-links-page">
-				<UseFulLinksContent usefulLinksSections={usefulLinksSections} />
-			</main>
-			<Footer />
-		</>
-	);
+	return <UseFulLinksContent usefulLinksSections={usefulLinksSections} />;
 }
