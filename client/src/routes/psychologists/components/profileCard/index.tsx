@@ -15,7 +15,7 @@ export function ProfileCard({
 }: PsychologistModel) {
 	return (
 		<header
-			className="mb-10 mt-32 justify-center bg-white rounded-2xl p-10 lg:mt-0"
+			className="mb-10 mt-32 justify-center bg-white border border-gray-200 rounded-2xl p-10 lg:mt-0"
 			aria-labelledby="profile-card-heading"
 		>
 			<div className="flex items-center justify-start">
@@ -32,13 +32,18 @@ export function ProfileCard({
 					<Typography
 						className="font-bold"
 						as="h2"
-						variant="large"
+						variant="body"
 						color="black"
 						id="profile-card-heading"
 					>
 						{name}
 					</Typography>
-					<Typography className="mb-2" as="p" variant="small" color="darkGray">
+					<Typography
+						className="mb-2"
+						as="p"
+						variant="bodySmall"
+						color="darkGray"
+					>
 						{facility}
 					</Typography>
 					<div className="space-x-1 space-y-1">
@@ -46,7 +51,7 @@ export function ProfileCard({
 							? resource.map((res) => (
 									<Badge
 										key={res.title}
-										className="w-max"
+										className="w-max !cursor-default"
 										color="green"
 										aria-label={`Type: ${res.title}`}
 									>
@@ -58,7 +63,12 @@ export function ProfileCard({
 				</div>
 			</div>
 			<div className="my-10">
-				<Typography className="mb-5" as="p" variant="xsmall" color="darkGray">
+				<Typography
+					className="mb-5"
+					as="p"
+					variant="bodySmall"
+					color="darkGray"
+				>
 					{description}
 				</Typography>
 			</div>
@@ -69,7 +79,7 @@ export function ProfileCard({
 						<Typography
 							className="font-semibold"
 							as="p"
-							variant="xsmall"
+							variant="bodySmall"
 							color="darkGray"
 						>
 							Accepts Insurance
@@ -81,7 +91,7 @@ export function ProfileCard({
 						<Typography
 							className="font-semibold"
 							as="p"
-							variant="small"
+							variant="bodySmall"
 							color="darkGray"
 						>
 							Self-pay - Insurance not accepted
@@ -98,7 +108,7 @@ export function ProfileCard({
 					<Typography
 						className="font-semibold"
 						as="p"
-						variant="small"
+						variant="bodySmall"
 						color="darkGray"
 					>
 						Vetted & Verified

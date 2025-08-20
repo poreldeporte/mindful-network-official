@@ -20,7 +20,7 @@ const CTACard = ({
 	sectionToScroll,
 }: Props) => {
 	return (
-		<article className="relative w-full h-[450px] overflow-hidden transition-transform hover:scale-[101%]">
+		<article className="relative w-full h-[250px] xl:h-[450px] overflow-hidden transition-transform hover:scale-[101%]">
 			<Image
 				className="w-full h-full object-cover"
 				src={image.src}
@@ -36,8 +36,8 @@ const CTACard = ({
 					<Typography
 						color="white"
 						as="p"
-						variant="medium"
-						className="text-lg font-bold mr-5 flex items-center gap-2"
+						variant="body"
+						className="font-bold mr-5 flex items-center gap-2"
 					>
 						{buttonText}
 						<ArrowRightCircleIcon
@@ -63,19 +63,16 @@ const CTACard = ({
 
 export function CTASection() {
 	return (
-		<section
-			className="page-width section-y-padding"
-			aria-labelledby="cta-section-heading"
-		>
+		<section className="page-width " aria-labelledby="cta-section-heading">
 			<Typography
 				as="h2"
-				variant="title"
+				variant="h2"
 				color="black"
-				className="text-green-500 mb-5"
+				className="text-green-500 mb-5 font-antic"
 				id="cta-section-heading"
 			>
 				Take the first step <span className="block"></span>
-				<span className="text-black">Discover trusted resources</span>
+				<span className="text-[#3C3D42]">Discover trusted resources</span>
 			</Typography>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 				{CTACards.map((card) => (

@@ -1,4 +1,3 @@
-import HeroImage from "@/assets/images/hero.webp";
 import CoachingAndSupportImage from "@/assets/images/coaching-and-support.webp";
 import PersonalizedSearchOptionsImage from "@/assets/images/personalized-search-options.webp";
 import TrustedAndVerifiedResourcesImage from "@/assets/images/trusted-and-verified-resources.webp";
@@ -38,7 +37,6 @@ export {
 	PersonalizedSearchOptionsImage,
 	TrustedAndVerifiedResourcesImage,
 	UpToDateInformationImage,
-	HeroImage,
 	ExploreCuratedResourcesImage,
 	JoinOurNetworkImage,
 };

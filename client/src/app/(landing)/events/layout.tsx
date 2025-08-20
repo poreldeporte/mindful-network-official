@@ -1,4 +1,3 @@
-import { Footer, MobileTopBar, Topbar } from "@/components/shared";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -55,12 +54,5 @@ export default function EventsLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<>
-			<MobileTopBar />
-			<Topbar />
-			<main aria-labelledby="mindful-events-page">{children}</main>
-			<Footer />
-		</>
-	);
+	return <main aria-labelledby="mindful-events-page">{children}</main>;
 }

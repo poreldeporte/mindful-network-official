@@ -11,6 +11,7 @@ export const getCompanyDetailsAdapter = (
 	id: companyDetails._id,
 	logo: companyDetails.logo,
 	logoAlt: companyDetails.logoAlt,
+	heroBackground: companyDetails.heroBackground,
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,
 	address: companyDetails.address,

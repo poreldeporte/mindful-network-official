@@ -39,10 +39,10 @@ export const ContentHeader = ({
 	return (
 		<header className="my-10">
 			<div className="flex flex-col z-10">
-				<Typography color="black" as="h2" variant="large" className="font-bold">
+				<Typography color="black" as="h2" variant="h3" className="font-bold">
 					Blog
 				</Typography>
-				<Typography color="darkGray" as="p" variant="medium">
+				<Typography color="darkGray" as="p" variant="bodySmall">
 					Discover expert insights, self-care tips, and the latest trends in
 					mental health and wellness.
 				</Typography>

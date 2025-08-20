@@ -49,15 +49,10 @@ export const EventsContainer = ({ events }: Props) => {
 		<div className="mx-auto w-11/12 xl:w-3/4 pb-20">
 			<header className="py-10">
 				<div className="flex flex-col z-10">
-					<Typography
-						color="black"
-						as="h2"
-						variant="large"
-						className="font-bold"
-					>
+					<Typography color="black" as="h2" variant="h3" className="font-bold">
 						Events
 					</Typography>
-					<Typography color="darkGray" as="p" variant="medium">
+					<Typography color="darkGray" as="p" variant="bodySmall">
 						Discover expert insights, self-care tips, and the latest trends in
 						mental health and wellness.
 					</Typography>
@@ -76,7 +71,7 @@ export const EventsContainer = ({ events }: Props) => {
 					))
 				) : (
 					<div className="col-span-full text-center py-10">
-						<Typography color="darkGray" as="p" variant="medium">
+						<Typography color="darkGray" as="p" variant="bodySmall">
 							No events found. Check back soon for upcoming events!
 						</Typography>
 					</div>

@@ -62,7 +62,7 @@ const FilterItem = ({
 				<Typography
 					as="p"
 					color="darkGray"
-					variant="small"
+					variant="bodySmall"
 					className="font-semibold"
 				>
 					{title}
@@ -162,7 +162,7 @@ export const Filters = ({
 				<div className="flex items-center px-6 py-4 border-b border-gray-200">
 					<div className="flex-grow flex justify-center">
 						<Typography
-							variant="medium"
+							variant="body"
 							color="black"
 							as="h3"
 							className="font-semibold"
@@ -219,7 +219,7 @@ export const Filters = ({
 				<div className="border-t border-gray-200 p-4 bg-blue-50">
 					<Button
 						className="w-full py-2 px-4 rounded-full"
-						variant="small"
+						variant="bodySmall"
 						onClick={() => {
 							setVisible(false);
 						}}

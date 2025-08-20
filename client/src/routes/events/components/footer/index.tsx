@@ -20,12 +20,12 @@ export const EventsFooter = () => {
 						<Typography
 							color="white"
 							as="h2"
-							variant="large"
+							variant="h3"
 							className="font-semibold"
 						>
 							Need assistance?
 						</Typography>
-						<Typography color="white" as="p" variant="small">
+						<Typography color="white" as="p" variant="bodySmall">
 							Start by exploring our mental health professionals database.
 						</Typography>
 						<Link
@@ -35,7 +35,7 @@ export const EventsFooter = () => {
 						>
 							<Typography
 								as="span"
-								variant={"small"}
+								variant={"bodySmall"}
 								color="white"
 								className="flex items-center gap-2"
 							>
@@ -61,12 +61,12 @@ export const EventsFooter = () => {
 						<Typography
 							color="white"
 							as="h2"
-							variant="large"
+							variant="h3"
 							className="font-semibold"
 						>
 							Find what you need
 						</Typography>
-						<Typography color="white" variant="small">
+						<Typography color="white" variant="bodySmall">
 							Search through support groups, services, books, and the latest in
 							mental health research
 						</Typography>
@@ -77,7 +77,7 @@ export const EventsFooter = () => {
 						>
 							<Typography
 								as="span"
-								variant={"small"}
+								variant={"bodySmall"}
 								color="white"
 								className="flex items-center gap-2"
 							>

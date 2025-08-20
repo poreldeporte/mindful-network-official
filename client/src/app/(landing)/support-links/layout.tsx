@@ -62,5 +62,5 @@ export default function SupportLinksLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return <>{children}</>;
+	return <main aria-labelledby="support-links-page">{children}</main>;
 }

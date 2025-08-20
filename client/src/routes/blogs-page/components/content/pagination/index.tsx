@@ -21,7 +21,7 @@ export const BlogsPagination = ({
 				const pageNumber = index + 1;
 				return (
 					<Button
-						variant="medium"
+						variant="bodySmall"
 						className="px-3 py-0.5 rounded-lg"
 						key={pageNumber}
 						isSelected={pageNumber === currentPage}

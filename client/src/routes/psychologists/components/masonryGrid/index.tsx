@@ -73,7 +73,7 @@ interface ImageViewer {
 // 					onClick={() => setIsVisible(false)}
 // 					className="bg-blue-50/30 rounded-full px-4 py-2 flex space-x-2 items-center justify-between mt-5 cursor-pointer"
 // 				>
-// 					<Typography color="white" variant="small">
+// 					<Typography color="white" variant="bodySmall">
 // 						Close Gallery
 // 					</Typography>
 // 				</div>
@@ -218,7 +218,7 @@ export function MasonryGrid({ images }: Props) {
 				})}
 			{/* <div className="flex items-center justify-end">
 				<Button
-					variant="small"
+					variant="bodySmall"
 					className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"
 					form="primary"
 					onClick={() => {

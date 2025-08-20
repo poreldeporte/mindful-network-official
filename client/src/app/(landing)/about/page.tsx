@@ -16,7 +16,7 @@ export default function About() {
 					className="font-antic"
 					as="h1"
 					color="black"
-					variant="title"
+					variant="h1"
 				>
 					Why We <span className="text-green-500">Rise</span>
 				</Typography>
@@ -24,7 +24,7 @@ export default function About() {
 					id="about-hero-text"
 					as="p"
 					color="darkGray"
-					variant="medium"
+					variant="bodySmall"
 				>
 					As a Family Mentor, Certified Recovery Peer Specialist, and Mental
 					Health Advocate, I&apos;ve partnered with a dedicated team of

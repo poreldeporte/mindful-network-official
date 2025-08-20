@@ -16,18 +16,15 @@ import { generateResourceKeys } from "@/utilities";
 import { useEffect, useState } from "react";
 import { Button, Typography } from "../ui";
 import { CompanyDetails } from "@/models/company-details.model";
-import { getCompanyDetails } from "@/services/company-details.service";
 
 interface Props {
 	blogPosts?: BlogModel[];
+	companyDetails?: CompanyDetails;
 }
 
-export function Footer({ blogPosts }: Props) {
+export function Footer({ blogPosts, companyDetails }: Props) {
 	const [posts, setPosts] = useState<BlogModel[] | []>([]);
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -46,20 +43,16 @@ export function Footer({ blogPosts }: Props) {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
@@ -86,7 +79,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.address && (
 								<div className="flex items-center space-x-3">
 									<MapPin className="w-6 h-6 text-gray-500" />
-									<Typography variant="xsmall" as="p" color="black">
+									<Typography variant="bodySmall" as="p" color="black">
 										{companyDetails.address}
 									</Typography>
 								</div>
@@ -94,7 +87,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.phoneNumber && (
 								<div className="flex items-center space-x-3">
 									<Phone className="w-6 h-6 text-gray-500" />
-									<Typography variant="xsmall" as="p" color="black">
+									<Typography variant="bodySmall" as="p" color="black">
 										{companyDetails.phoneNumber}
 									</Typography>
 								</div>
@@ -104,7 +97,7 @@ export function Footer({ blogPosts }: Props) {
 								<div className="flex items-center space-x-3">
 									<Mail className="w-6 h-6 text-gray-500" />
 									<Typography
-										variant="xsmall"
+										variant="bodySmall"
 										as="p"
 										color="black"
 										className="hover:underline underline-offset-4"
@@ -146,7 +139,7 @@ export function Footer({ blogPosts }: Props) {
 							<Typography
 								color="black"
 								as="h2"
-								variant="medium"
+								variant="body"
 								className="font-bold lg:font-semibold"
 							>
 								About
@@ -159,7 +152,11 @@ export function Footer({ blogPosts }: Props) {
 											href={label.link}
 											key={label.key}
 										>
-											<Typography color="darkGray" as="span" variant="xsmall">
+											<Typography
+												color="darkGray"
+												as="span"
+												variant="bodySmall"
+											>
 												{label.label}
 											</Typography>
 										</Link>
@@ -171,7 +168,7 @@ export function Footer({ blogPosts }: Props) {
 							<Typography
 								color="black"
 								as="h2"
-								variant="medium"
+								variant="body"
 								className="font-bold lg:font-semibold"
 							>
 								Blog
@@ -190,7 +187,7 @@ export function Footer({ blogPosts }: Props) {
 															className=""
 															color="darkGray"
 															as="span"
-															variant="xsmall"
+															variant="bodySmall"
 														>
 															{article.title}
 														</Typography>
@@ -204,7 +201,7 @@ export function Footer({ blogPosts }: Props) {
 							<Typography
 								color="black"
 								as="h2"
-								variant="medium"
+								variant="body"
 								className="font-bold lg:font-semibold"
 							>
 								Resources
@@ -217,7 +214,11 @@ export function Footer({ blogPosts }: Props) {
 											href={`/search?resource=${resource.key}`}
 											key={resource.key}
 										>
-											<Typography color="darkGray" as="span" variant="xsmall">
+											<Typography
+												color="darkGray"
+												as="span"
+												variant="bodySmall"
+											>
 												{resource.label}
 											</Typography>
 										</Link>
@@ -229,7 +230,7 @@ export function Footer({ blogPosts }: Props) {
 				</div>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between items-center">
-				<Typography variant="xsmall" color="black" className="p-0 md:p-4">
+				<Typography variant="bodySmall" color="black" className="p-0 md:p-4">
 					© {new Date().getFullYear()} The Mindful Network
 				</Typography>
 
@@ -252,9 +253,9 @@ export function Footer({ blogPosts }: Props) {
 				<Button
 					onClick={scrollToTop}
 					className="hidden lg:flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
-					variant="xsmall"
+					variant="bodySmall"
 				>
-					<Typography variant="xsmall" as="h3" color="white">
+					<Typography variant="bodySmall" as="h3" color="white">
 						Back to top
 					</Typography>
 					<ChevronUp className="h-8 w-8 text-white" />

@@ -1,14 +1,13 @@
 "use client";
 
+import { CompanyDetails, ResourcesKey } from "@/models";
+import { getAllResources } from "@/services";
+import { generateResourceKeys } from "@/utilities";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { Button } from "../ui";
-import { getCompanyDetails } from "@/services/company-details.service";
-import { getAllResources } from "@/services";
-import { useState, useEffect } from "react";
-import { CompanyDetails, ResourcesKey } from "@/models";
-import { generateResourceKeys } from "@/utilities";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Button, Typography } from "../ui";
 
 import {
 	Select,
@@ -17,13 +16,9 @@ import {
 	SelectItem,
 	SelectLabel,
 	SelectTrigger,
-	SelectValue,
 } from "@/components/ui/Shadcn-select";
 
-export function Topbar() {
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
+export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const router = useRouter();
 	const pathname = usePathname();
@@ -40,23 +35,19 @@ export function Topbar() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	return (
-		<header className="fixed top-5 left-1/2 -translate-x-1/2 w-11/12 xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden lg:block z-50">
+		<header className="fixed top-5 left-1/2 -translate-x-1/2 w-11/12 2xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden xl:block z-50">
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
@@ -75,19 +66,24 @@ export function Topbar() {
 				</Link>
 
 				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
-					<Link
-						href="/about"
-						className={`${
-							pathname === "/about"
-								? "text-green-500 font-medium"
-								: "text-gray-700 font-normal"
-						}`}
-					>
-						About
+					<Link href="/about">
+						<Typography
+							variant="bodyXSmall"
+							color={pathname === "/about" ? "green" : "darkGray"}
+							className={pathname === "/about" ? "font-medium" : ""}
+						>
+							About
+						</Typography>
 					</Link>
 					<Select onValueChange={handleSelectChange}>
-						<SelectTrigger className="w-[160px] z-50 border-none text-gray-700 px-0">
-							<SelectValue placeholder="Find Professionals" />
+						<SelectTrigger className="w-max z-50 border-none text-gray-700 px-0">
+							<Typography
+								variant="bodyXSmall"
+								color={pathname === "/search" ? "green" : "darkGray"}
+								className={pathname === "/search" ? "font-medium" : ""}
+							>
+								Find Professionals
+							</Typography>
 						</SelectTrigger>
 						<SelectContent className="bg-white p-5">
 							<SelectGroup>
@@ -105,41 +101,38 @@ export function Topbar() {
 							</SelectGroup>
 						</SelectContent>
 					</Select>
-					<Link
-						href="/support-links"
-						className={`${
-							pathname === "/support-links"
-								? "text-green-500 font-medium"
-								: "text-gray-700 font-normal"
-						}`}
-					>
-						Support Links
+					<Link href="/support-links">
+						<Typography
+							variant="bodyXSmall"
+							color={pathname === "/support-links" ? "green" : "darkGray"}
+							className={pathname === "/support-links" ? "font-medium" : ""}
+						>
+							Support Links
+						</Typography>
 					</Link>
-					<Link
-						href="/blog"
-						className={`${
-							pathname === "/blog"
-								? "text-green-500 font-medium"
-								: "text-gray-700 font-normal"
-						}`}
-					>
-						Blog
+					<Link href="/blog">
+						<Typography
+							variant="bodyXSmall"
+							color={pathname === "/blog" ? "green" : "darkGray"}
+							className={pathname === "/blog" ? "font-medium" : ""}
+						>
+							Blog
+						</Typography>
 					</Link>
-					<Link
-						href="/events"
-						className={`${
-							pathname === "/events"
-								? "text-green-500 font-medium"
-								: "text-gray-700 font-normal"
-						}`}
-					>
-						Events
+					<Link href="/events">
+						<Typography
+							variant="bodyXSmall"
+							color={pathname === "/events" ? "green" : "darkGray"}
+							className={pathname === "/events" ? "font-medium" : ""}
+						>
+							Events
+						</Typography>
 					</Link>
 				</nav>
 
 				<div className="p-2 pr-5">
 					<Button
-						variant="xsmall"
+						variant="bodyXSmall"
 						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
 						form="primary"
 					>

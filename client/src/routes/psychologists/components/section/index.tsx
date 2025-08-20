@@ -46,7 +46,7 @@ export function Section({
 	return (
 		<section
 			id={id}
-			className="py-10 px-10 lg:rounded-2xl my-10 bg-white shadow-sm shadow-gray-100 transition-all h-max"
+			className="py-10 px-10 lg:rounded-2xl my-10 bg-white border border-gray-200 transition-all h-max"
 			aria-labelledby={`${id}-header`}
 		>
 			<SectionHeader
@@ -69,7 +69,7 @@ export function Section({
 								<Subsection key={subsection.id} {...subsection} />
 							))
 						) : (
-							<Typography as="p" variant="medium" color="darkGray">
+							<Typography as="p" variant="body" color="darkGray">
 								{emptyMessage}
 							</Typography>
 						)}
@@ -99,7 +99,7 @@ export const Subsection = ({
 				</div>
 				<Typography
 					id={`${id}-title`}
-					variant="small"
+					variant="bodySmall"
 					className="font-bold"
 					as="h4"
 					color="black"
@@ -118,7 +118,7 @@ export const Subsection = ({
 						{isEmail ? (
 							<Typography
 								as="p"
-								variant="xsmall"
+								variant="bodySmall"
 								color="darkGray"
 								className="xs:max-w-full xs:text-wrap break-all whitespace-pre-wrap"
 							>
@@ -127,7 +127,7 @@ export const Subsection = ({
 						) : (
 							<Typography
 								as="p"
-								variant="xsmall"
+								variant="bodySmall"
 								color="darkGray"
 								className="xs:max-w-full xs:text-wrap"
 							>
@@ -165,12 +165,7 @@ export const SectionHeader = ({
 			tabIndex={0}
 		>
 			<div className="flex items-center">
-				<Typography
-					variant="medium"
-					className="font-bold"
-					as="h3"
-					color="black"
-				>
+				<Typography variant="body" className="font-bold" as="h3" color="black">
 					{title}
 				</Typography>
 			</div>

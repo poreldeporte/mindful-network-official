@@ -25,17 +25,17 @@ const components: PortableTextComponents = {
 	},
 	block: {
 		normal: ({ children }) => (
-			<Typography className="mb-5" as="p" variant="small" color="black">
+			<Typography className="mb-5" as="p" variant="bodySmall" color="black">
 				{children}
 			</Typography>
 		),
 		h2: ({ children }) => (
-			<Typography className="mb-5" as="h2" variant="large" color="black">
+			<Typography className="mb-5" as="h2" variant="h2" color="black">
 				{children}
 			</Typography>
 		),
 		h3: ({ children }) => (
-			<Typography className="mb-5" as="h3" variant="medium" color="black">
+			<Typography className="mb-5" as="h3" variant="h3" color="black">
 				{children}
 			</Typography>
 		),
@@ -55,14 +55,14 @@ const components: PortableTextComponents = {
 	listItem: {
 		bullet: ({ children }) => (
 			<li className="mb-4 ml-4">
-				<Typography variant="small" color="black">
+				<Typography variant="bodySmall" color="black">
 					{children}
 				</Typography>
 			</li>
 		),
 		number: ({ children }) => (
 			<li className="mb-4 ml-4">
-				<Typography variant="small" color="black">
+				<Typography variant="bodySmall" color="black">
 					{children}
 				</Typography>
 			</li>

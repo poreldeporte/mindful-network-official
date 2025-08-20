@@ -10,15 +10,14 @@ type ColorType =
 	| "green";
 
 const variantClasses: Record<VariantType, string> = {
-	xxlarge: "text-lg md:text-xl xl:text-2xl leading-tight",
-	xlarge: "text-base md:text-lg xl:text-xl leading-tight",
-	large: "text-sm md:text-base xl:text-lg leading-tight",
-	medium: "text-sm xl:text-sm",
-	small: "text-xs xl:text-[18px]",
-	xsmall: "text-[12px] xl:text-xs",
-	title: "text-lg md:text-xl xl:text-2xl font-antic leading-tight",
-	subtitle: "text-base md:text-lg xl:text-xl font-antic",
-	item: "text-[16px]",
+	h1: "text-[2.5rem] leading-tight sm:text-[3rem] md:text-[4rem] lg:text-[4.5rem] xl:text-[5rem]",
+	h2: "text-[1.75rem] leading-tight sm:text-[2rem] md:text-[2.5rem] lg:text-[2.75rem] xl:text-[3rem]",
+	h3: "text-[1.25rem] leading-tight sm:text-[1.5rem] md:text-[1.75rem] lg:text-[1.875rem] xl:text-[2rem]",
+	body: "text-[1rem] leading-relaxed sm:text-[1.125rem] md:text-[1.25rem] lg:text-[1.375rem] xl:text-[1.5rem]",
+	bodySmall:
+		"text-[0.875rem] leading-relaxed sm:text-[1rem] md:text-[1.0625rem] lg:text-[1.125rem]",
+	bodyXSmall:
+		"text-[0.75rem] leading-relaxed sm:text-[0.875rem] md:text-[0.9375rem] lg:text-[1rem]",
 };
 
 const colorClasses: Record<ColorType, string> = {

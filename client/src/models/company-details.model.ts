@@ -8,6 +8,7 @@ interface SocialLink {
 export interface CompanyDetails {
 	logo: string;
 	logoAlt?: string;
+	heroBackground: string;
 	email: string;
 	address: string;
 	phoneNumber: string;

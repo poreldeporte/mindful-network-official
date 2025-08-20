@@ -1,4 +1,3 @@
-import { Footer, Topbar, MobileTopBar } from "@/components/shared";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -62,13 +61,6 @@ export default function PsychologistLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<>
-			<MobileTopBar />
-			<Topbar />
-			<main aria-labelledby="Mental Health Professional Search">
-				{children}
-			</main>
-			<Footer />
-		</>
+		<main aria-labelledby="Mental Health Professional Search">{children}</main>
 	);
 }

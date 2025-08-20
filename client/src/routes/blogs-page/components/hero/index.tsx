@@ -16,7 +16,7 @@ export const BlogsHero = () => {
 				<Typography
 					color="white"
 					as="h1"
-					variant="xlarge"
+					variant="h2"
 					className="text-center md:text-start z-10"
 				>
 					Cuarted articles just for you

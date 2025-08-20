@@ -51,7 +51,7 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 					{showSlider && (
 						<div className="flex gap-2">
 							<Button
-								variant="small"
+								variant="bodySmall"
 								className="p-2 rounded-full bg-green-400 hover:bg-green-600"
 								onClick={prevSlide}
 							>
@@ -70,7 +70,7 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 								</svg>
 							</Button>
 							<Button
-								variant="small"
+								variant="bodySmall"
 								className="p-2 rounded-full bg-green-400 hover:bg-green-600"
 								onClick={nextSlide}
 							>

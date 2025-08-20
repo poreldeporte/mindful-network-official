@@ -6,6 +6,7 @@ export const getCompanyDetails = async (): Promise<CompanyDetails | null> => {
 	try {
 		const allCompanyDetailsQuery = `*[_type == "companyDetails"][0] {
 			_id,
+			"heroBackground": heroBackground.asset->url,
 			"logo": logo.asset->url,
 			"logoAlt": logo.alt,
 			email,

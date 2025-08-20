@@ -84,7 +84,7 @@ const EventCard = ({
 
 				<div className="flex flex-grow items-end justify-end mt-5">
 					<Button
-						variant="small"
+						variant="bodySmall"
 						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative transition-all duration-300 hover:shadow-md"
 						form="primary"
 					>

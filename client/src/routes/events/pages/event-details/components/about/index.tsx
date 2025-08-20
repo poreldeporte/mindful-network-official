@@ -81,7 +81,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -135,7 +135,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 											<Typography
 												as="h3"
 												color="black"
-												variant="medium"
+												variant="body"
 												className="font-bold"
 											>
 												Share as a post
@@ -261,7 +261,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -278,7 +278,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -293,7 +293,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -327,16 +327,16 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold"
 					>
 						{event.name.text}
 					</Typography>
-					<Typography as="p" color="black" variant="small">
+					<Typography as="p" color="black" variant="bodySmall">
 						{event.summary}
 					</Typography>
 					<Button
-						variant="small"
+						variant="bodySmall"
 						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative w-full mt-5"
 						form="primary"
 					>

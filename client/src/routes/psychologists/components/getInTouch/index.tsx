@@ -194,7 +194,7 @@ function ContactForm({ psychologistName }: Props) {
 			<div className="flex items-center justify-end">
 				<Button
 					className="py-2 px-4 mt-10 rounded-full w-auto"
-					variant="xsmall"
+					variant="bodySmall"
 					type="submit"
 					disabled={isSubmitting}
 				>
@@ -216,7 +216,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 				<Typography
 					className="font-dmSans"
 					color="black"
-					variant="title"
+					variant="h2"
 					as="h2"
 					id="get-in-touch-heading"
 				>

@@ -12,6 +12,16 @@ export default {
       ...imageWithAlt(),
     },
     {
+      name: 'heroBackground',
+      title: 'Hero Background Image',
+      description:
+        'Suggestion: Ensure the image size is under 1MB. Background image for hero section of homepage. Recommended size: 1920x1080 and .webp format',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: 'address',
       title: 'Company Address',
       type: 'string',
@@ -61,8 +71,7 @@ export default {
   ],
   preview: {
     select: {
-      title: 'name',
-      subtitle: 'email',
+      title: 'email',
     },
   },
 }
