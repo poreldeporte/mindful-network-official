@@ -36,7 +36,7 @@ export function MobileTopBar({
 	}, [companyDetails]);
 
 	return (
-		<header className="transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 py-5 z-50">
+		<header className="transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 py-5 px-2.5 z-50">
 			<Link href={"/"} className="flex content-center space-x-3 items-center">
 				{companyDetails?.logo && (
 					<Image

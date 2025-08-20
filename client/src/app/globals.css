@@ -15,7 +15,7 @@ html {
 }
 
 .section-y-padding {
-	padding-block: 80px;
+	padding-block: 50px;
 }
 
 .blurred-overlay {
@@ -74,8 +74,5 @@ html {
 	.page-width {
 		width: 75%;
 		margin-inline: auto;
-	}
-	.section-y-padding {
-		padding-block: 120px;
 	}
 }

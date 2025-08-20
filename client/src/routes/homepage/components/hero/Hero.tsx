@@ -45,9 +45,9 @@ export const Hero = ({
 
 				<Typography
 					as="p"
-					className="lg:w-1/2 text-left text-[1.125rem] leading-relaxed"
+					className="lg:w-3/4 text-left text-[1.125rem] leading-relaxed"
 					color="white"
-					variant="bodySmall"
+					variant="body"
 				>
 					Explore our network of trusted mental health resources to find the
 					support you need, when you need it.

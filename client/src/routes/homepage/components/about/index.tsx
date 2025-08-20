@@ -4,7 +4,7 @@ import { ResourcesContainer } from "./ResourcesContainer";
 export function About() {
 	return (
 		<section
-			className="page-width section-y-padding flex flex-col xl:items-center gap-10"
+			className="page-width section-y-padding flex flex-col xl:items-center"
 			aria-labelledby="about-section-heading"
 		>
 			<div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-end">

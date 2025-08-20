@@ -15,12 +15,12 @@ export const ResourcesContainer = () => {
 			aria-label="List of benefits"
 		>
 			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-10"
+				className="grid grid-cols-1 xl:grid-cols-2 items-center lg:gap-10"
 				aria-labelledby={`benefit-title-Trusted and Verified Resources`}
 			>
 				<div className="xl:order-1 py-10 lg:p-10">
 					<Typography
-						className="mb-5 font-semibold"
+						className="mb-5 font-semibold font-antic"
 						color="black"
 						as="h4"
 						variant="h3"
@@ -116,7 +116,7 @@ export const ResourcesContainer = () => {
 				<Image
 					src={TrustedAndVerifiedResourcesImage}
 					alt="Trusted and Verified Resources"
-					className="max-h-[550px] object-cover object-center p-5"
+					className="max-h-[550px] object-cover object-center lg:p-5"
 				/>
 			</article>
 
@@ -126,7 +126,7 @@ export const ResourcesContainer = () => {
 			>
 				<div className="py-10 lg:p-10">
 					<Typography
-						className="mb-5 font-semibold"
+						className="mb-5 font-semibold font-antic"
 						color="black"
 						as="h4"
 						variant="h3"
@@ -179,7 +179,7 @@ export const ResourcesContainer = () => {
 				</div>
 
 				<Image
-					className="max-h-[550px] object-cover object-center p-5"
+					className="max-h-[550px] object-cover object-center lg:p-5"
 					src={UpToDateInformationImage}
 					alt="Up-to-Date Information"
 				/>
@@ -191,7 +191,7 @@ export const ResourcesContainer = () => {
 			>
 				<div className="xl:order-1 py-10 lg:p-10">
 					<Typography
-						className="mb-5 font-semibold"
+						className="mb-5 font-semibold font-antic"
 						color="black"
 						as="h4"
 						variant="h3"
@@ -266,7 +266,7 @@ export const ResourcesContainer = () => {
 				</div>
 
 				<Image
-					className="max-h-[550px] object-cover object-center p-5"
+					className="max-h-[550px] object-cover object-center lg:p-5"
 					src={PersonalizedSearchOptionsImage}
 					alt="Personalized Search Options"
 				/>

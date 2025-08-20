@@ -2,7 +2,7 @@ import { Typography } from "@/components/ui";
 
 export const OurMission = () => {
 	return (
-		<section className="page-width py-24 my-10 grid place-items-center xl:min-h-[80vh]">
+		<section className="page-width py-10 lg:py-24 my-10 grid place-items-center">
 			<div className="flex flex-col xl:items-center xl:justify-center">
 				<Typography
 					as="h2"
