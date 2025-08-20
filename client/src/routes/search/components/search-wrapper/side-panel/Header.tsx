@@ -66,7 +66,7 @@ const Header = ({
 				className="font-antic xs:!text-[40px]"
 				as="h1"
 				color="black"
-				variant="h1"
+				variant="h2"
 			>
 				Find Professionals in{" "}
 				<span className="text-green-300">South Florida</span>

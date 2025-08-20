@@ -5,7 +5,7 @@ export const TermsOfServiceBody = () => {
 	return (
 		<section className="flex flex-col mt-48 mb-[100px]">
 			<div className="flex flex-col items-center mb-20">
-				<Typography variant="h1" as="h1" color="black">
+				<Typography variant="h2" as="h1" color="black">
 					Terms of service
 				</Typography>
 				<Typography variant="bodySmall" as="p" color="black">
@@ -18,13 +18,18 @@ export const TermsOfServiceBody = () => {
 						<Typography
 							color="black"
 							as="h2"
-							variant="h2"
+							variant="h3"
 							className="font-bold mb-2"
 						>
 							{section.title}
 						</Typography>
 						{section.content && (
-							<Typography color="black" as="p" variant="body" className="mb-5">
+							<Typography
+								color="black"
+								as="p"
+								variant="bodyXSmall"
+								className="mb-5"
+							>
 								{section.content}
 							</Typography>
 						)}
@@ -36,12 +41,17 @@ export const TermsOfServiceBody = () => {
 										<Typography
 											color="black"
 											as="h3"
-											variant="h3"
+											variant="bodyXSmall"
 											className="font-semibold"
 										>
 											{subsection.title}
 										</Typography>
-										<Typography as="p" variant="bodySmall" color="black">
+										<Typography
+											as="p"
+											variant="bodyXSmall"
+											color="black"
+											className="mb-5"
+										>
 											{subsection.content}
 										</Typography>
 									</li>
