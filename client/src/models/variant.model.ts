@@ -1,10 +1,7 @@
 export type VariantType =
-	| "xxlarge"
-	| "xlarge"
-	| "large"
-	| "medium"
-	| "small"
-	| "xsmall"
-	| "title"
-	| "subtitle"
-	| "item";
+	| "h1"
+	| "h2"
+	| "h3"
+	| "body"
+	| "bodySmall"
+	| "bodyXSmall";

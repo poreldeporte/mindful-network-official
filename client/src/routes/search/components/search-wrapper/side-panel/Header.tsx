@@ -55,7 +55,7 @@ const Header = ({
 				<Typography
 					as="span"
 					color="blue"
-					variant="small"
+					variant="bodySmall"
 					className="flex items-center gap-2 hover:text-blue-700 hover:underline underline-offset-4"
 				>
 					<ArrowLongLeftIcon className="h-8 w-8" aria-hidden="true" />
@@ -66,7 +66,7 @@ const Header = ({
 				className="font-antic xs:!text-[40px]"
 				as="h1"
 				color="black"
-				variant="title"
+				variant="h1"
 			>
 				Find Professionals in{" "}
 				<span className="text-green-300">South Florida</span>
@@ -74,7 +74,7 @@ const Header = ({
 
 			<div className="flex items-center justify-between lg:hidden mt-5">
 				<div className="flex flex-col mb-2">
-					<Typography color="black" variant="medium" as="h3">
+					<Typography color="black" variant="h3" as="h3">
 						Filters
 					</Typography>
 					<SelectedFilters
@@ -136,7 +136,7 @@ const Header = ({
 						>
 							<div className="h-[55vh] overflow-y-auto">
 								<div className="my-2">
-									<Typography as="p" color="darkGray" variant="small">
+									<Typography as="p" color="darkGray" variant="bodySmall">
 										Pick your resources:
 									</Typography>
 									<div className="flex items-center flex-wrap gap-2 w-full">
@@ -163,7 +163,7 @@ const Header = ({
 								</div>
 
 								<div className="my-2">
-									<Typography as="p" color="darkGray" variant="small">
+									<Typography as="p" color="darkGray" variant="bodySmall">
 										Conditions:
 									</Typography>
 									<div className="flex items-center flex-wrap gap-2 w-full">
@@ -194,7 +194,7 @@ const Header = ({
 								</div>
 
 								<div className="mb-2">
-									<Typography as="p" color="darkGray" variant="small">
+									<Typography as="p" color="darkGray" variant="bodySmall">
 										Insurance:
 									</Typography>
 									<div className="flex items-center flex-wrap gap-2 w-full">
@@ -225,7 +225,7 @@ const Header = ({
 								</div>
 
 								<div className="mt-2">
-									<Typography as="p" color="darkGray" variant="small">
+									<Typography as="p" color="darkGray" variant="bodySmall">
 										Therapy Options:
 									</Typography>
 									<div className="flex items-center flex-wrap gap-2 w-full">

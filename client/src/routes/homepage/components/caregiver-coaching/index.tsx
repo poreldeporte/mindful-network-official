@@ -10,7 +10,7 @@ export const CaregiverCoaching = () => {
 					as="h2"
 					className="font-antic mb-2.5 leading-none"
 					color="green"
-					variant="title"
+					variant="h2"
 				>
 					Caregiver Coaching & Support
 				</Typography>
@@ -19,12 +19,17 @@ export const CaregiverCoaching = () => {
 					as="p"
 					className="font-bold mb-2.5"
 					color="black"
-					variant="medium"
+					variant="body"
 				>
 					Helping you care for a loved one in emotional distress.
 				</Typography>
 
-				<Typography as="p" color="darkGray" variant="medium" className="mt-10">
+				<Typography
+					as="p"
+					color="darkGray"
+					variant="bodySmall"
+					className="mt-10"
+				>
 					Caring for someone with mental health challenges can feel overwhelming
 					and isolating. Our coaching service is here to support you with
 					one-on-one mentorship, practical tools, and guidance tailored to your
@@ -39,7 +44,7 @@ export const CaregiverCoaching = () => {
 					className="mt-10 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
 					aria-label="Start your search for mental health resources"
 				>
-					<Typography as="span" variant={"small"} color="white">
+					<Typography as="span" variant={"bodySmall"} color="white">
 						Schedule Your Free Call
 					</Typography>
 				</a>

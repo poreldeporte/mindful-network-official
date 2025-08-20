@@ -36,7 +36,7 @@ const CTACard = ({
 					<Typography
 						color="white"
 						as="p"
-						variant="medium"
+						variant="body"
 						className="text-lg font-bold mr-5 flex items-center gap-2"
 					>
 						{buttonText}
@@ -69,13 +69,13 @@ export function CTASection() {
 		>
 			<Typography
 				as="h2"
-				variant="title"
+				variant="h2"
 				color="black"
-				className="text-green-500 mb-5"
+				className="text-green-500 mb-5 font-antic"
 				id="cta-section-heading"
 			>
 				Take the first step <span className="block"></span>
-				<span className="text-black">Discover trusted resources</span>
+				<span className="text-[#3C3D42]">Discover trusted resources</span>
 			</Typography>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 				{CTACards.map((card) => (

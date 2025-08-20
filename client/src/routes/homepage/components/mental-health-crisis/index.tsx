@@ -11,7 +11,7 @@ export const MentalHealthCrisis = () => {
 					as="h2"
 					className="font-antic mb-5 leading-none"
 					color="black"
-					variant="title"
+					variant="h2"
 				>
 					In a Mental Health Crisis?{" "}
 					<span className="text-green-500">Start Here</span>
@@ -19,22 +19,27 @@ export const MentalHealthCrisis = () => {
 
 				<ul className="list-disc list-inside">
 					<li>
-						<Typography as="span" variant="medium" color="darkGray">
+						<Typography as="span" variant="bodySmall" color="darkGray">
 							<strong>National Suicide Prevention Hotline:</strong> 988
 						</Typography>
 					</li>
 					<li>
-						<Typography as="span" variant="medium" color="darkGray">
+						<Typography as="span" variant="bodySmall" color="darkGray">
 							<strong>Crisis Text Line :</strong> Text SHARE to 741741
 						</Typography>
 					</li>
 					<li>
-						<Typography as="span" variant="medium" color="darkGray">
+						<Typography as="span" variant="bodySmall" color="darkGray">
 							<strong>Mobile Crisis Unit:</strong> 800-435-7968
 						</Typography>
 					</li>
 				</ul>
-				<Typography as="p" className="mb-5" color="darkGray" variant="medium">
+				<Typography
+					as="p"
+					className="mb-5"
+					color="darkGray"
+					variant="bodySmall"
+				>
 					<br />
 					<strong>Not urgent?</strong> Filter via mental illness, mental health
 					challenge, mental health services and more to find the best place to

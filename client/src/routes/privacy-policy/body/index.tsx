@@ -5,10 +5,10 @@ export const PrivacyPolicyBody = () => {
 	return (
 		<section className="flex flex-col mt-48 mb-[100px]">
 			<div className="flex flex-col items-center mb-20">
-				<Typography variant="title" as="h1" color="black">
+				<Typography variant="h1" as="h1" color="black">
 					Privacy & Policy
 				</Typography>
-				<Typography variant="small" as="p" color="black">
+				<Typography variant="bodySmall" as="p" color="black">
 					Last Updated on October, 2024
 				</Typography>
 			</div>
@@ -18,13 +18,13 @@ export const PrivacyPolicyBody = () => {
 						<Typography
 							color="black"
 							as="h2"
-							variant="medium"
+							variant="h2"
 							className="font-bold mb-2"
 						>
 							{section.title}
 						</Typography>
 						{section.content && (
-							<Typography color="black" as="p" variant="small" className="mb-5">
+							<Typography color="black" as="p" variant="body" className="mb-5">
 								{section.content}
 							</Typography>
 						)}
@@ -36,12 +36,12 @@ export const PrivacyPolicyBody = () => {
 										<Typography
 											color="black"
 											as="h3"
-											variant="small"
+											variant="h3"
 											className="font-semibold"
 										>
 											{subsection.title}
 										</Typography>
-										<Typography as="p" variant="small" color="black">
+										<Typography as="p" variant="bodySmall" color="black">
 											{subsection.content}
 										</Typography>
 									</li>

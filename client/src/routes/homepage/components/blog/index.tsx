@@ -69,14 +69,14 @@ export const BlogCard = ({
 					alt={`Featured image for ${title}`}
 				/>
 			</motion.div>
-			<Typography color="darkGray" as="h3" variant="xsmall">
+			<Typography color="darkGray" as="h3" variant="bodySmall">
 				{category.slug.replaceAll("-", " ").toUpperCase()}
 			</Typography>
 			<Typography
 				className="mb-2 font-semibold"
 				color="black"
 				as="h2"
-				variant="medium"
+				variant="body"
 				id={`blog-title-${slug}`}
 			>
 				{title}
@@ -117,15 +117,15 @@ export const BlogCard = ({
 export const BlogContainer = ({ blogPosts }: BlogProps) => {
 	return (
 		<section
-			className="pl-5 pr-5 xl:pl-[70px] 3xl:pl-[140px] section-y-padding"
+			className="pl-5 pr-5 xl:pl-[12.5%] section-y-padding"
 			aria-labelledby="blog-section-heading"
 			role="region"
 		>
 			<Typography
-				className="mb-20 font-medium leading-tight"
+				className="mb-20 font-antic"
 				color="black"
 				as="h2"
-				variant="title"
+				variant="h2"
 				id="blog-section-heading"
 			>
 				Expert articles and resources <span className="block"></span>
@@ -171,7 +171,7 @@ export const BlogContainer = ({ blogPosts }: BlogProps) => {
 							key={blogPost.slug}
 							role="option"
 							aria-label={`Blog post ${index + 1} of ${blogPosts.length}`}
-							className="max-h-96"
+							className="min-h-96"
 						>
 							<BlogCard {...blogPost} index={index} />
 						</SwiperSlide>

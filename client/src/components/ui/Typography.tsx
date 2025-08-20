@@ -10,15 +10,12 @@ type ColorType =
 	| "green";
 
 const variantClasses: Record<VariantType, string> = {
-	xxlarge: "text-lg md:text-xl xl:text-2xl leading-tight",
-	xlarge: "text-base md:text-lg xl:text-xl leading-tight",
-	large: "text-sm md:text-base xl:text-lg leading-tight",
-	medium: "text-sm xl:text-sm",
-	small: "text-xs xl:text-[18px]",
-	xsmall: "text-[12px] xl:text-xs",
-	title: "text-lg md:text-xl xl:text-2xl font-antic leading-tight",
-	subtitle: "text-base md:text-lg xl:text-xl font-antic",
-	item: "text-[16px]",
+	h1: "text-[5rem] leading-tight",
+	h2: "text-[3rem] leading-tight",
+	h3: "text-[2rem] leading-tight",
+	body: "text-[1.5rem] leading-relaxed",
+	bodySmall: "text-[1.125rem] leading-relaxed",
+	bodyXSmall: "text-[1rem] leading-relaxed",
 };
 
 const colorClasses: Record<ColorType, string> = {

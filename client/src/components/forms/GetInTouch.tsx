@@ -133,7 +133,7 @@ function ContactForm() {
 			/>
 			<Button
 				className="py-2 px-4 mt-10 rounded-full w-auto"
-				variant="small"
+				variant="bodySmall"
 				type="submit"
 				disabled={isSubmitting}
 			>
@@ -146,17 +146,17 @@ function ContactForm() {
 export function GetInTouch() {
 	return (
 		<section id="get-in-touch-form" className="page-width section-y-padding">
-			<div className="rounded-xl grid grid-cols-1 lg:grid-cols-2">
+			<div className="rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-10">
 				<div>
-					<Typography color="black" as="h2" variant="title">
+					<Typography
+						color="black"
+						as="h2"
+						variant="h2"
+						className="font-antic mb-5"
+					>
 						Get in Touch
 					</Typography>
-					<Typography
-						className="mb-10"
-						color="darkGray"
-						as="h2"
-						variant="medium"
-					>
+					<Typography className="mb-10" color="darkGray" as="h2" variant="body">
 						We&apos;re Here to Help—Reach Out with Your Questions or Concerns
 					</Typography>
 				</div>

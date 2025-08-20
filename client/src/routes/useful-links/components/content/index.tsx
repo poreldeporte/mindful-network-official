@@ -7,12 +7,7 @@ const CategoryCard = (useFulLinkSection: UseFulLinkSection) => {
 	return (
 		<article className="bg-white p-10 rounded-xl shadow-sm border border-gray-100">
 			<div className="mb-5 flex items-center space-x-2">
-				<Typography
-					color="black"
-					variant="medium"
-					as="h3"
-					className="font-bold"
-				>
+				<Typography color="black" variant="h3" as="h3" className="font-medium">
 					{useFulLinkSection.sectionTitle}
 				</Typography>
 			</div>
@@ -26,13 +21,13 @@ const CategoryCard = (useFulLinkSection: UseFulLinkSection) => {
 							<CircleChevronRight className="h-6 w-6 text-gray-700" />
 							{type === "internal" ? (
 								<Link href={url} className="pl-1 lg:pl-2">
-									<Typography variant="xsmall" color="black" as="p">
+									<Typography variant="bodySmall" color="black" as="p">
 										{label}
 									</Typography>
 								</Link>
 							) : (
 								<a href={url} className="pl-1 lg:pl-2">
-									<Typography variant="xsmall" color="black" as="p">
+									<Typography variant="bodySmall" color="black" as="p">
 										{label}
 									</Typography>
 								</a>
@@ -74,7 +69,12 @@ export const UseFulLinksContent = ({
 }) => {
 	return (
 		<section className="h-max mx-auto w-11/12 xl:w-3/4 flex flex-col mt-24 lg:mt-48 lg:mb-[100px]">
-			<Typography variant="title" as="h1" color="black" className="mb-5">
+			<Typography
+				variant="h1"
+				as="h1"
+				color="black"
+				className="mb-5 font-antic"
+			>
 				Support Links
 			</Typography>
 			<div className="grid lg:grid-cols-2 gap-5">

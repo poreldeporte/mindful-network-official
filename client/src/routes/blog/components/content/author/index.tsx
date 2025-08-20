@@ -30,13 +30,13 @@ export const Author = ({
 						id="author-section-heading"
 						className="font-bold"
 						as="h3"
-						variant="small"
+						variant="h3"
 						color="black"
 					>
 						{author}
 					</Typography>
 
-					<Typography as="span" variant="xsmall" color="darkGray">
+					<Typography as="span" variant="bodySmall" color="darkGray">
 						Published on{" "}
 						<time dateTime={publishDate} className="font-medium">
 							{formatDateMMDDAAAA(publishDate)}

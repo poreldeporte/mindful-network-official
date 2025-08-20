@@ -1,6 +1,4 @@
 import { Typography } from "@/components/ui";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { ResourcesContainer } from "./ResourcesContainer";
 
 export function About() {
@@ -11,10 +9,10 @@ export function About() {
 		>
 			<div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-end">
 				<Typography
-					className="mb-2 col-span-7"
+					className="mb-2 col-span-7 text-left font-antic"
 					color="black"
 					as="h2"
-					variant="title"
+					variant="h2"
 					id="about-section-heading"
 				>
 					<span className="text-green-500">Mental Health Resources</span>{" "}
@@ -25,7 +23,7 @@ export function About() {
 					className="mb-4 col-span-5"
 					color="black"
 					as="h3"
-					variant="medium"
+					variant="bodySmall"
 				>
 					Access to reliable & reputable mental health care and emotional health
 					resources.
@@ -33,22 +31,6 @@ export function About() {
 			</div>
 
 			<ResourcesContainer />
-
-			<Link
-				href={"/about"}
-				className="lg:mt-4 py-2 w-max px-6 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
-				aria-label="Start your search for mental health resources"
-			>
-				<Typography
-					className="flex items-center gap-2"
-					as="span"
-					variant={"medium"}
-					color="white"
-				>
-					See Why This Means So Much To Us{" "}
-					<ArrowLongRightIcon className="h-7 w-7" />
-				</Typography>
-			</Link>
 		</section>
 	);
 }

@@ -15,7 +15,7 @@ export const Hero = ({ post }: SectionProps) => {
 					className="font-antic mb-2"
 					as="h1"
 					color="black"
-					variant="title"
+					variant="h1"
 				>
 					{post.title}
 				</Typography>
