@@ -1,25 +1,37 @@
+"use client";
+
 import { Typography } from "@/components/ui";
 import { CompanyDetails } from "@/models";
 import Link from "next/link";
+import { FallbackBackground } from "./FallbackBackground";
+import { MainBackground } from "./MainBackground";
+import { useImageLoader } from "@/hooks";
 
 export const Hero = ({
 	companyDetails,
 }: {
 	companyDetails: CompanyDetails;
 }) => {
+	const { isLoading, isLoaded, hasError } = useImageLoader(
+		companyDetails?.heroBackground
+	);
+
+	const showImage = isLoaded && !hasError;
+	const showFallback = isLoading || hasError;
+
 	return (
 		<section
-			className="pt-10 mx-auto h-[80vh] lg:h-[90vh] flex lg:items-center lg:text-center justify-center flex-col"
+			className="pt-10 mx-auto h-[80vh] lg:h-[90vh] flex lg:items-center lg:text-center justify-center flex-col relative overflow-hidden"
 			role="region"
 			aria-labelledby="hero-heading"
-			style={{
-				backgroundImage: `url(${companyDetails.heroBackground})`,
-				backgroundSize: "cover",
-				backgroundPosition: "center",
-				backgroundAttachment: "fixed",
-			}}
 		>
-			<div className="page-width flex flex-col items-start justify-center">
+			{showFallback && (
+				<FallbackBackground imageUrl={companyDetails?.heroBackground} />
+			)}
+
+			{showImage && <MainBackground imageUrl={companyDetails.heroBackground} />}
+
+			<div className="page-width flex flex-col items-start justify-center relative z-10">
 				<Typography
 					id="hero-heading"
 					className="font-antic mb-5 leading-none text-left"

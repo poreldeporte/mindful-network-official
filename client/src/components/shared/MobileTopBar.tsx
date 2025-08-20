@@ -65,7 +65,7 @@ export function MobileTopBar({
 						animate="open"
 						exit="closed"
 						variants={menuVariants}
-						className="absolute top-20 left-0 w-full bg-white p-5 shadow-lg flex flex-col gap-2"
+						className="absolute top-20 left-0 w-full bg-white p-5 shadow-lg flex flex-col gap-2 h-[calc(100vh-88px)] overflow-y-auto"
 					>
 						<nav className="flex flex-col gap-5">
 							<div className="flex flex-col gap-1">
