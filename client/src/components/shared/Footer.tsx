@@ -2,20 +2,20 @@
 
 import { aboutFooter } from "@/lib/constants";
 import { BlogModel, ResourcesKey } from "@/models";
+import { CompanyDetails } from "@/models/company-details.model";
 import { getLatestBlog } from "@/routes/homepage/services";
-import { ChevronUp, Phone, Mail, MapPin } from "lucide-react";
-import {
-	IconBrandX,
-	IconBrandLinkedin,
-	IconBrandInstagram,
-} from "@tabler/icons-react";
-import Image from "next/image";
-import Link from "next/link";
 import { getAllResources } from "@/services";
 import { generateResourceKeys } from "@/utilities";
+import {
+	IconBrandInstagram,
+	IconBrandLinkedin,
+	IconBrandX,
+} from "@tabler/icons-react";
+import { ChevronUp, Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, Typography } from "../ui";
-import { CompanyDetails } from "@/models/company-details.model";
+import { Typography } from "../ui";
 
 interface Props {
 	blogPosts?: BlogModel[];
