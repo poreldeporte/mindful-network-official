@@ -28,7 +28,7 @@ export const CaregiverCoaching = () => {
 					as="p"
 					color="darkGray"
 					variant="bodySmall"
-					className="mt-10"
+					className="mt-5"
 				>
 					Caring for someone with mental health challenges can feel overwhelming
 					and isolating. Our coaching service is here to support you with
