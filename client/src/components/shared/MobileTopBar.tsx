@@ -41,7 +41,7 @@ export function MobileTopBar({
 				{companyDetails?.logo && (
 					<Image
 						alt={companyDetails.logoAlt || "The Mindful Network Logo"}
-						className="w-auto h-12"
+						className="w-auto h-16"
 						src={companyDetails.logo}
 						width={400}
 						height={400}

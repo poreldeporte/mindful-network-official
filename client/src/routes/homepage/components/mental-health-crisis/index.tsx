@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export const MentalHealthCrisis = () => {
 	return (
-		<section className="page-width py-10 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-			<div className="flex flex-col items-start justify-center col-span-1">
+		<section className="page-width my-10 lg:my-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center border border-blue-500">
+			<div className="flex flex-col items-start justify-center col-span-1 p-5">
 				<Typography
 					as="h2"
 					className="font-antic mb-5 leading-none"
@@ -14,7 +14,7 @@ export const MentalHealthCrisis = () => {
 					variant="h2"
 				>
 					In a Mental Health Crisis?{" "}
-					<span className="text-green-500">Start Here</span>
+					<span className="text-blue-500">Start Here</span>
 				</Typography>
 
 				<ul className="list-disc list-inside">
@@ -22,7 +22,7 @@ export const MentalHealthCrisis = () => {
 						<Typography as="span" variant="bodySmall" color="darkGray">
 							<strong>National Suicide Prevention Hotline:</strong>{" "}
 							<a
-								className="font-medium underline underline-offset-4 text-green-500"
+								className="font-medium underline underline-offset-4 text-blue-500"
 								href="tel:988"
 							>
 								988
@@ -33,7 +33,7 @@ export const MentalHealthCrisis = () => {
 						<Typography as="span" variant="bodySmall" color="darkGray">
 							<strong>Crisis Text Line:</strong> Text SHARE to{" "}
 							<a
-								className="font-medium underline underline-offset-4 text-green-500"
+								className="font-medium underline underline-offset-4 text-blue-500"
 								href="sms:741741"
 							>
 								741741
@@ -44,7 +44,7 @@ export const MentalHealthCrisis = () => {
 						<Typography as="span" variant="bodySmall" color="darkGray">
 							<strong>Mobile Crisis Unit:</strong>{" "}
 							<a
-								className="font-medium underline underline-offset-4 text-green-500"
+								className="font-medium underline underline-offset-4 text-blue-500"
 								href="tel:8004357968"
 							>
 								800-435-7968
@@ -66,14 +66,14 @@ export const MentalHealthCrisis = () => {
 					<br />
 					<strong>Half-way there?</strong> Maybe you have an advocate but need
 					some supplemental education. Check out our{" "}
-					<Link className="underline text-green-500" href="/support-links">
+					<Link className="underline text-blue-500" href="/support-links">
 						support links
 					</Link>{" "}
 					here.
 				</Typography>
 			</div>
 
-			<picture className="col-span-1">
+			<picture className="col-span-1 h-[600px] border-l border-blue-500">
 				<Image
 					src={MentalHealthCrisisImage.src}
 					alt="Mental Health Crisis"

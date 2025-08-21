@@ -67,7 +67,7 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 							{companyDetails?.logo && (
 								<Image
 									alt={companyDetails.logoAlt || "The Mindful Network Logo"}
-									className="w-54 h-16 xl:w-56 xl:h-20"
+									className="w-54 h-16 xl:w-56 xl:h-20 object-cover"
 									src={companyDetails.logo}
 									width={200}
 									height={150}
@@ -252,7 +252,7 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 
 				<button
 					onClick={scrollToTop}
-					className="hidden lg:flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
+					className="hidden lg:flex items-center bg-blue-500 hover:bg-blue-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
 				>
 					<Typography variant="bodySmall" as="h3" color="white">
 						Back to top

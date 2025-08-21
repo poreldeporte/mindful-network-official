@@ -48,7 +48,7 @@ export const Hero = ({
 					variant="h1"
 				>
 					A network curated for{" "}
-					<span className="text-green-500 lg:block">your path to healing</span>
+					<span className="lg:block">your path to healing</span>
 				</Typography>
 
 				<Typography

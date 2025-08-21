@@ -5,16 +5,25 @@ import UpToDateInformationImage from "@/assets/images/up-to-date-info.png";
 
 import UserImage from "@/assets/images/user-icon.jpg";
 
+// Mindful OLD Logos
 import MindfulImagotype from "@/assets/images/mindful-logos/mindful-imagotype.png";
 import MindfulIsotype from "@/assets/images/mindful-logos/mindful-isotype.png";
 import MindfulLogo from "@/assets/images/mindful-logos/mindful-logo.png";
 
+// Mindful NEW Logos
+import MindfulColImagotypeBlue from "@/assets/images/mindful-logos/mindful-col-imagotype-blue.png";
+import MindfulColImagotypeWhite from "@/assets/images/mindful-logos/mindful-col-imagotype-white.png";
+import MindfulIsotypeBlue from "@/assets/images/mindful-logos/mindful-isotype-blue.png";
+import MindfulIsotypeWhite from "@/assets/images/mindful-logos/mindful-isotype-white.png";
+import MindfulRowImagotypeBlue from "@/assets/images/mindful-logos/mindful-row-imagotype-blue.png";
+import MindfulRowImagotypeWhite from "@/assets/images/mindful-logos/mindful-row-imagotype-white.png";
+
 import ExploreCuratedResourcesImage from "@/assets/images/explore-curated-resources.webp";
 import JoinOurNetworkImage from "@/assets/images/join-our-network.webp";
+import OurMissionImage from "@/assets/images/our-mission.webp";
 
-import AboutImage from "@/assets/images/mindful-about-image.webp";
+import AboutImage from "@/assets/images/about/about.webp";
 
-import BlogsHeroImage from "@/assets/images/blog/blog-hero.webp";
 import AvailableArticlesImage from "@/assets/images/blog/blog-article.webp";
 import SearchCtaBlogImage from "@/assets/images/blog/blog-assistance.webp";
 
@@ -27,8 +36,12 @@ export {
 	MindfulImagotype,
 	MindfulIsotype,
 	MindfulLogo,
-	AboutImage,
-	BlogsHeroImage,
+	MindfulColImagotypeBlue,
+	MindfulColImagotypeWhite,
+	MindfulIsotypeBlue,
+	MindfulIsotypeWhite,
+	MindfulRowImagotypeBlue,
+	MindfulRowImagotypeWhite,
 	AvailableArticlesImage,
 	SearchCtaBlogImage,
 	MentalHealthCrisisImage,
@@ -39,4 +52,6 @@ export {
 	UpToDateInformationImage,
 	ExploreCuratedResourcesImage,
 	JoinOurNetworkImage,
+	OurMissionImage,
+	AboutImage,
 };

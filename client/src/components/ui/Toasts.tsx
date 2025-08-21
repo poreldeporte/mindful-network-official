@@ -80,7 +80,7 @@ const ToastContainer = () => {
 
 	const getTypeClasses = (type: ToastType): string => {
 		return {
-			success: "text-green-500",
+			success: "text-blue-500",
 			info: "text-blue-500",
 			warning: "text-orange-400",
 			danger: "text-red-500",

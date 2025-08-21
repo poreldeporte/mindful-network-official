@@ -15,7 +15,7 @@ export function About() {
 					variant="h2"
 					id="about-section-heading"
 				>
-					<span className="text-green-500">Mental Health Resources</span>{" "}
+					<span className="text-blue-500">Mental Health Resources</span>{" "}
 					<span className="block" />
 					to build your support network
 				</Typography>

@@ -11,7 +11,11 @@ export default async function EventsPage() {
 	try {
 		const { privateToken, organizationId } = EventbriteKeys;
 		const eventbrite = new Eventbrite(privateToken as string);
-		const events = await eventbrite.getAllEvents(organizationId as string);
+		const eventsData = await eventbrite.getAllEvents(organizationId as string);
+		const events = {
+			...eventsData,
+			events: eventsData.events.reverse(),
+		};
 
 		return (
 			<>

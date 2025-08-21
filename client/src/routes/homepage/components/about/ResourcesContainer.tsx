@@ -102,7 +102,7 @@ export const ResourcesContainer = () => {
 					</ul>
 
 					<Link
-						className="text-green-500 underline underline-offset-4 flex items-center gap-2"
+						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
 						href="/about"
 					>
 						Learn more <ArrowLongRightIcon className="w-4 h-4" />
@@ -167,7 +167,7 @@ export const ResourcesContainer = () => {
 					</Typography>
 
 					<Link
-						className="text-green-500 underline underline-offset-4 flex items-center gap-2"
+						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
 						href="/about"
 					>
 						Learn more <ArrowLongRightIcon className="w-4 h-4" />
@@ -254,7 +254,7 @@ export const ResourcesContainer = () => {
 					</ul>
 
 					<Link
-						className="text-green-500 underline underline-offset-4 flex items-center gap-2"
+						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
 						href="/about"
 					>
 						Learn more <ArrowLongRightIcon className="w-4 h-4" />

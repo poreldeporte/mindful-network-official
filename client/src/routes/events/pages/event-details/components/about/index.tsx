@@ -153,7 +153,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 											<div className="flex flex-col items-center">
 												<button
 													onClick={() => shareVia("whatsapp")}
-													className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mb-1 hover:bg-green-600"
+													className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mb-1 hover:bg-blue-600"
 													aria-label="Share on WhatsApp"
 												>
 													<svg
@@ -243,7 +243,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 												readOnly
 											/>
 											<button
-												className="bg-green-500 text-white rounded-r-md px-4 hover:bg-green-600 flex items-center gap-1"
+												className="bg-blue-500 text-white rounded-r-md px-4 hover:bg-blue-600 flex items-center gap-1"
 												onClick={() => {
 													navigator.clipboard.writeText(window.location.href);
 												}}
@@ -337,7 +337,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					</Typography>
 					<Button
 						variant="bodySmall"
-						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative w-full mt-5"
+						className="py-2 rounded-full px-4 bg-blue-500 hover:bg-blue-600 relative w-full mt-5"
 						form="outline"
 					>
 						<a

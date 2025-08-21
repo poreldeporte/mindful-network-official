@@ -31,8 +31,8 @@ export const Badge = ({
 			isSelected ? "bg-orange-700 text-white" : "bg-transparent text-black"
 		} border-orange-700`,
 		green: `${
-			isSelected ? "bg-green-600 text-white" : "bg-transparent text-black"
-		} border-green-600`,
+			isSelected ? "bg-blue-600 text-white" : "bg-transparent text-black"
+		} border-blue-600`,
 		blue: `${
 			isSelected ? "bg-blue-600 text-white" : "bg-transparent text-black"
 		} border-blue-600`,

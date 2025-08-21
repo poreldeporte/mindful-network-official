@@ -223,7 +223,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 					Get in touch with <span className="block" />
 					<span
 						style={{ textTransform: "capitalize" }}
-						className="text-green-500 font-antic"
+						className="text-blue-500 font-antic"
 					>
 						{name.toLowerCase()}
 					</span>

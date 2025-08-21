@@ -121,7 +121,7 @@ export function FileUploadContainer() {
 				</div>
 				{errorMessage && <p className="text-orange-500 mt-4">{errorMessage}</p>}
 				{successMessage && (
-					<p className="text-green-500 mt-4">{successMessage}</p>
+					<p className="text-blue-500 mt-4">{successMessage}</p>
 				)}
 			</form>
 		</section>

@@ -24,7 +24,7 @@ const colorClasses: Record<ColorType, string> = {
 	white: "text-white",
 	black: "text-[#3C3D42]",
 	blue: "text-blue-500",
-	green: "text-green-500",
+	green: "text-blue-500",
 	darkGray: "text-[#3C3D42]",
 	lightGray: "text-gray-400",
 };

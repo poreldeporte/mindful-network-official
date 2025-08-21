@@ -62,7 +62,7 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 
 							<Button
 								variant="bodySmall"
-								className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
+								className="py-2 rounded-full px-4 bg-blue-500 hover:bg-blue-600 relative"
 								form="outline"
 							>
 								<a

@@ -219,7 +219,7 @@ export function MasonryGrid({ images }: Props) {
 			{/* <div className="flex items-center justify-end">
 				<Button
 					variant="bodySmall"
-					className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"
+					className="py-2 rounded-full px-4 bg-blue-500 hover:bg-blue-600"
 					form="primary"
 					onClick={() => {
 						setIsVisible(true);

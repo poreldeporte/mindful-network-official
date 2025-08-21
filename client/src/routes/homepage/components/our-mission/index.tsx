@@ -1,11 +1,20 @@
 import { Typography } from "@/components/ui";
-import { MindfulImagotype } from "@/lib/images";
+import { OurMissionImage } from "@/lib/images";
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 
 export const OurMission = () => {
 	return (
-		<section className="page-width py-10 lg:py-24 grid lg:grid-cols-2 ">
-			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0">
+		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 border border-blue-500">
+			<div className="h-[600px] overflow-hidden border-r border-blue-500">
+				<Image
+					src={OurMissionImage}
+					alt="The Mindful Network Our Mission"
+					className="w-full h-full object-cover object-center"
+				/>
+			</div>
+			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-5">
 				<Typography
 					as="h2"
 					className="font-antic mb-2.5 leading-none pt-0 lg:pt-10"
@@ -36,14 +45,13 @@ export const OurMission = () => {
 					mental health professionals, and additional resources to guide you
 					through every step of your journey.
 				</Typography>
-			</div>
 
-			<div className="max-h-max overflow-hidden">
-				<Image
-					src={MindfulImagotype}
-					alt="The Mindful Network Imagotype"
-					className="w-full h-[400px] lg:h-[500px] object-contain object-center"
-				/>
+				<Link
+					className="text-blue-500 underline underline-offset-4 flex items-center gap-2 mt-5"
+					href="/about"
+				>
+					Learn more <ArrowLongRightIcon className="w-4 h-4" />
+				</Link>
 			</div>
 		</section>
 	);

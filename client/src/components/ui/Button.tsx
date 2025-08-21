@@ -26,22 +26,22 @@ export function Button({
 }: Props) {
 	const getButtonStyles = () => {
 		if (isSelected) {
-			return "bg-green-500 hover:bg-green-700 text-white";
+			return "bg-blue-500 hover:bg-blue-700 text-white";
 		}
 
 		switch (form) {
 			case "primary":
-				return "bg-green-500 hover:bg-green-700 text-white";
+				return "bg-blue-500 hover:bg-blue-700 text-white";
 			case "secondary":
 				return "bg-blue-500 hover:bg-blue-700 text-white";
 			case "outline":
-				return "bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white group";
+				return "bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white group";
 			case "outline-blue":
 				return "bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white group";
 			case "outline-white":
 				return "bg-transparent border border-white text-white hover:bg-white hover:text-black group";
 			default:
-				return "bg-green-500 hover:bg-green-700 text-white";
+				return "bg-blue-500 hover:bg-blue-700 text-white";
 		}
 	};
 

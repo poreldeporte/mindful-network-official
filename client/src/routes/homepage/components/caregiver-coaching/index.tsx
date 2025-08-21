@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export const CaregiverCoaching = () => {
 	return (
-		<section className="page-width py-10 lg:py-24 grid lg:grid-cols-2 gap-7">
-			<div className="flex flex-col justify-center w-full mb-10">
+		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 gap-7 border border-blue-500">
+			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-5">
 				<Typography
 					as="h2"
 					className="font-antic mb-2.5 leading-none"
@@ -49,7 +49,7 @@ export const CaregiverCoaching = () => {
 				</a>
 			</div>
 
-			<div className="max-h-max overflow-hidden">
+			<div className="h-[600px] overflow-hidden border-l border-blue-500">
 				<Image
 					src={CoachingAndSupportImage}
 					alt="Caregiver Coaching"

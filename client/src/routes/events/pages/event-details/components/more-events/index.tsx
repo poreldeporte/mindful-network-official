@@ -52,7 +52,7 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 						<div className="flex gap-2">
 							<Button
 								variant="bodySmall"
-								className="p-2 rounded-full bg-green-400 hover:bg-green-600"
+								className="p-2 rounded-full bg-blue-400 hover:bg-blue-600"
 								onClick={prevSlide}
 							>
 								<svg
@@ -71,7 +71,7 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 							</Button>
 							<Button
 								variant="bodySmall"
-								className="p-2 rounded-full bg-green-400 hover:bg-green-600"
+								className="p-2 rounded-full bg-blue-400 hover:bg-blue-600"
 								onClick={nextSlide}
 							>
 								<svg
@@ -137,7 +137,7 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 							<button
 								key={index}
 								className={`w-3 h-3 mx-1 rounded-full ${
-									index === currentIndex ? "bg-green-500" : "bg-gray-300"
+									index === currentIndex ? "bg-blue-500" : "bg-gray-300"
 								}`}
 								onClick={() => setCurrentIndex(index)}
 							/>

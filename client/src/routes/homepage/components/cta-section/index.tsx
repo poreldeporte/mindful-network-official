@@ -68,7 +68,7 @@ export function CTASection() {
 				as="h2"
 				variant="h2"
 				color="black"
-				className="text-green-500 mb-5 font-antic"
+				className="text-blue-500 mb-5 font-antic"
 				id="cta-section-heading"
 			>
 				Take the first step <span className="block"></span>

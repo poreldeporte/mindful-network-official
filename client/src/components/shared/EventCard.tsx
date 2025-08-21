@@ -75,7 +75,7 @@ const EventCard = ({
 				</motion.div>
 
 				<div className="mt-2.5">
-					<span className="text-green-500 text-[14px]">
+					<span className="text-blue-500 text-[14px]">
 						{formatEventDate(event.start.utc)}
 					</span>
 					<h2 className="font-bold text-sm leading-tight">{event.name.text}</h2>

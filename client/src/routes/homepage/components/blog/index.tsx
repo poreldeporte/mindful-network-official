@@ -130,21 +130,21 @@ export const BlogContainer = ({ blogPosts }: BlogProps) => {
 				id="blog-section-heading"
 			>
 				Expert articles and resources <span className="block"></span>
-				<span className="text-green-500">to support your journey</span>
+				<span className="text-blue-500">to support your journey</span>
 			</Typography>
 
 			<div className="flex flex-col gap-5">
 				<div className="flex gap-2 justify-end pr-5 xl:pr-[70px] 3xl:pr-[140px]">
 					<button
 						type="button"
-						className="blog-swiper-prev group p-4 transition-all rounded-full border border-green-400 bg-transparent hover:bg-green-600 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-700"
+						className="blog-swiper-prev group p-4 transition-all rounded-full border border-blue-400 bg-transparent hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700"
 						aria-label="Previous blogs"
 					>
 						<ArrowLeft className="text-black group-hover:text-white" />
 					</button>
 					<button
 						type="button"
-						className="blog-swiper-next group p-4 transition-all rounded-full border border-green-400 bg-transparent hover:bg-green-600 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-700"
+						className="blog-swiper-next group p-4 transition-all rounded-full border border-blue-400 bg-transparent hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700"
 						aria-label="Next blogs"
 					>
 						<ArrowRight className="text-black group-hover:text-white" />
