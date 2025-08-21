@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const MentalHealthCrisis = () => {
 	return (
-		<section className="page-width py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+		<section className="page-width py-10 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 			<div className="flex flex-col items-start justify-center col-span-1">
 				<Typography
 					as="h2"
@@ -20,17 +20,35 @@ export const MentalHealthCrisis = () => {
 				<ul className="list-disc list-inside">
 					<li>
 						<Typography as="span" variant="bodySmall" color="darkGray">
-							<strong>National Suicide Prevention Hotline:</strong> 988
+							<strong>National Suicide Prevention Hotline:</strong>{" "}
+							<a
+								className="font-medium underline underline-offset-4 text-green-500"
+								href="tel:988"
+							>
+								988
+							</a>
 						</Typography>
 					</li>
 					<li>
 						<Typography as="span" variant="bodySmall" color="darkGray">
-							<strong>Crisis Text Line :</strong> Text SHARE to 741741
+							<strong>Crisis Text Line:</strong> Text SHARE to{" "}
+							<a
+								className="font-medium underline underline-offset-4 text-green-500"
+								href="sms:741741"
+							>
+								741741
+							</a>
 						</Typography>
 					</li>
 					<li>
 						<Typography as="span" variant="bodySmall" color="darkGray">
-							<strong>Mobile Crisis Unit:</strong> 800-435-7968
+							<strong>Mobile Crisis Unit:</strong>{" "}
+							<a
+								className="font-medium underline underline-offset-4 text-green-500"
+								href="tel:8004357968"
+							>
+								800-435-7968
+							</a>
 						</Typography>
 					</li>
 				</ul>

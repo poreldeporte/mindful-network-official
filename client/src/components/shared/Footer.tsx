@@ -250,16 +250,15 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 					/>
 				</a>
 
-				<Button
+				<button
 					onClick={scrollToTop}
 					className="hidden lg:flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
-					variant="bodySmall"
 				>
 					<Typography variant="bodySmall" as="h3" color="white">
 						Back to top
 					</Typography>
 					<ChevronUp className="h-8 w-8 text-white" />
-				</Button>
+				</button>
 			</div>
 		</footer>
 	);

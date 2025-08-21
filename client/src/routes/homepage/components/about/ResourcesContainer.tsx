@@ -5,6 +5,7 @@ import {
 	UpToDateInformationImage,
 } from "@/lib/images";
 import Image from "next/image";
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export const ResourcesContainer = () => {
@@ -18,7 +19,7 @@ export const ResourcesContainer = () => {
 				className="grid grid-cols-1 xl:grid-cols-2 items-center lg:gap-10"
 				aria-labelledby={`benefit-title-Trusted and Verified Resources`}
 			>
-				<div className="xl:order-1 py-10 lg:p-10">
+				<div className="xl:order-1 py-5 lg:p-10">
 					<Typography
 						className="mb-5 font-semibold font-antic"
 						color="black"
@@ -29,12 +30,7 @@ export const ResourcesContainer = () => {
 						Trusted and Verified Resources
 					</Typography>
 
-					<Typography
-						className="mb-2"
-						color="darkGray"
-						as="p"
-						variant="bodySmall"
-					>
+					<Typography color="darkGray" as="p" variant="bodySmall">
 						We thoroughly vet and verify every provider in our network, ensuring
 						you only have access to reputable and reliable options to tackle
 						mental health conditions.
@@ -42,7 +38,7 @@ export const ResourcesContainer = () => {
 						<br />
 						Find:
 					</Typography>
-					<ul className="list-disc list-inside mb-10">
+					<ul className="list-disc list-inside mb-5 lg:mb-10">
 						<li>
 							<Typography
 								className="mb-2"
@@ -106,17 +102,17 @@ export const ResourcesContainer = () => {
 					</ul>
 
 					<Link
-						className="text-green-500 underline underline-offset-4"
+						className="text-green-500 underline underline-offset-4 flex items-center gap-2"
 						href="/about"
 					>
-						Learn more
+						Learn more <ArrowLongRightIcon className="w-4 h-4" />
 					</Link>
 				</div>
 
 				<Image
 					src={TrustedAndVerifiedResourcesImage}
 					alt="Trusted and Verified Resources"
-					className="max-h-[550px] object-cover object-center lg:p-5"
+					className="max-h-[550px] object-cover object-center"
 				/>
 			</article>
 
@@ -124,7 +120,7 @@ export const ResourcesContainer = () => {
 				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-10"
 				aria-labelledby={`benefit-title-Up-to-Date Information`}
 			>
-				<div className="py-10 lg:p-10">
+				<div className="py-5 lg:p-10">
 					<Typography
 						className="mb-5 font-semibold font-antic"
 						color="black"
@@ -135,7 +131,7 @@ export const ResourcesContainer = () => {
 						Up-to-Date Information
 					</Typography>
 
-					<ul className="list-disc list-inside">
+					<ul className="list-disc list-inside mb-5 lg:mb-10">
 						<li>
 							<Typography
 								className="mb-2"
@@ -171,15 +167,15 @@ export const ResourcesContainer = () => {
 					</Typography>
 
 					<Link
-						className="text-green-500 underline underline-offset-4"
+						className="text-green-500 underline underline-offset-4 flex items-center gap-2"
 						href="/about"
 					>
-						Learn more
+						Learn more <ArrowLongRightIcon className="w-4 h-4" />
 					</Link>
 				</div>
 
 				<Image
-					className="max-h-[550px] object-cover object-center lg:p-5"
+					className="max-h-[550px] object-cover object-center"
 					src={UpToDateInformationImage}
 					alt="Up-to-Date Information"
 				/>
@@ -189,7 +185,7 @@ export const ResourcesContainer = () => {
 				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-10"
 				aria-labelledby={`benefit-title-Personalized Search Options`}
 			>
-				<div className="xl:order-1 py-10 lg:p-10">
+				<div className="xl:order-1 py-5 lg:p-10">
 					<Typography
 						className="mb-5 font-semibold font-antic"
 						color="black"
@@ -214,7 +210,7 @@ export const ResourcesContainer = () => {
 						<br />
 						Search By:
 					</Typography>
-					<ul className="list-disc list-inside mb-10">
+					<ul className="list-disc list-inside mb-5 lg:mb-10">
 						<li>
 							<Typography
 								className="mb-2"
@@ -258,15 +254,15 @@ export const ResourcesContainer = () => {
 					</ul>
 
 					<Link
-						className="text-green-500 underline underline-offset-4"
+						className="text-green-500 underline underline-offset-4 flex items-center gap-2"
 						href="/about"
 					>
-						Learn more
+						Learn more <ArrowLongRightIcon className="w-4 h-4" />
 					</Link>
 				</div>
 
 				<Image
-					className="max-h-[550px] object-cover object-center lg:p-5"
+					className="max-h-[550px] object-contain object-center"
 					src={PersonalizedSearchOptionsImage}
 					alt="Personalized Search Options"
 				/>

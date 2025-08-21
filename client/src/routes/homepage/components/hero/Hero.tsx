@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@/components/ui";
+import { Typography, Button } from "@/components/ui";
 import { CompanyDetails } from "@/models";
 import Link from "next/link";
 import { FallbackBackground } from "./FallbackBackground";
@@ -55,10 +55,11 @@ export const Hero = ({
 
 				<Link
 					href={"/search"}
-					className="mt-10 py-2 w-max px-4 rounded-full border border-white hover:bg-white hover:text-black transition-colors text-white text-center text-[0.875rem] leading-relaxed sm:text-[1rem] md:text-[1.0625rem] lg:text-[1.125rem]"
 					aria-label="Start your search for mental health resources"
 				>
-					Start Search
+					<Button form="outline-white" variant="body" className="mt-10">
+						Start Search
+					</Button>
 				</Link>
 			</div>
 		</section>

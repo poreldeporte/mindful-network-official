@@ -1,10 +1,10 @@
-import { Typography } from "@/components/ui";
+import { Typography, Button } from "@/components/ui";
 import { CoachingAndSupportImage } from "@/lib/images";
 import Image from "next/image";
 
 export const CaregiverCoaching = () => {
 	return (
-		<section className="page-width py-24 grid lg:grid-cols-2 gap-7">
+		<section className="page-width py-10 lg:py-24 grid lg:grid-cols-2 gap-7">
 			<div className="flex flex-col justify-center w-full mb-10">
 				<Typography
 					as="h2"
@@ -17,7 +17,7 @@ export const CaregiverCoaching = () => {
 
 				<Typography
 					as="p"
-					className="font-bold mb-2.5"
+					className="font-bold mb-2.5 font-antic"
 					color="black"
 					variant="body"
 				>
@@ -41,12 +41,11 @@ export const CaregiverCoaching = () => {
 				<a
 					href="mailto:contact@themindfulnetwork.com"
 					target="_blank"
-					className="mt-10 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
 					aria-label="Start your search for mental health resources"
 				>
-					<Typography as="span" variant={"bodySmall"} color="white">
+					<Button form="outline" variant="bodySmall" className="mt-10">
 						Schedule Your Free Call
-					</Typography>
+					</Button>
 				</a>
 			</div>
 

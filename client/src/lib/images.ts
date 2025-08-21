@@ -1,7 +1,7 @@
 import CoachingAndSupportImage from "@/assets/images/coaching-and-support.webp";
-import PersonalizedSearchOptionsImage from "@/assets/images/personalized-search-options.webp";
-import TrustedAndVerifiedResourcesImage from "@/assets/images/trusted-and-verified-resources.webp";
-import UpToDateInformationImage from "@/assets/images/up-to-date-information.webp";
+import PersonalizedSearchOptionsImage from "@/assets/images/personalized-search.png";
+import TrustedAndVerifiedResourcesImage from "@/assets/images/trusted-resources.png";
+import UpToDateInformationImage from "@/assets/images/up-to-date-info.png";
 
 import UserImage from "@/assets/images/user-icon.jpg";
 

@@ -1,4 +1,4 @@
-import { Badge, Typography } from "@/components/ui";
+import { Badge, Typography, Button } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
@@ -133,12 +133,15 @@ const PsychologistCard = ({
 			<div className="flex justify-end items-end h-full mt-2">
 				<Link
 					href={`/professional/${slug}`}
-					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
-					<Typography as="span" color="white" variant="bodySmall">
+					<Button
+						form="outline-blue"
+						variant="bodySmall"
+						className="w-full md:w-max"
+					>
 						View profile
-					</Typography>
+					</Button>
 				</Link>
 			</div>
 		</li>
