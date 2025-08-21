@@ -1,19 +1,38 @@
 import "./hero.css";
+import { HeroBackground } from "@/models";
 
 interface FallbackBackgroundProps {
-	imageUrl?: string;
+	heroBackground?: HeroBackground;
 }
 
-export const FallbackBackground = ({ imageUrl }: FallbackBackgroundProps) => {
+export const FallbackBackground = ({
+	heroBackground,
+}: FallbackBackgroundProps) => {
 	return (
 		<div className="absolute inset-0">
-			{imageUrl && (
+			{heroBackground?.url && (
 				<div
 					className="absolute inset-0 hero-fallback-blur"
 					style={{
-						backgroundImage: `url(${imageUrl})`,
+						backgroundImage:
+							heroBackground.mediaType === "image"
+								? `url(${heroBackground.url})`
+								: "none",
 						backgroundSize: "cover",
 						backgroundPosition: "center",
+					}}
+				/>
+			)}
+
+			{heroBackground?.mediaType === "video" && heroBackground.url && (
+				<video
+					src={heroBackground.url}
+					muted
+					loop
+					playsInline
+					className="absolute inset-0 w-full h-full object-cover hero-fallback-blur"
+					style={{
+						objectPosition: "center",
 					}}
 				/>
 			)}

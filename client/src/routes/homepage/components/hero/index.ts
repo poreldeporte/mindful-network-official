@@ -1,3 +1,4 @@
 export { FallbackBackground } from "./FallbackBackground";
 export { Hero } from "./Hero";
-export { MainBackground } from "./MainBackground";
+export { ImageBackground } from "./MainBackground";
+export { VideoBackground } from "./VideoBackground";

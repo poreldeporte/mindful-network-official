@@ -4,20 +4,22 @@ import { Typography, Button } from "@/components/ui";
 import { CompanyDetails } from "@/models";
 import Link from "next/link";
 import { FallbackBackground } from "./FallbackBackground";
-import { MainBackground } from "./MainBackground";
-import { useImageLoader } from "@/hooks";
+import { ImageBackground } from "./MainBackground";
+import { VideoBackground } from "./VideoBackground";
+import { useMediaLoader } from "@/hooks";
 
 export const Hero = ({
 	companyDetails,
 }: {
 	companyDetails: CompanyDetails;
 }) => {
-	const { isLoading, isLoaded, hasError } = useImageLoader(
+	const { isLoading, isLoaded, hasError } = useMediaLoader(
 		companyDetails?.heroBackground
 	);
 
-	const showImage = isLoaded && !hasError;
+	const showMedia = isLoaded && !hasError;
 	const showFallback = isLoading || hasError;
+	const isVideo = companyDetails?.heroBackground?.mediaType === "video";
 
 	return (
 		<section
@@ -26,10 +28,16 @@ export const Hero = ({
 			aria-labelledby="hero-heading"
 		>
 			{showFallback && (
-				<FallbackBackground imageUrl={companyDetails?.heroBackground} />
+				<FallbackBackground heroBackground={companyDetails?.heroBackground} />
 			)}
 
-			{showImage && <MainBackground imageUrl={companyDetails.heroBackground} />}
+			{showMedia && isVideo && (
+				<VideoBackground videoUrl={companyDetails.heroBackground.url} />
+			)}
+
+			{showMedia && !isVideo && (
+				<ImageBackground imageUrl={companyDetails.heroBackground.url} />
+			)}
 
 			<div className="page-width flex flex-col items-start justify-center relative z-10">
 				<Typography

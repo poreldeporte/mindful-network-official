@@ -5,10 +5,15 @@ interface SocialLink {
 	url: string;
 }
 
+export interface HeroBackground {
+	mediaType: "image" | "video";
+	url: string;
+}
+
 export interface CompanyDetails {
 	logo: string;
 	logoAlt?: string;
-	heroBackground: string;
+	heroBackground: HeroBackground;
 	email: string;
 	address: string;
 	phoneNumber: string;

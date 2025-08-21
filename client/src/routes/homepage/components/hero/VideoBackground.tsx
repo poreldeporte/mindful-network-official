@@ -4,17 +4,17 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useRef } from "react";
 import "./hero.css";
 
-interface ImageBackgroundProps {
-	imageUrl: string;
+interface VideoBackgroundProps {
+	videoUrl: string;
 }
 
-export const ImageBackground = ({ imageUrl }: ImageBackgroundProps) => {
+export const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
 	const { scrollY } = useScroll();
 	const elementRef = useRef<HTMLDivElement>(null);
 
 	useMotionValueEvent(scrollY, "change", (latest) => {
 		if (elementRef.current) {
-			const rate = latest * -0.25;
+			const rate = latest * -0.3;
 			elementRef.current.style.transform = `translateY(${rate}px)`;
 		}
 	});
@@ -22,11 +22,8 @@ export const ImageBackground = ({ imageUrl }: ImageBackgroundProps) => {
 	return (
 		<motion.div
 			ref={elementRef}
-			className="absolute inset-0 hero-background hero-fade-in"
+			className="absolute inset-0 hero-background hero-fade-in dark-overlay"
 			style={{
-				backgroundImage: `url(${imageUrl})`,
-				backgroundSize: "cover",
-				backgroundPosition: "center",
 				height: "110vh",
 			}}
 			initial={{ opacity: 0, scale: 1.05 }}
@@ -35,6 +32,18 @@ export const ImageBackground = ({ imageUrl }: ImageBackgroundProps) => {
 				duration: 0.5,
 				ease: "easeOut",
 			}}
-		/>
+		>
+			<video
+				src={videoUrl}
+				autoPlay
+				muted
+				loop
+				playsInline
+				className="w-full h-full object-cover"
+				style={{
+					objectPosition: "center",
+				}}
+			/>
+		</motion.div>
 	);
 };

@@ -11,7 +11,10 @@ export const getCompanyDetailsAdapter = (
 	id: companyDetails._id,
 	logo: companyDetails.logo,
 	logoAlt: companyDetails.logoAlt,
-	heroBackground: companyDetails.heroBackground,
+	heroBackground: {
+		mediaType: companyDetails.heroBackground.mediaType,
+		url: companyDetails.heroBackground.url,
+	},
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,
 	address: companyDetails.address,

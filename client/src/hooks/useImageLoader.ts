@@ -1,16 +1,17 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { HeroBackground } from "@/models";
 
-interface UseImageLoaderReturn {
+interface UseMediaLoaderReturn {
 	isLoading: boolean;
 	isLoaded: boolean;
 	hasError: boolean;
 }
 
-export const useImageLoader = (
-	imageUrl: string | undefined
-): UseImageLoaderReturn => {
+export const useMediaLoader = (
+	heroBackground: HeroBackground | undefined
+): UseMediaLoaderReturn => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [hasError, setHasError] = useState(false);
@@ -21,7 +22,7 @@ export const useImageLoader = (
 			clearTimeout(timeoutRef.current);
 		}
 
-		if (!imageUrl) {
+		if (!heroBackground?.url) {
 			setIsLoading(false);
 			setHasError(true);
 			return;
@@ -31,34 +32,68 @@ export const useImageLoader = (
 		setIsLoaded(false);
 		setHasError(false);
 
-		const img = new Image();
+		if (heroBackground.mediaType === "image") {
+			// Handle image loading
+			const img = new Image();
 
-		img.onload = () => {
-			timeoutRef.current = setTimeout(() => {
-				setIsLoading(false);
-				setIsLoaded(true);
-				setHasError(false);
-			}, 100);
-		};
+			img.onload = () => {
+				timeoutRef.current = setTimeout(() => {
+					setIsLoading(false);
+					setIsLoaded(true);
+					setHasError(false);
+				}, 100);
+			};
 
-		img.onerror = () => {
-			timeoutRef.current = setTimeout(() => {
-				setIsLoading(false);
-				setIsLoaded(false);
-				setHasError(true);
-			}, 100);
-		};
+			img.onerror = () => {
+				timeoutRef.current = setTimeout(() => {
+					setIsLoading(false);
+					setIsLoaded(false);
+					setHasError(true);
+				}, 100);
+			};
 
-		img.src = imageUrl;
+			img.src = heroBackground.url;
 
-		return () => {
-			img.onload = null;
-			img.onerror = null;
-			if (timeoutRef.current) {
-				clearTimeout(timeoutRef.current);
-			}
-		};
-	}, [imageUrl]);
+			return () => {
+				img.onload = null;
+				img.onerror = null;
+				if (timeoutRef.current) {
+					clearTimeout(timeoutRef.current);
+				}
+			};
+		} else if (heroBackground.mediaType === "video") {
+			// Handle video loading
+			const video = document.createElement("video");
+			video.muted = true;
+			video.preload = "metadata";
+
+			video.onloadedmetadata = () => {
+				timeoutRef.current = setTimeout(() => {
+					setIsLoading(false);
+					setIsLoaded(true);
+					setHasError(false);
+				}, 100);
+			};
+
+			video.onerror = () => {
+				timeoutRef.current = setTimeout(() => {
+					setIsLoading(false);
+					setIsLoaded(false);
+					setHasError(true);
+				}, 100);
+			};
+
+			video.src = heroBackground.url;
+
+			return () => {
+				video.onloadedmetadata = null;
+				video.onerror = null;
+				if (timeoutRef.current) {
+					clearTimeout(timeoutRef.current);
+				}
+			};
+		}
+	}, [heroBackground]);
 
 	return {
 		isLoading,

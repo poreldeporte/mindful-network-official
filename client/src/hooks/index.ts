@@ -1,1 +1,1 @@
-export { useImageLoader } from "./useImageLoader";
+export { useMediaLoader } from "./useImageLoader";

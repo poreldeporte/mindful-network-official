@@ -6,7 +6,10 @@ export const getCompanyDetails = async (): Promise<CompanyDetails | null> => {
 	try {
 		const allCompanyDetailsQuery = `*[_type == "companyDetails"][0] {
 			_id,
-			"heroBackground": heroBackground.asset->url,
+			"heroBackground": {
+				"imageUrl": heroBackground.image.asset->url,
+				"videoUrl": heroBackground.video.asset->url
+			},
 			"logo": logo.asset->url,
 			"logoAlt": logo.alt,
 			email,
@@ -16,6 +19,16 @@ export const getCompanyDetails = async (): Promise<CompanyDetails | null> => {
 		}`;
 
 		const companyDetails = await sanityClient.fetch(allCompanyDetailsQuery);
+
+		if (companyDetails?.heroBackground) {
+			const { imageUrl, videoUrl } = companyDetails.heroBackground;
+
+			companyDetails.heroBackground = {
+				mediaType: imageUrl ? "image" : "video",
+				url: imageUrl || videoUrl,
+			};
+		}
+
 		const companyDetailsAdapter = getCompanyDetailsAdapter(companyDetails);
 		return companyDetailsAdapter;
 	} catch (error) {
