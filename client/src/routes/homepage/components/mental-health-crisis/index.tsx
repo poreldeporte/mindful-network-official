@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export const MentalHealthCrisis = () => {
 	return (
-		<section className="page-width my-10 lg:my-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center border border-blue-500">
-			<div className="flex flex-col items-start justify-center col-span-1 p-5">
+		<section className="page-width my-10 lg:my-24 grid grid-cols-1 lg:grid-cols-2 items-center border border-blue-500">
+			<div className="flex flex-col items-start justify-center col-span-1 p-10">
 				<Typography
 					as="h2"
 					className="font-antic mb-5 leading-none"
@@ -73,7 +73,7 @@ export const MentalHealthCrisis = () => {
 				</Typography>
 			</div>
 
-			<picture className="col-span-1 h-[600px] border-l border-blue-500">
+			<picture className="col-span-1 h-[600px] border-t md:border-t-0 md:border-l border-blue-500">
 				<Image
 					src={MentalHealthCrisisImage.src}
 					alt="Mental Health Crisis"

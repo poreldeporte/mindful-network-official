@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export const CaregiverCoaching = () => {
 	return (
-		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 gap-7 border border-blue-500">
-			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-5">
+		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 border border-blue-500 max-h-[700px] overflow-hidden">
+			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-10">
 				<Typography
 					as="h2"
 					className="font-antic mb-2.5 leading-none"
@@ -41,19 +41,19 @@ export const CaregiverCoaching = () => {
 				<a
 					href="mailto:contact@themindfulnetwork.com"
 					target="_blank"
+					className="mt-10 w-max"
 					aria-label="Start your search for mental health resources"
 				>
-					<Button form="outline" variant="bodySmall" className="mt-10">
+					<Button form="outline" variant="bodySmall">
 						Schedule Your Free Call
 					</Button>
 				</a>
 			</div>
-
-			<div className="h-[600px] overflow-hidden border-l border-blue-500">
+			<div className="max-h-[700px] overflow-hidden border-t md:border-t-0  md:border-l border-blue-500">
 				<Image
 					src={CoachingAndSupportImage}
 					alt="Caregiver Coaching"
-					className="w-full h-[400px] lg:h-[650px] object-cover object-center"
+					className="w-full h-full object-cover object-center"
 				/>
 			</div>
 		</section>

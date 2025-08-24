@@ -7,14 +7,14 @@ import Link from "next/link";
 export const OurMission = () => {
 	return (
 		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 border border-blue-500">
-			<div className="h-[600px] overflow-hidden border-r border-blue-500">
+			<div className="h-[600px] overflow-hidden border-b md:border-b-0 md:border-r border-blue-500">
 				<Image
 					src={OurMissionImage}
 					alt="The Mindful Network Our Mission"
 					className="w-full h-full object-cover object-center"
 				/>
 			</div>
-			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-5">
+			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-10">
 				<Typography
 					as="h2"
 					className="font-antic mb-2.5 leading-none pt-0 lg:pt-10"

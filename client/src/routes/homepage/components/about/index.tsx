@@ -9,7 +9,7 @@ export function About() {
 		>
 			<div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-end">
 				<Typography
-					className="mb-2 col-span-7 text-left font-antic"
+					className="mb-2 col-span-6 text-left font-antic"
 					color="black"
 					as="h2"
 					variant="h2"
@@ -20,7 +20,7 @@ export function About() {
 					to build your support network
 				</Typography>
 				<Typography
-					className="mb-4 col-span-5"
+					className="mb-4 col-span-6 xl:px-10"
 					color="black"
 					as="h3"
 					variant="bodySmall"
