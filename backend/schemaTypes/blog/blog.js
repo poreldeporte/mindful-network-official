@@ -60,12 +60,92 @@ export default {
       hidden: ({document}) => document?.isInternal === true,
     },
     {
+      name: 'tocSettings',
+      title: '📚 Table of Contents Settings',
+      type: 'object',
+      fields: [
+        {
+          name: 'enableTOC',
+          title: 'Enable Table of Contents',
+          type: 'boolean',
+          description: 'Generate automatic TOC from headings',
+          default: true,
+        },
+        {
+          name: 'tocPosition',
+          title: 'TOC Position',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Before content', value: 'before'},
+              {title: 'After content', value: 'after'},
+              {title: 'Floating', value: 'floating'},
+            ],
+          },
+          default: 'before',
+        },
+        {
+          name: 'includeLevels',
+          title: 'Include Heading Levels',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            list: [
+              {title: 'H1', value: 'h1'},
+              {title: 'H2', value: 'h2'},
+              {title: 'H3', value: 'h3'},
+              {title: 'H4', value: 'h4'},
+              {title: 'H5', value: 'h5'},
+              {title: 'H6', value: 'h6'},
+            ],
+          },
+          default: ['h1', 'h2', 'h3'],
+          description: 'Which heading levels to include in TOC',
+        },
+      ],
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'array',
       of: [
         {
           type: 'block',
+          styles: [
+            {title: 'Normal', value: 'normal'},
+            {title: 'H1', value: 'h1'},
+            {title: 'H2', value: 'h2'},
+            {title: 'H3', value: 'h3'},
+            {title: 'H4', value: 'h4'},
+            {title: 'H5', value: 'h5'},
+            {title: 'H6', value: 'h6'},
+          ],
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'URL',
+                  },
+                  {
+                    name: 'openInNewTab',
+                    type: 'boolean',
+                    title: 'Open in new tab',
+                    default: false,
+                  },
+                ],
+              },
+            ],
+          },
         },
         {
           type: 'image',
@@ -78,7 +158,7 @@ export default {
                 be they blind, color-blind, low-sighted; 
                 alternative text is of great help for those 
                 people that can rely on it to have a good idea of 
-                what\'s on your page.`,
+                what\'s on the page.`,
               options: {
                 isHighlighted: true,
               },

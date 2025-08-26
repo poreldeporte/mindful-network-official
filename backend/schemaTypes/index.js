@@ -1,4 +1,5 @@
 import blog from './blog/blog'
+import headingBlock from './blog/headingBlock'
 
 import professionals from './professionals/professionals'
 
@@ -19,6 +20,7 @@ export const schemaTypes = [
   usefulLinks,
   blog,
   blogCategories,
+  headingBlock,
   resources,
   ageSpecialties,
   conditionSpecialties,
