@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const CaregiverCoaching = () => {
 	return (
-		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 border border-blue-500 max-h-[700px] overflow-hidden">
+		<section className="page-width my-10 lg:my-24 grid lg:grid-cols-2 border border-blue-500 lg:max-h-[700px] overflow-hidden">
 			<div className="flex flex-col justify-center w-full mb-10 lg:mb-0 p-10">
 				<Typography
 					as="h2"
