@@ -17,6 +17,12 @@ interface ImageWithAlt {
 	alt?: string;
 }
 
+export interface TOCSettings {
+	enableTOC: boolean;
+	tocPosition: "before" | "after" | "sidebar" | "floating";
+	includeLevels: string[];
+}
+
 export interface PsychologistModel {
 	_type: string;
 	id: string;
@@ -42,4 +48,5 @@ export interface PsychologistModel {
 	video: string;
 	slug: string;
 	email?: string;
+	tocSettings?: TOCSettings;
 }

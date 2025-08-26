@@ -15,7 +15,7 @@ export const blogByIdQuery = `*[_type == "blog" && slug.current == $slug][0]{
     ...,
     title,
     slug,
-    body,
+    content,
     excerpt,
     "featuredImage": featuredImage.asset->url,
     "featuredImageAlt": featuredImage.alt,

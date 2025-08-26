@@ -8,6 +8,8 @@ import { getPsychologistById } from "@/services";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatType } from "@/utilities";
+import ProfessionalTOC from "@/components/shared/ProfessionalTOC";
+import { getTOCPosition } from "@/utilities/toc.utility";
 
 export async function generateMetadata({
 	params,
@@ -82,14 +84,40 @@ export default async function PsychologistPage({
 		notFound();
 	}
 
+	const tocSettings = psychologist.tocSettings || {
+		enableTOC: true,
+		tocPosition: "before",
+		includeLevels: ["h1", "h2", "h3"],
+	};
+
+	const tocPositionClass = getTOCPosition(tocSettings.tocPosition);
+
 	return (
 		<div className="min-h-screen mx-auto w-11/12 xl:w-3/4 lg:grid lg:grid-cols-6 lg:items-start lg:mt-28 lg:gap-x-10">
 			<div className="lg:col-span-4">
+				{tocSettings.enableTOC && tocSettings.tocPosition === "before" && (
+					<div className={`${tocPositionClass} mb-8`}>
+						<ProfessionalTOC psychologist={psychologist} />
+					</div>
+				)}
+
 				<ProfileCard {...psychologist} />
 				<PsychologistAbout {...psychologist} />
+
+				{tocSettings.enableTOC && tocSettings.tocPosition === "after" && (
+					<div className={`${tocPositionClass} mt-8`}>
+						<ProfessionalTOC psychologist={psychologist} />
+					</div>
+				)}
 			</div>
 			<div className="lg:col-span-2 lg:relative h-full">
-				<StickyButton />
+				<div className="sticky top-28 space-y-5">
+					{tocSettings.enableTOC && tocSettings.tocPosition === "sidebar" && (
+						<ProfessionalTOC psychologist={psychologist} />
+					)}
+
+					<StickyButton />
+				</div>
 			</div>
 			<GetInTouch {...psychologist} />
 		</div>

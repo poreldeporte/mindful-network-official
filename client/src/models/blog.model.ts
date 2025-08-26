@@ -5,6 +5,12 @@ export interface BlogCategory {
 	slug: string;
 }
 
+export interface TOCSettings {
+	enableTOC: boolean;
+	tocPosition: "before" | "after" | "sidebar" | "floating";
+	includeLevels: string[];
+}
+
 export interface BlogModel {
 	id: string;
 	title: string;
@@ -21,6 +27,7 @@ export interface BlogModel {
 	tags?: string[];
 	authorImage?: string;
 	authorImageAlt?: string;
+	tocSettings?: TOCSettings;
 	seo?: {
 		metaTitle: string;
 		metaDescription: string;

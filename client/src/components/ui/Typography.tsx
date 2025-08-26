@@ -44,6 +44,7 @@ export const Typography: React.FC<TypographyProps> = ({
 	color,
 	className = "",
 	id,
+	children,
 	...props
 }) => {
 	const variantClass = variantClasses[variant] || "";
@@ -53,6 +54,6 @@ export const Typography: React.FC<TypographyProps> = ({
 	return React.createElement(
 		Tag,
 		{ className: classes, id, ...props },
-		props.children
+		children
 	);
 };
