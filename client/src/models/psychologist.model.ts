@@ -4,6 +4,7 @@ import { insurances } from "./insurances.model";
 import { Positions } from "./positions.model";
 import { TherapyModality } from "./therapy-modality.model";
 import { ResourcesModel } from "./resources.model";
+import { TOCSettings } from "./common/toc-settings.model";
 
 interface Address {
 	address: string;
@@ -15,12 +16,6 @@ interface Address {
 interface ImageWithAlt {
 	url: string;
 	alt?: string;
-}
-
-export interface TOCSettings {
-	enableTOC: boolean;
-	tocPosition: "before" | "after" | "sidebar" | "floating";
-	includeLevels: string[];
 }
 
 export interface PsychologistModel {

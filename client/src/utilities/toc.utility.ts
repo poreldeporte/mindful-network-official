@@ -1,14 +1,10 @@
+import { TOCSettings } from "@/models";
+
 export interface TOCItem {
 	id: string;
 	text: string;
 	level: string;
 	anchor: string;
-}
-
-export interface TOCSettings {
-	enableTOC: boolean;
-	tocPosition: "before" | "after" | "sidebar" | "floating";
-	includeLevels: string[];
 }
 
 export const generateHeadingId = (text: string): string => {

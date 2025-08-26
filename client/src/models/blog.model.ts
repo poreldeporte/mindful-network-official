@@ -1,14 +1,9 @@
 import { PortableTextBlock } from "@portabletext/types";
+import { TOCSettings } from "./common/toc-settings.model";
 
 export interface BlogCategory {
 	title: string;
 	slug: string;
-}
-
-export interface TOCSettings {
-	enableTOC: boolean;
-	tocPosition: "before" | "after" | "sidebar" | "floating";
-	includeLevels: string[];
 }
 
 export interface BlogModel {
