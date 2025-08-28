@@ -73,6 +73,12 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'address',
+      title: 'Company Address',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'email',
       title: 'Email',
       type: 'string',
@@ -110,6 +116,46 @@ export default {
               validation: (Rule) => Rule.required().uri(),
             },
           ],
+        },
+      ],
+    },
+    {
+      name: 'eventsSection',
+      title: 'Events Section',
+      description: 'Configure the title and subtitle for the Events section',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'Events Section Title',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'subtitle',
+          title: 'Events Section Subtitle',
+          type: 'text',
+          rows: 3,
+        },
+      ],
+    },
+    {
+      name: 'blogsSection',
+      title: 'Blogs Section',
+      description: 'Configure the title and subtitle for the Blogs section',
+      type: 'object',
+      fields: [
+        {
+          name: 'title',
+          title: 'Blogs Section Title',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'subtitle',
+          title: 'Blogs Section Subtitle',
+          type: 'text',
+          rows: 3,
         },
       ],
     },
