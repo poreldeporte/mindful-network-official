@@ -86,6 +86,7 @@ export default defineConfig({
               .title('Company Details')
               .icon(FaBuilding)
               .child(S.documentTypeList('companyDetails')),
+            S.listItem().title('redirect').icon(FaUser).child(S.documentTypeList('redirect')),
           ])
       },
     }),

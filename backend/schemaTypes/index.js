@@ -14,6 +14,7 @@ import user from './user/user'
 import usefulLinks from './useful-links/usefulLinks'
 import blogCategories from './blog/blogCategories'
 import admittedLanguages from './admitted-languages/admittedLanguages'
+import redirects from './redirects/redirects'
 
 export const schemaTypes = [
   professionals,
@@ -29,4 +30,5 @@ export const schemaTypes = [
   admittedLanguages,
   user,
   companyDetail,
+  redirects,
 ]
