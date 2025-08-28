@@ -11,3 +11,4 @@ export * from "./type-with-key.model";
 export * from "./variant.model";
 export * from "./company-details.model";
 export * from "./useful-links.model";
+export * from "./redirect.model";

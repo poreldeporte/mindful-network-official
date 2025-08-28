@@ -5,3 +5,4 @@ export * from "./psychologist.service";
 export * from "./resources.service";
 export * from "./therapy-options.service";
 export * from "./useful-links.service";
+export * from "./redirect.service";

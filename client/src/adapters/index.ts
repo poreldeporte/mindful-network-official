@@ -6,3 +6,4 @@ export * from "./psychologist.adapter";
 export * from "./therapy-modality.adapter";
 export * from "./company-details.adapter";
 export * from "./useful-links.adapter";
+export * from "./redirect.adapter";
