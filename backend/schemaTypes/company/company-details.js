@@ -73,12 +73,6 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'address',
-      title: 'Company Address',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    },
-    {
       name: 'email',
       title: 'Email',
       type: 'string',
