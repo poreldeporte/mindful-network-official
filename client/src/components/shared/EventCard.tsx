@@ -1,7 +1,7 @@
 "use client";
 
 import { EventbriteEvent } from "@/models/eventbrite.model";
-import { generateSlug } from "@/utilities";
+import { generateSlug, isEventExpired } from "@/utilities";
 import { formatEventDate } from "@/utilities/format-event-date.utility";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
@@ -50,45 +50,70 @@ const EventCard = ({
 	};
 
 	const eventUrl = `/events/${generateSlug(event.name.text)}-${event.id}`;
+	const isExpired = isEventExpired(event.end.utc);
 
-	return (
-		<Link href={eventUrl}>
-			<motion.article
-				initial="offscreen"
-				whileInView="onscreen"
-				viewport={{ once: true, amount: 0.3 }}
-				variants={cardVariants}
-				className="w-full h-full flex flex-col"
+	const CardContent = (
+		<motion.article
+			initial="offscreen"
+			whileInView="onscreen"
+			viewport={{ once: true, amount: 0.3 }}
+			variants={cardVariants}
+			className={`w-full h-full flex flex-col ${
+				isExpired ? "opacity-60 cursor-not-allowed" : ""
+			}`}
+		>
+			<motion.div
+				variants={imageVariants}
+				className="w-full h-64 overflow-hidden rounded-3xl border"
 			>
-				<motion.div
-					variants={imageVariants}
-					className="w-full h-64 overflow-hidden rounded-3xl border"
+				<Image
+					src={event.logo.url}
+					alt={event.name.text}
+					width={250}
+					height={250}
+					loading="lazy"
+					className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+				/>
+			</motion.div>
+
+			<div className="mt-2.5">
+				<span
+					className={`text-[14px] ${isExpired ? "text-gray-400" : "text-blue-500"}`}
 				>
-					<Image
-						src={event.logo.url}
-						alt={event.name.text}
-						width={250}
-						height={250}
-						loading="lazy"
-						className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-					/>
-				</motion.div>
+					{formatEventDate(event.start.utc)}
+					{isExpired && " (Event Ended)"}
+				</span>
+				<h2
+					className={`font-bold text-sm leading-tight ${isExpired ? "text-gray-600" : ""}`}
+				>
+					{event.name.text}
+				</h2>
+				<p
+					className={`text-xs line-clamp-2 ${isExpired ? "text-gray-500" : ""}`}
+				>
+					{event.summary}
+				</p>
+			</div>
 
-				<div className="mt-2.5">
-					<span className="text-blue-500 text-[14px]">
-						{formatEventDate(event.start.utc)}
-					</span>
-					<h2 className="font-bold text-sm leading-tight">{event.name.text}</h2>
-					<p className="text-xs line-clamp-2">{event.summary}</p>
-				</div>
+			<div className="flex flex-grow items-end justify-end mt-5">
+				<Button
+					variant="bodySmall"
+					form="outline"
+					className={isExpired ? "opacity-50 cursor-not-allowed" : ""}
+				>
+					{isExpired ? "Event Ended" : "See Event"}
+				</Button>
+			</div>
+		</motion.article>
+	);
 
-				<div className="flex flex-grow items-end justify-end mt-5">
-					<Button variant="bodySmall" form="outline">
-						See Event
-					</Button>
-				</div>
-			</motion.article>
-		</Link>
+	return isExpired ? (
+		<div className="relative">
+			{CardContent}
+			<div className="absolute inset-0 bg-transparent cursor-not-allowed" />
+		</div>
+	) : (
+		<Link href={eventUrl}>{CardContent}</Link>
 	);
 };
 

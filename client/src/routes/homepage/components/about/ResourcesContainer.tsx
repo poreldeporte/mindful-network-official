@@ -11,12 +11,12 @@ import Link from "next/link";
 export const ResourcesContainer = () => {
 	return (
 		<div
-			className="lg:my-5 grid grid-cols-1 w-full gap-10"
+			className="lg:my-5 grid grid-cols-1 w-full gap-5 lg:gap-10"
 			role="list"
 			aria-label="List of benefits"
 		>
 			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center lg:gap-10"
+				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-5 lg:gap-10"
 				aria-labelledby={`benefit-title-Trusted and Verified Resources`}
 			>
 				<div className="xl:order-1 py-5 lg:p-10">
@@ -112,12 +112,12 @@ export const ResourcesContainer = () => {
 				<Image
 					src={TrustedAndVerifiedResourcesImage}
 					alt="Trusted and Verified Resources"
-					className="max-h-[550px] object-cover object-center"
+					className="max-h-[550px] object-contain object-center"
 				/>
 			</article>
 
 			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-10"
+				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-5 lg:gap-10"
 				aria-labelledby={`benefit-title-Up-to-Date Information`}
 			>
 				<div className="py-5 lg:p-10">
@@ -175,14 +175,14 @@ export const ResourcesContainer = () => {
 				</div>
 
 				<Image
-					className="max-h-[550px] object-cover object-center"
+					className="max-h-[550px] object-contain object-center"
 					src={UpToDateInformationImage}
 					alt="Up-to-Date Information"
 				/>
 			</article>
 
 			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-10"
+				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-5 lg:gap-10"
 				aria-labelledby={`benefit-title-Personalized Search Options`}
 			>
 				<div className="xl:order-1 py-5 lg:p-10">

@@ -1,9 +1,10 @@
-import { EventsHero } from "@/routes/events/components/hero";
-import { EventsFooter } from "@/routes/events/components/footer";
-import { EventsContainer } from "@/routes/events/components/events-container";
-import { Suspense } from "react";
 import { Eventbrite } from "@/api/Eventbrite";
+import { CTAFooter } from "@/components/shared";
 import { EventbriteKeys } from "@/config/eventbrite.config";
+import { AvailableArticlesImage, SearchCtaBlogImage } from "@/lib/images";
+import { EventsContainer } from "@/routes/events/components/events-container";
+import { EventsHero } from "@/routes/events/components/hero";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -13,15 +14,9 @@ export default async function EventsPage() {
 		const eventbrite = new Eventbrite(privateToken as string);
 		const eventsData = await eventbrite.getAllEvents(organizationId as string);
 
-		const currentDate = new Date();
-		const filteredEvents = eventsData.events.filter((event) => {
-			const eventStartDate = new Date(event.start.utc);
-			return eventStartDate >= currentDate;
-		});
-
 		const events = {
 			...eventsData,
-			events: filteredEvents.reverse(),
+			events: eventsData.events.reverse(),
 		};
 
 		return (
@@ -36,7 +31,18 @@ export default async function EventsPage() {
 				>
 					<EventsContainer events={events || { events: [] }} />
 				</Suspense>
-				<EventsFooter />
+				<CTAFooter
+					image1={SearchCtaBlogImage}
+					image2={AvailableArticlesImage}
+					title1="Need assistance?"
+					buttonText1="Start Search"
+					path1="/search"
+					description1="Start by exploring our mental health professionals database."
+					title2="Find what you need"
+					buttonText2="Start Learning"
+					path2="/support-links"
+					description2="Search through support groups, services, books, and the latest inmental health research."
+				/>
 			</>
 		);
 	} catch (error) {
@@ -52,7 +58,18 @@ export default async function EventsPage() {
 						again later.
 					</p>
 				</div>
-				<EventsFooter />
+				<CTAFooter
+					image1={SearchCtaBlogImage}
+					image2={AvailableArticlesImage}
+					title1="Need assistance?"
+					buttonText1="Start Search"
+					path1="/search"
+					description1="Start by exploring our mental health professionals database."
+					title2="Find what you need"
+					buttonText2="Start Learning"
+					path2="/support-links"
+					description2="Search through support groups, services, books, and the latest inmental health research."
+				/>
 			</>
 		);
 	}

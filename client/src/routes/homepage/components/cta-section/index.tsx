@@ -63,7 +63,7 @@ const CTACard = ({
 
 export function CTASection() {
 	return (
-		<section className="page-width " aria-labelledby="cta-section-heading">
+		<section className="page-width" aria-labelledby="cta-section-heading">
 			<Typography
 				as="h2"
 				variant="h2"

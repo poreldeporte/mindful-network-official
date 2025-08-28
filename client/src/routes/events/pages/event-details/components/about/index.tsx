@@ -3,6 +3,7 @@
 import { Button, Typography } from "@/components/ui";
 import { MindfulIsotype } from "@/lib/images";
 import { EventbriteEvent } from "@/models/eventbrite.model";
+import { isEventExpired } from "@/utilities";
 import {
 	ChevronRight,
 	MapPin,
@@ -20,6 +21,7 @@ import ActionButton from "@/components/shared/ActionButtons";
 
 export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 	const [showShareModal, setShowShareModal] = useState(false);
+	const isExpired = isEventExpired(event.end.utc);
 
 	const openInGoogleMaps = () => {
 		const address = `${event.venue.address.address_1}, ${event.venue.address.city}, ${event.venue.address.region}, ${event.venue.address.country}`;
@@ -337,18 +339,29 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					</Typography>
 					<Button
 						variant="bodySmall"
-						className="py-2 rounded-full px-4 bg-blue-500 hover:bg-blue-600 relative w-full mt-5"
+						className={`py-2 rounded-full px-4 relative w-full mt-5 ${
+							isExpired
+								? "bg-gray-400 cursor-not-allowed"
+								: "bg-blue-500 hover:bg-blue-600"
+						}`}
 						form="outline"
+						disabled={isExpired}
 					>
-						<a
-							aria-label={`Get tickets for ${event.name.text}`}
-							href={event.url}
-							className="expandable-tag-link"
-							target="_blank"
-						>
-							Get Tickets Now
-						</a>
-						<ChevronRight size={20} />
+						{isExpired ? (
+							<span className="text-gray-600">Event Ended</span>
+						) : (
+							<>
+								<a
+									aria-label={`Get tickets for ${event.name.text}`}
+									href={event.url}
+									className="expandable-tag-link"
+									target="_blank"
+								>
+									Get Tickets Now
+								</a>
+								<ChevronRight size={20} />
+							</>
+						)}
 					</Button>
 				</div>
 			</div>
