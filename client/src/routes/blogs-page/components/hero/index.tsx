@@ -1,6 +1,11 @@
 import { Typography } from "@/components/ui";
 
-export const BlogsHero = () => {
+interface BlogsHeroProps {
+	title?: string;
+	subtitle?: string;
+}
+
+export const BlogsHero = ({ title, subtitle }: BlogsHeroProps) => {
 	return (
 		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center">
 			<div className="flex flex-col justify-center items-center h-full w-full relative overflow-hidden">
@@ -22,8 +27,18 @@ export const BlogsHero = () => {
 						color="white"
 						variant="h1"
 					>
-						Cuarted articles just for you
+						{title || "Curated articles just for you"}
 					</Typography>
+					{subtitle && (
+						<Typography
+							as="p"
+							className="lg:w-3/4 text-left text-[1.125rem] leading-relaxed"
+							color="white"
+							variant="body"
+						>
+							{subtitle}
+						</Typography>
+					)}
 				</div>
 			</div>
 		</section>

@@ -18,5 +18,13 @@ export const getCompanyDetailsAdapter = (
 	email: companyDetails.email,
 	phoneNumber: companyDetails.phoneNumber,
 	address: companyDetails.address,
+	eventsSection: {
+		title: companyDetails.eventsSection.title,
+		subtitle: companyDetails.eventsSection.subtitle,
+	},
+	blogsSection: {
+		title: companyDetails.blogsSection.title,
+		subtitle: companyDetails.blogsSection.subtitle,
+	},
 	socialLinks: companyDetails.socialLinks,
 });

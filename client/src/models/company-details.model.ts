@@ -10,6 +10,11 @@ export interface HeroBackground {
 	url: string;
 }
 
+export interface SectionContent {
+	title: string;
+	subtitle?: string;
+}
+
 export interface CompanyDetails {
 	logo: string;
 	logoAlt?: string;
@@ -18,4 +23,6 @@ export interface CompanyDetails {
 	address: string;
 	phoneNumber: string;
 	socialLinks: SocialLink[];
+	eventsSection?: SectionContent;
+	blogsSection?: SectionContent;
 }

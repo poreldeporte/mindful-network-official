@@ -15,7 +15,15 @@ export const getCompanyDetails = async (): Promise<CompanyDetails | null> => {
 			email,
 			phoneNumber,
 			address,
-			socialLinks
+			socialLinks,
+			"eventsSection": eventsSection{
+				title,
+				subtitle
+			},
+			"blogsSection": blogsSection{
+				title,
+				subtitle
+			}
 		}`;
 
 		const companyDetails = await sanityClient.fetch(allCompanyDetailsQuery);
