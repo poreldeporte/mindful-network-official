@@ -2,8 +2,8 @@ import { Typography } from "@/components/ui";
 
 export const BlogsHero = () => {
 	return (
-		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center p-2">
-			<div className="flex flex-col justify-center items-center h-full w-full rounded-xl relative overflow-hidden px-5">
+		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center">
+			<div className="flex flex-col justify-center items-center h-full w-full relative overflow-hidden">
 				<video
 					autoPlay
 					muted
@@ -14,14 +14,17 @@ export const BlogsHero = () => {
 					<source src={"/videos/blog-hero.mp4"} type="video/mp4" />
 				</video>
 				<div className="dark-overlay h-full w-full absolute top-0 left-0" />
-				<Typography
-					color="white"
-					as="h1"
-					variant="h2"
-					className="text-center md:text-start z-10"
-				>
-					Cuarted articles just for you
-				</Typography>
+				<div className="page-width flex flex-col items-start justify-center relative z-10">
+					<Typography
+						id="hero-heading"
+						className="font-antic mb-5 leading-none text-left"
+						as="h1"
+						color="white"
+						variant="h1"
+					>
+						Cuarted articles just for you
+					</Typography>
+				</div>
 			</div>
 		</section>
 	);

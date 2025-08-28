@@ -61,16 +61,24 @@ export const BlogCard = ({
 
 	const content = (
 		<>
-			<motion.div variants={imageVariants} className="w-full overflow-hidden">
+			<motion.div
+				variants={imageVariants}
+				className="w-full h-52 overflow-hidden"
+			>
 				<Image
-					className="w-full aspect-video object-cover mb-4 transition-transform hover:scale-105 duration-300"
+					className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
 					src={featuredImage}
 					width={300}
 					height={300}
 					alt={featuredImageAlt || `Featured image for ${title}`}
 				/>
 			</motion.div>
-			<Typography color="darkGray" as="h3" variant="bodySmall">
+			<Typography
+				color="darkGray"
+				as="h3"
+				variant="bodySmall"
+				className="mt-2.5"
+			>
 				{category.slug.replaceAll("-", " ").toUpperCase()}
 			</Typography>
 			<Typography

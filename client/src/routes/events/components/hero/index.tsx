@@ -1,26 +1,30 @@
 import { Typography } from "@/components/ui";
-import { EventsHeroImage } from "@/lib/images";
 
-export const AllBlogsHero = () => {
+export const EventsHero = () => {
 	return (
-		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center p-2">
-			<div
-				className="flex flex-col justify-center items-center h-full w-full rounded-xl relative overflow-hidden px-5"
-				style={{
-					backgroundImage: `url(${EventsHeroImage.src})`,
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}
-			>
-				<div className="dark-overlay h-full w-full absolute top-0 left-0" />
-				<Typography
-					color="white"
-					as="h1"
-					variant="h2"
-					className="text-center md:text-start z-10"
+		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center">
+			<div className="flex flex-col justify-center items-center h-full w-full relative overflow-hidden">
+				<video
+					autoPlay
+					muted
+					loop
+					playsInline
+					className="absolute inset-0 w-full h-full object-cover"
 				>
-					Connect, Learn, and Heal
-				</Typography>
+					<source src={"/videos/events-hero.mp4"} type="video/mp4" />
+				</video>
+				<div className="dark-overlay h-full w-full absolute top-0 left-0" />
+				<div className="page-width flex flex-col items-start justify-center relative z-10">
+					<Typography
+						id="hero-heading"
+						className="font-antic mb-5 leading-none text-left"
+						as="h1"
+						color="white"
+						variant="h1"
+					>
+						Connect, Learn, and Heal
+					</Typography>
+				</div>
 			</div>
 		</section>
 	);
