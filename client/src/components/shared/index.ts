@@ -7,4 +7,4 @@ export * from "./Topbar";
 export { default as EventCard } from "./EventCard";
 export { default as TableOfContents } from "./TableOfContents";
 export { default as ProfessionalTOC } from "./ProfessionalTOC";
-export { CTAFooter } from "./cta-footer";
+export { CTASection } from "./cta-footer";

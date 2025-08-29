@@ -1,7 +1,6 @@
 import { Eventbrite } from "@/api/Eventbrite";
-import { CTAFooter } from "@/components/shared";
+import { CTASection } from "@/components/shared/cta-footer";
 import { EventbriteKeys } from "@/config/eventbrite.config";
-import { AvailableArticlesImage, SearchCtaBlogImage } from "@/lib/images";
 import { EventsContainer } from "@/routes/events/components/events-container";
 import { EventsHero } from "@/routes/events/components/hero";
 import { getCompanyDetails } from "@/services/company-details.service";
@@ -36,18 +35,7 @@ export default async function EventsPage() {
 				>
 					<EventsContainer events={events || { events: [] }} />
 				</Suspense>
-				<CTAFooter
-					image1={SearchCtaBlogImage}
-					image2={AvailableArticlesImage}
-					title1="Need assistance?"
-					buttonText1="Start Search"
-					path1="/search"
-					description1="Start by exploring our mental health professionals database."
-					title2="Find what you need"
-					buttonText2="Start Learning"
-					path2="/support-links"
-					description2="Search through support groups, services, books, and the latest inmental health research."
-				/>
+				<CTASection />
 			</>
 		);
 	} catch (error) {
@@ -67,18 +55,7 @@ export default async function EventsPage() {
 						again later.
 					</p>
 				</div>
-				<CTAFooter
-					image1={SearchCtaBlogImage}
-					image2={AvailableArticlesImage}
-					title1="Need assistance?"
-					buttonText1="Start Search"
-					path1="/search"
-					description1="Start by exploring our mental health professionals database."
-					title2="Find what you need"
-					buttonText2="Start Learning"
-					path2="/support-links"
-					description2="Search through support groups, services, books, and the latest inmental health research."
-				/>
+				<CTASection />
 			</>
 		);
 	}

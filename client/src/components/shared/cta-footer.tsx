@@ -1,107 +1,84 @@
-import { Button, Typography } from "@/components/ui";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import { Typography } from "@/components/ui";
+import { CTACards } from "@/lib/constants";
+import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
-interface FooterCardProps {
+interface Props {
 	image: StaticImageData;
-	title: string;
 	buttonText: string;
 	path: string;
-	description: string;
+	isInternalLink: boolean;
+	sectionToScroll: string | null;
 }
 
-const FooterCard = ({
+const CTACard = ({
 	image,
-	title,
 	buttonText,
 	path,
-	description,
-}: FooterCardProps) => {
+	isInternalLink,
+	sectionToScroll,
+}: Props) => {
 	return (
 		<article className="relative w-full h-[250px] xl:h-[450px] overflow-hidden transition-transform hover:scale-[101%]">
-			<div className="dark-overlay">
-				<Image
-					className="w-full h-full object-cover dark-overlay"
-					src={image.src}
-					width={500}
-					height={200}
-					alt={`Image for ${buttonText}`}
-				/>
-			</div>
+			<Image
+				className="w-full h-full object-cover"
+				src={image.src}
+				width={500}
+				height={200}
+				alt={`Image for ${buttonText}`}
+			/>
 			<div className="absolute bottom-0 left-0 w-full p-8 flex items-center">
-				<div className="w-full flex flex-col gap-1">
+				<button
+					className="text-left w-full flex items-center gap-2 focus:outline-none"
+					aria-label={`Call to action: ${buttonText}`}
+				>
 					<Typography
 						color="white"
-						as="h3"
-						variant="h3"
-						className="font-bold mr-5"
+						as="p"
+						variant="body"
+						className="font-bold mr-5 flex items-center gap-2"
 					>
-						{title}
+						{buttonText}
+						<ArrowRightCircleIcon
+							className="h-8 w-8 text-white"
+							aria-hidden="true"
+						/>
 					</Typography>
-					<Typography color="white" as="p" variant="bodySmall">
-						{description}
-					</Typography>
-					<Link href={path} className="w-fit mt-5">
-						<Button
-							form="outline-white"
-							variant="bodySmall"
-							aria-label={`Read more about ${title}`}
-						>
-							{buttonText} <ArrowLongRightIcon className="w-4 h-4" />
-						</Button>
-					</Link>
-				</div>
+				</button>
 			</div>
+
+			{isInternalLink ? (
+				<Link className="container-link-overlay" href={path}>
+					<span className="sr-only">Redirect to {buttonText} page</span>
+				</Link>
+			) : (
+				<a className="container-link-overlay" href={`#${sectionToScroll}`}>
+					<span className="sr-only">Redirect to {buttonText} page</span>
+				</a>
+			)}
 		</article>
 	);
 };
 
-interface Props {
-	image1: StaticImageData;
-	image2: StaticImageData;
-	title1: string;
-	buttonText1: string;
-	path1: string;
-	description1: string;
-	title2: string;
-	buttonText2: string;
-	path2: string;
-	description2: string;
-}
-
-export const CTAFooter = ({
-	image1,
-	image2,
-	title1,
-	buttonText1,
-	path1,
-	description1,
-	title2,
-	buttonText2,
-	path2,
-	description2,
-}: Props) => {
+export function CTASection() {
 	return (
-		<section
-			aria-labelledby="blogs-footer-heading"
-			className="grid grid-cols-1 lg:grid-cols-2 gap-5 page-width"
-		>
-			<FooterCard
-				image={image1}
-				title={title1}
-				buttonText={buttonText1}
-				path={path1}
-				description={description1}
-			/>
-
-			<FooterCard
-				image={image2}
-				title={title2}
-				buttonText={buttonText2}
-				path={path2}
-				description={description2}
-			/>
+		<section className="page-width" aria-labelledby="cta-section-heading">
+			<Typography
+				as="h2"
+				variant="h2"
+				color="black"
+				className="text-blue-500 mb-5 font-antic"
+				id="cta-section-heading"
+			>
+				Take the first step <span className="block"></span>
+				<span className="text-[#3C3D42]">Discover trusted resources</span>
+			</Typography>
+			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+				{CTACards.map((card) => (
+					<CTACard key={card.id} {...card} />
+				))}
+			</div>
 		</section>
 	);
-};
+}

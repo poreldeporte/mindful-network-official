@@ -262,7 +262,7 @@ export const ResourcesContainer = () => {
 				</div>
 
 				<Image
-					className="max-h-[550px] object-contain object-center"
+					className="max-h-[350px] lg:max-h-[550px] object-contain object-center"
 					src={PersonalizedSearchOptionsImage}
 					alt="Personalized Search Options"
 				/>

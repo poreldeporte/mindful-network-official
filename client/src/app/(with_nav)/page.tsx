@@ -4,11 +4,11 @@ import {
 	About,
 	BlogContainer,
 	CaregiverCoaching,
-	CTASection,
 	Hero,
 	MentalHealthCrisis,
 	OurMission,
 } from "@/routes/homepage/components";
+import { CTASection } from "@/components/shared/cta-footer";
 import { getLatestBlog } from "@/routes/homepage/services";
 import { getCompanyDetails } from "@/services/company-details.service";
 
