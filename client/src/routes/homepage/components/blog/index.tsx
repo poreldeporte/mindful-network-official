@@ -5,6 +5,11 @@ import { BlogModel } from "@/models/blog.model";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, A11y, Keyboard } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 interface BlogProps {
 	blogPosts: BlogModel[];
@@ -14,6 +19,7 @@ export const BlogCard = ({
 	title,
 	category,
 	featuredImage,
+	featuredImageAlt,
 	slug,
 	isInternal,
 	externalLink,
@@ -57,24 +63,29 @@ export const BlogCard = ({
 		<>
 			<motion.div
 				variants={imageVariants}
-				className="w-full overflow-hidden rounded-xl"
+				className="w-full h-52 overflow-hidden"
 			>
 				<Image
-					className="w-full aspect-video object-cover mb-4 rounded-xl transition-transform hover:scale-105 duration-300"
+					className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
 					src={featuredImage}
 					width={300}
 					height={300}
-					alt={`Featured image for ${title}`}
+					alt={featuredImageAlt || `Featured image for ${title}`}
 				/>
 			</motion.div>
-			<Typography color="darkGray" as="h3" variant="xsmall">
+			<Typography
+				color="darkGray"
+				as="h3"
+				variant="bodySmall"
+				className="mt-2.5"
+			>
 				{category.slug.replaceAll("-", " ").toUpperCase()}
 			</Typography>
 			<Typography
 				className="mb-2 font-semibold"
 				color="black"
 				as="h2"
-				variant="medium"
+				variant="body"
 				id={`blog-title-${slug}`}
 			>
 				{title}
@@ -89,7 +100,10 @@ export const BlogCard = ({
 			viewport={{ once: true, amount: 0.3 }}
 			variants={cardVariants}
 			className="w-full"
-			aria-labelledby={`blog-title-${slug}`}
+			aria-labelledby={`blog-card-${slug}`}
+			draggable={true}
+			aria-grabbed="true"
+			id={`blog-card-${slug}`}
 		>
 			{isInternal ? (
 				<Link href={`/blog/${slug}`} aria-label={`Read more about ${title}`}>
@@ -112,30 +126,66 @@ export const BlogCard = ({
 export const BlogContainer = ({ blogPosts }: BlogProps) => {
 	return (
 		<section
-			className="page-width section-y-padding"
+			className="pl-5 pr-5 xl:pl-[12.5%] section-y-padding"
 			aria-labelledby="blog-section-heading"
+			role="region"
 		>
 			<Typography
-				className="mb-20 font-medium leading-tight"
+				className="mb-20 font-antic"
 				color="black"
 				as="h2"
-				variant="title"
+				variant="h2"
 				id="blog-section-heading"
 			>
 				Expert articles and resources <span className="block"></span>
-				<span className="text-green-500">to support your journey</span>
+				<span className="text-blue-500">to support your journey</span>
 			</Typography>
 
-			<div
-				className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-5"
-				role="list"
-				aria-label="Blog posts list"
-			>
-				{blogPosts && blogPosts.length
-					? blogPosts.map((blogPost, index) => (
-							<BlogCard key={blogPost.slug} {...blogPost} index={index} />
-						))
-					: ""}
+			<div className="flex flex-col gap-5">
+				<div className="flex gap-2 justify-end pr-5 xl:pr-[70px] 3xl:pr-[140px]">
+					<button
+						type="button"
+						className="blog-swiper-prev group p-4 transition-all rounded-full border border-blue-400 bg-transparent hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700"
+						aria-label="Previous blogs"
+					>
+						<ArrowLeft className="text-black group-hover:text-white" />
+					</button>
+					<button
+						type="button"
+						className="blog-swiper-next group p-4 transition-all rounded-full border border-blue-400 bg-transparent hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700"
+						aria-label="Next blogs"
+					>
+						<ArrowRight className="text-black group-hover:text-white" />
+					</button>
+				</div>
+				<Swiper
+					modules={[Navigation, A11y, Keyboard]}
+					slidesPerView={1}
+					spaceBetween={20}
+					navigation={{
+						nextEl: ".blog-swiper-next",
+						prevEl: ".blog-swiper-prev",
+					}}
+					keyboard={{ enabled: true }}
+					breakpoints={{
+						640: { slidesPerView: 2 },
+						1024: { slidesPerView: 3 },
+						1280: { slidesPerView: 4 },
+					}}
+					aria-live="polite"
+					className="w-full"
+				>
+					{blogPosts.map((blogPost, index) => (
+						<SwiperSlide
+							key={blogPost.slug}
+							role="option"
+							aria-label={`Blog post ${index + 1} of ${blogPosts.length}`}
+							className="min-h-96"
+						>
+							<BlogCard {...blogPost} index={index} />
+						</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
 		</section>
 	);

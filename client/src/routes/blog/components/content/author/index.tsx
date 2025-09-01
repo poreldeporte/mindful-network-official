@@ -10,6 +10,7 @@ export const Author = ({
 	publishDate,
 	tags,
 	authorImage,
+	authorImageAlt,
 }: BlogModel) => {
 	return (
 		<section
@@ -21,7 +22,7 @@ export const Author = ({
 					src={authorImage ? authorImage : UserImage}
 					height={125}
 					width={125}
-					alt={`Profile picture of ${author}`}
+					alt={authorImageAlt || `Profile picture of ${author}`}
 					className="rounded-full aspect-square object-cover object-center"
 				/>
 
@@ -30,13 +31,13 @@ export const Author = ({
 						id="author-section-heading"
 						className="font-bold"
 						as="h3"
-						variant="small"
+						variant="h3"
 						color="black"
 					>
 						{author}
 					</Typography>
 
-					<Typography as="span" variant="xsmall" color="darkGray">
+					<Typography as="span" variant="bodySmall" color="darkGray">
 						Published on{" "}
 						<time dateTime={publishDate} className="font-medium">
 							{formatDateMMDDAAAA(publishDate)}

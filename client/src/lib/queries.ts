@@ -4,6 +4,7 @@ export const blogQuery = `*[_type == "blog"] | order(_createdAt desc)[0...8] {
     description, 
     "slug": slug.current, 
     "featuredImage": featuredImage.asset->url,
+    "featuredImageAlt": featuredImage.alt,
     "category": {
       ...category->,
       "slug": category->slug.current
@@ -14,10 +15,12 @@ export const blogByIdQuery = `*[_type == "blog" && slug.current == $slug][0]{
     ...,
     title,
     slug,
-    body,
+    content,
     excerpt,
     "featuredImage": featuredImage.asset->url,
+    "featuredImageAlt": featuredImage.alt,
     "authorImage": authorImage.asset->url,
+    "authorImageAlt": authorImage.alt,
     metaTitle,
     metaDescription
   }`;
@@ -49,6 +52,7 @@ export const blogsWithOffsetQuery = ({
       "slug": slug.current,
       isInternal,
       "featuredImage": featuredImage.asset->url,
+      "featuredImageAlt": featuredImage.alt,
     }`;
 
 	return query;

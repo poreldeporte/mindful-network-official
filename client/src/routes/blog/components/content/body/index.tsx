@@ -3,6 +3,26 @@ import { Typography } from "@/components/ui";
 import { BlogModel } from "@/models";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import Image from "next/image";
+import { generateHeadingId } from "@/utilities/toc.utility";
+
+const extractTextFromChildren = (children: any): string => {
+	if (!children || !Array.isArray(children)) return "";
+
+	const firstChild = children[0];
+	if (firstChild?.props?.text) {
+		return firstChild.props.text;
+	}
+
+	if (firstChild?.children) {
+		return extractTextFromChildren(firstChild.children);
+	}
+
+	if (firstChild?.props?.children) {
+		return extractTextFromChildren(firstChild.props.children);
+	}
+
+	return "";
+};
 
 const components: PortableTextComponents = {
 	types: {
@@ -25,20 +45,106 @@ const components: PortableTextComponents = {
 	},
 	block: {
 		normal: ({ children }) => (
-			<Typography className="mb-5" as="p" variant="small" color="black">
+			<Typography className="mb-5" as="p" variant="bodySmall" color="black">
 				{children}
 			</Typography>
 		),
-		h2: ({ children }) => (
-			<Typography className="mb-5" as="h2" variant="large" color="black">
-				{children}
-			</Typography>
-		),
-		h3: ({ children }) => (
-			<Typography className="mb-5" as="h3" variant="medium" color="black">
-				{children}
-			</Typography>
-		),
+		h1: ({ children }) => {
+			const text = extractTextFromChildren(children);
+			const id = generateHeadingId(text);
+
+			return (
+				<Typography
+					id={id}
+					className="mb-5 scroll-mt-20"
+					as="h1"
+					variant="h1"
+					color="black"
+				>
+					{children}
+				</Typography>
+			);
+		},
+		h2: ({ children }) => {
+			const text = extractTextFromChildren(children);
+			const id = generateHeadingId(text);
+
+			return (
+				<Typography
+					id={id}
+					className="mb-5 scroll-mt-20"
+					as="h2"
+					variant="h2"
+					color="black"
+				>
+					{children}
+				</Typography>
+			);
+		},
+		h3: ({ children }) => {
+			const text = extractTextFromChildren(children);
+			const id = generateHeadingId(text);
+
+			return (
+				<Typography
+					id={id}
+					className="mb-5 scroll-mt-20 underline underline-offset-4 font-light"
+					as="h3"
+					variant="body"
+					color="blue"
+				>
+					{children}
+				</Typography>
+			);
+		},
+		h4: ({ children }) => {
+			const text = extractTextFromChildren(children);
+			const id = generateHeadingId(text);
+
+			return (
+				<Typography
+					id={id}
+					className="mb-5 scroll-mt-20"
+					as="h4"
+					variant="bodySmall"
+					color="black"
+				>
+					{children}
+				</Typography>
+			);
+		},
+		h5: ({ children }) => {
+			const text = extractTextFromChildren(children);
+			const id = generateHeadingId(text);
+
+			return (
+				<Typography
+					id={id}
+					className="mb-5 scroll-mt-20"
+					as="h5"
+					variant="bodySmall"
+					color="black"
+				>
+					{children}
+				</Typography>
+			);
+		},
+		h6: ({ children }) => {
+			const text = extractTextFromChildren(children);
+			const id = generateHeadingId(text);
+
+			return (
+				<Typography
+					id={id}
+					className="mb-5 scroll-mt-20"
+					as="h6"
+					variant="bodySmall"
+					color="black"
+				>
+					{children}
+				</Typography>
+			);
+		},
 	},
 	list: {
 		bullet: ({ children }) => (
@@ -55,14 +161,14 @@ const components: PortableTextComponents = {
 	listItem: {
 		bullet: ({ children }) => (
 			<li className="mb-4 ml-4">
-				<Typography variant="small" color="black">
+				<Typography variant="bodySmall" color="black">
 					{children}
 				</Typography>
 			</li>
 		),
 		number: ({ children }) => (
 			<li className="mb-4 ml-4">
-				<Typography variant="small" color="black">
+				<Typography variant="bodySmall" color="black">
 					{children}
 				</Typography>
 			</li>

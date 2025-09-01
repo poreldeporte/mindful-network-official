@@ -5,13 +5,18 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { useEffect } from "react";
 
+interface ImageWithAlt {
+	url: string;
+	alt?: string;
+}
+
 interface Props {
-	images: string[];
+	images: ImageWithAlt[];
 }
 
 interface ImageViewer {
-	image: string;
-	setIsVisible: (boolean) => void;
+	image: ImageWithAlt;
+	setIsVisible: (isVisible: boolean) => void;
 }
 
 // interface GalleryCarouselProps {
@@ -68,7 +73,7 @@ interface ImageViewer {
 // 					onClick={() => setIsVisible(false)}
 // 					className="bg-blue-50/30 rounded-full px-4 py-2 flex space-x-2 items-center justify-between mt-5 cursor-pointer"
 // 				>
-// 					<Typography color="white" variant="small">
+// 					<Typography color="white" variant="bodySmall">
 // 						Close Gallery
 // 					</Typography>
 // 				</div>
@@ -95,8 +100,8 @@ const ImageViewer = ({ image, setIsVisible }) => {
 			>
 				<div className="relative overflow-hidden">
 					<Image
-						alt={`Image ${image}`}
-						src={image}
+						alt={image.alt || `Gallery image`}
+						src={image.url}
 						className="aspect-[3/3] object-cover rounded-lg"
 						width={720}
 						height={480}
@@ -123,14 +128,14 @@ export function MasonryGrid({ images }: Props) {
 	const [isVisible, setIsVisible] = useState(false);
 	const [sortedImages, setSortedImages] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [image, setImage] = useState("");
+	const [image, setImage] = useState<ImageWithAlt | null>(null);
 
 	useEffect(() => {
 		setIsLoading(true);
 		const tempRatios = [];
 		let loadedCount = 0;
 
-		images.forEach((src, index) => {
+		images.forEach((imageObj, index) => {
 			const img = new window.Image();
 			img.onload = () => {
 				tempRatios[index] = img.width / img.height;
@@ -153,7 +158,7 @@ export function MasonryGrid({ images }: Props) {
 					setIsLoading(false);
 				}
 			};
-			img.src = src;
+			img.src = imageObj.url;
 		});
 	}, [images]);
 
@@ -188,8 +193,8 @@ export function MasonryGrid({ images }: Props) {
 			})()}`}
 		>
 			{!isLoading &&
-				sortedImages.map((src, index) => {
-					const originalIndex = images.indexOf(src);
+				sortedImages.map((imageObj, index) => {
+					const originalIndex = images.indexOf(imageObj);
 					const isHorizontal = aspectRatios[originalIndex] > 1;
 
 					return (
@@ -197,14 +202,14 @@ export function MasonryGrid({ images }: Props) {
 							<Image
 								onClick={() => {
 									setIsVisible(true);
-									setImage(src);
+									setImage(imageObj);
 								}}
-								alt={`Image ${index}`}
+								alt={imageObj.alt || `Gallery image ${index}`}
 								style={{ transform: "translate3d(0, 0, 0)" }}
 								className={`h-[196px] w-full transform rounded-lg brightness-90 transition group-hover:brightness-110 object-cover cursor-pointer duration-200 hover:lg:brightness-[0.8] ${
 									isHorizontal ? "h-[196px]" : "lg:h-[400px]"
 								}`}
-								src={src || ""}
+								src={imageObj.url || ""}
 								width={720}
 								height={480}
 							/>
@@ -213,8 +218,8 @@ export function MasonryGrid({ images }: Props) {
 				})}
 			{/* <div className="flex items-center justify-end">
 				<Button
-					variant="small"
-					className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600"
+					variant="bodySmall"
+					className="py-2 rounded-full px-4 bg-blue-500 hover:bg-blue-600"
 					form="primary"
 					onClick={() => {
 						setIsVisible(true);
@@ -223,7 +228,9 @@ export function MasonryGrid({ images }: Props) {
 					View all images
 				</Button>
 			</div> */}
-			{isVisible && <ImageViewer image={image} setIsVisible={setIsVisible} />}
+			{isVisible && image && (
+				<ImageViewer image={image} setIsVisible={setIsVisible} />
+			)}
 		</div>
 	);
 }

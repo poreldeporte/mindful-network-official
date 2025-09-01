@@ -1,0 +1,4 @@
+.hero-background {
+	will-change: transform;
+	transform-style: preserve-3d;
+}

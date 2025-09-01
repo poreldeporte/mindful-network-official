@@ -1,4 +1,5 @@
 import blog from './blog/blog'
+import headingBlock from './blog/headingBlock'
 
 import professionals from './professionals/professionals'
 
@@ -13,12 +14,14 @@ import user from './user/user'
 import usefulLinks from './useful-links/usefulLinks'
 import blogCategories from './blog/blogCategories'
 import admittedLanguages from './admitted-languages/admittedLanguages'
+import redirects from './redirects/redirects'
 
 export const schemaTypes = [
   professionals,
   usefulLinks,
   blog,
   blogCategories,
+  headingBlock,
   resources,
   ageSpecialties,
   conditionSpecialties,
@@ -27,4 +30,5 @@ export const schemaTypes = [
   admittedLanguages,
   user,
   companyDetail,
+  redirects,
 ]

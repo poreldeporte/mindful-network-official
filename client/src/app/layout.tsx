@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import "./globals.css";
 import Script from "next/script";
+import "./globals.css";
 
 const anticDidone = Antic_Didone({
 	weight: "400",
@@ -87,7 +86,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html>
 			<head>
 				<meta name="author" content="The Mindful Network" />
 				<meta name="theme-color" content="#fef9ef" />
@@ -135,7 +134,6 @@ export default function RootLayout({
 				className={`${anticDidone.className} ${dmSans.className} antialiased`}
 			>
 				{children}
-				<Analytics />
 			</body>
 		</html>
 	);

@@ -14,6 +14,7 @@ import {
   FaBrain,
   FaLanguage,
   FaLink,
+  FaExternalLinkAlt,
   FaUser,
   FaBuilding,
 } from 'react-icons/fa'
@@ -86,6 +87,10 @@ export default defineConfig({
               .title('Company Details')
               .icon(FaBuilding)
               .child(S.documentTypeList('companyDetails')),
+            S.listItem()
+              .title('Redirects')
+              .icon(FaExternalLinkAlt)
+              .child(S.documentTypeList('redirect')),
           ])
       },
     }),

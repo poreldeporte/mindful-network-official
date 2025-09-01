@@ -202,7 +202,7 @@ const SidePanel = ({
 
 			<footer className="px-5 pt-2.5 flex items-center">
 				{filteredProffesionals && proffesionals && (
-					<Typography as="span" color="black" variant="xsmall">
+					<Typography as="span" color="black" variant="bodySmall">
 						Showing {filteredProffesionals.length} of {proffesionals.length}{" "}
 						professionals
 					</Typography>

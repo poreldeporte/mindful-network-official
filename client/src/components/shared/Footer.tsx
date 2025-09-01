@@ -2,32 +2,29 @@
 
 import { aboutFooter } from "@/lib/constants";
 import { BlogModel, ResourcesKey } from "@/models";
+import { CompanyDetails } from "@/models/company-details.model";
 import { getLatestBlog } from "@/routes/homepage/services";
-import { ChevronUp, Phone, Mail, MapPin } from "lucide-react";
-import {
-	IconBrandX,
-	IconBrandLinkedin,
-	IconBrandInstagram,
-} from "@tabler/icons-react";
-import Image from "next/image";
-import Link from "next/link";
 import { getAllResources } from "@/services";
 import { generateResourceKeys } from "@/utilities";
+import {
+	IconBrandInstagram,
+	IconBrandLinkedin,
+	IconBrandX,
+} from "@tabler/icons-react";
+import { ChevronUp, Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, Typography } from "../ui";
-import { CompanyDetails } from "@/models/company-details.model";
-import { getCompanyDetails } from "@/services/company-details.service";
+import { Typography } from "../ui";
 
 interface Props {
 	blogPosts?: BlogModel[];
+	companyDetails?: CompanyDetails;
 }
 
-export function Footer({ blogPosts }: Props) {
+export function Footer({ blogPosts, companyDetails }: Props) {
 	const [posts, setPosts] = useState<BlogModel[] | []>([]);
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -46,20 +43,16 @@ export function Footer({ blogPosts }: Props) {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
@@ -73,8 +66,8 @@ export function Footer({ blogPosts }: Props) {
 						<div className="flex content-center space-x-4 items-center">
 							{companyDetails?.logo && (
 								<Image
-									alt="Mindful Logo"
-									className="w-54 h-16 xl:w-56 xl:h-20"
+									alt={companyDetails.logoAlt || "The Mindful Network Logo"}
+									className="w-54 h-16 xl:w-56 xl:h-20 object-cover"
 									src={companyDetails.logo}
 									width={200}
 									height={150}
@@ -86,7 +79,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.address && (
 								<div className="flex items-center space-x-3">
 									<MapPin className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="p" color="black">
+									<Typography variant="bodySmall" as="p" color="black">
 										{companyDetails.address}
 									</Typography>
 								</div>
@@ -94,7 +87,7 @@ export function Footer({ blogPosts }: Props) {
 							{companyDetails && companyDetails.phoneNumber && (
 								<div className="flex items-center space-x-3">
 									<Phone className="w-6 h-6 text-gray-500" />
-									<Typography variant="small" as="p" color="black">
+									<Typography variant="bodySmall" as="p" color="black">
 										{companyDetails.phoneNumber}
 									</Typography>
 								</div>
@@ -104,7 +97,7 @@ export function Footer({ blogPosts }: Props) {
 								<div className="flex items-center space-x-3">
 									<Mail className="w-6 h-6 text-gray-500" />
 									<Typography
-										variant="small"
+										variant="bodySmall"
 										as="p"
 										color="black"
 										className="hover:underline underline-offset-4"
@@ -124,6 +117,7 @@ export function Footer({ blogPosts }: Props) {
 											href={socialMedia.url}
 											target="_blank"
 											rel="noopener noreferrer"
+											aria-label={`Go to ${socialMedia.platform.charAt(0).toUpperCase() + socialMedia.platform.slice(1)}`}
 										>
 											{socialMedia.platform === "instagram" && (
 												<IconBrandInstagram className="w-8 h-8 text-gray-500" />
@@ -145,7 +139,7 @@ export function Footer({ blogPosts }: Props) {
 							<Typography
 								color="black"
 								as="h2"
-								variant="medium"
+								variant="body"
 								className="font-bold lg:font-semibold"
 							>
 								About
@@ -158,7 +152,11 @@ export function Footer({ blogPosts }: Props) {
 											href={label.link}
 											key={label.key}
 										>
-											<Typography color="darkGray" as="span" variant="small">
+											<Typography
+												color="darkGray"
+												as="span"
+												variant="bodySmall"
+											>
 												{label.label}
 											</Typography>
 										</Link>
@@ -170,7 +168,7 @@ export function Footer({ blogPosts }: Props) {
 							<Typography
 								color="black"
 								as="h2"
-								variant="medium"
+								variant="body"
 								className="font-bold lg:font-semibold"
 							>
 								Blog
@@ -189,7 +187,7 @@ export function Footer({ blogPosts }: Props) {
 															className=""
 															color="darkGray"
 															as="span"
-															variant="small"
+															variant="bodySmall"
 														>
 															{article.title}
 														</Typography>
@@ -203,7 +201,7 @@ export function Footer({ blogPosts }: Props) {
 							<Typography
 								color="black"
 								as="h2"
-								variant="medium"
+								variant="body"
 								className="font-bold lg:font-semibold"
 							>
 								Resources
@@ -216,7 +214,11 @@ export function Footer({ blogPosts }: Props) {
 											href={`/search?resource=${resource.key}`}
 											key={resource.key}
 										>
-											<Typography color="darkGray" as="span" variant="small">
+											<Typography
+												color="darkGray"
+												as="span"
+												variant="bodySmall"
+											>
 												{resource.label}
 											</Typography>
 										</Link>
@@ -228,12 +230,14 @@ export function Footer({ blogPosts }: Props) {
 				</div>
 			</div>
 			<div className="flex flex-col md:flex-row justify-between items-center">
-				<Typography variant="small" color="black" className="p-0 md:p-4">
+				<Typography variant="bodySmall" color="black" className="p-0 md:p-4">
 					© {new Date().getFullYear()} The Mindful Network
 				</Typography>
 
 				<a
 					href="https://www.violacreative.com/"
+					rel="noopener noreferrer"
+					target="_blank"
 					className="flex items-center gap-1 p-4 lg:p-0"
 				>
 					<span className="text-[12px] text-gray-500">Developed by</span>
@@ -246,16 +250,15 @@ export function Footer({ blogPosts }: Props) {
 					/>
 				</a>
 
-				<Button
+				<button
 					onClick={scrollToTop}
-					className="hidden lg:flex items-center bg-green-500 hover:bg-green-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
-					variant="small"
+					className="hidden lg:flex items-center bg-blue-500 hover:bg-blue-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
 				>
-					<Typography variant="small" as="h3" color="white">
+					<Typography variant="bodySmall" as="h3" color="white">
 						Back to top
 					</Typography>
 					<ChevronUp className="h-8 w-8 text-white" />
-				</Button>
+				</button>
 			</div>
 		</footer>
 	);

@@ -12,14 +12,14 @@ export const StickyButton = () => {
 
 	return (
 		<div
-			className="hidden lg:flex items-center justify-center sticky top-28 right-0 rounded-xl"
+			className="hidden lg:flex items-center justify-center right-0 rounded-xl"
 			role="complementary"
 			aria-label="Sticky action button"
 		>
 			<Button
 				className="rounded-full py-4 w-full"
 				color=""
-				variant="small"
+				variant="bodySmall"
 				onClick={handleScrollToContact}
 				aria-label="Scroll to contact section"
 			>

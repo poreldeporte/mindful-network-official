@@ -1,3 +1,5 @@
+import {imageWithAlt, imageArrayWithAlt} from '../helpers/imageWithAlt'
+
 export default {
   name: 'professionals',
   title: '👨‍⚕️ Professionals',
@@ -44,6 +46,51 @@ export default {
       type: 'text',
     },
     {
+      name: 'tocSettings',
+      title: '📚 Table of Contents Settings',
+      type: 'object',
+      fields: [
+        {
+          name: 'enableTOC',
+          title: 'Enable Table of Contents',
+          type: 'boolean',
+          description: 'Generate automatic TOC from headings',
+          default: true,
+        },
+        {
+          name: 'tocPosition',
+          title: 'TOC Position',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Before content', value: 'before'},
+              {title: 'After content', value: 'after'},
+              {title: 'Sidebar', value: 'sidebar'},
+            ],
+          },
+          default: 'before',
+        },
+        {
+          name: 'includeLevels',
+          title: 'Include Heading Levels',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            list: [
+              {title: 'H1', value: 'h1'},
+              {title: 'H2', value: 'h2'},
+              {title: 'H3', value: 'h3'},
+              {title: 'H4', value: 'h4'},
+              {title: 'H5', value: 'h5'},
+              {title: 'H6', value: 'h6'},
+            ],
+          },
+          default: ['h1', 'h2', 'h3'],
+          description: 'Which heading levels to include in TOC',
+        },
+      ],
+    },
+    {
       name: 'resource',
       title: 'Resources',
       type: 'array',
@@ -53,10 +100,7 @@ export default {
       name: 'image',
       title: 'Image',
       description: 'Suggestion: Ensure the image size is under 1MB.',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      ...imageWithAlt(),
     },
     {
       name: 'video',
@@ -70,9 +114,7 @@ export default {
     {
       name: 'imagesGallery',
       title: 'Images Gallery',
-      type: 'array',
-      validation: (Rule) => Rule.max(4),
-      of: [{type: 'image'}],
+      ...imageArrayWithAlt({validation: (Rule) => Rule.max(4)}),
     },
     {
       name: 'facility',

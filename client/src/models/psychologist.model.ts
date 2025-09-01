@@ -4,12 +4,18 @@ import { insurances } from "./insurances.model";
 import { Positions } from "./positions.model";
 import { TherapyModality } from "./therapy-modality.model";
 import { ResourcesModel } from "./resources.model";
+import { TOCSettings } from "./common/toc-settings.model";
 
 interface Address {
 	address: string;
 	city: string;
 	state: string;
 	zip: string;
+}
+
+interface ImageWithAlt {
+	url: string;
+	alt?: string;
 }
 
 export interface PsychologistModel {
@@ -31,9 +37,11 @@ export interface PsychologistModel {
 	slidingScale: string;
 	languages: string[];
 	image: string;
-	imagesGallery: string[];
+	imageAlt?: string;
+	imagesGallery: ImageWithAlt[];
 	subtitle: string;
 	video: string;
 	slug: string;
 	email?: string;
+	tocSettings?: TOCSettings;
 }

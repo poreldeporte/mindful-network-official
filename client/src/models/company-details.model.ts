@@ -5,10 +5,24 @@ interface SocialLink {
 	url: string;
 }
 
+export interface HeroBackground {
+	mediaType: "image" | "video";
+	url: string;
+}
+
+export interface SectionContent {
+	title: string;
+	subtitle?: string;
+}
+
 export interface CompanyDetails {
 	logo: string;
+	logoAlt?: string;
+	heroBackground: HeroBackground;
 	email: string;
 	address: string;
 	phoneNumber: string;
 	socialLinks: SocialLink[];
+	eventsSection?: SectionContent;
+	blogsSection?: SectionContent;
 }

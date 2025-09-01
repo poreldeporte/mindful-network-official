@@ -129,7 +129,7 @@ function ContactForm({ psychologistName }: Props) {
 					name="from_name"
 					placeholder="Name"
 					value={userInput.from_name}
-					className="rounded-full p-2 pl-10 w-full outline-0"
+					className="p-2 pl-10 w-full outline-0 border-b"
 					aria-required="true"
 					onChange={handleChange}
 				/>
@@ -146,7 +146,7 @@ function ContactForm({ psychologistName }: Props) {
 					id="phone"
 					name="user_phone"
 					placeholder="Number"
-					className="rounded-full p-2 pl-10 w-full outline-0"
+					className="p-2 pl-10 w-full outline-0 border-b"
 					value={userInput.user_phone}
 					onChange={handleChange}
 					aria-required="true"
@@ -164,7 +164,7 @@ function ContactForm({ psychologistName }: Props) {
 					id="email"
 					name="user_email"
 					placeholder="Email"
-					className="rounded-full p-2 pl-10 w-full outline-0"
+					className="p-2 pl-10 w-full outline-0 border-b"
 					value={userInput.user_email}
 					onChange={handleChange}
 					aria-required="true"
@@ -181,7 +181,7 @@ function ContactForm({ psychologistName }: Props) {
 					id="message"
 					name="message"
 					placeholder="Message"
-					className="rounded-xl p-2 pl-10 w-full resize-none outline-0"
+					className="p-2 pl-10 w-full resize-none outline-0 border-b"
 					rows={4}
 					value={userInput.message}
 					onChange={handleChange}
@@ -194,7 +194,7 @@ function ContactForm({ psychologistName }: Props) {
 			<div className="flex items-center justify-end">
 				<Button
 					className="py-2 px-4 mt-10 rounded-full w-auto"
-					variant="small"
+					variant="bodySmall"
 					type="submit"
 					disabled={isSubmitting}
 				>
@@ -216,21 +216,21 @@ export function GetInTouch({ name }: PsychologistModel) {
 				<Typography
 					className="font-dmSans"
 					color="black"
-					variant="title"
+					variant="h2"
 					as="h2"
 					id="get-in-touch-heading"
 				>
 					Get in touch with <span className="block" />
 					<span
 						style={{ textTransform: "capitalize" }}
-						className="text-green-500 font-antic"
+						className="text-blue-500 font-antic"
 					>
 						{name.toLowerCase()}
 					</span>
 				</Typography>
 			</div>
 
-			<div className="bg-orange-100 rounded-2xl w-full lg:flex-grow p-5 lg:w-1/2 lg:p-10 flex flex-col items-center justify-center">
+			<div className="bg-white border rounded-2xl w-full lg:flex-grow p-5 lg:w-1/2 lg:p-10 flex flex-col items-center justify-center">
 				<div className="flex flex-col gap-y-2 w-full">
 					<ToastProvider>
 						<ContactForm psychologistName={name} />

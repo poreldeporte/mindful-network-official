@@ -1,6 +1,7 @@
 export * from "./age-specialty.model";
 export * from "./blog.model";
 export * from "./condition-specialty.model";
+export * from "./common/toc-settings.model";
 export * from "./insurances.model";
 export * from "./positions.model";
 export * from "./psychologist.model";
@@ -10,3 +11,4 @@ export * from "./type-with-key.model";
 export * from "./variant.model";
 export * from "./company-details.model";
 export * from "./useful-links.model";
+export * from "./redirect.model";

@@ -1,26 +1,45 @@
 import { Typography } from "@/components/ui";
-import { BlogsHeroImage } from "@/lib/images";
 
-export const BlogsHero = () => {
+interface BlogsHeroProps {
+	title?: string;
+	subtitle?: string;
+}
+
+export const BlogsHero = ({ title, subtitle }: BlogsHeroProps) => {
 	return (
-		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center p-2">
-			<div
-				className="flex flex-col justify-center items-center h-full w-full rounded-xl relative overflow-hidden px-5"
-				style={{
-					backgroundImage: `url(${BlogsHeroImage.src})`,
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}
-			>
-				<div className="dark-overlay h-full w-full absolute top-0 left-0" />
-				<Typography
-					color="white"
-					as="h1"
-					variant="xlarge"
-					className="text-center md:text-start z-10"
+		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center">
+			<div className="flex flex-col justify-center items-center h-full w-full relative overflow-hidden">
+				<video
+					autoPlay
+					muted
+					loop
+					playsInline
+					className="absolute inset-0 w-full h-full object-cover"
 				>
-					Cuarted articles just for you
-				</Typography>
+					<source src={"/videos/blog-hero.mp4"} type="video/mp4" />
+				</video>
+				<div className="dark-overlay h-full w-full absolute top-0 left-0" />
+				<div className="page-width flex flex-col items-start justify-center relative z-10">
+					<Typography
+						id="hero-heading"
+						className="font-antic mb-5 leading-none text-left"
+						as="h1"
+						color="white"
+						variant="h1"
+					>
+						{title || "Curated articles just for you"}
+					</Typography>
+					{subtitle && (
+						<Typography
+							as="p"
+							className="lg:w-3/4 text-left text-[1.125rem] leading-relaxed"
+							color="white"
+							variant="body"
+						>
+							{subtitle}
+						</Typography>
+					)}
+				</div>
 			</div>
 		</section>
 	);

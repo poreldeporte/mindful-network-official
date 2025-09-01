@@ -10,12 +10,12 @@ import { Button, Typography } from "../ui";
 import Image from "next/image";
 import { getAllResources } from "@/services";
 import { generateResourceKeys } from "@/utilities";
-import { getCompanyDetails } from "@/services/company-details.service";
 
-export function MobileTopBar() {
-	const [companyDetails, setCompanyDetails] = useState<CompanyDetails | null>(
-		null
-	);
+export function MobileTopBar({
+	companyDetails,
+}: {
+	companyDetails: CompanyDetails;
+}) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -24,28 +24,28 @@ export function MobileTopBar() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const [company, resources] = await Promise.all([
-					getCompanyDetails(),
-					getAllResources(),
-				]);
+				const [resources] = await Promise.all([getAllResources()]);
 
 				const resourceKeys = generateResourceKeys(resources);
 				setResources(resourceKeys);
-				setCompanyDetails(company);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+	}, [companyDetails]);
 
 	return (
-		<header className="page-width transition-all fixed w-full flex items-center justify-between lg:hidden bg-orange-50 top-0 py-5 z-50">
-			<Link href={"/"} className="flex content-center space-x-3 items-center">
+		<header className="transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 px-2.5 z-50">
+			<Link
+				onClick={() => handleCloseHeader()}
+				href={"/"}
+				className="flex content-center space-x-3 items-center"
+			>
 				{companyDetails?.logo && (
 					<Image
-						alt="Mindful Logo"
-						className="w-auto h-12"
+						alt={companyDetails.logoAlt || "The Mindful Network Logo"}
+						className="w-auto h-20"
 						src={companyDetails.logo}
 						width={400}
 						height={400}
@@ -69,16 +69,31 @@ export function MobileTopBar() {
 						animate="open"
 						exit="closed"
 						variants={menuVariants}
-						className="absolute top-20 left-0 w-full bg-orange-50 page-width py-5 shadow-lg flex flex-col gap-2"
+						className="absolute top-20 left-0 w-full bg-white p-5 shadow-lg flex flex-col gap-2 h-[calc(100vh-88px)] overflow-y-auto"
 					>
+						<div>
+							<Typography
+								variant="h3"
+								as="span"
+								color="black"
+								className="font-medium"
+							>
+								Navigation
+							</Typography>
+						</div>
+
 						<nav className="flex flex-col gap-5">
 							<div className="flex flex-col gap-1">
-								<Typography variant="large" as="span" color="black">
+								<Typography variant="body" as="span" color="black">
 									Resources
 								</Typography>
 								{resources.map((link) => (
-									<Link key={link.key} href={`/search?resource=${link.key}`}>
-										<Typography variant="medium" as="span" color="black">
+									<Link
+										onClick={() => handleCloseHeader()}
+										key={link.key}
+										href={`/search?resource=${link.key}`}
+									>
+										<Typography variant="bodyXSmall" as="span" color="black">
 											{link.label}
 										</Typography>
 									</Link>
@@ -86,27 +101,27 @@ export function MobileTopBar() {
 							</div>
 
 							<div className="flex flex-col gap-1">
-								<Typography variant="large" as="span" color="black">
+								<Typography variant="body" as="span" color="black">
 									Navigation
 								</Typography>
 
-								<Link href="/support-links">
-									<Typography variant="medium" as="span" color="black">
+								<Link onClick={() => handleCloseHeader()} href="/support-links">
+									<Typography variant="bodyXSmall" as="span" color="black">
 										Support Links
 									</Typography>
 								</Link>
-								<Link href="/blog">
-									<Typography variant="medium" as="span" color="black">
+								<Link onClick={() => handleCloseHeader()} href="/blog">
+									<Typography variant="bodyXSmall" as="span" color="black">
 										Blog
 									</Typography>
 								</Link>
-								<Link href="/events">
-									<Typography variant="medium" as="span" color="black">
+								<Link onClick={() => handleCloseHeader()} href="/events">
+									<Typography variant="bodyXSmall" as="span" color="black">
 										Events
 									</Typography>
 								</Link>
-								<Link href="/about">
-									<Typography variant="medium" as="span" color="black">
+								<Link onClick={() => handleCloseHeader()} href="/about">
+									<Typography variant="bodyXSmall" as="span" color="black">
 										About
 									</Typography>
 								</Link>
@@ -114,9 +129,10 @@ export function MobileTopBar() {
 						</nav>
 
 						<Button
-							onClick={handleCloseHeader}
-							variant="small"
-							className="py-2 rounded-full px-4 mt-5 bg-green-500 hover:bg-green-600"
+							onClick={() => handleCloseHeader()}
+							variant="bodyXSmall"
+							form="outline"
+							className="mt-5"
 						>
 							<Link href={"/search"}>Start Search</Link>
 						</Button>

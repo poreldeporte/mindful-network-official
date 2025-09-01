@@ -3,6 +3,7 @@
 import { Button, Typography } from "@/components/ui";
 import { MindfulIsotype } from "@/lib/images";
 import { EventbriteEvent } from "@/models/eventbrite.model";
+import { isEventExpired } from "@/utilities";
 import {
 	ChevronRight,
 	MapPin,
@@ -20,6 +21,7 @@ import ActionButton from "@/components/shared/ActionButtons";
 
 export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 	const [showShareModal, setShowShareModal] = useState(false);
+	const isExpired = isEventExpired(event.end.utc);
 
 	const openInGoogleMaps = () => {
 		const address = `${event.venue.address.address_1}, ${event.venue.address.city}, ${event.venue.address.region}, ${event.venue.address.country}`;
@@ -81,7 +83,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -135,7 +137,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 											<Typography
 												as="h3"
 												color="black"
-												variant="medium"
+												variant="body"
 												className="font-bold"
 											>
 												Share as a post
@@ -153,7 +155,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 											<div className="flex flex-col items-center">
 												<button
 													onClick={() => shareVia("whatsapp")}
-													className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mb-1 hover:bg-green-600"
+													className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mb-1 hover:bg-blue-600"
 													aria-label="Share on WhatsApp"
 												>
 													<svg
@@ -243,7 +245,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 												readOnly
 											/>
 											<button
-												className="bg-green-500 text-white rounded-r-md px-4 hover:bg-green-600 flex items-center gap-1"
+												className="bg-blue-500 text-white rounded-r-md px-4 hover:bg-blue-600 flex items-center gap-1"
 												onClick={() => {
 													navigator.clipboard.writeText(window.location.href);
 												}}
@@ -261,7 +263,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -278,7 +280,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -293,7 +295,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold flex items-center gap-2"
 					>
 						<div className="bg-orange-50 p-2 rounded-full border">
@@ -327,28 +329,39 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 					<Typography
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 						className="font-bold"
 					>
 						{event.name.text}
 					</Typography>
-					<Typography as="p" color="black" variant="small">
+					<Typography as="p" color="black" variant="bodySmall">
 						{event.summary}
 					</Typography>
 					<Button
-						variant="small"
-						className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative w-full mt-5"
-						form="primary"
+						variant="bodySmall"
+						className={`py-2 rounded-full px-4 relative w-full mt-5 ${
+							isExpired
+								? "bg-gray-400 cursor-not-allowed"
+								: "bg-blue-500 hover:bg-blue-600"
+						}`}
+						form="outline"
+						disabled={isExpired}
 					>
-						<a
-							aria-label={`Get tickets for ${event.name.text}`}
-							href={event.url}
-							className="expandable-tag-link"
-							target="_blank"
-						>
-							Get Tickets Now
-						</a>
-						<ChevronRight size={20} />
+						{isExpired ? (
+							<span className="text-gray-600">Event Ended</span>
+						) : (
+							<>
+								<a
+									aria-label={`Get tickets for ${event.name.text}`}
+									href={event.url}
+									className="expandable-tag-link"
+									target="_blank"
+								>
+									Get Tickets Now
+								</a>
+								<ChevronRight size={20} />
+							</>
+						)}
 					</Button>
 				</div>
 			</div>

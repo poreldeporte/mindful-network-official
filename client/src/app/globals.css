@@ -6,7 +6,8 @@
 @tailwind utilities;
 
 .page-width {
-	padding-inline: 20px;
+	width: 91.66%;
+	margin-inline: auto;
 }
 
 html {
@@ -14,7 +15,7 @@ html {
 }
 
 .section-y-padding {
-	padding-block: 80px;
+	padding-block: 30px;
 }
 
 .blurred-overlay {
@@ -71,14 +72,11 @@ html {
 
 @media only screen and (min-width: 1200px) {
 	.page-width {
-		padding-inline: 70px;
+		width: 75%;
+		margin-inline: auto;
 	}
+
 	.section-y-padding {
-		padding-block: 120px;
-	}
-}
-@media only screen and (min-width: 1920px) {
-	.page-width {
-		padding-inline: 140px;
+		padding-block: 50px;
 	}
 }

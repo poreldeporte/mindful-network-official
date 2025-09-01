@@ -30,7 +30,12 @@ export const getPsychologistById = async (
 			},
             "languages": languages[]->.language,
             "image": image.asset->url,
+            "imageAlt": image.alt,
             "video": video.asset->url,
+            "imagesGallery": imagesGallery[]{
+                "url": asset->url,
+                "alt": alt
+            }
         }`;
 
 		const data = await sanityClient.fetch(
@@ -39,7 +44,7 @@ export const getPsychologistById = async (
 			{ cache: "no-store" }
 		);
 
-		console.log(data);
+		// console.log(data);
 		return getPsychologistsAdapter(data);
 	} catch (error) {
 		console.error("Error fetching psychologist data:", error);
@@ -73,7 +78,8 @@ export const getAllProfessionals = async () => {
 				_id,
 				title
 			},
-			"image": image.asset->url
+			"image": image.asset->url,
+			"imageAlt": image.alt
 		}`,
 			{},
 			{ cache: "no-store" }

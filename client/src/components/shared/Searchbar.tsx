@@ -61,7 +61,7 @@ export function Searchbar({ onClick }: Props) {
 					placeholder={selectedCondition ? selectedCondition : "All"}
 					value={selectedCondition || ""}
 					setValue={setSelectedCondition}
-					variant="medium"
+					variant="body"
 					className="h-full rounded-l-full w-20"
 				/>
 
@@ -74,7 +74,7 @@ export function Searchbar({ onClick }: Props) {
 				/>
 
 				<Button
-					variant="medium"
+					variant="body"
 					className="absolute rounded-full px-4 right-1 top-1/2 -translate-y-1/2 h-[calc(100%-8px)]"
 					onClick={handleSubmit}
 				>

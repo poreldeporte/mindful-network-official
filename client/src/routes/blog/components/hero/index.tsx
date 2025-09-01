@@ -15,7 +15,7 @@ export const Hero = ({ post }: SectionProps) => {
 					className="font-antic mb-2"
 					as="h1"
 					color="black"
-					variant="title"
+					variant="h1"
 				>
 					{post.title}
 				</Typography>
@@ -27,7 +27,7 @@ export const Hero = ({ post }: SectionProps) => {
 				aria-hidden="true"
 			>
 				<Image
-					alt={`Featured image for ${post.title}`}
+					alt={post.featuredImageAlt || `Featured image for ${post.title}`}
 					src={post.featuredImage}
 					width={1024}
 					height={512}

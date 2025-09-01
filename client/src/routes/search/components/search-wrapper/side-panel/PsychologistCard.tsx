@@ -1,4 +1,4 @@
-import { Badge, Typography } from "@/components/ui";
+import { Badge, Typography, Button } from "@/components/ui";
 import { UserImage } from "@/lib/images";
 import { PsychologistModel } from "@/models";
 import { formatType } from "@/utilities";
@@ -32,7 +32,7 @@ const PsychologistCard = ({
 			<div className="flex items-start justify-center md:justify-start w-full">
 				<Image
 					src={image ? image : UserImage}
-					alt={`Profile image of ${name}`}
+					alt={psychologist.imageAlt || `Profile image of ${name}`}
 					loading="lazy"
 					width={100}
 					height={100}
@@ -46,7 +46,7 @@ const PsychologistCard = ({
 						className="font-bold mb-2"
 						as="h2"
 						color="black"
-						variant="medium"
+						variant="body"
 					>
 						{name}
 					</Typography>
@@ -73,7 +73,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="bodySmall">
 							<span className="font-semibold">Specialty:</span>{" "}
 							{conditionSpecialty?.length
 								? conditionSpecialty
@@ -88,7 +88,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="bodySmall">
 							<span className="font-semibold">Accepted Insurance:</span>{" "}
 							{showInsurances ? (
 								<>
@@ -107,7 +107,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="bodySmall">
 							<span className="font-semibold">Age Specialty:</span>{" "}
 							{ageSpecialty?.length
 								? ageSpecialty.map((specialty) => specialty.age).join(", ")
@@ -120,7 +120,7 @@ const PsychologistCard = ({
 							className="min-h-5 min-w-5 text-gray-500"
 							aria-hidden="true"
 						/>
-						<Typography as="p" color="darkGray" variant="small">
+						<Typography as="p" color="darkGray" variant="bodySmall">
 							<span className="font-semibold">Therapy Option:</span>{" "}
 							{therapyOptions?.length
 								? therapyOptions.map((option) => option.type).join(", ")
@@ -133,12 +133,15 @@ const PsychologistCard = ({
 			<div className="flex justify-end items-end h-full mt-2">
 				<Link
 					href={`/professional/${slug}`}
-					className="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-700 transition-colors text-white text-center w-full md:w-max"
 					aria-label={`View profile of ${name}`}
 				>
-					<Typography as="span" color="white" variant="small">
+					<Button
+						form="outline-blue"
+						variant="bodySmall"
+						className="w-full md:w-max"
+					>
 						View profile
-					</Typography>
+					</Button>
 				</Link>
 			</div>
 		</li>

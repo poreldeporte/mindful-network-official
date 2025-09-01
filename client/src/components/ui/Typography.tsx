@@ -10,23 +10,22 @@ type ColorType =
 	| "green";
 
 const variantClasses: Record<VariantType, string> = {
-	xxlarge: "text-xl md:text-2xl xl:text-3xl leading-tight",
-	xlarge: "text-base md:text-lg xl:text-xl leading-tight",
-	large: "text-sm md:text-base xl:text-lg leading-tight",
-	medium: "text-xs xl:text-sm",
-	small: "text-xs text-[20px]",
-	xsmall: "text-[14px] lg:text-xs",
-	title: "text-xl md:text-2xl xl:text-3xl font-antic leading-tight",
-	subtitle: "text-base md:text-lg xl:text-xl font-antic",
-	item: "text-[16px]",
+	h1: "text-[2.5rem] leading-tight sm:text-[3rem] md:text-[4rem] lg:text-[4.5rem] xl:text-[5rem]",
+	h2: "text-[1.75rem] leading-tight sm:text-[2rem] md:text-[2.5rem] lg:text-[2.75rem] xl:text-[3rem]",
+	h3: "text-[1.25rem] leading-tight sm:text-[1.5rem] md:text-[1.75rem] lg:text-[1.875rem] xl:text-[2rem]",
+	body: "text-[1rem] leading-relaxed sm:text-[1.125rem] md:text-[1.25rem] lg:text-[1.375rem] xl:text-[1.5rem]",
+	bodySmall:
+		"text-[0.875rem] leading-relaxed sm:text-[1rem] md:text-[1.0625rem] lg:text-[1.125rem]",
+	bodyXSmall:
+		"text-[0.75rem] leading-relaxed sm:text-[0.875rem] md:text-[0.9375rem] lg:text-[1rem]",
 };
 
 const colorClasses: Record<ColorType, string> = {
 	white: "text-white",
-	black: "text-gray-950",
+	black: "text-[#3C3D42]",
 	blue: "text-blue-500",
-	green: "text-green-500",
-	darkGray: "text-gray-700",
+	green: "text-blue-500",
+	darkGray: "text-[#3C3D42]",
 	lightGray: "text-gray-400",
 };
 
@@ -45,6 +44,7 @@ export const Typography: React.FC<TypographyProps> = ({
 	color,
 	className = "",
 	id,
+	children,
 	...props
 }) => {
 	const variantClass = variantClasses[variant] || "";
@@ -54,6 +54,6 @@ export const Typography: React.FC<TypographyProps> = ({
 	return React.createElement(
 		Tag,
 		{ className: classes, id, ...props },
-		props.children
+		children
 	);
 };

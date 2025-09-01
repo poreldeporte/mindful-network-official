@@ -39,7 +39,7 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 					className="font-antic mb-5 leading-none"
 					as="h1"
 					color="black"
-					variant="title"
+					variant="h2"
 				>
 					{event.name.text}
 				</Typography>
@@ -47,23 +47,23 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 				<div className="w-full">
 					<div className="border-b border-[#525252] grid lg:grid-cols-2 py-10">
 						<div>
-							<Typography as="p" color="black" variant="small">
+							<Typography as="p" color="black" variant="bodySmall">
 								<strong>{formatEventDate(event.start.utc)}</strong>
 							</Typography>
-							<Typography as="p" color="black" variant="small">
+							<Typography as="p" color="black" variant="bodySmall">
 								{event.venue.address.localized_address_display}
 							</Typography>
 						</div>
 
 						<div className="space-y-5">
-							<Typography as="p" color="black" variant="medium">
+							<Typography as="p" color="black" variant="body">
 								{event.summary}
 							</Typography>
 
 							<Button
-								variant="small"
-								className="py-2 rounded-full px-4 bg-green-500 hover:bg-green-600 relative"
-								form="primary"
+								variant="bodySmall"
+								className="py-2 rounded-full px-4 bg-blue-500 hover:bg-blue-600 relative"
+								form="outline"
 							>
 								<a
 									aria-label={`Get tickets for ${event.name.text}`}

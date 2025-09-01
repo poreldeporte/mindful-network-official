@@ -1,188 +1,36 @@
 import { Typography } from "@/components/ui";
-import Image from "next/image";
-import { Person1, Person2, Person3 } from "@/lib/images";
-import Link from "next/link";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import { ResourcesContainer } from "./ResourcesContainer";
 
 export function About() {
 	return (
 		<section
-			className="page-width section-y-padding bg-gray-50"
+			className="page-width section-y-padding flex flex-col xl:items-center"
 			aria-labelledby="about-section-heading"
 		>
-			<Typography
-				className="mb-2"
-				color="black"
-				as="h2"
-				variant="title"
-				id="about-section-heading"
-			>
-				<span className="text-green-500">Mental Health Resources</span>{" "}
-				<span className="block" />
-				to build your support network
-			</Typography>
-			<div className="grid grid-cols-1 xl:grid-cols-2 mt-10 lg:mt-20 gap-10 lg:gap-5">
-				<div className="flex flex-col gap-5">
-					<Typography
-						className="mb-2 font-medium w-3/4"
-						color="black"
-						as="h3"
-						variant="large"
-					>
-						Access to reliable & reputable mental health care and emotional
-						health resources.
-					</Typography>
-
-					<div className="lg:my-5" role="list" aria-label="List of benefits">
-						<article
-							role="listitem"
-							className="mb-4"
-							aria-labelledby={`benefit-title-Trusted and Verified Resources`}
-						>
-							<Typography
-								className="mb-2 font-semibold"
-								color="black"
-								as="h4"
-								variant="medium"
-								id={`benefit-title-Trusted and Verified Resources`}
-							>
-								Trusted and Verified Resources
-							</Typography>
-
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="p"
-								variant="small"
-							>
-								We thoroughly vet and verify every provider in our network,
-								ensuring you only have access to reputable and reliable options
-								to tackle mental health conditions.
-								<br />
-								<br />
-								Find:
-							</Typography>
-							<ul className="list-disc list-inside">
-								<li>Licensed Therapists</li>
-								<li>Psychiatrist/Medication Management</li>
-								<li>
-									Crisis Counseling for Youth Mental & Substance Use Disorders
-								</li>
-								<li>Peer-led Support Groups</li>
-								<li>Innovative Therapies</li>
-								<li>And more</li>
-							</ul>
-						</article>
-
-						<article
-							role="listitem"
-							className="mb-4"
-							aria-labelledby={`benefit-title-Up-to-Date Information`}
-						>
-							<Typography
-								className="mb-2 font-semibold"
-								color="black"
-								as="h4"
-								variant="medium"
-								id={`benefit-title-Up-to-Date Information`}
-							>
-								Up-to-Date Information
-							</Typography>
-
-							<ul className="list-disc list-inside">
-								<li>Listings of South Florida Professionals</li>
-								<li>Online Resources: Support Links and Educational Blogs</li>
-							</ul>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="p"
-								variant="small"
-							>
-								<br />
-								Our team regularly monitors and updates listings and resources
-								so you connect with the best mental health crisis services,
-								mental health treatments, and support for a range of mental
-								health disorders and mood disorders.
-							</Typography>
-						</article>
-
-						<article
-							role="listitem"
-							className="mb-4"
-							aria-labelledby={`benefit-title-Personalized Search Options`}
-						>
-							<Typography
-								className="mb-2 font-semibold"
-								color="black"
-								as="h4"
-								variant="medium"
-								id={`benefit-title-Personalized Search Options`}
-							>
-								Personalized Search Options
-							</Typography>
-
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="p"
-								variant="small"
-							>
-								Use our advanced filters to find services tailored to your
-								specific mental health concern. Whether you're navigating
-								traumatic events, caring for a loved one in a suicidal crisis,
-								or simply raising your mental health awareness.
-								<br />
-								<br />
-								Search By:
-							</Typography>
-							<ul className="list-disc list-inside">
-								<li>Condition</li>
-								<li>Type of therapy</li>
-								<li>Health care provider</li>
-								<li>Insurance</li>
-							</ul>
-						</article>
-					</div>
-
-					<Link
-						href={"/about"}
-						className="lg:mt-4 py-2 w-max px-4 rounded-full bg-green-500 hover:bg-green-700 transition-colors text-white text-center"
-						aria-label="Start your search for mental health resources"
-					>
-						<Typography
-							className="flex items-center gap-2"
-							as="span"
-							variant={"small"}
-							color="white"
-						>
-							See Why This Means So Much To Us{" "}
-							<ArrowLongRightIcon className="h-7 w-7" />
-						</Typography>
-					</Link>
-				</div>
-
-				<div
-					className="grid grid-cols-3 xl:flex gap-5 w-full h-full relative"
-					aria-label="People illustrations representing support and guidance"
+			<div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-end">
+				<Typography
+					className="mb-2 col-span-6 text-left font-antic"
+					color="black"
+					as="h2"
+					variant="h2"
+					id="about-section-heading"
 				>
-					<Image
-						className="w-auto h-auto xl:absolute xl:top-0 xl:left-0 xl:w-[370px] xl:h-auto"
-						src={Person1}
-						alt="Person smiling, symbolizing support and positivity"
-					/>
-					<Image
-						className="w-auto h-auto xl:absolute xl:-bottom-20 xl:w-[200px] xl:left-1/4 xl:h-auto"
-						src={Person2}
-						alt="Person with a thoughtful expression, representing understanding"
-					/>
-					<Image
-						className="w-auto h-auto xl:absolute xl:bottom-20 xl:w-[270px] xl:right-20 xl:h-auto"
-						src={Person3}
-						alt="Person with an empathetic look, symbolizing compassion"
-					/>
-				</div>
+					<span className="text-blue-500">Mental Health Resources</span>{" "}
+					<span className="block" />
+					to build your support network
+				</Typography>
+				<Typography
+					className="mb-4 col-span-6 xl:px-10"
+					color="black"
+					as="h3"
+					variant="bodySmall"
+				>
+					Access to reliable & reputable mental health care and emotional health
+					resources.
+				</Typography>
 			</div>
+
+			<ResourcesContainer />
 		</section>
 	);
 }

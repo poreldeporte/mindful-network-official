@@ -39,7 +39,7 @@ const ActionButton = ({
 					}
 				}}
 			>
-				<Icon size={20} className="text-green-500" />
+				<Icon size={20} className="text-blue-500" />
 			</button>
 			<Tooltip visible={showTooltip} text={tooltipContent} />
 		</div>
