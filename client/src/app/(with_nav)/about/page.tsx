@@ -1,7 +1,7 @@
-import { AboutImage } from "@/lib/images";
+import { CoachingAndSupportImage } from "@/lib/images";
 
-import Image from "next/image";
 import { Typography } from "@/components/ui";
+import Image from "next/image";
 
 export default function About() {
 	return (
@@ -47,7 +47,7 @@ export default function About() {
 
 			<div className="flex h-full w-full col-span-1 lg:col-span-4 order-2 lg:order-1">
 				<Image
-					src={AboutImage}
+					src={CoachingAndSupportImage}
 					alt="Professional at Mindful Network"
 					className="w-full sm:w-1/2 lg:w-full h-full object-cover object-top"
 					priority
