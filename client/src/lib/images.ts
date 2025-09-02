@@ -22,8 +22,6 @@ import ExploreCuratedResourcesImage from "@/assets/images/explore-curated-resour
 import JoinOurNetworkImage from "@/assets/images/join-our-network.webp";
 import OurMissionImage from "@/assets/images/our-mission.webp";
 
-import AboutImage from "@/assets/images/about/about.webp";
-
 import AvailableArticlesImage from "@/assets/images/blog/blog-article.webp";
 import SearchCtaBlogImage from "@/assets/images/blog/blog-assistance.webp";
 
@@ -53,5 +51,4 @@ export {
 	ExploreCuratedResourcesImage,
 	JoinOurNetworkImage,
 	OurMissionImage,
-	AboutImage,
 };

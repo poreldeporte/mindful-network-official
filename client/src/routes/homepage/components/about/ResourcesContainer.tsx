@@ -103,9 +103,9 @@ export const ResourcesContainer = () => {
 
 					<Link
 						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
-						href="/about"
+						href="/search"
 					>
-						Learn more <ArrowLongRightIcon className="w-4 h-4" />
+						Start Search <ArrowLongRightIcon className="w-4 h-4" />
 					</Link>
 				</div>
 
@@ -168,9 +168,9 @@ export const ResourcesContainer = () => {
 
 					<Link
 						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
-						href="/about"
+						href="/search"
 					>
-						Learn more <ArrowLongRightIcon className="w-4 h-4" />
+						Start Search <ArrowLongRightIcon className="w-4 h-4" />
 					</Link>
 				</div>
 
@@ -255,9 +255,9 @@ export const ResourcesContainer = () => {
 
 					<Link
 						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
-						href="/about"
+						href="/search"
 					>
-						Learn more <ArrowLongRightIcon className="w-4 h-4" />
+						Start Search <ArrowLongRightIcon className="w-4 h-4" />
 					</Link>
 				</div>
 
