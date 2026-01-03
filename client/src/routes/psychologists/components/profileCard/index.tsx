@@ -15,7 +15,7 @@ export function ProfileCard({
 }: PsychologistModel) {
 	return (
 		<header
-			className="mb-10 mt-32 justify-center bg-white border border-gray-200 rounded-2xl p-10 lg:mt-0"
+			className="mb-10 mt-32 justify-center bg-white border border-gray-200 p-10 lg:mt-0"
 			aria-labelledby="profile-card-heading"
 		>
 			<div className="flex items-center justify-start">
@@ -31,7 +31,7 @@ export function ProfileCard({
 				<div>
 					<Typography
 						className="font-bold"
-						as="h2"
+						as="h1"
 						variant="body"
 						color="black"
 						id="profile-card-heading"

@@ -46,7 +46,7 @@ export function Section({
 	return (
 		<section
 			id={id}
-			className="py-10 px-10 lg:rounded-2xl my-10 bg-white border border-gray-200 transition-all h-max"
+			className="py-10 px-10 my-10 bg-white border border-gray-200 transition-all h-max"
 			aria-labelledby={`${id}-header`}
 		>
 			<SectionHeader
@@ -165,7 +165,12 @@ export const SectionHeader = ({
 			tabIndex={0}
 		>
 			<div className="flex items-center">
-				<Typography variant="body" className="font-bold" as="h3" color="black">
+				<Typography
+					variant="body"
+					className="font-bold font-antic"
+					as="h3"
+					color="black"
+				>
 					{title}
 				</Typography>
 			</div>

@@ -27,5 +27,6 @@ export interface BlogModel {
 		metaTitle: string;
 		metaDescription: string;
 		openGraphImage?: string;
+		openGraphImageAlt?: string;
 	};
 }

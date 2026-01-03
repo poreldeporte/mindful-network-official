@@ -204,8 +204,8 @@ export const ResourcesContainer = () => {
 					>
 						Use our advanced filters to find services tailored to your specific
 						mental health concern. Whether you're navigating traumatic events,
-						caring for a loved one in a suicidal crisis, or simply raising your
-						mental health awareness.
+						caring for a loved one, or simply raising your mental health
+						awareness.
 						<br />
 						<br />
 						Search By:

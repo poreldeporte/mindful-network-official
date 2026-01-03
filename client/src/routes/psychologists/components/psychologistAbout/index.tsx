@@ -125,8 +125,6 @@ export function PsychologistAbout({
 		});
 	}
 
-	console.log(imagesGallery);
-
 	return (
 		<>
 			{video && (

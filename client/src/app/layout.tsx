@@ -16,6 +16,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(
+		process.env.NEXT_PUBLIC_SITE_URL || "https://themindfulnetwork.com"
+	),
 	title:
 		"The Mindful Network - Your Guide to Mental Health Resources in South Florida",
 	description:
@@ -56,7 +59,7 @@ export const metadata: Metadata = {
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
-				type: "image/png",
+				type: "image/webp",
 			},
 		],
 	},
@@ -72,7 +75,7 @@ export const metadata: Metadata = {
 				width: 1200,
 				height: 630,
 				alt: "The Mindful Network - Mental Health Resources",
-				type: "image/png",
+				type: "image/webp",
 			},
 		],
 	},

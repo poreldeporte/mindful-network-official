@@ -56,6 +56,7 @@ export default {
           type: 'boolean',
           description: 'Generate automatic TOC from headings',
           default: true,
+          initialValue: true,
         },
         {
           name: 'tocPosition',
@@ -68,7 +69,8 @@ export default {
               {title: 'Sidebar', value: 'sidebar'},
             ],
           },
-          default: 'before',
+          default: 'sidebar',
+          initialValue: 'sidebar',
         },
         {
           name: 'includeLevels',

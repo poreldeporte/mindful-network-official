@@ -59,9 +59,8 @@ export const MentalHealthCrisis = () => {
 					variant="bodySmall"
 				>
 					<br />
-					<strong>Not urgent?</strong> Filter via mental illness, mental health
-					challenge, mental health services and more to find the best place to
-					start.
+					<strong>Not urgent?</strong> Filter via mental health challenge,
+					mental health services and more to find the best place to start.
 					<br />
 					<br />
 					<strong>Half-way there?</strong> Maybe you have an advocate but need

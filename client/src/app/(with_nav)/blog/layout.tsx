@@ -4,6 +4,9 @@ export const metadata: Metadata = {
 	title: "Comprehensive Mental Health Blog - Mindful Network",
 	description:
 		"Explore in-depth articles on mental health, well-being, and self-care. Find expert resources, therapy insights, and the latest trends in psychology.",
+	alternates: {
+		canonical: "/blog",
+	},
 	keywords: [
 		"mental health",
 		"wellness",

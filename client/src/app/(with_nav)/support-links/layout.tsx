@@ -4,6 +4,9 @@ export const metadata: Metadata = {
 	title: "Mental Health Support Links | The Mindful Network",
 	description:
 		"Access curated mental health resources, educational materials, crisis hotlines, support groups, and wellness tools. Find valuable information and support for your mental health journey.",
+	alternates: {
+		canonical: "/support-links",
+	},
 	keywords: [
 		"mental health resources",
 		"crisis hotlines",

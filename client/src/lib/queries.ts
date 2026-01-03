@@ -21,8 +21,12 @@ export const blogByIdQuery = `*[_type == "blog" && slug.current == $slug][0]{
     "featuredImageAlt": featuredImage.alt,
     "authorImage": authorImage.asset->url,
     "authorImageAlt": authorImage.alt,
-    metaTitle,
-    metaDescription
+    seo {
+      metaTitle,
+      metaDescription,
+      "openGraphImage": openGraphImage.asset->url,
+      "openGraphImageAlt": openGraphImage.alt
+    }
   }`;
 
 export const blogsWithOffsetQuery = ({
@@ -42,7 +46,7 @@ export const blogsWithOffsetQuery = ({
 		: "";
 	const sanitizedOrder = order === "asc" ? "asc" : "desc";
 
-	const query = `*[_type == 'blog' ${categoryFilter}] | order(publishedAt ${sanitizedOrder}) [${offset}...${offset + limit}] {
+  const query = `*[_type == 'blog' ${categoryFilter}] | order(publishDate ${sanitizedOrder}) [${offset}...${offset + limit}] {
       _id,
       "category": {
         ...category->,

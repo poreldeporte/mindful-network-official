@@ -47,7 +47,7 @@ export const EventsContainer = ({ events }: Props) => {
 
 	return (
 		<div className="mx-auto w-11/12 xl:w-3/4 pb-20">
-			<header className="py-10">
+			<header className="lg:py-10 py-5">
 				<div className="flex flex-col z-10">
 					<Typography color="black" as="h2" variant="h3" className="font-bold">
 						Events

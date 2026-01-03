@@ -4,6 +4,9 @@ export const metadata: Metadata = {
 	title: "Mental Health Events & Workshops - The Mindful Network",
 	description:
 		"Discover upcoming mental health events, workshops, and support groups in South Florida. Find valuable resources and community connections for your mental health journey.",
+	alternates: {
+		canonical: "/events",
+	},
 	keywords: [
 		"mental health events",
 		"therapy workshops",

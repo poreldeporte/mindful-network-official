@@ -88,7 +88,7 @@ export default function ProfessionalTOC({
 
 	const tocSettings = psychologist.tocSettings || {
 		enableTOC: true,
-		tocPosition: "before",
+		tocPosition: "sidebar",
 		includeLevels: ["h1", "h2", "h3"],
 	};
 
@@ -141,12 +141,7 @@ export default function ProfessionalTOC({
 
 	return (
 		<nav className={`professional-toc ${className}`}>
-			<div className="bg-white rounded-2xl border border-gray-200 p-4">
-				<h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center">
-					<span className="mr-2">👨‍⚕️</span>
-					Profile Sections
-				</h3>
-
+			<div className="bg-white border border-gray-200 p-4">
 				<ul className="space-y-2">
 					{tocItems.map((item) => (
 						<li key={item.id}>

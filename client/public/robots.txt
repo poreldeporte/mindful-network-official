@@ -8,19 +8,8 @@ Disallow: /temp/
 Disallow: /*.log$
 Disallow: /cgi-bin/
 
-# Permitir páginas de búsqueda con filtros válidos
-Allow: /search?resource=*
-Allow: /search?condition=*
-Allow: /search?insurance=*
-Allow: /search?therapy=*
-Allow: /search?*
-
-# Bloquear acceso a páginas de búsqueda vacías o problemáticas
-Disallow: /search?$
-Disallow: /search?&
-Disallow: /*?s=*
-Disallow: /*&s=*
-Disallow: /*?filter=*
+# Bloquear acceso a la búsqueda interna
+Disallow: /search
 
 # Permitir acceso específico a archivos CSS y JS (importantes para el renderizado)
 Allow: /assets/

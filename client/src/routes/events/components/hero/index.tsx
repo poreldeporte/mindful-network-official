@@ -7,7 +7,7 @@ interface EventsHeroProps {
 
 export const EventsHero = ({ title, subtitle }: EventsHeroProps) => {
 	return (
-		<section className="mt-20 lg:mt-0 h-[50vh] lg:h-[70vh] flex items-center justify-center">
+		<section className="mt-20 lg:mt-0 h-[45vh] lg:h-[70vh] flex items-center justify-center">
 			<div className="flex flex-col justify-center items-center h-full w-full relative overflow-hidden">
 				<video
 					autoPlay

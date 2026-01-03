@@ -230,7 +230,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 				</Typography>
 			</div>
 
-			<div className="bg-white border rounded-2xl w-full lg:flex-grow p-5 lg:w-1/2 lg:p-10 flex flex-col items-center justify-center">
+			<div className="bg-white border w-full lg:flex-grow p-5 lg:w-1/2 lg:p-10 flex flex-col items-center justify-center">
 				<div className="flex flex-col gap-y-2 w-full">
 					<ToastProvider>
 						<ContactForm psychologistName={name} />

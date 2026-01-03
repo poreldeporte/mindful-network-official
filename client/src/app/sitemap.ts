@@ -4,6 +4,8 @@ import { EventbriteKeys } from "@/config/eventbrite.config";
 import { generateSlug } from "@/utilities";
 import { MetadataRoute } from "next";
 
+export const revalidate = 3600;
+
 const professionalsQuery = `*[_type == 'professionals'] {
 	"slug": slug.current,
 	_updatedAt
@@ -37,12 +39,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			lastModified: currentDate,
 			changeFrequency: "monthly",
 			priority: 0.8,
-		},
-		{
-			url: `${baseUrl}/search`,
-			lastModified: currentDate,
-			changeFrequency: "monthly",
-			priority: 0.6,
 		},
 		{
 			url: `${baseUrl}/support-links`,

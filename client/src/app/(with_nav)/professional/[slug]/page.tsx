@@ -9,7 +9,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatType } from "@/utilities";
 import ProfessionalTOC from "@/components/shared/ProfessionalTOC";
-import { getTOCPosition } from "@/utilities/toc.utility";
 
 export async function generateMetadata({
 	params,
@@ -54,22 +53,6 @@ export async function generateMetadata({
 		alternates: {
 			canonical: url,
 		},
-		other: {
-			"application/ld+json": JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "Person",
-				name: psychologist.name,
-				description: psychologist.subtitle,
-				image: psychologist.image,
-				jobTitle: "Mental Health Professional",
-				url: url,
-				worksFor: {
-					"@type": "Organization",
-					name: "Mindful Network",
-					url: "https://themindfulnetwork.com",
-				},
-			}),
-		},
 	};
 }
 
@@ -84,42 +67,41 @@ export default async function PsychologistPage({
 		notFound();
 	}
 
-	const tocSettings = psychologist.tocSettings || {
-		enableTOC: true,
-		tocPosition: "before",
-		includeLevels: ["h1", "h2", "h3"],
+	const url = `https://themindfulnetwork.com/professional/${params.slug}`;
+	const schemaData = {
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name: psychologist.name,
+		description: psychologist.subtitle || psychologist.description,
+		image: psychologist.image,
+		jobTitle: "Mental Health Professional",
+		url,
+		worksFor: {
+			"@type": "Organization",
+			name: "Mindful Network",
+			url: "https://themindfulnetwork.com",
+		},
 	};
 
-	const tocPositionClass = getTOCPosition(tocSettings.tocPosition);
-
 	return (
-		<div className="min-h-screen mx-auto w-11/12 xl:w-3/4 lg:grid lg:grid-cols-6 lg:items-start lg:mt-28 lg:gap-x-10">
-			<div className="lg:col-span-4">
-				{tocSettings.enableTOC && tocSettings.tocPosition === "before" && (
-					<div className={`${tocPositionClass} mb-8`}>
-						<ProfessionalTOC psychologist={psychologist} />
-					</div>
-				)}
-
-				<ProfileCard {...psychologist} />
-				<PsychologistAbout {...psychologist} />
-
-				{tocSettings.enableTOC && tocSettings.tocPosition === "after" && (
-					<div className={`${tocPositionClass} mt-8`}>
-						<ProfessionalTOC psychologist={psychologist} />
-					</div>
-				)}
-			</div>
-			<div className="lg:col-span-2 lg:relative h-full">
-				<div className="sticky top-28 space-y-5">
-					{tocSettings.enableTOC && tocSettings.tocPosition === "sidebar" && (
-						<ProfessionalTOC psychologist={psychologist} />
-					)}
-
-					<StickyButton />
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+			/>
+			<div className="min-h-screen mx-auto w-11/12 xl:w-3/4 lg:grid lg:grid-cols-6 lg:items-start lg:mt-28 lg:gap-x-5">
+				<div className="lg:col-span-4">
+					<ProfileCard {...psychologist} />
+					<PsychologistAbout {...psychologist} />
 				</div>
+				<div className="lg:col-span-2 lg:relative h-full">
+					<div className="sticky top-28 space-y-5">
+						<ProfessionalTOC psychologist={psychologist} />
+						<StickyButton />
+					</div>
+				</div>
+				<GetInTouch {...psychologist} />
 			</div>
-			<GetInTouch {...psychologist} />
-		</div>
+		</>
 	);
 }
