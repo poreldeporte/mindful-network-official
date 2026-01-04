@@ -225,6 +225,7 @@ const MediaCollage = ({
 }) => {
 	const [leftImage, middleImage, rightImage] = images;
 	const isSingle = galleryCount <= 1;
+	const isProfileImage = galleryCount === 0;
 	const isDouble = galleryCount === 2;
 	const isTriple = galleryCount >= 3;
 	const middleSource = middleImage ?? leftImage;
@@ -238,7 +239,11 @@ const MediaCollage = ({
 						src={leftImage.src}
 						alt={leftImage.alt}
 						fill
-						className="rounded-2xl object-cover"
+						className={`rounded-2xl ${
+							isProfileImage
+								? "object-contain object-left"
+								: "object-cover"
+						}`}
 						sizes="(max-width: 768px) 100vw, 60vw"
 					/>
 					{primaryLabel && (

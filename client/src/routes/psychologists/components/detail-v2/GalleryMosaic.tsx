@@ -6,16 +6,19 @@ import type { ListingImage } from "./listingDetailMapper";
 interface GalleryMosaicProps {
 	images: ListingImage[];
 	onOpenGallery: (index: number) => void;
+	isProfileImage?: boolean;
 }
 
 const Tile = ({
 	image,
 	className,
 	onOpenGallery,
+	isProfileImage,
 }: {
 	image: ListingImage;
 	className: string;
 	onOpenGallery: () => void;
+	isProfileImage?: boolean;
 }) => (
 	<button
 		type="button"
@@ -27,7 +30,9 @@ const Tile = ({
 			src={image.src}
 			alt={image.alt}
 			fill
-			className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+			className={`transition-transform duration-200 group-hover:scale-[1.02] ${
+				isProfileImage ? "object-contain" : "object-cover"
+			}`}
 			sizes="(max-width: 768px) 100vw, 50vw"
 		/>
 	</button>
@@ -36,8 +41,10 @@ const Tile = ({
 export const GalleryMosaic = ({
 	images,
 	onOpenGallery,
+	isProfileImage = false,
 }: GalleryMosaicProps) => {
 	const visibleImages = images.slice(0, 5);
+	const useContain = isProfileImage && visibleImages.length <= 1;
 
 	if (visibleImages.length <= 1) {
 		return (
@@ -46,6 +53,7 @@ export const GalleryMosaic = ({
 					image={visibleImages[0]}
 					onOpenGallery={() => onOpenGallery(0)}
 					className="h-full w-full"
+					isProfileImage={useContain}
 				/>
 			</div>
 		);
@@ -63,6 +71,7 @@ export const GalleryMosaic = ({
 							image={image}
 							onOpenGallery={() => onOpenGallery(index)}
 							className="h-full w-full"
+							isProfileImage={false}
 						/>
 					</div>
 				))}
@@ -79,6 +88,7 @@ export const GalleryMosaic = ({
 						image={first}
 						onOpenGallery={() => onOpenGallery(0)}
 						className="h-full w-full"
+						isProfileImage={false}
 					/>
 				</div>
 				<div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 lg:h-full">
@@ -87,6 +97,7 @@ export const GalleryMosaic = ({
 							image={second}
 							onOpenGallery={() => onOpenGallery(1)}
 							className="h-full w-full"
+							isProfileImage={false}
 						/>
 					</div>
 					<div className="relative aspect-[4/2.1] lg:aspect-auto lg:h-full">
@@ -94,6 +105,7 @@ export const GalleryMosaic = ({
 							image={third}
 							onOpenGallery={() => onOpenGallery(2)}
 							className="h-full w-full"
+							isProfileImage={false}
 						/>
 					</div>
 				</div>
@@ -110,6 +122,7 @@ export const GalleryMosaic = ({
 					image={main}
 					onOpenGallery={() => onOpenGallery(0)}
 					className="h-full w-full"
+					isProfileImage={false}
 				/>
 			</div>
 			<div className="grid grid-cols-2 gap-2 lg:grid-rows-2 lg:h-full">
@@ -122,6 +135,7 @@ export const GalleryMosaic = ({
 							image={image}
 							onOpenGallery={() => onOpenGallery(index + 1)}
 							className="h-full w-full"
+							isProfileImage={false}
 						/>
 					</div>
 				))}

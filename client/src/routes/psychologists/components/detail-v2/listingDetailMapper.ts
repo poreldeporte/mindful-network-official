@@ -45,6 +45,7 @@ export interface ListingDetailViewModel {
 	isLicensed: boolean;
 	primaryBadge?: string;
 	images: ListingImage[];
+	isProfileImage: boolean;
 	highlights: ListingHighlight[];
 	overviewItems: OverviewItem[];
 	insuranceList: string[];
@@ -74,8 +75,8 @@ const normalizeValue = (value: unknown): string | undefined => {
 	return undefined;
 };
 
-const uniqueList = (items: Array<string | undefined>) =>
-	Array.from(new Set(items.filter(Boolean) as string[]));
+const uniqueList = (items?: Array<string | undefined>) =>
+	Array.from(new Set((items ?? []).filter(Boolean) as string[]));
 
 const buildLocation = (psychologist: PsychologistModel) => {
 	const address = psychologist.address;
@@ -96,7 +97,9 @@ const buildLocation = (psychologist: PsychologistModel) => {
 	return { shortLocation, fullLocation };
 };
 
-const buildGalleryImages = (psychologist: PsychologistModel): ListingImage[] => {
+const buildGalleryImages = (
+	psychologist: PsychologistModel
+): { images: ListingImage[]; isProfileImage: boolean } => {
 	const galleryImages = (psychologist.imagesGallery || [])
 		.filter((image) => image?.url)
 		.map((image) => ({
@@ -104,18 +107,26 @@ const buildGalleryImages = (psychologist: PsychologistModel): ListingImage[] => 
 			alt: image.alt || psychologist.name,
 		}));
 
-	if (galleryImages.length > 0) return galleryImages;
-
-	if (psychologist.image) {
-		return [
-			{
-				src: psychologist.image,
-				alt: psychologist.imageAlt || psychologist.name,
-			},
-		];
+	if (galleryImages.length > 0) {
+		return { images: galleryImages, isProfileImage: false };
 	}
 
-	return [{ src: UserImage as StaticImageData, alt: psychologist.name }];
+	if (psychologist.image) {
+		return {
+			images: [
+				{
+					src: psychologist.image,
+					alt: psychologist.imageAlt || psychologist.name,
+				},
+			],
+			isProfileImage: true,
+		};
+	}
+
+	return {
+		images: [{ src: UserImage as StaticImageData, alt: psychologist.name }],
+		isProfileImage: true,
+	};
 };
 
 const buildMetaTags = (psychologist: PsychologistModel) => {
@@ -276,7 +287,7 @@ export const mapPsychologistToListingDetail = (
 	psychologist: PsychologistModel
 ): ListingDetailViewModel => {
 	const { shortLocation, fullLocation } = buildLocation(psychologist);
-	const images = buildGalleryImages(psychologist);
+	const { images, isProfileImage } = buildGalleryImages(psychologist);
 	const highlights = buildHighlights(psychologist);
 	const overviewItems = buildOverviewItems(psychologist);
 	const metaTags = buildMetaTags(psychologist);
@@ -347,6 +358,7 @@ export const mapPsychologistToListingDetail = (
 		isLicensed: Boolean(psychologist.degree),
 		primaryBadge: psychologist.degree ? "Licensed" : undefined,
 		images,
+		isProfileImage,
 		highlights,
 		overviewItems,
 		insuranceList,

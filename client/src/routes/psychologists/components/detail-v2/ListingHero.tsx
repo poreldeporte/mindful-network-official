@@ -93,12 +93,14 @@ export const ListingHero = ({ viewModel }: ListingHeroProps) => {
 					setActiveImageIndex(index);
 					setIsGalleryOpen(true);
 				}}
+				isProfileImage={viewModel.isProfileImage}
 			/>
 
 			<GalleryModal
 				isOpen={isGalleryOpen}
 				images={viewModel.images}
 				activeIndex={activeImageIndex}
+				isProfileImage={viewModel.isProfileImage}
 				onClose={() => setIsGalleryOpen(false)}
 			/>
 		</div>

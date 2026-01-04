@@ -9,6 +9,7 @@ interface GalleryModalProps {
 	isOpen: boolean;
 	images: ListingImage[];
 	activeIndex: number;
+	isProfileImage?: boolean;
 	onClose: () => void;
 }
 
@@ -16,6 +17,7 @@ export const GalleryModal = ({
 	isOpen,
 	images,
 	activeIndex,
+	isProfileImage = false,
 	onClose,
 }: GalleryModalProps) => {
 	const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -80,12 +82,16 @@ export const GalleryModal = ({
 					</button>
 				</div>
 
-				<div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gray-100">
+				<div
+					className={`relative aspect-[16/9] w-full overflow-hidden rounded-2xl ${
+						isProfileImage ? "bg-white" : "bg-gray-100"
+					}`}
+				>
 					<Image
 						src={currentImage.src}
 						alt={currentImage.alt}
 						fill
-						className="object-cover"
+						className={isProfileImage ? "object-contain" : "object-cover"}
 						sizes="(max-width: 768px) 100vw, 80vw"
 						priority
 					/>
