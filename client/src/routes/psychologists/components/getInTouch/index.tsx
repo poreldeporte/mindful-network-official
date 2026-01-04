@@ -4,12 +4,6 @@ import { Button, Typography } from "@/components/ui";
 import { ToastProvider, useToast } from "@/components/ui/Toasts";
 import { PsychologistModel } from "@/models";
 import emailjs from "@emailjs/browser";
-import {
-	IconMail,
-	IconMessage,
-	IconPhone,
-	IconUser,
-} from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -116,10 +110,10 @@ function ContactForm({ psychologistName }: Props) {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex flex-col w-full space-y-5"
+			className="w-full flex flex-col gap-5"
 			aria-label="Contact form"
 		>
-			<div className="relative">
+			<div>
 				<label htmlFor="name" className="sr-only">
 					Name
 				</label>
@@ -129,15 +123,12 @@ function ContactForm({ psychologistName }: Props) {
 					name="from_name"
 					placeholder="Name"
 					value={userInput.from_name}
-					className="p-2 pl-10 w-full outline-0 border-b"
+					className="bg-transparent w-full p-2 border-b border-gray-400 placeholder-gray-400 appearance-none outline-none"
 					aria-required="true"
 					onChange={handleChange}
 				/>
-				<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-					<IconUser className="h-5 w-5 text-gray-400" aria-hidden="true" />
-				</span>
 			</div>
-			<div className="relative">
+			<div>
 				<label htmlFor="phone" className="sr-only">
 					Phone Number
 				</label>
@@ -146,16 +137,13 @@ function ContactForm({ psychologistName }: Props) {
 					id="phone"
 					name="user_phone"
 					placeholder="Number"
-					className="p-2 pl-10 w-full outline-0 border-b"
+					className="bg-transparent w-full p-2 border-b border-gray-400 placeholder-gray-400 appearance-none outline-none"
 					value={userInput.user_phone}
 					onChange={handleChange}
 					aria-required="true"
 				/>
-				<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-					<IconPhone className="h-5 w-5 text-gray-400" aria-hidden="true" />
-				</span>
 			</div>
-			<div className="relative">
+			<div>
 				<label htmlFor="email" className="sr-only">
 					Email
 				</label>
@@ -164,16 +152,13 @@ function ContactForm({ psychologistName }: Props) {
 					id="email"
 					name="user_email"
 					placeholder="Email"
-					className="p-2 pl-10 w-full outline-0 border-b"
+					className="bg-transparent w-full p-2 border-b border-gray-400 placeholder-gray-400 appearance-none outline-none"
 					value={userInput.user_email}
 					onChange={handleChange}
 					aria-required="true"
 				/>
-				<span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-					<IconMail className="h-5 w-5 text-gray-400" aria-hidden="true" />
-				</span>
 			</div>
-			<div className="relative">
+			<div>
 				<label htmlFor="message" className="sr-only">
 					Message
 				</label>
@@ -181,17 +166,14 @@ function ContactForm({ psychologistName }: Props) {
 					id="message"
 					name="message"
 					placeholder="Message"
-					className="p-2 pl-10 w-full resize-none outline-0 border-b"
+					className="bg-transparent h-44 w-full p-2 border-b border-gray-400 placeholder-gray-400 appearance-none outline-none"
 					rows={4}
 					value={userInput.message}
 					onChange={handleChange}
 					aria-required="true"
 				></textarea>
-				<span className="absolute left-3 top-3">
-					<IconMessage className="h-5 w-5 text-gray-400" aria-hidden="true" />
-				</span>
 			</div>
-			<div className="flex items-center justify-end">
+			<div className="flex items-center justify-start">
 				<Button
 					className="py-2 px-4 mt-10 rounded-full w-auto"
 					variant="bodySmall"
@@ -208,30 +190,33 @@ function ContactForm({ psychologistName }: Props) {
 export function GetInTouch({ name }: PsychologistModel) {
 	return (
 		<section
-			className="section-y-padding col-span-full lg:flex"
+			className="section-y-padding col-span-full pb-6 lg:pb-8"
 			id="get-in-touch"
 			aria-labelledby="get-in-touch-heading"
 		>
-			<div className="mb-10 lg:w-1/2">
-				<Typography
-					className="font-dmSans"
-					color="black"
-					variant="h2"
-					as="h2"
-					id="get-in-touch-heading"
-				>
-					Get in touch with <span className="block" />
-					<span
-						style={{ textTransform: "capitalize" }}
-						className="text-blue-500 font-antic"
+			<div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+				<div>
+					<Typography
+						color="black"
+						as="h2"
+						variant="h2"
+						className="font-antic mb-5"
+						id="get-in-touch-heading"
 					>
-						{name.toLowerCase()}
-					</span>
-				</Typography>
-			</div>
+						Get in touch with <span className="block" />
+						<span
+							style={{ textTransform: "capitalize" }}
+							className="text-blue-500 font-antic"
+						>
+							{name.toLowerCase()}
+						</span>
+					</Typography>
+					<Typography className="mb-10" color="darkGray" as="p" variant="body">
+						We&apos;re Here to Help—Reach Out with Your Questions or Concerns
+					</Typography>
+				</div>
 
-			<div className="bg-white border w-full lg:flex-grow p-5 lg:w-1/2 lg:p-10 flex flex-col items-center justify-center">
-				<div className="flex flex-col gap-y-2 w-full">
+				<div className="flex flex-col items-end">
 					<ToastProvider>
 						<ContactForm psychologistName={name} />
 					</ToastProvider>

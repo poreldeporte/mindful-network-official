@@ -9,14 +9,14 @@ import {
 	TherapyModality,
 } from "@/models";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Filters } from "./Filters";
-import Header from "./Header";
+import { useCallback, useEffect, useState } from "react";
 import PsychologistCard from "./PsychologistCard";
 import { PsychologistCardSkeleton } from "./PsychologistCard.skeleton";
+import { SearchHeader } from "./SearchHeader";
+import { FilterKey } from "./FilterPillBar";
+import { SearchPagination } from "./SearchPagination";
 
 interface Props {
-	proffesionals: PsychologistModel[] | null;
 	filteredProffesionals: PsychologistModel[] | null;
 	conditions: conditionSpecialty[] | null;
 	insurances: insurances[] | null;
@@ -26,7 +26,6 @@ interface Props {
 }
 
 const SidePanel = ({
-	proffesionals,
 	filteredProffesionals,
 	conditions,
 	insurances,
@@ -34,14 +33,32 @@ const SidePanel = ({
 	resources,
 	isLoading,
 }: Props) => {
+	const RESULTS_PER_PAGE = 12;
 	const [selectedCondition, setSelectedCondition] = useState<string[]>([]);
 	const [selectedResources, setSelectedResources] = useState<string[]>([]);
 	const [selectedInsurance, setSelectedInsurance] = useState<string[]>([]);
 	const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
-	const [filtersPanelVisible, setFiltersPanelVisible] =
-		useState<boolean>(false);
 	const searchParams = useSearchParams();
 	const router = useRouter();
+	const pageParam = searchParams.get("page");
+	const parsedPage = Number.parseInt(pageParam ?? "1", 10);
+	const currentPage =
+		Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+	const totalResults = filteredProffesionals?.length ?? 0;
+	const totalPages = Math.max(1, Math.ceil(totalResults / RESULTS_PER_PAGE));
+	const safePage = Math.min(currentPage, totalPages);
+	const pageStart =
+		totalResults === 0 ? 0 : (safePage - 1) * RESULTS_PER_PAGE + 1;
+	const pageEnd =
+		totalResults === 0
+			? 0
+			: Math.min(safePage * RESULTS_PER_PAGE, totalResults);
+	const paginatedProfessionals = filteredProffesionals
+		? filteredProffesionals.slice(
+				(safePage - 1) * RESULTS_PER_PAGE,
+				safePage * RESULTS_PER_PAGE
+			)
+		: null;
 
 	useEffect(() => {
 		const conditionParam = searchParams.get("condition");
@@ -49,25 +66,23 @@ const SidePanel = ({
 		const therapyParam = searchParams.get("therapy");
 		const resourceParam = searchParams.get("resource");
 
-		if (conditionParam) {
-			setSelectedCondition(conditionParam.split(","));
-		}
-
-		if (insuranceParam) {
-			setSelectedInsurance(insuranceParam.split(","));
-		}
-
-		if (therapyParam) {
-			setSelectedTherapy(therapyParam);
-		}
-
-		if (resourceParam) {
-			setSelectedResources(resourceParam.split(","));
-		}
+		setSelectedCondition(conditionParam ? conditionParam.split(",") : []);
+		setSelectedInsurance(insuranceParam ? insuranceParam.split(",") : []);
+		setSelectedTherapy(therapyParam ?? null);
+		setSelectedResources(resourceParam ? resourceParam.split(",") : []);
 	}, [searchParams]);
 
-	const handleBadgeClick = (filterType: string, value: string) => {
+	const pushParams = useCallback(
+		(params: URLSearchParams) => {
+			const queryString = params.toString();
+			router.push(queryString ? `?${queryString}` : "?", undefined);
+		},
+		[router]
+	);
+
+	const handleBadgeClick = (filterType: FilterKey, value: string) => {
 		const currentParams = new URLSearchParams(searchParams.toString());
+		currentParams.delete("page");
 
 		if (filterType === "resource") {
 			let updatedResources = [...selectedResources];
@@ -132,31 +147,93 @@ const SidePanel = ({
 			}
 		}
 
-		router.push(`?${currentParams.toString()}`, undefined);
+		pushParams(currentParams);
 	};
+
+	const handleClearFilter = (filterType: FilterKey) => {
+		const currentParams = new URLSearchParams(searchParams.toString());
+		currentParams.delete("page");
+
+		if (filterType === "resource") {
+			setSelectedResources([]);
+			currentParams.delete("resource");
+		}
+
+		if (filterType === "condition") {
+			setSelectedCondition([]);
+			currentParams.delete("condition");
+		}
+
+		if (filterType === "insurance") {
+			setSelectedInsurance([]);
+			currentParams.delete("insurance");
+		}
+
+		if (filterType === "therapy") {
+			setSelectedTherapy(null);
+			currentParams.delete("therapy");
+		}
+
+		pushParams(currentParams);
+	};
+
+	const handleClearAll = () => {
+		const currentParams = new URLSearchParams(searchParams.toString());
+		currentParams.delete("page");
+		currentParams.delete("resource");
+		currentParams.delete("condition");
+		currentParams.delete("insurance");
+		currentParams.delete("therapy");
+
+		setSelectedResources([]);
+		setSelectedCondition([]);
+		setSelectedInsurance([]);
+		setSelectedTherapy(null);
+		pushParams(currentParams);
+	};
+
+	const handlePageChange = (nextPage: number) => {
+		const page = Math.min(Math.max(nextPage, 1), totalPages);
+		const currentParams = new URLSearchParams(searchParams.toString());
+
+		if (page <= 1) {
+			currentParams.delete("page");
+		} else {
+			currentParams.set("page", String(page));
+		}
+
+		pushParams(currentParams);
+	};
+
+	useEffect(() => {
+		if (!filteredProffesionals || totalResults === 0) return;
+		if (currentPage === safePage) return;
+
+		const currentParams = new URLSearchParams(searchParams.toString());
+		if (safePage <= 1) {
+			currentParams.delete("page");
+		} else {
+			currentParams.set("page", String(safePage));
+		}
+
+		pushParams(currentParams);
+	}, [
+		currentPage,
+		filteredProffesionals,
+		pushParams,
+		safePage,
+		searchParams,
+		totalResults,
+	]);
 
 	return (
 		<aside
-			className="overflow-hidden z-10 lg:py-5 pb-5 pt-14 lg:absolute lg:left-2.5 lg:top-1/2 lg:-translate-y-1/2 h-max lg:h-[calc(100%-20px)] w-full lg:w-3/4 bg-white rounded-3xl grid grid-rows-[auto_1fr_auto]"
+			className="w-full bg-white flex flex-col"
 			role="complementary"
 			aria-labelledby="side-panel-header"
 		>
-			<Filters
-				visible={filtersPanelVisible}
-				insurances={insurances}
+			<SearchHeader
 				conditions={conditions}
-				resources={resources}
-				therapyModalities={therapyModalities}
-				selectedCondition={selectedCondition}
-				selectedInsurance={selectedInsurance}
-				selectedResources={selectedResources}
-				selectedTherapy={selectedTherapy}
-				setVisible={setFiltersPanelVisible}
-				handleBadgeClick={handleBadgeClick}
-			/>
-			<Header
-				conditions={conditions}
-				handleBadgeClick={handleBadgeClick}
 				insurances={insurances}
 				resources={resources}
 				therapyModalities={therapyModalities}
@@ -164,13 +241,23 @@ const SidePanel = ({
 				selectedInsurance={selectedInsurance}
 				selectedResources={selectedResources}
 				selectedTherapy={selectedTherapy}
-				setFiltersPanelVisible={setFiltersPanelVisible}
+				onToggleFilter={handleBadgeClick}
+				onClearFilter={handleClearFilter}
+				onClearAll={handleClearAll}
 			/>
-			<div
-				className="overflow-y-auto overflow-x-hidden max-w-full"
-				role="region"
-				aria-live="polite"
-			>
+			{!isLoading && totalResults > 0 && (
+				<div className="px-5 pt-4">
+					<Typography
+						as="span"
+						color="darkGray"
+						variant="bodyXSmall"
+						className="text-gray-500"
+					>
+						Showing {pageStart}-{pageEnd} of {totalResults} professionals
+					</Typography>
+				</div>
+			)}
+			<div className="max-w-full" role="region" aria-live="polite">
 				{isLoading ? (
 					<>
 						{Array(5)
@@ -179,13 +266,13 @@ const SidePanel = ({
 								<PsychologistCardSkeleton key={index} />
 							))}
 					</>
-				) : filteredProffesionals && filteredProffesionals.length ? (
+				) : paginatedProfessionals && paginatedProfessionals.length ? (
 					<ul
-						className="px-5 divide-y divide-gray-200"
+						className="px-5 pt-3 pb-5 grid gap-4 md:grid-cols-2"
 						role="list"
 						aria-label="Filtered professionals"
 					>
-						{filteredProffesionals.map((psychologist) => (
+						{paginatedProfessionals.map((psychologist) => (
 							<PsychologistCard
 								psychologist={psychologist}
 								key={psychologist.id}
@@ -200,14 +287,13 @@ const SidePanel = ({
 				)}
 			</div>
 
-			<footer className="px-5 pt-2.5 flex items-center">
-				{filteredProffesionals && proffesionals && (
-					<Typography as="span" color="black" variant="bodySmall">
-						Showing {filteredProffesionals.length} of {proffesionals.length}{" "}
-						professionals
-					</Typography>
-				)}
-			</footer>
+			{!isLoading && totalPages > 1 && (
+				<SearchPagination
+					currentPage={safePage}
+					totalPages={totalPages}
+					onPageChange={handlePageChange}
+				/>
+			)}
 		</aside>
 	);
 };

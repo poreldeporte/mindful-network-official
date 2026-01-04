@@ -22,6 +22,7 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const router = useRouter();
 	const pathname = usePathname();
+	const isSearchPage = pathname === "/search";
 
 	const handleSelectChange = (value: string) => {
 		const selectedResource = resources.find(
@@ -47,7 +48,7 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	}, [companyDetails]);
 
 	return (
-		<header className="fixed top-5 left-1/2 -translate-x-1/2 w-11/12 2xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden xl:block z-50">
+		<header className="site-header fixed top-5 left-1/2 -translate-x-1/2 w-11/12 2xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden xl:block z-50">
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
@@ -131,11 +132,13 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 				</nav>
 
 				<div className="p-2 pr-5">
-					<Button variant="bodyXSmall" form="outline" className="relative">
-						<Link className="expandable-tag-link" href={"/search"}>
-							Start Search
-						</Link>
-					</Button>
+					{!isSearchPage && (
+						<Button variant="bodyXSmall" form="outline" className="relative">
+							<Link className="expandable-tag-link" href={"/search"}>
+								Start Search
+							</Link>
+						</Button>
+					)}
 				</div>
 			</div>
 		</header>

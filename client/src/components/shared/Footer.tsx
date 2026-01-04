@@ -10,8 +10,11 @@ import {
 	IconBrandInstagram,
 	IconBrandLinkedin,
 	IconBrandX,
+	IconMail,
+	IconMapPin,
+	IconPhone,
 } from "@tabler/icons-react";
-import { ChevronUp, Mail, MapPin, Phone } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -25,6 +28,8 @@ interface Props {
 export function Footer({ blogPosts, companyDetails }: Props) {
 	const [posts, setPosts] = useState<BlogModel[] | []>([]);
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
+	const [showAllBlog, setShowAllBlog] = useState(false);
+	const [showAllResources, setShowAllResources] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -58,11 +63,14 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
+	const blogItems = showAllBlog ? posts : posts.slice(0, 10);
+	const resourceItems = showAllResources ? resources : resources.slice(0, 10);
+
 	return (
 		<footer>
 			<div className="page-width py-10">
-				<div className="lg:gap-5 grid grid-cols-1 lg:grid-cols-[auto_1fr]">
-					<div className="mb-10 lg:mb-0 space-y-5">
+				<div className="grid gap-10 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-12">
+					<div className="space-y-5">
 						<div className="flex content-center space-x-4 items-center">
 							{companyDetails?.logo && (
 								<Image
@@ -75,19 +83,19 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 								/>
 							)}
 						</div>
-						<div className="flex flex-col items-start space-y-3">
+						<div className="flex flex-col items-start gap-3">
 							{companyDetails && companyDetails.address && (
 								<div className="flex items-center space-x-3">
-									<MapPin className="w-6 h-6 text-gray-500" />
-									<Typography variant="bodySmall" as="p" color="black">
+									<IconMapPin className="h-5 w-5 text-gray-500" />
+									<Typography variant="bodyXSmall" as="p" color="black">
 										{companyDetails.address}
 									</Typography>
 								</div>
 							)}
 							{companyDetails && companyDetails.phoneNumber && (
 								<div className="flex items-center space-x-3">
-									<Phone className="w-6 h-6 text-gray-500" />
-									<Typography variant="bodySmall" as="p" color="black">
+									<IconPhone className="h-5 w-5 text-gray-500" />
+									<Typography variant="bodyXSmall" as="p" color="black">
 										{companyDetails.phoneNumber}
 									</Typography>
 								</div>
@@ -95,9 +103,9 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 
 							{companyDetails && companyDetails.email && (
 								<div className="flex items-center space-x-3">
-									<Mail className="w-6 h-6 text-gray-500" />
+									<IconMail className="h-5 w-5 text-gray-500" />
 									<Typography
-										variant="bodySmall"
+										variant="bodyXSmall"
 										as="p"
 										color="black"
 										className="hover:underline underline-offset-4"
@@ -120,13 +128,22 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 											aria-label={`Go to ${socialMedia.platform.charAt(0).toUpperCase() + socialMedia.platform.slice(1)}`}
 										>
 											{socialMedia.platform === "instagram" && (
-												<IconBrandInstagram className="w-8 h-8 text-gray-500" />
+												<IconBrandInstagram
+													className="h-5 w-5 text-gray-500"
+													stroke={1.6}
+												/>
 											)}
 											{socialMedia.platform === "linkedin" && (
-												<IconBrandLinkedin className="w-8 h-8 text-gray-500" />
+												<IconBrandLinkedin
+													className="h-5 w-5 text-gray-500"
+													stroke={1.6}
+												/>
 											)}
 											{socialMedia.platform === "twitter" && (
-												<IconBrandX className="w-8 h-8 text-gray-500" />
+												<IconBrandX
+													className="h-5 w-5 text-gray-500"
+													stroke={1.6}
+												/>
 											)}
 										</a>
 									))}
@@ -134,17 +151,17 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 							)}
 						</div>
 					</div>
-					<div className="flex flex-col flex-wrap lg:flex-row items-start justify-between xl:justify-around">
-						<div>
+					<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+						<div className="min-w-0">
 							<Typography
 								color="black"
 								as="h2"
-								variant="body"
+								variant="bodySmall"
 								className="font-bold lg:font-semibold"
 							>
 								About
 							</Typography>
-							<div className="flex flex-col mb-2 lg:mb-0">
+							<div className="mt-2 flex flex-col gap-2">
 								{aboutFooter.map((label) => {
 									return (
 										<Link
@@ -155,7 +172,7 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 											<Typography
 												color="darkGray"
 												as="span"
-												variant="bodySmall"
+												variant="bodyXSmall"
 											>
 												{label.label}
 											</Typography>
@@ -164,73 +181,99 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 								})}
 							</div>
 						</div>
-						<div className="max-w-72">
+						<div className="min-w-0">
 							<Typography
 								color="black"
 								as="h2"
-								variant="body"
+								variant="bodySmall"
 								className="font-bold lg:font-semibold"
-							>
-								Blog
-							</Typography>
-							<div className="flex flex-col mb-2 lg:mb-0">
-								{posts && posts.length
-									? posts.map((article, index) => {
-											if (index < 6)
-												return (
-													<Link
-														className="hover:underline"
-														href={`/blog/${article.slug}`}
-														key={article.id}
-													>
-														<Typography
-															className=""
-															color="darkGray"
-															as="span"
-															variant="bodySmall"
-														>
-															{article.title}
-														</Typography>
-													</Link>
-												);
-										})
-									: ""}
-							</div>
+						>
+							Resources
+						</Typography>
+						<div
+							id="footer-resources-list"
+							className="mt-2 flex flex-col gap-2"
+						>
+							{resourceItems.map((resource) => {
+								return (
+									<Link
+										className="hover:underline"
+										href={`/search?resource=${resource.key}`}
+										key={resource.key}
+									>
+										<Typography
+											color="darkGray"
+											as="span"
+											variant="bodyXSmall"
+										>
+											{resource.label}
+										</Typography>
+									</Link>
+								);
+							})}
 						</div>
-						<div className="max-w-72">
-							<Typography
-								color="black"
-								as="h2"
-								variant="body"
-								className="font-bold lg:font-semibold"
+						{resources.length > 10 && (
+							<button
+								type="button"
+								onClick={() => setShowAllResources((prev) => !prev)}
+								aria-expanded={showAllResources}
+								aria-controls="footer-resources-list"
+								className="mt-2 text-[11px] font-semibold text-blue-600 hover:text-blue-700"
 							>
-								Resources
-							</Typography>
-							<div className="flex flex-col mb-2 lg:mb-0">
-								{resources.map((resource) => {
-									return (
+								{showAllResources ? "See less" : "See more"}
+							</button>
+						)}
+					</div>
+					<div className="min-w-0">
+						<Typography
+							color="black"
+							as="h2"
+							variant="bodySmall"
+							className="font-bold lg:font-semibold"
+						>
+							Blog
+						</Typography>
+						<div id="footer-blog-list" className="mt-2 flex flex-col gap-2">
+							{blogItems.length
+								? blogItems.map((article) => (
 										<Link
 											className="hover:underline"
-											href={`/search?resource=${resource.key}`}
-											key={resource.key}
+											href={`/blog/${article.slug}`}
+											key={article.id}
 										>
 											<Typography
+												className=""
 												color="darkGray"
 												as="span"
-												variant="bodySmall"
+												variant="bodyXSmall"
 											>
-												{resource.label}
+												{article.title}
 											</Typography>
 										</Link>
-									);
-								})}
-							</div>
+									))
+								: ""}
 						</div>
+						{posts.length > 10 && (
+							<button
+								type="button"
+								onClick={() => setShowAllBlog((prev) => !prev)}
+								aria-expanded={showAllBlog}
+								aria-controls="footer-blog-list"
+								className="mt-2 text-[11px] font-semibold text-blue-600 hover:text-blue-700"
+							>
+								{showAllBlog ? "See less" : "See more"}
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col md:flex-row justify-between items-center">
-				<Typography variant="bodySmall" color="black" className="p-0 md:p-4">
+			</div>
+			<div className="flex flex-col items-center gap-4 md:flex-row md:justify-between md:items-center">
+				<Typography
+					variant="bodyXSmall"
+					color="black"
+					className="p-0 text-center md:p-4 md:text-left"
+				>
 					© {new Date().getFullYear()} The Mindful Network
 				</Typography>
 
@@ -254,7 +297,7 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 					onClick={scrollToTop}
 					className="hidden lg:flex items-center bg-blue-500 hover:bg-blue-600 transition-colors p-3 pl-12 rounded-tl-full space-x-2"
 				>
-					<Typography variant="bodySmall" as="h3" color="white">
+					<Typography variant="bodyXSmall" as="h3" color="white">
 						Back to top
 					</Typography>
 					<ChevronUp className="h-8 w-8 text-white" />

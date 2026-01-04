@@ -15,11 +15,11 @@ export function ProfileCard({
 }: PsychologistModel) {
 	return (
 		<header
-			className="mb-10 mt-32 justify-center bg-white border border-gray-200 p-10 lg:mt-0"
+			className="mb-8 justify-center rounded-2xl bg-white border border-gray-200 p-6 shadow-sm sm:p-8 lg:mt-0"
 			aria-labelledby="profile-card-heading"
 		>
 			<div className="flex items-center justify-start">
-				<div className="w-24 h-24 lg:h-48 lg:w-48 mr-5">
+				<div className="w-24 h-24 lg:h-40 lg:w-40 mr-5">
 					<Image
 						className="rounded-full aspect-square object-cover"
 						src={image ? image : UserImage}
@@ -30,28 +30,28 @@ export function ProfileCard({
 				</div>
 				<div>
 					<Typography
-						className="font-bold"
+						className="text-[20px] font-semibold leading-snug sm:text-[22px]"
 						as="h1"
-						variant="body"
+						variant="bodySmall"
 						color="black"
 						id="profile-card-heading"
 					>
 						{name}
 					</Typography>
 					<Typography
-						className="mb-2"
+						className="mb-2 text-[12px] text-gray-600"
 						as="p"
-						variant="bodySmall"
+						variant="bodyXSmall"
 						color="darkGray"
 					>
 						{facility}
 					</Typography>
-					<div className="space-x-1 space-y-1">
+					<div className="flex flex-wrap gap-2">
 						{resource && resource.length
 							? resource.map((res) => (
 									<Badge
 										key={res.title}
-										className="w-max !cursor-default"
+										className="w-max !cursor-default text-[11px] px-2.5 py-0.5"
 										color="green"
 										aria-label={`Type: ${res.title}`}
 									>
@@ -62,11 +62,11 @@ export function ProfileCard({
 					</div>
 				</div>
 			</div>
-			<div className="my-10">
+			<div className="my-6">
 				<Typography
-					className="mb-5"
+					className="text-[12px] text-gray-600 leading-relaxed"
 					as="p"
-					variant="bodySmall"
+					variant="bodyXSmall"
 					color="darkGray"
 				>
 					{description}
@@ -75,11 +75,11 @@ export function ProfileCard({
 			<div className="flex flex-col space-y-3 lg:items-center lg:justify-start lg:flex-row lg:space-x-6 lg:space-y-0">
 				{showInsurances ? (
 					<div className="flex items-center space-x-2">
-						<HeartPulse className="w-10 h-10" aria-hidden="true" />
+						<HeartPulse className="w-5 h-5" aria-hidden="true" />
 						<Typography
-							className="font-semibold"
+							className="text-[12px] font-medium text-gray-600"
 							as="p"
-							variant="bodySmall"
+							variant="bodyXSmall"
 							color="darkGray"
 						>
 							Accepts Insurance
@@ -87,11 +87,11 @@ export function ProfileCard({
 					</div>
 				) : (
 					<div className="flex items-center space-x-2">
-						<Wallet className="w-10 h-10" aria-hidden="true" />
+						<Wallet className="w-5 h-5" aria-hidden="true" />
 						<Typography
-							className="font-semibold"
+							className="text-[12px] font-medium text-gray-600"
 							as="p"
-							variant="bodySmall"
+							variant="bodyXSmall"
 							color="darkGray"
 						>
 							Self-pay - Insurance not accepted
@@ -101,14 +101,14 @@ export function ProfileCard({
 				<div className="flex items-center space-x-2">
 					<Image
 						alt="Mindful Logo"
-						className="w-10 h-10"
+						className="w-5 h-5"
 						src={MindfulIsotype}
 						aria-hidden="true"
 					/>
 					<Typography
-						className="font-semibold"
+						className="text-[12px] font-medium text-gray-600"
 						as="p"
-						variant="bodySmall"
+						variant="bodyXSmall"
 						color="darkGray"
 					>
 						Vetted & Verified

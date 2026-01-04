@@ -46,7 +46,7 @@ export function Section({
 	return (
 		<section
 			id={id}
-			className="py-10 px-10 my-10 bg-white border border-gray-200 transition-all h-max"
+			className="my-6 rounded-2xl bg-white border border-gray-200 p-6 shadow-sm transition-all h-max sm:p-8"
 			aria-labelledby={`${id}-header`}
 		>
 			<SectionHeader
@@ -69,7 +69,12 @@ export function Section({
 								<Subsection key={subsection.id} {...subsection} />
 							))
 						) : (
-							<Typography as="p" variant="body" color="darkGray">
+							<Typography
+								as="p"
+								variant="bodyXSmall"
+								color="darkGray"
+								className="text-[12px]"
+							>
 								{emptyMessage}
 							</Typography>
 						)}
@@ -92,15 +97,15 @@ export const Subsection = ({
 		<div className="flex flex-col" aria-labelledby={`${id}-title`}>
 			<div className="flex items-center space-x-2 mb-2">
 				<div
-					className="flex-shrink-0 bg-orange-50 border border-gray-100 rounded-full p-2"
+					className="flex-shrink-0 bg-orange-50 border border-gray-100 rounded-full p-1.5"
 					aria-hidden="true"
 				>
 					{icon}
 				</div>
 				<Typography
 					id={`${id}-title`}
-					variant="bodySmall"
-					className="font-bold"
+					variant="bodyXSmall"
+					className="text-[12px] font-semibold"
 					as="h4"
 					color="black"
 				>
@@ -109,7 +114,7 @@ export const Subsection = ({
 			</div>
 
 			<ul
-				className={`space-y-1 my-2 ml-[51px] ${
+				className={`space-y-1 my-2 ml-[44px] ${
 					layoutStyle === "row" ? "grid grid-cols-2 gap-4" : "flex flex-col"
 				}`}
 			>
@@ -118,18 +123,18 @@ export const Subsection = ({
 						{isEmail ? (
 							<Typography
 								as="p"
-								variant="bodySmall"
+								variant="bodyXSmall"
 								color="darkGray"
-								className="xs:max-w-full xs:text-wrap break-all whitespace-pre-wrap"
+								className="xs:max-w-full xs:text-wrap text-[12px] break-all whitespace-pre-wrap"
 							>
 								{item}
 							</Typography>
 						) : (
 							<Typography
 								as="p"
-								variant="bodySmall"
+								variant="bodyXSmall"
 								color="darkGray"
-								className="xs:max-w-full xs:text-wrap"
+								className="xs:max-w-full xs:text-wrap text-[12px]"
 							>
 								{item}
 							</Typography>
@@ -156,7 +161,7 @@ export const SectionHeader = ({
 }: SectionHeaderProps) => {
 	return (
 		<div
-			className="flex items-center justify-between border-b pb-5 border-gray-200 cursor-pointer"
+			className="flex items-center justify-between border-b pb-4 border-gray-200 cursor-pointer"
 			role="button"
 			aria-expanded={isOpen}
 			aria-controls={`${id}-content`}
@@ -166,8 +171,8 @@ export const SectionHeader = ({
 		>
 			<div className="flex items-center">
 				<Typography
-					variant="body"
-					className="font-bold font-antic"
+					variant="bodySmall"
+					className="text-[16px] font-semibold font-antic sm:text-[18px]"
 					as="h3"
 					color="black"
 				>
@@ -176,7 +181,7 @@ export const SectionHeader = ({
 			</div>
 
 			<ChevronDown
-				className={`${isOpen ? "rotate-180" : "rotate-0"} h-6 w-6 text-gray-300 transition-transform`}
+				className={`${isOpen ? "rotate-180" : "rotate-0"} h-4 w-4 text-gray-300 transition-transform`}
 				aria-hidden="true"
 			/>
 		</div>
@@ -193,7 +198,7 @@ export const SectionContent = ({
 	return (
 		<motion.div
 			id={id}
-			className="pt-5 space-y-5"
+			className="pt-4 space-y-4"
 			initial="closed"
 			animate="open"
 			exit="closed"

@@ -10,6 +10,7 @@ import { Button, Typography } from "../ui";
 import Image from "next/image";
 import { getAllResources } from "@/services";
 import { generateResourceKeys } from "@/utilities";
+import { usePathname } from "next/navigation";
 
 export function MobileTopBar({
 	companyDetails,
@@ -18,6 +19,8 @@ export function MobileTopBar({
 }) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const pathname = usePathname();
+	const isSearchPage = pathname === "/search";
 
 	const handleCloseHeader = () => setIsOpen(!isOpen);
 
@@ -36,7 +39,7 @@ export function MobileTopBar({
 	}, [companyDetails]);
 
 	return (
-		<header className="transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 px-2.5 z-50">
+		<header className="site-header transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 px-2.5 z-50">
 			<Link
 				onClick={() => handleCloseHeader()}
 				href={"/"}
@@ -128,14 +131,16 @@ export function MobileTopBar({
 							</div>
 						</nav>
 
-						<Button
-							onClick={() => handleCloseHeader()}
-							variant="bodyXSmall"
-							form="outline"
-							className="mt-5"
-						>
-							<Link href={"/search"}>Start Search</Link>
-						</Button>
+						{!isSearchPage && (
+							<Button
+								onClick={() => handleCloseHeader()}
+								variant="bodyXSmall"
+								form="outline"
+								className="mt-5"
+							>
+								<Link href={"/search"}>Start Search</Link>
+							</Button>
+						)}
 					</motion.div>
 				)}
 			</AnimatePresence>

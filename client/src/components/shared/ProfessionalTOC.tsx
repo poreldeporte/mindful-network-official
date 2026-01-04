@@ -141,19 +141,19 @@ export default function ProfessionalTOC({
 
 	return (
 		<nav className={`professional-toc ${className}`}>
-			<div className="bg-white border border-gray-200 p-4">
+			<div className="rounded-2xl bg-white border border-gray-200 p-4 shadow-sm">
 				<ul className="space-y-2">
 					{tocItems.map((item) => (
 						<li key={item.id}>
 							<button
 								onClick={() => scrollToSection(item.anchor)}
-								className={`w-full text-left px-2 py-1 rounded transition-all duration-200 hover:bg-blue-50 hover:text-blue-700 flex items-center ${
+								className={`w-full text-left px-2.5 py-1.5 rounded-lg text-[12px] font-medium transition-all duration-200 hover:bg-blue-50 hover:text-blue-700 flex items-center ${
 									activeSection === item.id
 										? "text-blue-700 bg-blue-50 font-medium"
-										: "text-gray-700"
+										: "text-gray-600"
 								}`}
 							>
-								<ChevronRightIcon className="w-3 h-3 mr-1 flex-shrink-0" />
+								<ChevronRightIcon className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
 								{item.text}
 							</button>
 						</li>

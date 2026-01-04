@@ -1,14 +1,8 @@
-import {
-	GetInTouch,
-	ProfileCard,
-	PsychologistAbout,
-	StickyButton,
-} from "@/routes/psychologists/components";
+import { ListingDetailPage } from "@/routes/psychologists/components/detail-v2";
 import { getPsychologistById } from "@/services";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatType } from "@/utilities";
-import ProfessionalTOC from "@/components/shared/ProfessionalTOC";
 
 export async function generateMetadata({
 	params,
@@ -89,19 +83,8 @@ export default async function PsychologistPage({
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
 			/>
-			<div className="min-h-screen mx-auto w-11/12 xl:w-3/4 lg:grid lg:grid-cols-6 lg:items-start lg:mt-28 lg:gap-x-5">
-				<div className="lg:col-span-4">
-					<ProfileCard {...psychologist} />
-					<PsychologistAbout {...psychologist} />
-				</div>
-				<div className="lg:col-span-2 lg:relative h-full">
-					<div className="sticky top-28 space-y-5">
-						<ProfessionalTOC psychologist={psychologist} />
-						<StickyButton />
-					</div>
-				</div>
-				<GetInTouch {...psychologist} />
-			</div>
+			<ListingDetailPage psychologist={psychologist} />
+			{/* Legacy layout available at `client/src/routes/psychologists/components/legacy/LegacyProfessionalLayout.tsx`. */}
 		</>
 	);
 }
