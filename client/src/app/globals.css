@@ -70,6 +70,15 @@ html {
 	z-index: 5;
 }
 
+.site-header {
+	transition: opacity 200ms ease;
+}
+
+.detail-subnav-active .site-header {
+	opacity: 0;
+	pointer-events: none;
+}
+
 @media only screen and (min-width: 1200px) {
 	.page-width {
 		width: 75%;

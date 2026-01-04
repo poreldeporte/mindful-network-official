@@ -34,6 +34,7 @@ interface TypographyProps {
 	variant: VariantType;
 	color: ColorType;
 	className?: string;
+	style?: React.CSSProperties;
 	children?: React.ReactNode;
 	id?: string;
 }

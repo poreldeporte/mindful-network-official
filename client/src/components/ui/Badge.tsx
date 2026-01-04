@@ -42,12 +42,14 @@ export const Badge = ({
 
 	return (
 		<button
-			className={`${className} ${colorClass} text-xs rounded-full px-2.5 py-0.5 border font-medium focus:outline-none`}
+			className={`${colorClass} inline-flex items-center gap-1.5 whitespace-nowrap text-xs rounded-full px-2.5 py-0.5 border font-medium focus:outline-none ${className}`}
 			onClick={onClick}
 			{...props}
 		>
 			{children}
-			{isSelected && showIcon && <XMarkIcon className="w-6 h-6" />}
+			{isSelected && showIcon && (
+				<XMarkIcon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+			)}
 		</button>
 	);
 };

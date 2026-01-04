@@ -1,6 +1,5 @@
 "use client";
 
-import { MapComponent } from "@/components/shared";
 import {
 	conditionSpecialty,
 	insurances,
@@ -146,21 +145,13 @@ export const SearchWrapper = () => {
 	}, [searchParams, allProfessionals]);
 
 	return (
-		<>
-			<SidePanel
-				proffesionals={allProfessionals || []}
-				filteredProffesionals={filteredProfessionals}
-				conditions={conditions}
-				insurances={insurances}
-				therapyModalities={therapyModalities}
-				resources={allResourceKeys}
-				isLoading={isLoading}
-			/>
-
-			<MapComponent
-				positions={[{ lat: 25.842, lng: -80.2903 }]}
-				className="h-full w-full"
-			/>
-		</>
+		<SidePanel
+			filteredProffesionals={filteredProfessionals}
+			conditions={conditions}
+			insurances={insurances}
+			therapyModalities={therapyModalities}
+			resources={allResourceKeys}
+			isLoading={isLoading}
+		/>
 	);
 };

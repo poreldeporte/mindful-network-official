@@ -17,9 +17,9 @@ export const StickyButton = () => {
 			aria-label="Sticky action button"
 		>
 			<Button
-				className="rounded-full py-4 w-full"
+				className="h-11 w-full !py-0 rounded-full [&>span]:!text-[12px] [&>span]:sm:!text-[13px]"
 				color=""
-				variant="bodySmall"
+				variant="bodyXSmall"
 				onClick={handleScrollToContact}
 				aria-label="Scroll to contact section"
 			>

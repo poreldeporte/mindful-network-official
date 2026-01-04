@@ -78,8 +78,13 @@ export const getAllProfessionals = async () => {
 				_id,
 				title
 			},
+			"languages": languages[]->.language,
 			"image": image.asset->url,
-			"imageAlt": image.alt
+			"imageAlt": image.alt,
+			"imagesGallery": imagesGallery[]{
+				"url": asset->url,
+				"alt": alt
+			}
 		}`,
 			{},
 			{ cache: "no-store" }

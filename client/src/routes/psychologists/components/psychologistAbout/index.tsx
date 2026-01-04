@@ -39,7 +39,7 @@ export function PsychologistAbout({
 	if (hasValidItems(ageSpecialty)) {
 		expertiseSubsections.push({
 			id: "age-specialties",
-			icon: <PersonStanding className="h-6 w-6" />,
+			icon: <PersonStanding className="h-5 w-5" />,
 			title: "Age Specialties",
 			items: ageSpecialty.map((age) => age.age),
 		});
@@ -48,7 +48,7 @@ export function PsychologistAbout({
 	if (hasValidItems(conditionSpecialty)) {
 		expertiseSubsections.push({
 			id: "condition-specialties",
-			icon: <Brain className="h-6 w-6" />,
+			icon: <Brain className="h-5 w-5" />,
 			title: "Condition Specialty",
 			items: conditionSpecialty.map((condition) => condition.name),
 		});
@@ -57,7 +57,7 @@ export function PsychologistAbout({
 	if (hasValidItems(therapyOptions)) {
 		expertiseSubsections.push({
 			id: "therapy-options",
-			icon: <Armchair className="h-6 w-6" />,
+			icon: <Armchair className="h-5 w-5" />,
 			title: "Therapy options",
 			items: therapyOptions.map((option) => option.type),
 		});
@@ -66,7 +66,7 @@ export function PsychologistAbout({
 	if (hasValidItems(insurances)) {
 		insuranceSubsections.push({
 			id: "insurances",
-			icon: <HeartPulse className="h-6 w-6" />,
+			icon: <HeartPulse className="h-5 w-5" />,
 			title: "Insurances",
 			items: insurances.map((insurance) => insurance.name),
 			layoutStyle: "row",
@@ -75,7 +75,7 @@ export function PsychologistAbout({
 	if (slidingScale) {
 		insuranceSubsections.push({
 			id: "sliding-scale",
-			icon: <Wallet className="h-6 w-6" />,
+			icon: <Wallet className="h-5 w-5" />,
 			title: "Sliding scale",
 			items: [slidingScale],
 		});
@@ -83,7 +83,7 @@ export function PsychologistAbout({
 	if (languages) {
 		moreInfoSubsections.push({
 			id: "languages",
-			icon: <Languages className="h-6 w-6" />,
+			icon: <Languages className="h-5 w-5" />,
 			title: "Languages",
 			items: languages,
 		});
@@ -92,7 +92,7 @@ export function PsychologistAbout({
 	if (degree) {
 		moreInfoSubsections.push({
 			id: "degree",
-			icon: <IconCertificate className="h-6 w-6" />,
+			icon: <IconCertificate className="h-5 w-5" />,
 			title: "Degree Type",
 			items: [degree],
 		});
@@ -101,7 +101,7 @@ export function PsychologistAbout({
 	if (email) {
 		moreInfoSubsections.push({
 			id: "email",
-			icon: <AtSign className="h-6 w-6" />,
+			icon: <AtSign className="h-5 w-5" />,
 			title: "Email",
 			items: [email],
 		});
@@ -110,7 +110,7 @@ export function PsychologistAbout({
 	if (address?.address) {
 		moreInfoSubsections.push({
 			id: "address",
-			icon: <MapPinned className="h-6 w-6" />,
+			icon: <MapPinned className="h-5 w-5" />,
 			title: "Address",
 			items: [address.address],
 		});
@@ -119,7 +119,7 @@ export function PsychologistAbout({
 	if (phone) {
 		moreInfoSubsections.push({
 			id: "phone",
-			icon: <Phone className="h-6 w-6" />,
+			icon: <Phone className="h-5 w-5" />,
 			title: "Phone",
 			items: [phone],
 		});
