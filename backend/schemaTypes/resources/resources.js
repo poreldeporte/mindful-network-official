@@ -1,19 +1,19 @@
 export default {
   name: 'resources',
-  title: '⚙️ Resources',
+  title: '⚙️ Resource Categories',
   type: 'document',
   fields: [
-    {
-      name: 'orderRank',
-      title: 'Order Rank',
-      type: 'string',
-      hidden: true,
-    },
     {
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'string',
+      hidden: true,
     },
   ],
   preview: {

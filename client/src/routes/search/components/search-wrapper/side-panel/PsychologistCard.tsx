@@ -25,12 +25,14 @@ interface CardMeta {
 	location?: string;
 	primaryLabel?: string;
 	badges: string[];
+	resourceTags: string[];
 	tags: string[];
 	highlights: ListingHighlight[];
 	description?: string;
 }
 
 const MAX_TAGS = 6;
+const SPECIALTY_PREVIEW_COUNT = 3;
 
 const normalizeValue = (value: unknown): string | undefined => {
 	if (typeof value === "string") return value.trim();
@@ -54,6 +56,9 @@ const normalizeLabel = (value: unknown): string | undefined => {
 	const raw = normalizeValue(value);
 	return raw ? formatType(raw) : undefined;
 };
+
+const uniqueList = (items?: Array<string | undefined>) =>
+	Array.from(new Set((items ?? []).filter(Boolean) as string[]));
 
 const buildImageSet = (psychologist: PsychologistModel) => {
 	const fallbackImage = psychologist.image
@@ -80,6 +85,11 @@ const mapPsychologistToCardMeta = (psychologist: PsychologistModel): CardMeta =>
 	].filter(Boolean) as string[];
 	const location = locationParts.length ? locationParts.join(", ") : undefined;
 
+	const resourceTags = uniqueList(
+		psychologist.resource?.map((resource) =>
+			normalizeLabel(resource?.title ?? resource)
+		) || []
+	);
 	const resourceLabel = normalizeLabel(
 		psychologist.resource?.[0]?.title ?? psychologist.resource?.[0]
 	);
@@ -163,16 +173,25 @@ const mapPsychologistToCardMeta = (psychologist: PsychologistModel): CardMeta =>
 		location,
 		primaryLabel,
 		badges: badges.slice(0, 2),
+		resourceTags,
 		tags: Array.from(tagSet),
 		highlights: highlights.slice(0, 4),
 		description,
 	};
 };
 
-const TagRow = ({ tags }: { tags: string[] }) => {
+const TagRow = ({
+	tags,
+	maxTags = MAX_TAGS,
+}: {
+	tags: string[];
+	maxTags?: number | null;
+}) => {
 	if (!tags.length) return null;
-	const visibleTags = tags.slice(0, MAX_TAGS);
-	const overflow = tags.length - visibleTags.length;
+	const visibleTags =
+		typeof maxTags === "number" ? tags.slice(0, maxTags) : tags;
+	const overflow =
+		typeof maxTags === "number" ? tags.length - visibleTags.length : 0;
 
 	return (
 		<div className="flex flex-wrap gap-2">
@@ -190,6 +209,25 @@ const TagRow = ({ tags }: { tags: string[] }) => {
 					+{overflow}
 				</span>
 			)}
+		</div>
+	);
+};
+
+const SpecialtyRow = ({ tags }: { tags: string[] }) => {
+	if (!tags.length) return null;
+	const visibleTags = tags.slice(0, SPECIALTY_PREVIEW_COUNT);
+	const overflow = tags.length - visibleTags.length;
+	const preview = visibleTags.join(", ");
+
+	return (
+		<div className="space-y-1.5">
+			<p className="text-[10px] uppercase tracking-wide text-gray-500">
+				Specialties
+			</p>
+			<p className="text-[12px] text-gray-600">
+				{preview}
+				{overflow > 0 ? ` +${overflow}` : ""}
+			</p>
 		</div>
 	);
 };
@@ -233,7 +271,7 @@ const MediaCollage = ({
 
 	if (isSingle) {
 		return (
-			<div className="rounded-3xl bg-blue-50 p-2">
+			<div className="rounded-3xl bg-orange-50 p-2">
 				<div className="relative h-48 sm:h-44">
 					<Image
 						src={leftImage.src}
@@ -271,7 +309,7 @@ const MediaCollage = ({
 		: "grid grid-cols-1 gap-2 sm:grid-cols-[45%_40%_15%]";
 
 	return (
-		<div className="rounded-3xl bg-blue-50 p-2">
+		<div className="rounded-3xl bg-orange-50 p-2">
 			<div className={gridClass}>
 				<div className="relative h-48 sm:h-44">
 					<Image
@@ -351,8 +389,15 @@ const PsychologistCard = ({
 }) => {
 	const router = useRouter();
 	const cardHref = `/professional/${psychologist.slug}`;
-	const { location, primaryLabel, badges, tags, highlights, description } =
-		mapPsychologistToCardMeta(psychologist);
+	const {
+		location,
+		primaryLabel,
+		badges,
+		resourceTags,
+		tags,
+		highlights,
+		description,
+	} = mapPsychologistToCardMeta(psychologist);
 	const { images, galleryCount } = buildImageSet(psychologist);
 	const preview = description?.trim();
 
@@ -418,7 +463,16 @@ const PsychologistCard = ({
 							</div>
 						)}
 
-						<TagRow tags={tags} />
+						{resourceTags.length > 0 && (
+							<div className="space-y-1.5">
+								<p className="text-[10px] uppercase tracking-wide text-gray-500">
+									Services
+								</p>
+								<TagRow tags={resourceTags} maxTags={null} />
+							</div>
+						)}
+
+						<SpecialtyRow tags={tags} />
 
 						{preview && (
 							<p

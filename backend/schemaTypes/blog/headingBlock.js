@@ -4,6 +4,12 @@ export default {
   type: 'object',
   fields: [
     {
+      name: 'text',
+      title: 'Heading Text',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'style',
       title: 'Heading Style',
       type: 'string',
@@ -17,12 +23,6 @@ export default {
           {title: 'H6', value: 'h6'},
         ],
       },
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'text',
-      title: 'Heading Text',
-      type: 'string',
       validation: (Rule) => Rule.required(),
     },
     {
@@ -47,4 +47,3 @@ export default {
     },
   },
 }
-

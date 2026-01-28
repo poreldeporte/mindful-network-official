@@ -2,7 +2,7 @@ export const PsychologistCardSkeleton = () => {
 	return (
 		<li className="w-full h-full animate-pulse">
 			<div className="h-full rounded-3xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
-				<div className="rounded-3xl bg-blue-50 p-2">
+				<div className="rounded-3xl bg-orange-50 p-2">
 					<div className="grid grid-cols-1 gap-2 sm:grid-cols-[45%_40%_15%]">
 						<div className="h-48 rounded-2xl bg-gray-200 sm:h-44" />
 						<div className="hidden h-44 rounded-2xl bg-gray-200 sm:block" />

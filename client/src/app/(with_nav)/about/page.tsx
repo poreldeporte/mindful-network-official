@@ -37,11 +37,11 @@ export default function About() {
 					<br />
 					As caretakers, we&apos;ll do anything to stop the pain of the young
 					adults we love so much. Parents become the architects of their
-					child&apos;s wellness—but first thing&apos;s first, we need the right
+					loved one&apos;s wellness—but first thing&apos;s first, we need the right
 					tools. The Mindful Network was born to clarify the overwhelming, often
 					confusing mental health landscape for parents and guardians. It&apos;s
 					one consolidated location where you can find the resources you need to
-					help your child.
+					help your loved one.
 				</Typography>
 			</div>
 

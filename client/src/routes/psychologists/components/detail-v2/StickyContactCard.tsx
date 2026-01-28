@@ -13,7 +13,12 @@ export const StickyContactCard = ({
 	viewModel,
 	contactAnchor,
 }: StickyContactCardProps) => {
-	const primaryTag = viewModel.metaTags[0];
+	const normalizedServiceTypes = new Set(
+		viewModel.serviceTypes.map((service) => service.toLowerCase())
+	);
+	const secondaryTags = viewModel.metaTags.filter(
+		(tag) => !normalizedServiceTypes.has(tag.toLowerCase())
+	);
 
 	return (
 		<aside
@@ -50,9 +55,34 @@ export const StickyContactCard = ({
 					</p>
 				)}
 
-				{primaryTag && (
-					<div className="mt-3 inline-flex rounded-full border border-gray-200 bg-gray-50 px-2.5 py-0.5 text-[11px] text-gray-600">
-						{primaryTag}
+				{secondaryTags.length > 0 && (
+					<div className="mt-3 flex flex-wrap gap-2">
+						{secondaryTags.map((tag) => (
+							<span
+								key={tag}
+								className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-0.5 text-[11px] text-gray-600"
+							>
+								{tag}
+							</span>
+						))}
+					</div>
+				)}
+
+				{viewModel.serviceTypes.length > 0 && (
+					<div className="mt-4">
+						<p className="text-[11px] font-medium uppercase tracking-wide text-gray-500">
+							Service types
+						</p>
+						<div className="mt-2 flex flex-wrap gap-2">
+							{viewModel.serviceTypes.map((service) => (
+								<span
+									key={service}
+									className="rounded-full border border-gray-200 bg-white px-2.5 py-0.5 text-[11px] font-medium text-gray-700"
+								>
+									{service}
+								</span>
+							))}
+						</div>
 					</div>
 				)}
 
