@@ -16,12 +16,17 @@ export const InsuranceSection = ({
 	showInsurances,
 }: InsuranceSectionProps) => {
 	const hasInsuranceList = showInsurances && insurances.length > 0;
+	const showInsuranceNote = showInsurances && !hasInsuranceList;
 	const normalizedSlidingScale = (slidingScale || "").trim().toLowerCase();
 	const hasSlidingScale =
 		Boolean(slidingScale) &&
 		!["no", "false", "0", "n/a", "na"].includes(normalizedSlidingScale);
-	const shouldShowPayment = showInsurances || Boolean(slidingScale);
-	const isVisible = showInsurances || shouldShowPayment;
+	const showSelfPay = !showInsurances;
+	const paymentOptions = [
+		...(showSelfPay ? ["Self pay"] : []),
+		...(hasSlidingScale ? ["Sliding scale"] : []),
+	];
+	const isVisible = showInsurances || paymentOptions.length > 0;
 
 	if (!isVisible) return null;
 
@@ -38,17 +43,22 @@ export const InsuranceSection = ({
 						</span>
 					))}
 				</div>
-			) : (
+			) : showInsuranceNote ? (
 				<p className="text-[12px] text-gray-600">
 					Contact to verify accepted insurance.
 				</p>
-			)}
+			) : null}
 
-			{shouldShowPayment && (
-				<div className="rounded-2xl border border-gray-100 bg-gray-50 px-4 py-3 text-[12px] text-gray-700">
-					<span className="font-medium">
-						{hasSlidingScale ? "Sliding scale" : "Self pay"}
-					</span>
+			{paymentOptions.length > 0 && (
+				<div className="flex flex-wrap gap-2">
+					{paymentOptions.map((option) => (
+						<span
+							key={option}
+							className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-0.5 text-[11px] font-medium text-gray-700"
+						>
+							{option}
+						</span>
+					))}
 				</div>
 			)}
 

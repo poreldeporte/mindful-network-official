@@ -54,13 +54,6 @@ export default {
       ],
     },
     {
-      name: 'isActive',
-      title: 'Is Active?',
-      type: 'boolean',
-      description: 'Whether this redirect is currently active',
-      initialValue: true,
-    },
-    {
       name: 'redirectType',
       title: 'Redirect Type',
       type: 'string',
@@ -72,6 +65,13 @@ export default {
       },
       initialValue: '301',
       description: '301 for permanent redirects (SEO-friendly), 302 for temporary redirects',
+    },
+    {
+      name: 'isActive',
+      title: 'Is Active?',
+      type: 'boolean',
+      description: 'Whether this redirect is currently active',
+      initialValue: true,
     },
     {
       name: 'description',

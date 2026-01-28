@@ -21,6 +21,7 @@ export default {
               name: 'label',
               title: 'Link Label',
               type: 'string',
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'type',
@@ -32,12 +33,17 @@ export default {
                   {title: 'Internal', value: 'internal'},
                 ],
               },
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'url',
               title: 'URL',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
+              type: 'url',
+              validation: (Rule) =>
+                Rule.required().uri({
+                  allowRelative: true,
+                  scheme: ['http', 'https', 'mailto', 'tel'],
+                }),
             },
           ],
         },

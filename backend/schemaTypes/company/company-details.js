@@ -4,12 +4,70 @@ export default {
   name: 'companyDetails',
   title: '⚙️ Company Details',
   type: 'document',
+  fieldsets: [
+    {name: 'branding', title: 'Branding', options: {collapsible: true, collapsed: false}},
+    {name: 'contact', title: 'Contact', options: {collapsible: true, collapsed: false}},
+    {name: 'social', title: 'Social', options: {collapsible: true, collapsed: true}},
+    {name: 'homepage', title: 'Homepage', options: {collapsible: true, collapsed: true}},
+  ],
   fields: [
     {
       name: 'logo',
       title: 'Image Company Logo',
       description: 'Suggestion: Ensure the image size is under 1MB. Logo for topbar and footer',
+      fieldset: 'branding',
       ...imageWithAlt(),
+    },
+    {
+      name: 'address',
+      title: 'Company Address',
+      type: 'string',
+      fieldset: 'contact',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+      fieldset: 'contact',
+      validation: (Rule) => Rule.required().email(),
+    },
+    {
+      name: 'phoneNumber',
+      title: 'Phone Number',
+      type: 'string',
+      fieldset: 'contact',
+    },
+    {
+      name: 'socialLinks',
+      title: 'Social Media Links',
+      type: 'array',
+      fieldset: 'social',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'platform',
+              title: 'Platform',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Twitter', value: 'twitter'},
+                  {title: 'Linkedin', value: 'linkedin'},
+                  {title: 'Instagram', value: 'instagram'},
+                ],
+              },
+            },
+            {
+              name: 'url',
+              title: 'URL',
+              type: 'url',
+              validation: (Rule) => Rule.required().uri(),
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'heroBackground',
@@ -17,6 +75,7 @@ export default {
       description:
         'Choose between image or video for the hero section background. Images: under 1MB, recommended 1920x1080 .webp format. Videos: under 10MB, recommended MP4 format.',
       type: 'object',
+      fieldset: 'homepage',
       fields: [
         {
           name: 'mediaType',
@@ -67,57 +126,11 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'address',
-      title: 'Company Address',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'email',
-      title: 'Email',
-      type: 'string',
-      validation: (Rule) => Rule.required().email(),
-    },
-    {
-      name: 'phoneNumber',
-      title: 'Phone Number',
-      type: 'string',
-    },
-    {
-      name: 'socialLinks',
-      title: 'Social Media Links',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {
-              name: 'platform',
-              title: 'Platform',
-              type: 'string',
-              options: {
-                list: [
-                  {title: 'Twitter', value: 'twitter'},
-                  {title: 'Linkedin', value: 'linkedin'},
-                  {title: 'Instagram', value: 'instagram'},
-                ],
-              },
-            },
-            {
-              name: 'url',
-              title: 'URL',
-              type: 'url',
-              validation: (Rule) => Rule.required().uri(),
-            },
-          ],
-        },
-      ],
-    },
-    {
       name: 'eventsSection',
       title: 'Events Section',
       description: 'Configure the title and subtitle for the Events section',
       type: 'object',
+      fieldset: 'homepage',
       fields: [
         {
           name: 'title',
@@ -138,6 +151,7 @@ export default {
       title: 'Blogs Section',
       description: 'Configure the title and subtitle for the Blogs section',
       type: 'object',
+      fieldset: 'homepage',
       fields: [
         {
           name: 'title',

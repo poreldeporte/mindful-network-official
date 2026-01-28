@@ -30,11 +30,11 @@ export const CaregiverCoaching = () => {
 					variant="bodySmall"
 					className="mt-5"
 				>
-					Caring for someone with mental health challenges can feel overwhelming
-					and isolating. Our coaching service is here to support you with
+					Supporting a loved one through mental health challenges can feel
+					overwhelming and isolating. This coaching is for caregivers, offering
 					one-on-one mentorship, practical tools, and guidance tailored to your
-					unique situation. Whether you're navigating a new diagnosis, feeling
-					stuck, or simply need someone to talk to who understands—you're not
+					role. Whether you&apos;re navigating a new diagnosis, feeling stuck, or
+					just need someone who understands the caregiver journey—you&apos;re not
 					alone. Schedule a free call to learn more and see how we can support
 					you.
 				</Typography>
