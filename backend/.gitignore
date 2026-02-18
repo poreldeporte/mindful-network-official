@@ -28,3 +28,6 @@
 
 # Dotenv and similar local-only files
 *.local
+
+# Local Sanity CLI config (created when XDG_CONFIG_HOME points inside repo)
+.sanity-config/

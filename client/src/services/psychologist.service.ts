@@ -24,12 +24,12 @@ export const getPsychologistById = async (
                 "id": _id,
                 type
             },
-			"resource": resource[]->{
-				_id,
-				title
-			},
-            "languages": languages[]->.language,
-            "image": image.asset->url,
+					"resource": resource[]->{
+						_id,
+						title
+					},
+		            "languages": languages[]->.language,
+		            "image": image.asset->url,
             "imageAlt": image.alt,
             "video": video.asset->url,
             "imagesGallery": imagesGallery[]{
@@ -74,12 +74,12 @@ export const getAllProfessionals = async () => {
 				"id": _id,
 				type
 			},
-			"resource": resource[]->{
-				_id,
-				title
-			},
-			"languages": languages[]->.language,
-			"image": image.asset->url,
+					"resource": resource[]->{
+						_id,
+						title
+					},
+					"languages": languages[]->.language,
+				"image": image.asset->url,
 			"imageAlt": image.alt,
 			"imagesGallery": imagesGallery[]{
 				"url": asset->url,

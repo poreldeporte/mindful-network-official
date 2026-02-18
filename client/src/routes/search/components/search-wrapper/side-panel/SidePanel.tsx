@@ -22,6 +22,11 @@ interface Props {
 	insurances: insurances[] | null;
 	therapyModalities: TherapyModality[] | null;
 	resources: ResourcesKey[];
+	lockedAgeSpecialties?: string[];
+	showLockedAgeSpecialties?: boolean;
+	titlePrefix?: string;
+	titleHighlight?: string;
+	headingAs?: "h1" | "h2";
 	isLoading: boolean;
 }
 
@@ -31,6 +36,11 @@ const SidePanel = ({
 	insurances,
 	therapyModalities,
 	resources,
+	lockedAgeSpecialties = [],
+	showLockedAgeSpecialties = true,
+	titlePrefix,
+	titleHighlight,
+	headingAs,
 	isLoading,
 }: Props) => {
 	const RESULTS_PER_PAGE = 12;
@@ -237,6 +247,11 @@ const SidePanel = ({
 				insurances={insurances}
 				resources={resources}
 				therapyModalities={therapyModalities}
+				lockedAgeSpecialties={lockedAgeSpecialties}
+				showLockedAgeSpecialties={showLockedAgeSpecialties}
+				titlePrefix={titlePrefix}
+				titleHighlight={titleHighlight}
+				headingAs={headingAs}
 				selectedCondition={selectedCondition}
 				selectedInsurance={selectedInsurance}
 				selectedResources={selectedResources}

@@ -18,6 +18,11 @@ interface SearchHeaderProps {
 	conditions: conditionSpecialty[] | null;
 	insurances: insurances[] | null;
 	therapyModalities: TherapyModality[] | null;
+	lockedAgeSpecialties?: string[];
+	showLockedAgeSpecialties?: boolean;
+	titlePrefix?: string;
+	titleHighlight?: string;
+	headingAs?: "h1" | "h2";
 	selectedResources: string[];
 	selectedCondition: string[];
 	selectedInsurance: string[];
@@ -32,6 +37,11 @@ export const SearchHeader = ({
 	conditions,
 	insurances,
 	therapyModalities,
+	lockedAgeSpecialties = [],
+	showLockedAgeSpecialties = true,
+	titlePrefix = "Find Professionals in",
+	titleHighlight = "South Florida",
+	headingAs = "h1",
 	selectedResources,
 	selectedCondition,
 	selectedInsurance,
@@ -166,14 +176,24 @@ export const SearchHeader = ({
 			<div className="mt-4 space-y-5">
 				<Typography
 					className="font-antic"
-					as="h1"
+					as={headingAs}
 					color="black"
 					variant="h3"
 					id="side-panel-header"
 				>
-					Find Professionals in{" "}
-					<span className="text-green-300">South Florida</span>
+					{titlePrefix} <span className="text-green-300">{titleHighlight}</span>
 				</Typography>
+
+				{showLockedAgeSpecialties && lockedAgeSpecialties.length > 0 && (
+					<div className="flex flex-wrap items-center gap-2">
+						<Typography as="span" color="darkGray" variant="bodyXSmall">
+							Prefiltered:
+						</Typography>
+						<span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700 sm:text-xs">
+							Age Specialty: {lockedAgeSpecialties.join(", ")}
+						</span>
+					</div>
+				)}
 
 				<form
 					className="flex flex-col gap-3 lg:flex-row lg:items-center"

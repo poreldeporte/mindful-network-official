@@ -20,7 +20,11 @@ export function MobileTopBar({
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const pathname = usePathname();
-	const isSearchPage = pathname === "/search";
+	const isSearchPage =
+		pathname === "/search" || pathname === "/students/search";
+	const startSearchHref = pathname.startsWith("/students")
+		? "/students/search"
+		: "/search";
 
 	const handleCloseHeader = () => setIsOpen(!isOpen);
 
@@ -108,6 +112,11 @@ export function MobileTopBar({
 									Navigation
 								</Typography>
 
+								<Link onClick={() => handleCloseHeader()} href="/students">
+									<Typography variant="bodyXSmall" as="span" color="black">
+										Students
+									</Typography>
+								</Link>
 								<Link onClick={() => handleCloseHeader()} href="/support-links">
 									<Typography variant="bodyXSmall" as="span" color="black">
 										Support Links
@@ -138,7 +147,7 @@ export function MobileTopBar({
 								form="outline"
 								className="mt-5"
 							>
-								<Link href={"/search"}>Start Search</Link>
+								<Link href={startSearchHref}>Start Search</Link>
 							</Button>
 						)}
 					</motion.div>

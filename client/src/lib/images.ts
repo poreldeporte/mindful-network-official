@@ -1,4 +1,6 @@
 import CoachingAndSupportImage from "@/assets/images/coaching-and-support.webp";
+import StudentsHeroImage from "@/assets/images/student-sky.jpg";
+import StudentsLaughingImage from "@/assets/images/students-laughing.jpg";
 import PersonalizedSearchOptionsImage from "@/assets/images/personalized-search.png";
 import TrustedAndVerifiedResourcesImage from "@/assets/images/trusted-resources.png";
 import UpToDateInformationImage from "@/assets/images/up-to-date-info.png";
@@ -45,6 +47,8 @@ export {
 	MentalHealthCrisisImage,
 	EventsHeroImage,
 	CoachingAndSupportImage,
+	StudentsHeroImage,
+	StudentsLaughingImage,
 	PersonalizedSearchOptionsImage,
 	TrustedAndVerifiedResourcesImage,
 	UpToDateInformationImage,

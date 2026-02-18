@@ -5,7 +5,7 @@ const professionalFieldsets = [
   {name: 'basics', title: 'Basics', options: {collapsible: true, collapsed: false}},
   {name: 'contact', title: 'Contact', options: {collapsible: true, collapsed: true}},
   {name: 'settings', title: 'Settings', options: {collapsible: true, collapsed: true}},
-  {name: 'specialties', title: 'Specialties', options: {collapsible: true, collapsed: true}},
+  {name: 'specialties', title: 'Filters', options: {collapsible: true, collapsed: true}},
   {name: 'media', title: 'Media', options: {collapsible: true, collapsed: true}},
 ]
 
