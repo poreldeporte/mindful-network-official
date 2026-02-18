@@ -76,6 +76,8 @@ html {
 
 .site-header {
 	transition: opacity 200ms ease;
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .site-header-hidden {

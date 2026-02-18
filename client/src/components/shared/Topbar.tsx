@@ -1,58 +1,30 @@
 "use client";
 
-import { CompanyDetails, ResourcesKey } from "@/models";
-import { getAllResources } from "@/services";
-import { generateResourceKeys } from "@/utilities";
+import { CompanyDetails } from "@/models";
+import { clearGlobalInteractionLocks } from "@/utilities/clear-global-interaction-locks.utility";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { Button, Typography } from "../ui";
 
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-} from "@/components/ui/Shadcn-select";
-
 export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
-	const [resources, setResources] = useState<ResourcesKey[]>([]);
-	const router = useRouter();
 	const pathname = usePathname();
 	const isSearchPage =
 		pathname === "/search" || pathname === "/students/search";
+	const findProfessionalsHref = pathname.startsWith("/students")
+		? "/students/search"
+		: "/search";
 	const startSearchHref = pathname.startsWith("/students")
 		? "/students/search"
 		: "/search";
 
-	const handleSelectChange = (value: string) => {
-		const selectedResource = resources.find(
-			(resource) => resource.label === value
-		);
-		if (selectedResource) {
-			router.push(`/search?resource=${selectedResource.key}`);
-		}
-	};
-
-	useEffect(() => {
-		async function fetchData() {
-			try {
-				const [resources] = await Promise.all([getAllResources()]);
-
-				const resourceKeys = generateResourceKeys(resources);
-				setResources(resourceKeys);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		fetchData();
-	}, [companyDetails]);
-
 	useEffect(() => {
 		if (!pathname.startsWith("/professional/")) {
+			clearGlobalInteractionLocks();
+			document
+				.querySelectorAll<HTMLElement>(".site-header")
+				.forEach((header) => header.classList.remove("site-header-hidden"));
 			document.body.classList.remove("detail-subnav-active");
 			document.documentElement.style.removeProperty("--subnav-top");
 			document.documentElement.style.removeProperty("--subnav-height");
@@ -97,32 +69,15 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 							Students
 						</Typography>
 					</Link>
-					<Select onValueChange={handleSelectChange}>
-						<SelectTrigger className="w-max z-50 border-none text-gray-700 px-0">
-							<Typography
-								variant="bodyXSmall"
-								color={isSearchPage ? "green" : "darkGray"}
-								className={isSearchPage ? "font-medium" : ""}
-							>
-								Find Professionals
-							</Typography>
-						</SelectTrigger>
-						<SelectContent className="bg-white p-5">
-							<SelectGroup>
-								<SelectLabel>Find Professionals</SelectLabel>
-								{resources.map((resource) => (
-									<SelectItem
-										className="w-max pr-8 cursor-pointer"
-										key={resource.key}
-										value={resource.label}
-										aria-label={`Search for ${resource.label} professionals`}
-									>
-										{resource.label}
-									</SelectItem>
-								))}
-							</SelectGroup>
-						</SelectContent>
-					</Select>
+					<Link href={findProfessionalsHref}>
+						<Typography
+							variant="bodyXSmall"
+							color={isSearchPage ? "green" : "darkGray"}
+							className={isSearchPage ? "font-medium" : ""}
+						>
+							Find Professionals
+						</Typography>
+					</Link>
 					<Link href="/support-links">
 						<Typography
 							variant="bodyXSmall"

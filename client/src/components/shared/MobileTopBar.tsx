@@ -10,6 +10,7 @@ import { Button, Typography } from "../ui";
 import Image from "next/image";
 import { getAllResources } from "@/services";
 import { generateResourceKeys } from "@/utilities";
+import { clearGlobalInteractionLocks } from "@/utilities/clear-global-interaction-locks.utility";
 import { usePathname } from "next/navigation";
 
 export function MobileTopBar({
@@ -26,7 +27,7 @@ export function MobileTopBar({
 		? "/students/search"
 		: "/search";
 
-	const handleCloseHeader = () => setIsOpen(!isOpen);
+	const closeHeader = () => setIsOpen(false);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -44,16 +45,24 @@ export function MobileTopBar({
 
 	useEffect(() => {
 		if (!pathname.startsWith("/professional/")) {
+			clearGlobalInteractionLocks();
+			document
+				.querySelectorAll<HTMLElement>(".site-header")
+				.forEach((header) => header.classList.remove("site-header-hidden"));
 			document.body.classList.remove("detail-subnav-active");
 			document.documentElement.style.removeProperty("--subnav-top");
 			document.documentElement.style.removeProperty("--subnav-height");
 		}
 	}, [pathname]);
 
+	useEffect(() => {
+		setIsOpen(false);
+	}, [pathname]);
+
 	return (
 		<header className="site-header transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 px-2.5 z-50">
 			<Link
-				onClick={() => handleCloseHeader()}
+				onClick={closeHeader}
 				href={"/"}
 				className="flex content-center space-x-3 items-center"
 			>
@@ -104,7 +113,7 @@ export function MobileTopBar({
 								</Typography>
 								{resources.map((link) => (
 									<Link
-										onClick={() => handleCloseHeader()}
+										onClick={closeHeader}
 										key={link.key}
 										href={`/search?resource=${link.key}`}
 									>
@@ -120,27 +129,27 @@ export function MobileTopBar({
 									Navigation
 								</Typography>
 
-								<Link onClick={() => handleCloseHeader()} href="/students">
+								<Link onClick={closeHeader} href="/students">
 									<Typography variant="bodyXSmall" as="span" color="black">
 										Students
 									</Typography>
 								</Link>
-								<Link onClick={() => handleCloseHeader()} href="/support-links">
+								<Link onClick={closeHeader} href="/support-links">
 									<Typography variant="bodyXSmall" as="span" color="black">
 										Support Links
 									</Typography>
 								</Link>
-								<Link onClick={() => handleCloseHeader()} href="/blog">
+								<Link onClick={closeHeader} href="/blog">
 									<Typography variant="bodyXSmall" as="span" color="black">
 										Blog
 									</Typography>
 								</Link>
-								<Link onClick={() => handleCloseHeader()} href="/events">
+								<Link onClick={closeHeader} href="/events">
 									<Typography variant="bodyXSmall" as="span" color="black">
 										Events
 									</Typography>
 								</Link>
-								<Link onClick={() => handleCloseHeader()} href="/about">
+								<Link onClick={closeHeader} href="/about">
 									<Typography variant="bodyXSmall" as="span" color="black">
 										About
 									</Typography>
@@ -150,7 +159,7 @@ export function MobileTopBar({
 
 						{!isSearchPage && (
 							<Button
-								onClick={() => handleCloseHeader()}
+								onClick={closeHeader}
 								variant="bodyXSmall"
 								form="outline"
 								className="mt-5"

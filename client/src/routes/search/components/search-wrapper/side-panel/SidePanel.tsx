@@ -8,8 +8,8 @@ import {
 	ResourcesKey,
 	TherapyModality,
 } from "@/models";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect } from "react";
 import PsychologistCard from "./PsychologistCard";
 import { PsychologistCardSkeleton } from "./PsychologistCard.skeleton";
 import { SearchHeader } from "./SearchHeader";
@@ -44,12 +44,13 @@ const SidePanel = ({
 	isLoading,
 }: Props) => {
 	const RESULTS_PER_PAGE = 12;
-	const [selectedCondition, setSelectedCondition] = useState<string[]>([]);
-	const [selectedResources, setSelectedResources] = useState<string[]>([]);
-	const [selectedInsurance, setSelectedInsurance] = useState<string[]>([]);
-	const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
 	const router = useRouter();
+	const selectedCondition = searchParams.get("condition")?.split(",") ?? [];
+	const selectedResources = searchParams.get("resource")?.split(",") ?? [];
+	const selectedInsurance = searchParams.get("insurance")?.split(",") ?? [];
+	const selectedTherapy = searchParams.get("therapy") ?? null;
 	const pageParam = searchParams.get("page");
 	const parsedPage = Number.parseInt(pageParam ?? "1", 10);
 	const currentPage =
@@ -70,24 +71,16 @@ const SidePanel = ({
 			)
 		: null;
 
-	useEffect(() => {
-		const conditionParam = searchParams.get("condition");
-		const insuranceParam = searchParams.get("insurance");
-		const therapyParam = searchParams.get("therapy");
-		const resourceParam = searchParams.get("resource");
-
-		setSelectedCondition(conditionParam ? conditionParam.split(",") : []);
-		setSelectedInsurance(insuranceParam ? insuranceParam.split(",") : []);
-		setSelectedTherapy(therapyParam ?? null);
-		setSelectedResources(resourceParam ? resourceParam.split(",") : []);
-	}, [searchParams]);
-
 	const pushParams = useCallback(
 		(params: URLSearchParams) => {
 			const queryString = params.toString();
-			router.push(queryString ? `?${queryString}` : "?", undefined);
+			const href = queryString ? `${pathname}?${queryString}` : pathname;
+			const currentQuery = searchParams.toString();
+			const currentHref = currentQuery ? `${pathname}?${currentQuery}` : pathname;
+			if (href === currentHref) return;
+			router.replace(href, { scroll: false });
 		},
-		[router]
+		[pathname, router, searchParams]
 	);
 
 	const handleBadgeClick = (filterType: FilterKey, value: string) => {
@@ -104,8 +97,6 @@ const SidePanel = ({
 			} else {
 				updatedResources.push(value);
 			}
-
-			setSelectedResources(updatedResources);
 
 			if (updatedResources.length > 0) {
 				currentParams.set("resource", updatedResources.join(","));
@@ -128,8 +119,6 @@ const SidePanel = ({
 			} else {
 				currentParams.delete("insurance");
 			}
-
-			setSelectedInsurance(selectedInsurances);
 		} else if (filterType === "condition") {
 			let updatedConditions = [...selectedCondition];
 
@@ -141,15 +130,12 @@ const SidePanel = ({
 				updatedConditions.push(value);
 			}
 
-			setSelectedCondition(updatedConditions);
-
 			if (updatedConditions.length > 0) {
 				currentParams.set("condition", updatedConditions.join(","));
 			} else {
 				currentParams.delete("condition");
 			}
 		} else if (filterType === "therapy") {
-			setSelectedTherapy(selectedTherapy === value ? null : value);
 			if (currentParams.get(filterType) === value) {
 				currentParams.delete(filterType);
 			} else {
@@ -165,22 +151,18 @@ const SidePanel = ({
 		currentParams.delete("page");
 
 		if (filterType === "resource") {
-			setSelectedResources([]);
 			currentParams.delete("resource");
 		}
 
 		if (filterType === "condition") {
-			setSelectedCondition([]);
 			currentParams.delete("condition");
 		}
 
 		if (filterType === "insurance") {
-			setSelectedInsurance([]);
 			currentParams.delete("insurance");
 		}
 
 		if (filterType === "therapy") {
-			setSelectedTherapy(null);
 			currentParams.delete("therapy");
 		}
 
@@ -194,11 +176,6 @@ const SidePanel = ({
 		currentParams.delete("condition");
 		currentParams.delete("insurance");
 		currentParams.delete("therapy");
-
-		setSelectedResources([]);
-		setSelectedCondition([]);
-		setSelectedInsurance([]);
-		setSelectedTherapy(null);
 		pushParams(currentParams);
 	};
 
