@@ -78,7 +78,7 @@ html {
 	transition: opacity 200ms ease;
 }
 
-.detail-subnav-active .site-header {
+.site-header-hidden {
 	opacity: 0;
 	pointer-events: none;
 }

@@ -57,6 +57,15 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 			);
 		};
 
+		const setHeaderHiddenState = (isHidden: boolean) => {
+			const headers = Array.from(
+				document.querySelectorAll<HTMLElement>(".site-header")
+			);
+			headers.forEach((header) => {
+				header.classList.toggle("site-header-hidden", isHidden);
+			});
+		};
+
 		const updateHeaderState = () => {
 			const header = getVisibleHeader();
 			const headerBottom = header
@@ -66,10 +75,7 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 			const tabsHeight = tabsElement.getBoundingClientRect().height;
 			const shouldHideHeader = tabsTop <= headerBottom + 8;
 
-			document.body.classList.toggle(
-				"detail-subnav-active",
-				shouldHideHeader
-			);
+			setHeaderHiddenState(shouldHideHeader);
 			document.documentElement.style.setProperty(
 				"--subnav-top",
 				shouldHideHeader
@@ -100,7 +106,7 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 			}
 			window.removeEventListener("scroll", handleScroll);
 			window.removeEventListener("resize", handleScroll);
-			document.body.classList.remove("detail-subnav-active");
+			setHeaderHiddenState(false);
 			document.documentElement.style.removeProperty("--subnav-top");
 			document.documentElement.style.removeProperty("--subnav-height");
 		};
