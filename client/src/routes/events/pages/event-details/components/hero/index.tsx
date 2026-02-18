@@ -33,7 +33,7 @@ export const EventDetailsHero = ({ event }: { event: EventbriteEvent }) => {
 				className="h-[70vh] w-full"
 			/>
 
-			<div className="mx-auto w-11/12 xl:w-3/4 mt-5">
+			<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px] mt-5">
 				<Typography
 					id="event-heading"
 					className="font-antic mb-5 leading-none"

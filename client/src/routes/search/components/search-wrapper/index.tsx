@@ -92,6 +92,14 @@ export const SearchWrapper = ({
 	}, []);
 
 	useEffect(() => {
+		// Defensive reset: if user navigates from a detail page, clear any
+		// residual body/html state that can disable the global header.
+		document.body.classList.remove("detail-subnav-active");
+		document.documentElement.style.removeProperty("--subnav-top");
+		document.documentElement.style.removeProperty("--subnav-height");
+	}, []);
+
+	useEffect(() => {
 		if (allProfessionals) {
 			const resourceParam = searchParams.get("resource");
 			const conditionParam = searchParams.get("condition");

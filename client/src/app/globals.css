@@ -5,8 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--site-max-width: 1440px;
+}
+
 .page-width {
-	width: 91.66%;
+	width: min(91.66%, var(--site-max-width));
 	margin-inline: auto;
 }
 
@@ -81,7 +85,7 @@ html {
 
 @media only screen and (min-width: 1200px) {
 	.page-width {
-		width: 75%;
+		width: min(75%, var(--site-max-width));
 		margin-inline: auto;
 	}
 

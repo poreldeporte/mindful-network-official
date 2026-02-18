@@ -51,8 +51,16 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 		fetchData();
 	}, [companyDetails]);
 
+	useEffect(() => {
+		if (!pathname.startsWith("/professional/")) {
+			document.body.classList.remove("detail-subnav-active");
+			document.documentElement.style.removeProperty("--subnav-top");
+			document.documentElement.style.removeProperty("--subnav-height");
+		}
+	}, [pathname]);
+
 	return (
-		<header className="site-header fixed top-5 left-1/2 -translate-x-1/2 w-11/12 2xl:w-3/4 bg-white shadow-sm rounded-full overflow-hidden hidden xl:block z-50">
+		<header className="site-header fixed top-5 left-1/2 -translate-x-1/2 w-11/12 2xl:w-3/4 max-w-[1440px] bg-white shadow-sm rounded-full overflow-hidden hidden xl:block z-50">
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}

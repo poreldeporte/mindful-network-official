@@ -45,7 +45,7 @@ export const MoreEvents = ({ events = [] }: { events: EventbriteEvent[] }) => {
 
 	return (
 		<section className="bg-white w-full min-h-auto mt-20">
-			<div className="mx-auto w-11/12 xl:w-3/4 py-20">
+			<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px] py-20">
 				<div className="flex justify-between items-center mb-6">
 					<h2 className="text-xl font-bold">Other events you may like</h2>
 					{showSlider && (
