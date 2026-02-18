@@ -22,7 +22,11 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	const [resources, setResources] = useState<ResourcesKey[]>([]);
 	const router = useRouter();
 	const pathname = usePathname();
-	const isSearchPage = pathname === "/search";
+	const isSearchPage =
+		pathname === "/search" || pathname === "/students/search";
+	const startSearchHref = pathname.startsWith("/students")
+		? "/students/search"
+		: "/search";
 
 	const handleSelectChange = (value: string) => {
 		const selectedResource = resources.find(
@@ -76,12 +80,21 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 							About
 						</Typography>
 					</Link>
+					<Link href="/students">
+						<Typography
+							variant="bodyXSmall"
+							color={pathname.startsWith("/students") ? "green" : "darkGray"}
+							className={pathname.startsWith("/students") ? "font-medium" : ""}
+						>
+							Students
+						</Typography>
+					</Link>
 					<Select onValueChange={handleSelectChange}>
 						<SelectTrigger className="w-max z-50 border-none text-gray-700 px-0">
 							<Typography
 								variant="bodyXSmall"
-								color={pathname === "/search" ? "green" : "darkGray"}
-								className={pathname === "/search" ? "font-medium" : ""}
+								color={isSearchPage ? "green" : "darkGray"}
+								className={isSearchPage ? "font-medium" : ""}
 							>
 								Find Professionals
 							</Typography>
@@ -134,7 +147,7 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 				<div className="p-2 pr-5">
 					{!isSearchPage && (
 						<Button variant="bodyXSmall" form="outline" className="relative">
-							<Link className="expandable-tag-link" href={"/search"}>
+							<Link className="expandable-tag-link" href={startSearchHref}>
 								Start Search
 							</Link>
 						</Button>

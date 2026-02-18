@@ -3,7 +3,7 @@ import {imageArrayWithAlt, imageWithAlt} from './imageWithAlt'
 export const listingFieldsets = [
   {name: 'basics', title: 'Basics', options: {collapsible: true, collapsed: false}},
   {name: 'contact', title: 'Contact', options: {collapsible: true, collapsed: true}},
-  {name: 'specialties', title: 'Specialties', options: {collapsible: true, collapsed: true}},
+  {name: 'specialties', title: 'Filters', options: {collapsible: true, collapsed: true}},
   {name: 'media', title: 'Media', options: {collapsible: true, collapsed: true}},
   {name: 'editorial', title: 'Editorial', options: {collapsible: true, collapsed: true}},
 ]

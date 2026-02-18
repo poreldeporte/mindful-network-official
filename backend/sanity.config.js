@@ -172,11 +172,11 @@ export default defineConfig({
                   ])
               ),
             S.listItem()
-              .title('Taxonomy')
+              .title('Search Filters')
               .icon(FaBook)
               .child(
                 S.list()
-                  .title('Taxonomy')
+                  .title('Search Filters')
                   .items([
                     taxonomyMenu('insurance', 'Insurances', FaShieldAlt, 'name', true),
                     taxonomyMenu('resources', 'Resource Categories', FaBook, 'title', true),

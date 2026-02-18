@@ -20,7 +20,23 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 
-export const SearchWrapper = () => {
+interface SearchWrapperProps {
+	lockedAgeSpecialties?: string[];
+	showLockedAgeSpecialties?: boolean;
+	titlePrefix?: string;
+	titleHighlight?: string;
+	headingAs?: "h1" | "h2";
+}
+
+const normalizeFilterValue = (value: string) => value.trim().toLowerCase();
+
+export const SearchWrapper = ({
+	lockedAgeSpecialties = [],
+	showLockedAgeSpecialties = true,
+	titlePrefix = "Find Professionals in",
+	titleHighlight = "South Florida",
+	headingAs = "h1",
+}: SearchWrapperProps) => {
 	const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
 		null
 	);
@@ -60,8 +76,8 @@ export const SearchWrapper = () => {
 				]);
 
 				const resourceKeys = generateResourceKeys(resources);
-				setAllResourceKeys(resourceKeys);
 
+				setAllResourceKeys(resourceKeys);
 				setAllProfessionals(professionals);
 				setConditions(conditionsRes);
 				setInsurances(insurancesRes);
@@ -126,6 +142,19 @@ export const SearchWrapper = () => {
 				);
 			}
 
+			if (lockedAgeSpecialties.length > 0) {
+				const lockedAgeSet = new Set(
+					lockedAgeSpecialties.map(normalizeFilterValue)
+				);
+
+				result = result.filter(
+					(professional) =>
+						professional.ageSpecialty?.some?.((age) =>
+							lockedAgeSet.has(normalizeFilterValue(age.age))
+						) ?? false
+				);
+			}
+
 			if (searchQuery) {
 				const query = searchQuery.toLowerCase();
 				result = result.filter(
@@ -142,7 +171,7 @@ export const SearchWrapper = () => {
 
 			setFilteredProfessionals(result);
 		}
-	}, [searchParams, allProfessionals]);
+	}, [searchParams, allProfessionals, lockedAgeSpecialties]);
 
 	return (
 		<SidePanel
@@ -151,6 +180,11 @@ export const SearchWrapper = () => {
 			insurances={insurances}
 			therapyModalities={therapyModalities}
 			resources={allResourceKeys}
+			lockedAgeSpecialties={lockedAgeSpecialties}
+			showLockedAgeSpecialties={showLockedAgeSpecialties}
+			titlePrefix={titlePrefix}
+			titleHighlight={titleHighlight}
+			headingAs={headingAs}
 			isLoading={isLoading}
 		/>
 	);

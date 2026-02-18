@@ -155,7 +155,6 @@ export const FilterPillBar = ({
 					Clear all
 				</button>
 			</div>
-
 		</div>
 	);
 };
