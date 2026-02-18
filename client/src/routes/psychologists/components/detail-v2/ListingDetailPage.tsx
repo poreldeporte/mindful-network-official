@@ -108,7 +108,7 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 
 	return (
 		<section className="relative min-h-screen w-full bg-[#fef9ef] pt-[var(--site-header-height)]">
-			<div className="relative mx-auto w-11/12 xl:w-3/4 pb-24 pt-6 lg:pt-8 lg:pb-10 space-y-6">
+			<div className="relative mx-auto w-11/12 xl:w-3/4 max-w-[1440px] pb-24 pt-6 lg:pt-8 lg:pb-10 space-y-6">
 				<ListingHero viewModel={viewModel} />
 
 				{tabs.length > 0 && <SectionTabs sections={tabs} />}

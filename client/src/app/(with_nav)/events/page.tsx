@@ -28,7 +28,7 @@ export default async function EventsPage() {
 				/>
 				<Suspense
 					fallback={
-						<div className="mx-auto w-11/12 xl:w-3/4 py-20 text-center">
+						<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px] py-20 text-center">
 							Loading events...
 						</div>
 					}
@@ -48,7 +48,7 @@ export default async function EventsPage() {
 					title={companyDetails?.eventsSection?.title}
 					subtitle={companyDetails?.eventsSection?.subtitle}
 				/>
-				<div className="mx-auto w-11/12 xl:w-3/4 py-20 text-center">
+				<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px] py-20 text-center">
 					<h2 className="text-xl font-bold mb-4">Unable to load events</h2>
 					<p>
 						We're having trouble connecting to our event system. Please try

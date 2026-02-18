@@ -42,6 +42,14 @@ export function MobileTopBar({
 		fetchData();
 	}, [companyDetails]);
 
+	useEffect(() => {
+		if (!pathname.startsWith("/professional/")) {
+			document.body.classList.remove("detail-subnav-active");
+			document.documentElement.style.removeProperty("--subnav-top");
+			document.documentElement.style.removeProperty("--subnav-height");
+		}
+	}, [pathname]);
+
 	return (
 		<header className="site-header transition-all fixed w-full flex items-center justify-between xl:hidden bg-white top-0 px-2.5 z-50">
 			<Link

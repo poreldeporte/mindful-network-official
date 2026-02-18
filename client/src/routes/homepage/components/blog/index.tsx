@@ -126,23 +126,28 @@ export const BlogCard = ({
 export const BlogContainer = ({ blogPosts }: BlogProps) => {
 	return (
 		<section
-			className="pl-5 pr-5 xl:pl-[12.5%] section-y-padding"
+			className="page-width section-y-padding"
 			aria-labelledby="blog-section-heading"
 			role="region"
 		>
 			<Typography
-				className="mb-20 font-antic"
+				className="font-antic"
 				color="black"
 				as="h2"
 				variant="h2"
 				id="blog-section-heading"
 			>
-				Expert articles and resources <span className="block"></span>
+				Expert articles and resources
+				<span className="block" />
 				<span className="text-blue-500">to support your journey</span>
 			</Typography>
+			<Typography as="p" variant="bodyXSmall" color="darkGray" className="mt-3">
+				Explore practical insights, caregiver guidance, and mental health
+				education from trusted contributors.
+			</Typography>
 
-			<div className="flex flex-col gap-5">
-				<div className="flex gap-2 justify-end pr-5 xl:pr-[70px] 3xl:pr-[140px]">
+			<div className="mt-8 flex flex-col gap-5">
+				<div className="flex gap-2 justify-end">
 					<button
 						type="button"
 						className="blog-swiper-prev group p-4 transition-all rounded-full border border-blue-400 bg-transparent hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700"

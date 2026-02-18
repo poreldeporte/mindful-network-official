@@ -21,7 +21,7 @@ export const LegacyProfessionalLayout = ({
 				aria-hidden="true"
 			/>
 			<section className="relative min-h-screen w-full">
-				<div className="mx-auto w-11/12 xl:w-3/4 mt-24 lg:grid lg:grid-cols-6 lg:items-start lg:mt-28 lg:gap-x-5">
+				<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px] mt-24 lg:grid lg:grid-cols-6 lg:items-start lg:mt-28 lg:gap-x-5">
 					<div className="lg:col-span-4">
 						<ProfileCard {...psychologist} />
 						<PsychologistAbout {...psychologist} />

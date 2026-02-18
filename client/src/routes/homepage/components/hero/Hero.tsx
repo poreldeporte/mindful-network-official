@@ -40,9 +40,12 @@ export const Hero = ({
 			)}
 
 			<div className="page-width flex flex-col items-start justify-center relative z-10">
+				<div className="inline-flex w-max items-center rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-sm">
+					TRUSTED SOUTH FLORIDA NETWORK
+				</div>
 				<Typography
 					id="hero-heading"
-					className="font-antic mb-5 leading-none text-left"
+					className="font-antic mt-4 mb-5 leading-none text-left"
 					as="h1"
 					color="white"
 					variant="h1"
@@ -53,7 +56,7 @@ export const Hero = ({
 
 				<Typography
 					as="p"
-					className="lg:w-3/4 text-left text-[1.125rem] leading-relaxed"
+					className="max-w-3xl text-left text-[1.05rem] leading-relaxed"
 					color="white"
 					variant="body"
 				>
@@ -61,14 +64,24 @@ export const Hero = ({
 					support you need, when you need it.
 				</Typography>
 
-				<Link
-					href={"/search"}
-					aria-label="Start your search for mental health resources"
-				>
-					<Button form="outline-white" variant="body" className="mt-10">
-						Start Search
-					</Button>
-				</Link>
+				<div className="mt-8 flex flex-wrap gap-3">
+					<Link
+						href={"/search"}
+						aria-label="Start your search for mental health resources"
+					>
+						<Button form="outline-white" variant="body">
+							Start Search
+						</Button>
+					</Link>
+					<Link
+						href={"/students"}
+						aria-label="Explore student mental health support"
+					>
+						<Button form="outline-white" variant="body">
+							Explore Students
+						</Button>
+					</Link>
+				</div>
 			</div>
 		</section>
 	);

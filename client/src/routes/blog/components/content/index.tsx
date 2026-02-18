@@ -12,7 +12,7 @@ export const Content = ({ post }: SectionProps) => {
 	};
 
 	return (
-		<div className="mx-auto w-11/12 xl:w-3/4">
+		<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px]">
 			{tocSettings.enableTOC && tocSettings.tocPosition === "before" && (
 				<div className={getTOCPosition(tocSettings.tocPosition)}>
 					<TableOfContents content={post.content} settings={tocSettings} />

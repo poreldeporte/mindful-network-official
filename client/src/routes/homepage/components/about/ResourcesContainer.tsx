@@ -4,269 +4,123 @@ import {
 	TrustedAndVerifiedResourcesImage,
 	UpToDateInformationImage,
 } from "@/lib/images";
+import {
+	ArrowLongRightIcon,
+	CheckCircleIcon,
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+
+const resourceSections = [
+	{
+		title: "Trusted and Verified Resources",
+		description:
+			"We vet and verify providers in our network so you can start with options that are reputable, relevant, and easier to trust.",
+		bullets: [
+			"Licensed therapists",
+			"Psychiatry and medication management",
+			"Crisis support resources",
+			"Peer-led support groups",
+			"Innovative therapies",
+		],
+		image: TrustedAndVerifiedResourcesImage,
+		imageAlt: "Trusted and verified resources",
+		imageSide: "right" as const,
+	},
+	{
+		title: "Up-to-Date Information",
+		description:
+			"Our team regularly reviews listings and content so families and caregivers can make decisions based on current information.",
+		bullets: [
+			"Updated South Florida provider listings",
+			"Educational blogs and support links",
+			"Current care pathways and treatment options",
+		],
+		image: UpToDateInformationImage,
+		imageAlt: "Up-to-date information",
+		imageSide: "left" as const,
+	},
+	{
+		title: "Personalized Search Options",
+		description:
+			"Use guided filters to narrow results to the support that best fits your current needs.",
+		bullets: ["Condition", "Type of therapy", "Level of care", "Insurance"],
+		image: PersonalizedSearchOptionsImage,
+		imageAlt: "Personalized search options",
+		imageSide: "right" as const,
+	},
+];
 
 export const ResourcesContainer = () => {
 	return (
 		<div
-			className="lg:my-5 grid grid-cols-1 w-full gap-5 lg:gap-10"
+			className="grid grid-cols-1 w-full gap-5 lg:gap-6"
 			role="list"
 			aria-label="List of benefits"
 		>
-			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-5 lg:gap-10"
-				aria-labelledby={`benefit-title-Trusted and Verified Resources`}
-			>
-				<div className="xl:order-1 py-5 lg:p-10">
-					<Typography
-						className="mb-5 font-semibold font-antic"
-						color="black"
-						as="h4"
-						variant="h3"
-						id={`benefit-title-Trusted and Verified Resources`}
+			{resourceSections.map((section) => {
+				const imageColumnClass =
+					section.imageSide === "left" ? "lg:order-1" : "lg:order-2";
+				const contentColumnClass =
+					section.imageSide === "left" ? "lg:order-2" : "lg:order-1";
+
+				return (
+					<article
+						key={section.title}
+						className="grid grid-cols-1 items-center gap-5 overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm lg:grid-cols-12 lg:gap-8"
+						aria-labelledby={`benefit-title-${section.title}`}
 					>
-						Trusted and Verified Resources
-					</Typography>
+						<div className={`lg:col-span-6 ${contentColumnClass} p-6 lg:p-8`}>
+							<Typography
+								className="mb-3 font-antic"
+								color="black"
+								as="h3"
+								variant="h3"
+								id={`benefit-title-${section.title}`}
+							>
+								{section.title}
+							</Typography>
 
-					<Typography color="darkGray" as="p" variant="bodySmall">
-						We thoroughly vet and verify every provider in our network, ensuring
-						you only have access to reputable and reliable options to tackle
-						mental health conditions.
-						<br />
-						<br />
-						Find:
-					</Typography>
-					<ul className="list-disc list-inside mb-5 lg:mb-10">
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Licensed Therapists
+							<Typography color="darkGray" as="p" variant="bodyXSmall">
+								{section.description}
 							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Psychiatrist/Medication Management
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Crisis Counseling for Youth Mental & Substance Use Disorders
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Peer-led Support Groups
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Innovative Therapies
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								And more
-							</Typography>
-						</li>
-					</ul>
 
-					<Link
-						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
-						href="/search"
-					>
-						Start Search <ArrowLongRightIcon className="w-4 h-4" />
-					</Link>
-				</div>
+							<ul className="mt-4 space-y-2">
+								{section.bullets.map((bullet) => (
+									<li key={bullet} className="flex items-start gap-2">
+										<CheckCircleIcon
+											className="mt-0.5 h-4 w-4 shrink-0 text-blue-500"
+											aria-hidden
+										/>
+										<Typography color="darkGray" as="span" variant="bodyXSmall">
+											{bullet}
+										</Typography>
+									</li>
+								))}
+							</ul>
 
-				<Image
-					src={TrustedAndVerifiedResourcesImage}
-					alt="Trusted and Verified Resources"
-					className="max-h-[550px] object-contain object-center"
-				/>
-			</article>
-
-			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-5 lg:gap-10"
-				aria-labelledby={`benefit-title-Up-to-Date Information`}
-			>
-				<div className="py-5 lg:p-10">
-					<Typography
-						className="mb-5 font-semibold font-antic"
-						color="black"
-						as="h4"
-						variant="h3"
-						id={`benefit-title-Up-to-Date Information`}
-					>
-						Up-to-Date Information
-					</Typography>
-
-					<ul className="list-disc list-inside mb-5 lg:mb-10">
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
+							<Link
+								className="mt-5 inline-flex items-center gap-2 text-blue-600 underline underline-offset-4"
+								href="/search"
 							>
-								Listings of South Florida Professionals
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Online Resources: Support Links and Educational Blogs
-							</Typography>
-						</li>
-					</ul>
-					<Typography
-						className="mb-10"
-						color="darkGray"
-						as="p"
-						variant="bodySmall"
-					>
-						<br />
-						Our team regularly monitors and updates listings and resources so
-						you connect with the best mental health crisis services, mental
-						health treatments, and support for a range of mental health
-						disorders and mood disorders.
-					</Typography>
+								Start Search <ArrowLongRightIcon className="w-4 h-4" />
+							</Link>
+						</div>
 
-					<Link
-						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
-						href="/search"
-					>
-						Start Search <ArrowLongRightIcon className="w-4 h-4" />
-					</Link>
-				</div>
-
-				<Image
-					className="max-h-[550px] object-contain object-center"
-					src={UpToDateInformationImage}
-					alt="Up-to-Date Information"
-				/>
-			</article>
-
-			<article
-				className="grid grid-cols-1 xl:grid-cols-2 items-center gap-5 lg:gap-10"
-				aria-labelledby={`benefit-title-Personalized Search Options`}
-			>
-				<div className="xl:order-1 py-5 lg:p-10">
-					<Typography
-						className="mb-5 font-semibold font-antic"
-						color="black"
-						as="h4"
-						variant="h3"
-						id={`benefit-title-Personalized Search Options`}
-					>
-						Personalized Search Options
-					</Typography>
-
-					<Typography
-						className="mb-2"
-						color="darkGray"
-						as="p"
-						variant="bodySmall"
-					>
-						Use our advanced filters to find services tailored to your specific
-						mental health concern. Whether you're navigating traumatic events,
-						caring for a loved one, or simply raising your mental health
-						awareness.
-						<br />
-						<br />
-						Search By:
-					</Typography>
-					<ul className="list-disc list-inside mb-5 lg:mb-10">
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Condition
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Type of therapy
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Health care provider
-							</Typography>
-						</li>
-						<li>
-							<Typography
-								className="mb-2"
-								color="darkGray"
-								as="span"
-								variant="bodySmall"
-							>
-								Insurance
-							</Typography>
-						</li>
-					</ul>
-
-					<Link
-						className="text-blue-500 underline underline-offset-4 flex items-center gap-2"
-						href="/search"
-					>
-						Start Search <ArrowLongRightIcon className="w-4 h-4" />
-					</Link>
-				</div>
-
-				<Image
-					className="max-h-[350px] lg:max-h-[550px] object-contain object-center"
-					src={PersonalizedSearchOptionsImage}
-					alt="Personalized Search Options"
-				/>
-			</article>
+						<div
+							className={`lg:col-span-6 ${imageColumnClass} border-t border-blue-100 bg-slate-50 lg:border-t-0 lg:border-l`}
+						>
+							<div className="flex h-full min-h-[320px] items-center justify-center p-5 lg:min-h-[460px] lg:p-8">
+								<Image
+									src={section.image}
+									alt={section.imageAlt}
+									className="max-h-[300px] w-full object-contain object-center lg:max-h-[390px]"
+								/>
+							</div>
+						</div>
+					</article>
+				);
+			})}
 		</div>
 	);
 };

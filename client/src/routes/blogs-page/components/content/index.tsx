@@ -53,20 +53,24 @@ export const BlogsContent = ({ blogAmount }: Props) => {
 	};
 
 	return (
-		<div className="mx-auto w-11/12 xl:w-3/4">
+		<div className="mx-auto w-11/12 xl:w-3/4 max-w-[1440px] pb-16 lg:pb-24">
 			<ContentHeader
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
 			/>
 			<section className="h-max gap-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
 				{isLoading ? (
-					<>Loading...</>
+					<div className="col-span-full rounded-3xl border border-blue-100 bg-white py-12 text-center text-sm text-gray-500">
+						Loading articles...
+					</div>
 				) : blogs && blogs.length ? (
 					blogs.map((blog, blogIdx) => (
 						<BlogCard index={blogIdx} key={blog._id} {...blog} />
 					))
 				) : (
-					""
+					<div className="col-span-full rounded-3xl border border-blue-100 bg-white py-12 text-center text-sm text-gray-500">
+						No articles found for this category yet.
+					</div>
 				)}
 			</section>
 			<BlogsPagination

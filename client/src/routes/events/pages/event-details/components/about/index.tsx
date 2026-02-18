@@ -77,7 +77,7 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 	};
 
 	return (
-		<section className="min-h-screen mx-auto w-11/12 xl:w-3/4 mt-20 grid lg:grid-cols-12 gap-5">
+		<section className="min-h-screen mx-auto w-11/12 xl:w-3/4 max-w-[1440px] mt-20 grid lg:grid-cols-12 gap-5">
 			<div className="lg:col-span-7 space-y-5">
 				<div id="location" className="bg-white border rounded-xl p-5">
 					<Typography

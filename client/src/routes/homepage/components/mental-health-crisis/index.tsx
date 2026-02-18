@@ -1,15 +1,21 @@
-import { Typography } from "@/components/ui";
+import { Typography, Button } from "@/components/ui";
 import { MentalHealthCrisisImage } from "@/lib/images";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
 export const MentalHealthCrisis = () => {
 	return (
-		<section className="page-width my-10 lg:my-24 grid grid-cols-1 lg:grid-cols-2 items-center border border-blue-500">
-			<div className="flex flex-col items-start justify-center col-span-1 p-10">
+		<section className="page-width my-10 lg:my-24 grid grid-cols-1 lg:grid-cols-12 items-center gap-0 overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-sm">
+			<div className="flex flex-col items-start justify-center p-6 lg:col-span-7 lg:p-10">
+				<div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 text-xs font-semibold tracking-wide text-red-700">
+					<ExclamationTriangleIcon className="h-4 w-4" aria-hidden />
+					CRISIS SUPPORT
+				</div>
+
 				<Typography
 					as="h2"
-					className="font-antic mb-5 leading-none"
+					className="font-antic mt-4 mb-4 leading-none"
 					color="black"
 					variant="h2"
 				>
@@ -17,70 +23,105 @@ export const MentalHealthCrisis = () => {
 					<span className="text-blue-500">Start Here</span>
 				</Typography>
 
-				<ul className="list-disc list-inside">
-					<li>
-						<Typography as="span" variant="bodySmall" color="darkGray">
-							<strong>National Suicide Prevention Hotline:</strong>{" "}
-							<a
-								className="font-medium underline underline-offset-4 text-blue-500"
-								href="tel:988"
-							>
-								988
-							</a>
+				<div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3">
+					<a
+						className="rounded-2xl border border-blue-100 bg-slate-50 p-3 transition hover:border-blue-200 hover:bg-blue-50"
+						href="tel:988"
+					>
+						<Typography
+							as="p"
+							color="black"
+							variant="bodyXSmall"
+							className="font-semibold"
+						>
+							Suicide & Crisis Lifeline
 						</Typography>
-					</li>
-					<li>
-						<Typography as="span" variant="bodySmall" color="darkGray">
-							<strong>Crisis Text Line:</strong> Text SHARE to{" "}
-							<a
-								className="font-medium underline underline-offset-4 text-blue-500"
-								href="sms:741741"
-							>
-								741741
-							</a>
+						<Typography
+							as="p"
+							color="blue"
+							variant="bodyXSmall"
+							className="mt-1 font-medium"
+						>
+							Call 988
 						</Typography>
-					</li>
-					<li>
-						<Typography as="span" variant="bodySmall" color="darkGray">
-							<strong>Mobile Crisis Unit:</strong>{" "}
-							<a
-								className="font-medium underline underline-offset-4 text-blue-500"
-								href="tel:8004357968"
-							>
-								800-435-7968
-							</a>
+					</a>
+					<a
+						className="rounded-2xl border border-blue-100 bg-slate-50 p-3 transition hover:border-blue-200 hover:bg-blue-50"
+						href="sms:741741"
+					>
+						<Typography
+							as="p"
+							color="black"
+							variant="bodyXSmall"
+							className="font-semibold"
+						>
+							Crisis Text Line
 						</Typography>
-					</li>
-				</ul>
+						<Typography
+							as="p"
+							color="blue"
+							variant="bodyXSmall"
+							className="mt-1 font-medium"
+						>
+							Text SHARE to 741741
+						</Typography>
+					</a>
+					<a
+						className="rounded-2xl border border-blue-100 bg-slate-50 p-3 transition hover:border-blue-200 hover:bg-blue-50"
+						href="tel:8004357968"
+					>
+						<Typography
+							as="p"
+							color="black"
+							variant="bodyXSmall"
+							className="font-semibold"
+						>
+							Mobile Crisis Unit
+						</Typography>
+						<Typography
+							as="p"
+							color="blue"
+							variant="bodyXSmall"
+							className="mt-1 font-medium"
+						>
+							Call 800-435-7968
+						</Typography>
+					</a>
+				</div>
+
 				<Typography
 					as="p"
-					className="mb-5"
+					className="mt-5"
 					color="darkGray"
-					variant="bodySmall"
+					variant="bodyXSmall"
 				>
-					<br />
-					<strong>Not urgent?</strong> Filter via mental health challenge,
-					mental health services and more to find the best place to start.
-					<br />
-					<br />
-					<strong>Half-way there?</strong> Maybe you have an advocate but need
-					some supplemental education. Check out our{" "}
-					<Link className="underline text-blue-500" href="/support-links">
-						support links
-					</Link>{" "}
-					here.
+					Not urgent? Use search filters to find the right care starting point.
+					Need educational or practical resources? Explore our support links.
 				</Typography>
+
+				<div className="mt-5 flex flex-wrap gap-3">
+					<Link href="/search">
+						<Button variant="bodySmall" form="outline">
+							Start Search
+						</Button>
+					</Link>
+					<Link href="/support-links">
+						<Button variant="bodySmall" form="outline-blue">
+							Support Links
+						</Button>
+					</Link>
+				</div>
 			</div>
 
-			<picture className="col-span-1 h-[600px] border-t md:border-t-0 md:border-l border-blue-500">
+			<div className="lg:col-span-5 h-full border-t border-blue-100 lg:border-l lg:border-t-0">
 				<Image
 					src={MentalHealthCrisisImage.src}
-					alt="Mental Health Crisis"
-					className="w-full h-full object-cover col-span-1"
-					width={500}
-					height={500}
+					alt="Mental health crisis support"
+					className="h-[360px] w-full object-cover lg:h-full"
+					width={700}
+					height={700}
 				/>
-			</picture>
+			</div>
 		</section>
 	);
 };
