@@ -9,7 +9,7 @@ import {
 } from "@/models";
 import { formatType } from "@/utilities";
 import { Search, X } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FilterConfig, FilterKey, FilterPillBar } from "./FilterPillBar";
 
@@ -51,6 +51,7 @@ export const SearchHeader = ({
 	onClearAll,
 }: SearchHeaderProps) => {
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
 	const router = useRouter();
 	const searchParam = searchParams.get("search") ?? "";
 	const [searchQuery, setSearchQuery] = useState(searchParam);
@@ -165,7 +166,11 @@ export const SearchHeader = ({
 		}
 
 		const queryString = params.toString();
-		router.push(queryString ? `?${queryString}` : "?", undefined);
+		const href = queryString ? `${pathname}?${queryString}` : pathname;
+		const currentQuery = searchParams.toString();
+		const currentHref = currentQuery ? `${pathname}?${currentQuery}` : pathname;
+		if (href === currentHref) return;
+		router.replace(href, { scroll: false });
 	};
 
 	return (

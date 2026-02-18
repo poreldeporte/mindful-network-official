@@ -15,9 +15,10 @@ import {
 	getAllTherapyOptions,
 } from "@/services";
 import { getValidationError } from "@/utilities";
+import { clearGlobalInteractionLocks } from "@/utilities/clear-global-interaction-locks.utility";
 import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 
 interface SearchWrapperProps {
@@ -29,6 +30,11 @@ interface SearchWrapperProps {
 }
 
 const normalizeFilterValue = (value: string) => value.trim().toLowerCase();
+const slugifyValue = (value: string) =>
+	value
+		.trim()
+		.toLowerCase()
+		.replace(/\s+/g, "-");
 
 export const SearchWrapper = ({
 	lockedAgeSpecialties = [],
@@ -47,15 +53,13 @@ export const SearchWrapper = ({
 	const [allResourceKeys, setAllResourceKeys] = useState<ResourcesKey[] | []>(
 		[]
 	);
-	const [filteredProfessionals, setFilteredProfessionals] = useState<
-		PsychologistModel[] | null
-	>(null);
 	const [allProfessionals, setAllProfessionals] = useState<
 		PsychologistModel[] | null
 	>(null);
 	const [isLoading, setLoading] = useState(false);
 
 	const searchParams = useSearchParams();
+	const searchParamsKey = searchParams.toString();
 
 	useEffect(() => {
 		async function fetchData() {
@@ -75,17 +79,27 @@ export const SearchWrapper = ({
 					getAllProfessionals(),
 				]);
 
-				const resourceKeys = generateResourceKeys(resources);
+				const safeConditions = Array.isArray(conditionsRes) ? conditionsRes : [];
+				const safeInsurances = Array.isArray(insurancesRes) ? insurancesRes : [];
+				const safeTherapies = Array.isArray(therapyModalitiesRes)
+					? therapyModalitiesRes
+					: [];
+				const safeResources = Array.isArray(resources) ? resources : [];
+				const safeProfessionals = Array.isArray(professionals)
+					? professionals
+					: [];
+				const resourceKeys = generateResourceKeys(safeResources);
 
 				setAllResourceKeys(resourceKeys);
-				setAllProfessionals(professionals);
-				setConditions(conditionsRes);
-				setInsurances(insurancesRes);
-				setTherapyModalities(therapyModalitiesRes);
-				setLoading(false);
+				setAllProfessionals(safeProfessionals);
+				setConditions(safeConditions);
+				setInsurances(safeInsurances);
+				setTherapyModalities(safeTherapies);
 			} catch (error) {
 				console.log(error);
 				getValidationError(error);
+			} finally {
+				setLoading(false);
 			}
 		}
 		fetchData();
@@ -94,92 +108,110 @@ export const SearchWrapper = ({
 	useEffect(() => {
 		// Defensive reset: if user navigates from a detail page, clear any
 		// residual body/html state that can disable the global header.
+		clearGlobalInteractionLocks();
+		document
+			.querySelectorAll<HTMLElement>(".site-header")
+			.forEach((header) => header.classList.remove("site-header-hidden"));
 		document.body.classList.remove("detail-subnav-active");
 		document.documentElement.style.removeProperty("--subnav-top");
 		document.documentElement.style.removeProperty("--subnav-height");
 	}, []);
 
-	useEffect(() => {
-		if (allProfessionals) {
-			const resourceParam = searchParams.get("resource");
-			const conditionParam = searchParams.get("condition");
-			const insuranceParam = searchParams.get("insurance");
-			const therapyParam = searchParams.get("therapy");
-			const searchQuery = searchParams.get("search");
+	const filteredProfessionals = useMemo(() => {
+		if (!allProfessionals) return null;
 
-			let result = [...allProfessionals];
+		const params = new URLSearchParams(searchParamsKey);
+		const resourceParam = params.get("resource");
+		const conditionParam = params.get("condition");
+		const insuranceParam = params.get("insurance");
+		const therapyParam = params.get("therapy");
+		const searchQuery = params.get("search");
 
-			if (resourceParam) {
-				const selectedResources = resourceParam.split(",");
-				result = result.filter(
-					(professional) =>
-						professional.resource?.some?.((res) =>
-							selectedResources.includes(
-								res.title.toLowerCase().replace(/\s+/g, "-")
-							)
-						) ?? false
-				);
-			}
+		let result = [...allProfessionals];
 
-			if (conditionParam) {
-				const selectedConditions = conditionParam.split(",");
-				result = result.filter(
-					(professional) =>
-						professional.conditionSpecialty?.some?.((specialty) =>
-							selectedConditions.includes(specialty.name)
-						) ?? false
-				);
-			}
-
-			if (insuranceParam) {
-				const selectedInsurances = insuranceParam.split(",");
-				result = result.filter(
-					(professional) =>
-						professional.insurances?.some?.((insurance) =>
-							selectedInsurances.includes(insurance.name)
-						) ?? false
-				);
-			}
-
-			if (therapyParam) {
-				result = result.filter(
-					(professional) =>
-						professional.therapyOptions?.some?.(
-							(modality) => modality.type === therapyParam
-						) ?? false
-				);
-			}
-
-			if (lockedAgeSpecialties.length > 0) {
-				const lockedAgeSet = new Set(
-					lockedAgeSpecialties.map(normalizeFilterValue)
-				);
-
-				result = result.filter(
-					(professional) =>
-						professional.ageSpecialty?.some?.((age) =>
-							lockedAgeSet.has(normalizeFilterValue(age.age))
-						) ?? false
-				);
-			}
-
-			if (searchQuery) {
-				const query = searchQuery.toLowerCase();
-				result = result.filter(
-					(professional) =>
-						professional.name?.toLowerCase().includes(query) ||
-						professional.insurances?.some?.((insurance) =>
-							insurance.name?.toLowerCase().includes(query)
-						) ||
-						professional.therapyOptions?.some?.((modality) =>
-							modality.type?.toLowerCase().includes(query)
-						)
-				);
-			}
-
-			setFilteredProfessionals(result);
+		if (resourceParam) {
+			const selectedResources = new Set(
+				resourceParam.split(",").map(normalizeFilterValue)
+			);
+			result = result.filter(
+				(professional) =>
+					professional.resource?.some?.((res) => {
+						if (!res?.title) return false;
+						return selectedResources.has(slugifyValue(res.title));
+					}) ?? false
+			);
 		}
-	}, [searchParams, allProfessionals, lockedAgeSpecialties]);
+
+		if (conditionParam) {
+			const selectedConditions = new Set(
+				conditionParam.split(",").map(normalizeFilterValue)
+			);
+			result = result.filter(
+				(professional) =>
+					professional.conditionSpecialty?.some?.((specialty) => {
+						if (!specialty?.name) return false;
+						return selectedConditions.has(
+							normalizeFilterValue(specialty.name)
+						);
+					}) ?? false
+			);
+		}
+
+		if (insuranceParam) {
+			const selectedInsurances = new Set(
+				insuranceParam.split(",").map(normalizeFilterValue)
+			);
+			result = result.filter(
+				(professional) =>
+					professional.insurances?.some?.((insurance) => {
+						if (!insurance?.name) return false;
+						return selectedInsurances.has(normalizeFilterValue(insurance.name));
+					}) ?? false
+			);
+		}
+
+		if (therapyParam) {
+			const selectedTherapy = normalizeFilterValue(therapyParam);
+			result = result.filter(
+				(professional) =>
+					professional.therapyOptions?.some?.(
+						(modality) =>
+							typeof modality?.type === "string" &&
+							normalizeFilterValue(modality.type) === selectedTherapy
+					) ?? false
+			);
+		}
+
+		if (lockedAgeSpecialties.length > 0) {
+			const lockedAgeSet = new Set(
+				lockedAgeSpecialties.map(normalizeFilterValue)
+			);
+
+			result = result.filter(
+				(professional) =>
+					professional.ageSpecialty?.some?.((age) => {
+						if (!age?.age) return false;
+						return lockedAgeSet.has(normalizeFilterValue(age.age));
+					}) ?? false
+			);
+		}
+
+		if (searchQuery) {
+			const query = searchQuery.toLowerCase();
+			result = result.filter(
+				(professional) =>
+					professional.name?.toLowerCase().includes(query) ||
+					professional.insurances?.some?.((insurance) =>
+						insurance.name?.toLowerCase().includes(query)
+					) ||
+					professional.therapyOptions?.some?.((modality) =>
+						modality.type?.toLowerCase().includes(query)
+					)
+			);
+		}
+
+		return result;
+	}, [allProfessionals, lockedAgeSpecialties, searchParamsKey]);
 
 	return (
 		<SidePanel

@@ -76,9 +76,11 @@ html {
 
 .site-header {
 	transition: opacity 200ms ease;
+	opacity: 1;
+	pointer-events: auto;
 }
 
-.detail-subnav-active .site-header {
+.site-header-hidden {
 	opacity: 0;
 	pointer-events: none;
 }

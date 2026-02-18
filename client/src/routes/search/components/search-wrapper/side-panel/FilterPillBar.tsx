@@ -1,6 +1,7 @@
 "use client";
 
 import { ColorType } from "@/components/ui";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FilterPill } from "./FilterPill";
 import { FilterOption, FilterPopover } from "./FilterPopover";
@@ -31,6 +32,7 @@ export const FilterPillBar = ({
 	onClearAll,
 }: FilterPillBarProps) => {
 	const [activeKey, setActiveKey] = useState<FilterKey | null>(null);
+	const pathname = usePathname();
 	const [popoverPosition, setPopoverPosition] = useState<{
 		left: number;
 		top: number;
@@ -46,6 +48,10 @@ export const FilterPillBar = ({
 			setActiveKey(null);
 		}
 	}, [activeKey, filters]);
+
+	useEffect(() => {
+		setActiveKey(null);
+	}, [pathname]);
 
 	const hasActiveFilters = filters.some(
 		(filter) => filter.selectedValues.length > 0

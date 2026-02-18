@@ -284,11 +284,6 @@ const MediaCollage = ({
 						}`}
 						sizes="(max-width: 768px) 100vw, 60vw"
 					/>
-					{primaryLabel && (
-						<span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-gray-700 shadow-sm">
-							{primaryLabel}
-						</span>
-					)}
 					<div className="absolute right-3 top-3 flex items-center gap-2">
 						<Link
 							href={href}
@@ -319,11 +314,6 @@ const MediaCollage = ({
 						className="rounded-2xl object-cover"
 						sizes="(max-width: 640px) 100vw, 45vw"
 					/>
-					{primaryLabel && (
-						<span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-gray-700 shadow-sm">
-							{primaryLabel}
-						</span>
-					)}
 					<div className="absolute right-3 top-3 flex items-center gap-2 sm:hidden">
 						<Link
 							href={href}
