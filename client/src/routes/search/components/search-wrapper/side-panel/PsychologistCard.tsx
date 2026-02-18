@@ -23,7 +23,6 @@ interface ListingHighlight {
 
 interface CardMeta {
 	location?: string;
-	primaryLabel?: string;
 	badges: string[];
 	resourceTags: string[];
 	tags: string[];
@@ -77,7 +76,7 @@ const buildImageSet = (psychologist: PsychologistModel) => {
 	return { images, galleryCount };
 };
 
-// Mapping notes: adjust primaryLabel/badges/tags/highlights here to change card metadata.
+// Mapping notes: adjust badges/tags/highlights here to change card metadata.
 const mapPsychologistToCardMeta = (psychologist: PsychologistModel): CardMeta => {
 	const locationParts = [
 		normalizeValue(psychologist.address?.city),
@@ -90,22 +89,6 @@ const mapPsychologistToCardMeta = (psychologist: PsychologistModel): CardMeta =>
 			normalizeLabel(resource?.title ?? resource)
 		) || []
 	);
-	const resourceLabel = normalizeLabel(
-		psychologist.resource?.[0]?.title ?? psychologist.resource?.[0]
-	);
-	const therapyLabel = normalizeLabel(
-		psychologist.therapyOptions?.[0]?.type ?? psychologist.therapyOptions?.[0]
-	);
-	const primaryLabel = resourceLabel
-		? resourceLabel
-		: psychologist.showInsurances && psychologist.insurances?.length
-			? "Insurance accepted"
-			: psychologist.slidingScale
-				? "Sliding scale"
-				: therapyLabel
-					? therapyLabel
-					: undefined;
-
 	const badges: string[] = [];
 	if (psychologist.showInsurances && psychologist.insurances?.length) {
 		badges.push("Insurance accepted");
@@ -171,7 +154,6 @@ const mapPsychologistToCardMeta = (psychologist: PsychologistModel): CardMeta =>
 
 	return {
 		location,
-		primaryLabel,
 		badges: badges.slice(0, 2),
 		resourceTags,
 		tags: Array.from(tagSet),
@@ -252,12 +234,10 @@ const HighlightRow = ({ highlights }: { highlights: ListingHighlight[] }) => {
 
 const MediaCollage = ({
 	images,
-	primaryLabel,
 	href,
 	galleryCount,
 }: {
 	images: { src: string | StaticImageData; alt: string }[];
-	primaryLabel?: string;
 	href: string;
 	galleryCount: number;
 }) => {
@@ -381,7 +361,6 @@ const PsychologistCard = ({
 	const cardHref = `/professional/${psychologist.slug}`;
 	const {
 		location,
-		primaryLabel,
 		badges,
 		resourceTags,
 		tags,
@@ -411,12 +390,7 @@ const PsychologistCard = ({
 				}}
 			>
 				<div className="relative z-10 flex flex-col gap-4 p-4 sm:p-5">
-					<MediaCollage
-						images={images}
-						primaryLabel={primaryLabel}
-						href={cardHref}
-						galleryCount={galleryCount}
-					/>
+					<MediaCollage images={images} href={cardHref} galleryCount={galleryCount} />
 
 					<div className="space-y-3">
 						{location && (
