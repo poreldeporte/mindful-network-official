@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 
 interface Props {
 	psychologistName: string;
+	psychologistEmail?: string;
 }
 
-function ContactForm({ psychologistName }: Props) {
+function ContactForm({ psychologistName, psychologistEmail }: Props) {
 	const toast = useToast();
 
 	useEffect(() => {
@@ -18,7 +19,9 @@ function ContactForm({ psychologistName }: Props) {
 	}, []);
 
 	const initialFormState = {
-		to_email: "contact@themindfulnetwork.com",
+		to_email: psychologistEmail
+			? `${psychologistEmail},contact@themindfulnetwork.com`
+			: "contact@themindfulnetwork.com",
 		profesional_name: psychologistName,
 		from_name: "",
 		user_email: "",
@@ -187,7 +190,7 @@ function ContactForm({ psychologistName }: Props) {
 	);
 }
 
-export function GetInTouch({ name }: PsychologistModel) {
+export function GetInTouch({ name, email }: PsychologistModel) {
 	return (
 		<section
 			className="section-y-padding col-span-full pb-6 lg:pb-8"
@@ -218,7 +221,7 @@ export function GetInTouch({ name }: PsychologistModel) {
 
 				<div className="flex flex-col items-end">
 					<ToastProvider>
-						<ContactForm psychologistName={name} />
+						<ContactForm psychologistName={name} psychologistEmail={email} />
 					</ToastProvider>
 				</div>
 			</div>
