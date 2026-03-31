@@ -119,6 +119,10 @@ export default function RootLayout({
 					name="google-site-verification"
 					content="MRYzoaKzfBfpS_gQkReJAjD6Q_b7IXW2G-QFSp_vYeE"
 				/>
+				<meta
+					name="google-site-verification"
+					content="wSCstJawknn7bjcAdj6MQuh_HzPe2iAdn2Sx4il-4vA"
+				/>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-TLP8D1GLB5"
 					strategy="afterInteractive"
