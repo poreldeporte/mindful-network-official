@@ -2,6 +2,7 @@ import { sanityClient } from "@/api";
 import { Eventbrite } from "@/api/Eventbrite";
 import { EventbriteKeys } from "@/config/eventbrite.config";
 import { generateSlug } from "@/utilities";
+import { getAllLandingPageSlugs } from "@/lib/seo-landing-pages";
 import { MetadataRoute } from "next";
 
 export const revalidate = 3600;
@@ -120,7 +121,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			console.error("Error fetching events from Eventbrite:", error);
 		}
 
-		return [...staticUrls, ...professionalUrls, ...blogUrls, ...eventUrls];
+		let landingPageUrls: MetadataRoute.Sitemap = [];
+		try {
+			const landingPages = await getAllLandingPageSlugs();
+			landingPageUrls = landingPages.map(({ slug }) => ({
+				url: `${baseUrl}/find/${slug}`,
+				lastModified: currentDate,
+				changeFrequency: "weekly" as const,
+				priority: 0.8,
+			}));
+		} catch (error) {
+			console.error("Error generating landing page URLs:", error);
+		}
+
+		return [...staticUrls, ...professionalUrls, ...blogUrls, ...eventUrls, ...landingPageUrls];
 	} catch (error) {
 		console.error("Error generating sitemap:", error);
 
