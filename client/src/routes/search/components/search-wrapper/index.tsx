@@ -24,6 +24,10 @@ import SidePanel from "./side-panel/SidePanel";
 interface SearchWrapperProps {
 	lockedAgeSpecialties?: string[];
 	showLockedAgeSpecialties?: boolean;
+	lockedConditions?: string[];
+	lockedInsurances?: string[];
+	lockedCity?: string;
+	lockedLanguage?: string;
 	titlePrefix?: string;
 	titleHighlight?: string;
 	headingAs?: "h1" | "h2";
@@ -39,6 +43,10 @@ const slugifyValue = (value: string) =>
 export const SearchWrapper = ({
 	lockedAgeSpecialties = [],
 	showLockedAgeSpecialties = true,
+	lockedConditions = [],
+	lockedInsurances = [],
+	lockedCity,
+	lockedLanguage,
 	titlePrefix = "Find Professionals in",
 	titleHighlight = "South Florida",
 	headingAs = "h1",
@@ -196,6 +204,53 @@ export const SearchWrapper = ({
 			);
 		}
 
+		if (lockedConditions.length > 0) {
+			const lockedConditionSet = new Set(
+				lockedConditions.map(normalizeFilterValue)
+			);
+			result = result.filter(
+				(professional) =>
+					professional.conditionSpecialty?.some?.((c) => {
+						if (!c?.name) return false;
+						return lockedConditionSet.has(normalizeFilterValue(c.name));
+					}) ?? false
+			);
+		}
+
+		if (lockedInsurances.length > 0) {
+			const lockedInsuranceSet = new Set(
+				lockedInsurances.map(normalizeFilterValue)
+			);
+			result = result.filter(
+				(professional) =>
+					professional.insurances?.some?.((i) => {
+						if (!i?.name) return false;
+						return lockedInsuranceSet.has(normalizeFilterValue(i.name));
+					}) ?? false
+			);
+		}
+
+		if (lockedCity) {
+			const cityLower = normalizeFilterValue(lockedCity);
+			result = result.filter((professional) => {
+				const provCity = normalizeFilterValue(professional.address?.city || "");
+				if (provCity === cityLower) return true;
+				if (cityLower === "fort lauderdale" && (provCity === "ft. lauderdale" || provCity.includes("fort lauderdale"))) return true;
+				if (cityLower === "coral gables" && provCity.startsWith("coral gable")) return true;
+				return false;
+			});
+		}
+
+		if (lockedLanguage) {
+			const langLower = normalizeFilterValue(lockedLanguage);
+			result = result.filter(
+				(professional) =>
+					professional.languages?.some?.(
+						(l) => normalizeFilterValue(l) === langLower
+					) ?? false
+			);
+		}
+
 		if (searchQuery) {
 			const query = searchQuery.toLowerCase();
 			result = result.filter(
@@ -211,7 +266,7 @@ export const SearchWrapper = ({
 		}
 
 		return result;
-	}, [allProfessionals, lockedAgeSpecialties, searchParamsKey]);
+	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, searchParamsKey]);
 
 	return (
 		<SidePanel
