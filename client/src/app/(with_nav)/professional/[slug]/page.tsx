@@ -4,6 +4,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatType } from "@/utilities";
 
+// Revalidate every hour so updated provider data appears without redeploying
+export const revalidate = 3600;
+
 export async function generateMetadata({
 	params,
 }: {
