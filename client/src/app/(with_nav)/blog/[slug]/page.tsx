@@ -3,6 +3,9 @@ import { Content, Hero } from "@/routes/blog";
 import { getBlogById } from "@/routes/homepage/services";
 import type { Metadata } from "next";
 
+// Revalidate every hour so blog SEO updates from Sanity appear without redeploying
+export const revalidate = 3600;
+
 interface BlogPostProps {
 	params: {
 		slug: string;
