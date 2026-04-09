@@ -119,20 +119,70 @@ export default async function PsychologistPage({
 	}
 
 	const url = `https://themindfulnetwork.com/professional/${params.slug}`;
-	const schemaData = {
+	const schemaData: Record<string, unknown> = {
 		"@context": "https://schema.org",
-		"@type": "Person",
+		"@type": "MedicalBusiness",
 		name: psychologist.name,
 		description: psychologist.subtitle || psychologist.description,
 		image: psychologist.image,
-		jobTitle: "Mental Health Professional",
 		url,
-		worksFor: {
+		isPartOf: {
 			"@type": "Organization",
-			name: "Mindful Network",
+			name: "The Mindful Network",
 			url: "https://themindfulnetwork.com",
 		},
 	};
+
+	if (psychologist.phone) {
+		schemaData.telephone = psychologist.phone;
+	}
+
+	if (psychologist.email) {
+		schemaData.email = psychologist.email;
+	}
+
+	if (psychologist.degree) {
+		schemaData.jobTitle = psychologist.degree;
+	} else {
+		schemaData.jobTitle = "Mental Health Professional";
+	}
+
+	if (psychologist.address?.address) {
+		schemaData.address = {
+			"@type": "PostalAddress",
+			streetAddress: psychologist.address.address,
+			addressLocality: psychologist.address.city,
+			addressRegion: psychologist.address.state,
+			postalCode: psychologist.address.zip,
+			addressCountry: "US",
+		};
+	}
+
+	if (psychologist.insurances?.length > 0) {
+		schemaData.paymentAccepted = psychologist.insurances.map((i) => i.name).join(", ");
+	}
+
+	if (psychologist.conditionSpecialty?.length > 0) {
+		schemaData.medicalSpecialty = psychologist.conditionSpecialty.map((c) => c.name).join(", ");
+	}
+
+	if (psychologist.languages?.length > 0) {
+		schemaData.knowsLanguage = psychologist.languages;
+	}
+
+	if (psychologist.therapyOptions?.length > 0) {
+		schemaData.hasOfferCatalog = {
+			"@type": "OfferCatalog",
+			name: "Therapy Services",
+			itemListElement: psychologist.therapyOptions.map((t) => ({
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "MedicalTherapy",
+					name: t.type,
+				},
+			})),
+		};
+	}
 
 	return (
 		<>
