@@ -5,11 +5,9 @@ Allow: /
 # Bloquear acceso a directorios administrativos y archivos sensibles
 Disallow: /admin/
 Disallow: /temp/
-Disallow: /*.log$
+Disallow: /*.log
 Disallow: /cgi-bin/
 
-# Bloquear acceso a la búsqueda interna
-Disallow: /search
 
 # Permitir acceso específico a archivos CSS y JS (importantes para el renderizado)
 Allow: /assets/
