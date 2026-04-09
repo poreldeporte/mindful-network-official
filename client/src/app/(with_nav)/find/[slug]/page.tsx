@@ -12,6 +12,9 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
 
+// Revalidate every hour so new providers appear without redeploying
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
 	const slugs = await getAllLandingPageSlugs();
 	return slugs.map(({ slug }) => ({ slug }));
