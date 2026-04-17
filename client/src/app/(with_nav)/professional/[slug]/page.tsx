@@ -1,11 +1,24 @@
 import { ListingDetailPage } from "@/routes/psychologists/components/detail-v2";
 import { getPsychologistById } from "@/services";
+import { sanityClient } from "@/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatType } from "@/utilities";
 
 // Revalidate every hour so updated provider data appears without redeploying
 export const revalidate = 3600;
+
+export async function generateStaticParams() {
+	try {
+		const professionals = await sanityClient.fetch(
+			`*[_type == 'professionals']{ "slug": slug.current }`
+		);
+		return professionals.map((p: { slug: string }) => ({ slug: p.slug }));
+	} catch (error) {
+		console.error("Failed to fetch professional slugs for static generation:", error);
+		return [];
+	}
+}
 
 export async function generateMetadata({
 	params,
