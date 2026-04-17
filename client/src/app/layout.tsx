@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 	title:
 		"Find a Therapist in South Florida | The Mindful Network",
 	description:
-		"Search licensed therapists, psychiatrists, and mental health professionals in Miami, Coral Gables, Boca Raton, Palm Beach, and South Florida. Filter by insurance, condition, and language.",
+		"Find licensed therapists in Miami, Coral Gables, Boca Raton, Palm Beach, and South Florida. Filter by insurance, condition, and language.",
 	keywords: [
 		"mental health resources",
 		"South Florida mental health",
