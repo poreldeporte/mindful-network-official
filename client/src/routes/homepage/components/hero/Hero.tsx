@@ -50,8 +50,8 @@ export const Hero = ({
 					color="white"
 					variant="h1"
 				>
-					A network curated for{" "}
-					<span className="lg:block">your path to healing</span>
+					Find Mental Health Professionals{" "}
+					<span className="lg:block">in South Florida</span>
 				</Typography>
 
 				<Typography
@@ -60,7 +60,8 @@ export const Hero = ({
 					color="white"
 					variant="body"
 				>
-					Explore our network of trusted mental health resources to find the
+					A network curated for your path to healing — explore trusted
+					therapists, psychiatrists, and mental health resources to find the
 					support you need, when you need it.
 				</Typography>
 

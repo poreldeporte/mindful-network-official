@@ -4,9 +4,9 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title:
-		"The Mindful Network - Your Guide to Mental Health Resources in South Florida",
+		"Find a Therapist in South Florida | The Mindful Network",
 	description:
-		"The Mindful Network is your comprehensive guide to finding and connecting with mental health resources in South Florida. Explore therapy options, medication management, outpatient and inpatient programs, and innovative therapies tailored for individuals aged 40 and above.",
+		"Find licensed therapists in Miami, Coral Gables, Boca Raton, Palm Beach, and South Florida. Filter by insurance, condition, and language.",
 	keywords: [
 		"mental health resources",
 		"South Florida mental health",
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
 	],
 	openGraph: {
 		title:
-			"The Mindful Network - Your Guide to Mental Health Resources in South Florida",
+			"Find a Therapist in South Florida | The Mindful Network",
 		description:
-			"Discover mental health services tailored to your needs in South Florida. Find therapy options, outpatient programs, and support for various conditions such as depression, anxiety, PTSD, and more.",
+			"Search licensed therapists, psychiatrists, and mental health professionals across South Florida. Filter by insurance, condition, and language.",
 		url: "https://themindfulnetwork.com",
 		type: "website",
 		locale: "en_US",
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		site: "@MindfulNetwork",
-		title: "The Mindful Network - Your Guide to Mental Health Resources",
+		title: "Find a Therapist in South Florida | The Mindful Network",
 		description:
-			"The Mindful Network helps individuals in South Florida find mental health resources tailored to their needs. Explore our platform to access therapy options, outpatient and inpatient programs, and more.",
+			"Search licensed therapists and mental health professionals in South Florida. Filter by insurance, condition, and language.",
 		images: [
 			{
 				url: "https://themindfulnetwork.com/images/logo.webp",
