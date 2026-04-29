@@ -4,9 +4,16 @@ import {
 	getAllLandingPageSlugs,
 	generateIntro,
 } from "@/lib/seo-landing-pages";
-import { getAllProfessionals } from "@/services";
+import {
+	getAllConditions,
+	getAllInsurances,
+	getAllProfessionals,
+	getAllResources,
+	getAllTherapyOptions,
+} from "@/services";
 import { PsychologistModel } from "@/models";
 import { SearchWrapper } from "@/routes/search";
+import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
@@ -82,9 +89,28 @@ export default async function FindPage({
 	const baseUrl = "https://themindfulnetwork.com";
 	const url = `${baseUrl}/find/${params.slug}`;
 
-	// Get provider count for intro text
-	const allProfessionals = await getAllProfessionals();
+	// Fetch all the data SearchWrapper needs on the server so it ships in the
+	// SSR HTML. Without this, the page renders an empty "No results found"
+	// placeholder until the client hydrates and re-fetches — which Google sees
+	// as the canonical content for the page.
+	const [
+		allProfessionals,
+		allConditions,
+		allInsurances,
+		allTherapyModalities,
+		allResources,
+	] = await Promise.all([
+		getAllProfessionals(),
+		getAllConditions(),
+		getAllInsurances(),
+		getAllTherapyOptions(),
+		getAllResources(),
+	]);
 	const professionals: PsychologistModel[] = Array.isArray(allProfessionals) ? allProfessionals : [];
+	const initialConditions = Array.isArray(allConditions) ? allConditions : [];
+	const initialInsurances = Array.isArray(allInsurances) ? allInsurances : [];
+	const initialTherapyModalities = Array.isArray(allTherapyModalities) ? allTherapyModalities : [];
+	const initialResourceKeys = generateResourceKeys(Array.isArray(allResources) ? allResources : []);
 
 	let heading: string;
 	let badgeText: string;
@@ -267,7 +293,14 @@ export default async function FindPage({
 			<section className="page-width pb-16 lg:pb-24">
 				<div className={`overflow-hidden rounded-[2rem] border ${colors.border} bg-white shadow-sm`}>
 					<Suspense fallback={<div className="p-8">Loading providers...</div>}>
-						<SearchWrapper {...searchProps} />
+						<SearchWrapper
+							{...searchProps}
+							initialProfessionals={professionals}
+							initialConditions={initialConditions}
+							initialInsurances={initialInsurances}
+							initialTherapyModalities={initialTherapyModalities}
+							initialResourceKeys={initialResourceKeys}
+						/>
 					</Suspense>
 				</div>
 			</section>

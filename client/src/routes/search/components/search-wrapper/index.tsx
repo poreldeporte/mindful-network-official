@@ -31,6 +31,15 @@ interface SearchWrapperProps {
 	titlePrefix?: string;
 	titleHighlight?: string;
 	headingAs?: "h1" | "h2";
+	// Optional pre-fetched data. When provided, SearchWrapper hydrates with this
+	// data instead of fetching client-side on mount. Lets server components
+	// (e.g. /find/[slug] landing pages) deliver populated HTML to bots and
+	// avoid the "No results found" flash before hydration.
+	initialProfessionals?: PsychologistModel[];
+	initialConditions?: conditionSpecialty[];
+	initialInsurances?: insurances[];
+	initialTherapyModalities?: TherapyModality[];
+	initialResourceKeys?: ResourcesKey[];
 }
 
 const normalizeFilterValue = (value: string) => value.trim().toLowerCase();
@@ -50,26 +59,40 @@ export const SearchWrapper = ({
 	titlePrefix = "Find Professionals in",
 	titleHighlight = "South Florida",
 	headingAs = "h1",
+	initialProfessionals,
+	initialConditions,
+	initialInsurances,
+	initialTherapyModalities,
+	initialResourceKeys,
 }: SearchWrapperProps) => {
+	const hasInitialData = Array.isArray(initialProfessionals);
+
 	const [conditions, setConditions] = useState<conditionSpecialty[] | null>(
-		null
+		initialConditions ?? null
 	);
-	const [insurances, setInsurances] = useState<insurances[] | null>(null);
+	const [insurances, setInsurances] = useState<insurances[] | null>(
+		initialInsurances ?? null
+	);
 	const [therapyModalities, setTherapyModalities] = useState<
 		TherapyModality[] | null
-	>(null);
+	>(initialTherapyModalities ?? null);
 	const [allResourceKeys, setAllResourceKeys] = useState<ResourcesKey[] | []>(
-		[]
+		initialResourceKeys ?? []
 	);
 	const [allProfessionals, setAllProfessionals] = useState<
 		PsychologistModel[] | null
-	>(null);
+	>(initialProfessionals ?? null);
 	const [isLoading, setLoading] = useState(false);
 
 	const searchParams = useSearchParams();
 	const searchParamsKey = searchParams.toString();
 
 	useEffect(() => {
+		// Skip the fetch when the server has already supplied the initial dataset
+		// (e.g. /find/ landing pages). The page-level `revalidate = 3600` on those
+		// routes still gives ISR-driven freshness.
+		if (hasInitialData) return;
+
 		async function fetchData() {
 			try {
 				setLoading(true);
@@ -111,7 +134,7 @@ export const SearchWrapper = ({
 			}
 		}
 		fetchData();
-	}, []);
+	}, [hasInitialData]);
 
 	useEffect(() => {
 		// Defensive reset: if user navigates from a detail page, clear any
