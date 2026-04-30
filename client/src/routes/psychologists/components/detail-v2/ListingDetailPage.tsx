@@ -28,8 +28,8 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 
 	useEffect(() => {
 		trackEvent("profile_view", {
-			slug: psychologist.slug ?? "",
-			name: psychologist.name ?? "",
+			therapist_slug: psychologist.slug ?? "",
+			therapist_name: psychologist.name ?? "",
 			type: psychologist._type ?? "",
 			city: psychologist.address?.city ?? "",
 		});
