@@ -2,16 +2,19 @@
 
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import type { ListingDetailViewModel } from "./listingDetailMapper";
 
 interface StickyContactCardProps {
 	viewModel: ListingDetailViewModel;
 	contactAnchor: string;
+	slug: string;
 }
 
 export const StickyContactCard = ({
 	viewModel,
 	contactAnchor,
+	slug,
 }: StickyContactCardProps) => {
 	const normalizedServiceTypes = new Set(
 		viewModel.serviceTypes.map((service) => service.toLowerCase())
@@ -90,6 +93,12 @@ export const StickyContactCard = ({
 					{viewModel.contact.phone && (
 						<a
 							href={`tel:${viewModel.contact.phone}`}
+							onClick={() =>
+								trackEvent("contact_click", {
+									method: "phone",
+									therapist_slug: slug,
+								})
+							}
 							className="flex h-10 items-center justify-center gap-2 rounded-full bg-blue-600 text-[12px] font-semibold text-white shadow-sm transition hover:bg-blue-700"
 						>
 							<Phone className="h-4 w-4" />
@@ -99,6 +108,12 @@ export const StickyContactCard = ({
 					{viewModel.contact.email && (
 						<a
 							href={contactAnchor}
+							onClick={() =>
+								trackEvent("contact_click", {
+									method: "email",
+									therapist_slug: slug,
+								})
+							}
 							className="flex h-10 items-center justify-center gap-2 rounded-full border border-gray-200 text-[12px] font-semibold text-gray-700 transition hover:border-gray-300"
 						>
 							<Mail className="h-4 w-4" />
