@@ -13,5 +13,5 @@ export const trackEvent = (
 	if (typeof window === "undefined" || typeof window.gtag !== "function") {
 		return;
 	}
-	window.gtag("event", eventName, params);
+	window.gtag("event", eventName, { transport_type: "beacon", ...params });
 };
