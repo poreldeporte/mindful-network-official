@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import { PsychologistModel } from "@/models";
 import { GetInTouch } from "@/routes/psychologists/components/getInTouch";
 import { useEffect } from "react";
@@ -24,6 +25,15 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 	const tabs = viewModel.sections
 		.filter((section) => section.isVisible)
 		.map((section) => ({ id: section.id, label: section.label }));
+
+	useEffect(() => {
+		trackEvent("profile_view", {
+			therapist_slug: psychologist.slug ?? "",
+			therapist_name: psychologist.name ?? "",
+			type: psychologist._type ?? "",
+			city: psychologist.address?.city ?? "",
+		});
+	}, [psychologist.slug, psychologist.name, psychologist._type, psychologist.address?.city]);
 
 	useEffect(() => {
 		const previousBodyBackground = document.body.style.backgroundColor;
@@ -150,6 +160,7 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 					<StickyContactCard
 						viewModel={viewModel}
 						contactAnchor={contactAnchor}
+						slug={psychologist.slug}
 					/>
 				</div>
 
@@ -159,6 +170,7 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 			<MobileContactBar
 				phone={viewModel.contact.phone}
 				contactAnchor={contactAnchor}
+				slug={psychologist.slug}
 			/>
 		</section>
 	);

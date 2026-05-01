@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Typography } from "@/components/ui";
+import { trackEvent } from "@/lib/analytics";
 import { MindfulIsotype } from "@/lib/images";
 import { EventbriteEvent } from "@/models/eventbrite.model";
 import { isEventExpired } from "@/utilities";
@@ -356,6 +357,14 @@ export const EventDetailsAbout = ({ event }: { event: EventbriteEvent }) => {
 									href={event.url}
 									className="expandable-tag-link"
 									target="_blank"
+									onClick={() =>
+										trackEvent("event_outbound_click", {
+											event_id: event.id,
+											event_name: event.name.text,
+											destination: event.url,
+											source: "about",
+										})
+									}
 								>
 									Get Tickets Now
 								</a>

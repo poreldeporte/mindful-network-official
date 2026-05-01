@@ -17,8 +17,9 @@ import {
 import { getValidationError } from "@/utilities";
 import { clearGlobalInteractionLocks } from "@/utilities/clear-global-interaction-locks.utility";
 import { generateResourceKeys } from "@/utilities/generate-resource.keys.utility";
+import { trackEvent } from "@/lib/analytics";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SidePanel from "./side-panel/SidePanel";
 
 interface SearchWrapperProps {
@@ -135,6 +136,8 @@ export const SearchWrapper = ({
 		}
 		fetchData();
 	}, [hasInitialData]);
+
+	const lastTrackedParamsRef = useRef<string | null>(null);
 
 	useEffect(() => {
 		// Defensive reset: if user navigates from a detail page, clear any
@@ -290,6 +293,43 @@ export const SearchWrapper = ({
 
 		return result;
 	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, searchParamsKey]);
+
+	useEffect(() => {
+		if (lastTrackedParamsRef.current === searchParamsKey) return;
+		lastTrackedParamsRef.current = searchParamsKey;
+
+		const params = new URLSearchParams(searchParamsKey);
+		const query = params.get("search") ?? "";
+		const condition = params.get("condition") ?? "";
+		const insurance = params.get("insurance") ?? "";
+		const therapy = params.get("therapy") ?? "";
+		const resource = params.get("resource") ?? "";
+
+		const hasFilters = Boolean(
+			query || condition || insurance || therapy || resource ||
+			lockedAgeSpecialties.length || lockedConditions.length ||
+			lockedInsurances.length || lockedCity || lockedLanguage
+		);
+		if (!hasFilters) return;
+
+		const timer = window.setTimeout(() => {
+			trackEvent("search_submit", {
+				query,
+				condition,
+				insurance,
+				therapy,
+				resource,
+				locked_city: lockedCity ?? "",
+				locked_language: lockedLanguage ?? "",
+				locked_age: lockedAgeSpecialties.join(",") || "",
+				locked_conditions: lockedConditions.join(",") || "",
+				locked_insurances: lockedInsurances.join(",") || "",
+				result_count: filteredProfessionals?.length ?? 0,
+			});
+		}, 600);
+
+		return () => window.clearTimeout(timer);
+	}, [searchParamsKey, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, filteredProfessionals]);
 
 	return (
 		<SidePanel

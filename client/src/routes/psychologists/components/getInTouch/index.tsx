@@ -2,6 +2,7 @@
 
 import { Button, Typography } from "@/components/ui";
 import { ToastProvider, useToast } from "@/components/ui/Toasts";
+import { trackEvent } from "@/lib/analytics";
 import { PsychologistModel } from "@/models";
 import emailjs from "@emailjs/browser";
 import { useEffect, useState } from "react";
@@ -9,9 +10,14 @@ import { useEffect, useState } from "react";
 interface Props {
 	psychologistName: string;
 	psychologistEmail?: string;
+	psychologistSlug?: string;
 }
 
-function ContactForm({ psychologistName, psychologistEmail }: Props) {
+function ContactForm({
+	psychologistName,
+	psychologistEmail,
+	psychologistSlug,
+}: Props) {
 	const toast = useToast();
 
 	useEffect(() => {
@@ -84,6 +90,11 @@ function ContactForm({ psychologistName, psychologistEmail }: Props) {
 			const res = await emailjs.send(serviceID, templateID, userInput);
 
 			if (res.status === 200) {
+				trackEvent("contact_form_submit", {
+					therapist_slug: psychologistSlug,
+					therapist_name: psychologistName,
+				});
+
 				toast.success("Success", {
 					description: "Your message has been sent successfully!",
 					position: "bottom-right",
@@ -190,7 +201,7 @@ function ContactForm({ psychologistName, psychologistEmail }: Props) {
 	);
 }
 
-export function GetInTouch({ name, email }: PsychologistModel) {
+export function GetInTouch({ name, email, slug }: PsychologistModel) {
 	return (
 		<section
 			className="section-y-padding col-span-full pb-6 lg:pb-8"
@@ -221,7 +232,11 @@ export function GetInTouch({ name, email }: PsychologistModel) {
 
 				<div className="flex flex-col items-end">
 					<ToastProvider>
-						<ContactForm psychologistName={name} psychologistEmail={email} />
+						<ContactForm
+							psychologistName={name}
+							psychologistEmail={email}
+							psychologistSlug={slug}
+						/>
 					</ToastProvider>
 				</div>
 			</div>
