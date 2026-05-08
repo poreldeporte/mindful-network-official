@@ -8,7 +8,7 @@ import {
 	ResourcesKey,
 	TherapyModality,
 } from "@/models";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import PsychologistCard from "./PsychologistCard";
 import { PsychologistCardSkeleton } from "./PsychologistCard.skeleton";
@@ -46,7 +46,6 @@ const SidePanel = ({
 	const RESULTS_PER_PAGE = 12;
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
-	const router = useRouter();
 	const selectedCondition = searchParams.get("condition")?.split(",") ?? [];
 	const selectedResources = searchParams.get("resource")?.split(",") ?? [];
 	const selectedInsurance = searchParams.get("insurance")?.split(",") ?? [];
@@ -71,6 +70,10 @@ const SidePanel = ({
 			)
 		: null;
 
+	// Update the URL via window.history.replaceState instead of router.replace
+	// so changing a filter chip doesn't trigger an RSC payload refetch from the
+	// server. The client already has all the data; useSearchParams still picks
+	// up the change because Next.js 14.1+ patches replaceState/pushState.
 	const pushParams = useCallback(
 		(params: URLSearchParams) => {
 			const queryString = params.toString();
@@ -78,9 +81,9 @@ const SidePanel = ({
 			const currentQuery = searchParams.toString();
 			const currentHref = currentQuery ? `${pathname}?${currentQuery}` : pathname;
 			if (href === currentHref) return;
-			router.replace(href, { scroll: false });
+			window.history.replaceState(null, "", href);
 		},
-		[pathname, router, searchParams]
+		[pathname, searchParams]
 	);
 
 	const handleBadgeClick = (filterType: FilterKey, value: string) => {
