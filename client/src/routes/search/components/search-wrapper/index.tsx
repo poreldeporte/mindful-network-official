@@ -282,6 +282,7 @@ export const SearchWrapper = ({
 			result = result.filter(
 				(professional) =>
 					professional.name?.toLowerCase().includes(query) ||
+					professional.facility?.toLowerCase().includes(query) ||
 					professional.insurances?.some?.((insurance) =>
 						insurance.name?.toLowerCase().includes(query)
 					) ||
@@ -289,6 +290,40 @@ export const SearchWrapper = ({
 						modality.type?.toLowerCase().includes(query)
 					)
 			);
+
+			// When a result is an org listing (its own name == its facility)
+			// and matches the query, hoist it above its affiliated practitioners
+			// so a facility search reads as "facility, then who works there."
+			const orgs = result.filter(
+				(p) =>
+					!!p.facility &&
+					!!p.name &&
+					normalizeFilterValue(p.name) === normalizeFilterValue(p.facility) &&
+					(p.name.toLowerCase().includes(query) ||
+						p.facility.toLowerCase().includes(query))
+			);
+
+			if (orgs.length > 0) {
+				const orgFacilityNames = new Set(
+					orgs.map((o) => normalizeFilterValue(o.facility))
+				);
+				const orgSet = new Set(orgs);
+				const affiliated = result.filter(
+					(p) =>
+						!orgSet.has(p) &&
+						!!p.facility &&
+						orgFacilityNames.has(normalizeFilterValue(p.facility))
+				);
+				const remaining = result.filter(
+					(p) =>
+						!orgSet.has(p) &&
+						!(
+							!!p.facility &&
+							orgFacilityNames.has(normalizeFilterValue(p.facility))
+						)
+				);
+				result = [...orgs, ...affiliated, ...remaining];
+			}
 		}
 
 		return result;
