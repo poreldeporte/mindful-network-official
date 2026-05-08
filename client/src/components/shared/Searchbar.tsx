@@ -68,7 +68,7 @@ export function Searchbar({ onClick }: Props) {
 				<input
 					className="h-full w-full border border-gray-300 rounded-r-full pl-5"
 					type="text"
-					placeholder="Search by Insurance or Therapy Modality"
+					placeholder="Search by Facility, Insurance, or Therapy Modality"
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 				/>
