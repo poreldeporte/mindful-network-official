@@ -15,6 +15,8 @@ import type { ComponentType, SVGProps } from "react";
 export interface ListingImage {
 	src: string | StaticImageData;
 	alt: string;
+	hotspotX?: number;
+	hotspotY?: number;
 }
 
 export interface ListingHighlight {
@@ -105,6 +107,8 @@ const buildGalleryImages = (
 		.map((image) => ({
 			src: image.url,
 			alt: image.alt || psychologist.name,
+			hotspotX: image.hotspot?.x,
+			hotspotY: image.hotspot?.y,
 		}));
 
 	if (galleryImages.length > 0) {

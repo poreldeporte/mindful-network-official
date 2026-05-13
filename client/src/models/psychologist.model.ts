@@ -16,6 +16,7 @@ interface Address {
 interface ImageWithAlt {
 	url: string;
 	alt?: string;
+	hotspot?: { x: number; y: number; width?: number; height?: number };
 }
 
 export interface PsychologistModel {
