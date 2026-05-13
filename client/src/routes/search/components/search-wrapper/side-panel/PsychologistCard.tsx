@@ -59,15 +59,26 @@ const normalizeLabel = (value: unknown): string | undefined => {
 const uniqueList = (items?: Array<string | undefined>) =>
 	Array.from(new Set((items ?? []).filter(Boolean) as string[]));
 
+interface CardImage {
+	src: string | StaticImageData;
+	alt: string;
+	hotspotX?: number;
+	hotspotY?: number;
+	fit?: "cover" | "contain";
+}
+
 const buildImageSet = (psychologist: PsychologistModel) => {
-	const fallbackImage = psychologist.image
+	const fallbackImage: CardImage = psychologist.image
 		? { src: psychologist.image, alt: psychologist.imageAlt || psychologist.name }
 		: { src: UserImage as StaticImageData, alt: psychologist.name };
-	const galleryImages = (psychologist.imagesGallery || [])
+	const galleryImages: CardImage[] = (psychologist.imagesGallery || [])
 		.filter((image) => image?.url)
 		.map((image) => ({
 			src: image.url,
 			alt: image.alt || psychologist.name,
+			hotspotX: image.hotspot?.x,
+			hotspotY: image.hotspot?.y,
+			fit: image.fit,
 		}));
 
 	const galleryCount = galleryImages.length;
@@ -232,12 +243,26 @@ const HighlightRow = ({ highlights }: { highlights: ListingHighlight[] }) => {
 	);
 };
 
+const tileImageProps = (image: CardImage) => ({
+	className: `rounded-2xl ${
+		image.fit === "contain" ? "object-contain" : "object-cover"
+	}`,
+	style:
+		image.fit !== "contain" &&
+		image.hotspotX !== undefined &&
+		image.hotspotY !== undefined
+			? {
+					objectPosition: `${image.hotspotX * 100}% ${image.hotspotY * 100}%`,
+				}
+			: undefined,
+});
+
 const MediaCollage = ({
 	images,
 	href,
 	galleryCount,
 }: {
-	images: { src: string | StaticImageData; alt: string }[];
+	images: CardImage[];
 	href: string;
 	galleryCount: number;
 }) => {
@@ -260,8 +285,13 @@ const MediaCollage = ({
 						className={`rounded-2xl ${
 							isProfileImage
 								? "object-contain object-left"
+								: leftImage.fit === "contain"
+								? "object-contain"
 								: "object-cover"
 						}`}
+						style={
+							isProfileImage ? undefined : tileImageProps(leftImage).style
+						}
 						sizes="(max-width: 768px) 100vw, 60vw"
 					/>
 					<div className="absolute right-3 top-3 flex items-center gap-2">
@@ -291,7 +321,7 @@ const MediaCollage = ({
 						src={leftImage.src}
 						alt={leftImage.alt}
 						fill
-						className="rounded-2xl object-cover"
+						{...tileImageProps(leftImage)}
 						sizes="(max-width: 640px) 100vw, 45vw"
 					/>
 					<div className="absolute right-3 top-3 flex items-center gap-2 sm:hidden">
@@ -311,7 +341,7 @@ const MediaCollage = ({
 						src={middleSource.src}
 						alt={middleSource.alt}
 						fill
-						className="rounded-2xl object-cover"
+						{...tileImageProps(middleSource)}
 						sizes="(max-width: 640px) 0px, 40vw"
 					/>
 					{isDouble && (
@@ -334,7 +364,7 @@ const MediaCollage = ({
 							src={rightSource.src}
 							alt={rightSource.alt}
 							fill
-							className="rounded-2xl object-cover"
+							{...tileImageProps(rightSource)}
 							sizes="(max-width: 640px) 0px, 15vw"
 						/>
 						<Link
