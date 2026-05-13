@@ -10,5 +10,8 @@ export default defineCliConfig({
    * Learn more at https://www.sanity.io/docs/cli#auto-updates
    */
   studioHost: 'mindful-network',
-  autoUpdates: true,
+  deployment: {
+    autoUpdates: true,
+    appId: 'gsajg4l5pcvf7jus6qa5envr',
+  },
 })
