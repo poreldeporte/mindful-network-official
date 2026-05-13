@@ -34,6 +34,15 @@ const Tile = ({
 				isProfileImage ? "object-contain" : "object-cover"
 			}`}
 			sizes="(max-width: 768px) 100vw, 50vw"
+			style={
+				!isProfileImage &&
+				image.hotspotX !== undefined &&
+				image.hotspotY !== undefined
+					? {
+							objectPosition: `${image.hotspotX * 100}% ${image.hotspotY * 100}%`,
+						}
+					: undefined
+			}
 		/>
 	</button>
 );
