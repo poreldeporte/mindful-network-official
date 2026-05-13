@@ -17,6 +17,7 @@ export interface ListingImage {
 	alt: string;
 	hotspotX?: number;
 	hotspotY?: number;
+	fit?: "cover" | "contain";
 }
 
 export interface ListingHighlight {
@@ -109,6 +110,7 @@ const buildGalleryImages = (
 			alt: image.alt || psychologist.name,
 			hotspotX: image.hotspot?.x,
 			hotspotY: image.hotspot?.y,
+			fit: image.fit,
 		}));
 
 	if (galleryImages.length > 0) {

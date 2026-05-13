@@ -31,11 +31,14 @@ const Tile = ({
 			alt={image.alt}
 			fill
 			className={`transition-transform duration-200 group-hover:scale-[1.02] ${
-				isProfileImage ? "object-contain" : "object-cover"
+				isProfileImage || image.fit === "contain"
+					? "object-contain"
+					: "object-cover"
 			}`}
 			sizes="(max-width: 768px) 100vw, 50vw"
 			style={
 				!isProfileImage &&
+				image.fit !== "contain" &&
 				image.hotspotX !== undefined &&
 				image.hotspotY !== undefined
 					? {
