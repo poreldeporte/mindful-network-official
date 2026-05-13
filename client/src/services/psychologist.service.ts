@@ -35,7 +35,8 @@ export const getPsychologistById = async (
             "imagesGallery": imagesGallery[]{
                 "url": asset->url,
                 "alt": alt,
-                hotspot
+                hotspot,
+                fit
             }
         }`;
 
@@ -85,7 +86,8 @@ export const getAllProfessionals = async () => {
 			"imagesGallery": imagesGallery[]{
 				"url": asset->url,
 				"alt": alt,
-				hotspot
+				hotspot,
+				fit
 			}
 		}`,
 			{},

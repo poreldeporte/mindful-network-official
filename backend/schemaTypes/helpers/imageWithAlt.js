@@ -15,6 +15,21 @@ export const imageWithAlt = (options = {}) => ({
         isHighlighted: true,
       },
     },
+    {
+      name: 'fit',
+      title: 'Display fit',
+      type: 'string',
+      description:
+        'How this image fits the gallery tile. Use "Contain" for logos or anything where the entire image must remain visible (letterboxed). Default is "Cover", which crops to fill — best for portraits.',
+      options: {
+        list: [
+          {title: 'Cover — crop to fill tile (default, best for portraits)', value: 'cover'},
+          {title: 'Contain — letterbox, no crop (best for logos)', value: 'contain'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'cover',
+    },
   ],
 })
 
