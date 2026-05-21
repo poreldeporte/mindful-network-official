@@ -34,7 +34,7 @@ export async function generateMetadata({
 	}
 
 	const city = psychologist.address?.city;
-	const state = psychologist.address?.state;
+	const state = psychologist.address?.state?.toUpperCase();
 	const cityState = [city, state].filter(Boolean).join(", ");
 	const nameWithDegree = psychologist.degree
 		? `${psychologist.name}, ${psychologist.degree}`
