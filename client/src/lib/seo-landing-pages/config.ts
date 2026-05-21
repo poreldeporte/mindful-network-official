@@ -34,6 +34,12 @@ export const CITIES: CityConfig[] = [
 	{ name: "Aventura", slug: "aventura", state: "Florida", stateAbbr: "FL", descriptor: "northeast Miami-Dade" },
 	{ name: "Pembroke Pines", slug: "pembroke-pines", state: "Florida", stateAbbr: "FL", descriptor: "one of Broward County's largest communities" },
 	{ name: "Hialeah", slug: "hialeah", state: "Florida", stateAbbr: "FL", descriptor: "Miami-Dade's second largest city" },
+	{ name: "Coral Springs", slug: "coral-springs", state: "Florida", stateAbbr: "FL", descriptor: "northwest Broward County" },
+	{ name: "Weston", slug: "weston", state: "Florida", stateAbbr: "FL", descriptor: "western Broward County" },
+	{ name: "Delray Beach", slug: "delray-beach", state: "Florida", stateAbbr: "FL", descriptor: "central Palm Beach County" },
+	{ name: "South Miami", slug: "south-miami", state: "Florida", stateAbbr: "FL", descriptor: "the heart of southern Miami-Dade" },
+	{ name: "Sunny Isles Beach", slug: "sunny-isles-beach", state: "Florida", stateAbbr: "FL", descriptor: "northeast Miami-Dade's beachfront" },
+	{ name: "Miami Beach", slug: "miami-beach", state: "Florida", stateAbbr: "FL", descriptor: "Miami's barrier island" },
 ];
 
 export const CONDITIONS: ConditionConfig[] = [
@@ -47,6 +53,11 @@ export const CONDITIONS: ConditionConfig[] = [
 	{ name: "Obsessive-Compulsive Disorder", slug: "ocd", therapistLabel: "OCD Therapists", filterValue: "obsessive-compulsive disorder" },
 	{ name: "Eating Disorders", slug: "eating-disorders", therapistLabel: "Eating Disorder Therapists", filterValue: "eating disorders" },
 	{ name: "Addiction", slug: "addiction", therapistLabel: "Addiction Therapists", filterValue: "addiction" },
+	{ name: "Autism Spectrum Disorder", slug: "autism", therapistLabel: "Autism Therapists", filterValue: "autism spectrum disorder" },
+	{ name: "Bipolar Disorder", slug: "bipolar", therapistLabel: "Bipolar Therapists", filterValue: "bipolar disorder" },
+	{ name: "Parenting", slug: "parenting", therapistLabel: "Parenting Therapists", filterValue: "parenting" },
+	{ name: "LGBTQ", slug: "lgbtq", therapistLabel: "LGBTQ-Affirming Therapists", filterValue: "lgbtq" },
+	{ name: "Women's Issues", slug: "womens-issues", therapistLabel: "Women's Issues Therapists", filterValue: "women's issues" },
 ];
 
 export const INSURANCES: InsuranceConfig[] = [
