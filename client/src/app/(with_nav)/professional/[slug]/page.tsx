@@ -3,7 +3,6 @@ import { getPsychologistById } from "@/services";
 import { sanityClient } from "@/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { formatType } from "@/utilities";
 
 // Revalidate every hour so updated provider data appears without redeploying
 export const revalidate = 3600;
@@ -34,14 +33,25 @@ export async function generateMetadata({
 		};
 	}
 
-	const title = `${psychologist.name} - ${formatType(psychologist._type)}`;
+	const city = psychologist.address?.city;
+	const state = psychologist.address?.state;
+	const cityState = [city, state].filter(Boolean).join(", ");
+	const nameWithDegree = psychologist.degree
+		? `${psychologist.name}, ${psychologist.degree}`
+		: psychologist.name;
+	const profession = psychologist.degree ? "Therapist" : "Mental Health Practice";
+	const locPart = cityState
+		? `${profession} in ${cityState}`
+		: `${profession} in South Florida`;
+	const title = `${nameWithDegree} — ${locPart} | The Mindful Network`;
 
 	// Build a unique description from actual provider data, fitting within ~155 chars
-	// Priority: name+degree, conditions (differentiator), location, then insurance (most common first)
+	// Priority: name+degree, conditions, location, modalities (how they work), insurance
 	const MAX_LENGTH = 155;
-	const location = [psychologist.address?.city, psychologist.address?.state].filter(Boolean).join(", ");
+	const location = cityState;
 
 	const conditions = psychologist.conditionSpecialty?.map((c) => c.name) || [];
+	const modalities = psychologist.therapyOptions?.map((t) => t.type) || [];
 
 	// Sort insurances by popularity — most-searched plans first
 	const INSURANCE_PRIORITY = [
@@ -55,16 +65,14 @@ export async function generateMetadata({
 	}).map((i) => i.name).filter((n) => n !== "Self Pay");
 
 	// Start with name + degree
-	let description = psychologist.degree
-		? `${psychologist.name}, ${psychologist.degree}`
-		: psychologist.name;
+	let description = nameWithDegree;
 
-	// Add conditions — as many as fit
+	// Add conditions — as many as fit, reserving budget for modalities + insurance sentences
 	if (conditions.length > 0) {
 		let condStr = ` specializes in ${conditions[0]}`;
 		for (let i = 1; i < conditions.length; i++) {
 			const next = `, ${conditions[i]}`;
-			if ((description + condStr + next).length > MAX_LENGTH - 40) break;
+			if ((description + condStr + next).length > MAX_LENGTH - 70) break;
 			condStr += next;
 		}
 		description += condStr;
@@ -75,6 +83,20 @@ export async function generateMetadata({
 		description += ` in ${location}.`;
 	} else {
 		description += " in South Florida.";
+	}
+
+	// Add modalities — up to 2, only if there's room left for at least a short insurance line
+	if (modalities.length > 0) {
+		let modStr = ` Offers ${modalities[0]}`;
+		if (modalities.length > 1) {
+			const next = ` and ${modalities[1]}`;
+			if ((description + modStr + next + ".").length <= MAX_LENGTH - 25) {
+				modStr += next;
+			}
+		}
+		if ((description + modStr + ".").length <= MAX_LENGTH - 15) {
+			description += modStr + ".";
+		}
 	}
 
 	// Add insurance — as many as fit
