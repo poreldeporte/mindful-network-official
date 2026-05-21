@@ -51,7 +51,12 @@ export async function generateMetadata({
 	const location = cityState;
 
 	const conditions = psychologist.conditionSpecialty?.map((c) => c.name) || [];
-	const modalities = psychologist.therapyOptions?.map((t) => t.type) || [];
+	// Only true modalities surface in the meta description — programs, formats,
+	// and delivery modes aren't SEO-useful keywords. `category` is missing on
+	// older records and is treated as 'modality' to match the schema default.
+	const modalities = (psychologist.therapyOptions || [])
+		.filter((t) => !t.category || t.category === "modality")
+		.map((t) => t.type);
 
 	// Sort insurances by popularity — most-searched plans first
 	const INSURANCE_PRIORITY = [

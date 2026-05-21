@@ -22,7 +22,8 @@ export const getPsychologistById = async (
             },
             "therapyOptions": therapyOptions[]->{
                 "id": _id,
-                type
+                type,
+                category
             },
 					"resource": resource[]->{
 						_id,
@@ -74,7 +75,8 @@ export const getAllProfessionals = async () => {
 			},
 			"therapyOptions": therapyOptions[]->{
 				"id": _id,
-				type
+				type,
+				category
 			},
 					"resource": resource[]->{
 						_id,
