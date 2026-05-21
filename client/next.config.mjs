@@ -54,6 +54,14 @@ const nextConfig = {
 				destination: "/find/online-therapy-florida",
 				permanent: true,
 			},
+			// Acadia Healthcare removed from Sanity 2026-05-21 — corporate parent of
+			// 250+ facilities across 39 states, not a clinical entity Florida users
+			// can visit. Redirect to /search so they can find a real provider.
+			{
+				source: "/professional/acadia-healthcare",
+				destination: "/search",
+				permanent: true,
+			},
 		];
 	},
 };
