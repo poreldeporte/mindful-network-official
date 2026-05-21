@@ -40,6 +40,20 @@ const nextConfig = {
 				destination: "/search",
 				permanent: true,
 			},
+			// Non-clinical orgs removed from Sanity 2026-05-21 (foundations / funding
+			// bodies, not treatment providers). Redirect to the statewide telehealth
+			// page so users with bookmarks land on accessible mental health care
+			// instead of a 404.
+			{
+				source: "/professional/kevin-love-fund",
+				destination: "/find/online-therapy-florida",
+				permanent: true,
+			},
+			{
+				source: "/professional/james-henry-mccann-iv-foundation",
+				destination: "/find/online-therapy-florida",
+				permanent: true,
+			},
 		];
 	},
 };
