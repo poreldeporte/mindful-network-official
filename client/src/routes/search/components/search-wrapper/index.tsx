@@ -29,6 +29,7 @@ interface SearchWrapperProps {
 	lockedInsurances?: string[];
 	lockedCity?: string;
 	lockedLanguage?: string;
+	lockedTherapyModality?: string;
 	titlePrefix?: string;
 	titleHighlight?: string;
 	headingAs?: "h1" | "h2";
@@ -57,6 +58,7 @@ export const SearchWrapper = ({
 	lockedInsurances = [],
 	lockedCity,
 	lockedLanguage,
+	lockedTherapyModality,
 	titlePrefix = "Find Professionals in",
 	titleHighlight = "South Florida",
 	headingAs = "h1",
@@ -277,6 +279,18 @@ export const SearchWrapper = ({
 			);
 		}
 
+		if (lockedTherapyModality) {
+			const modalityLower = normalizeFilterValue(lockedTherapyModality);
+			result = result.filter(
+				(professional) =>
+					professional.therapyOptions?.some?.(
+						(modality) =>
+							typeof modality?.type === "string" &&
+							normalizeFilterValue(modality.type) === modalityLower
+					) ?? false
+			);
+		}
+
 		if (searchQuery) {
 			const query = searchQuery.toLowerCase();
 			result = result.filter(
@@ -327,7 +341,7 @@ export const SearchWrapper = ({
 		}
 
 		return result;
-	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, searchParamsKey]);
+	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, lockedTherapyModality, searchParamsKey]);
 
 	useEffect(() => {
 		if (lastTrackedParamsRef.current === searchParamsKey) return;

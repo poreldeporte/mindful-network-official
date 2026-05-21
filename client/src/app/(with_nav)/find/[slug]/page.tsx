@@ -3,6 +3,7 @@ import {
 	resolveLandingPageSlug,
 	getAllLandingPageSlugs,
 	generateIntro,
+	VIRTUAL_MODALITY,
 } from "@/lib/seo-landing-pages";
 import {
 	getAllConditions,
@@ -53,9 +54,13 @@ export async function generateMetadata({
 	} else if (page.type === "insurance") {
 		title = `Therapists Accepting ${page.insurance.name} in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
 		description = `Find ${page.insurance.name}-covered therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse in-network providers by specialty, language, and treatment approach on The Mindful Network.`;
-	} else {
+	} else if (page.type === "language") {
 		title = `${page.language.name}-Speaking Therapists in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
 		description = `Find ${page.language.name}-speaking therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse licensed bilingual providers by specialty and insurance on The Mindful Network.`;
+	} else {
+		// virtual
+		title = `Online Therapy in Florida — Telehealth Providers | The Mindful Network`;
+		description = `Find licensed online therapists serving all of Florida. Browse telehealth providers by specialty, insurance, and treatment approach on The Mindful Network.`;
 	}
 
 	return {
@@ -174,7 +179,7 @@ export default async function FindPage({
 			titleHighlight: page.city.name,
 			headingAs: "h2" as const,
 		};
-	} else {
+	} else if (page.type === "language") {
 		heading = `${page.language.name}-Speaking Therapists in ${page.city.name}, ${page.city.stateAbbr}`;
 		badgeText = `${page.language.name.toUpperCase()}-SPEAKING`;
 		badgeColor = "purple";
@@ -194,6 +199,23 @@ export default async function FindPage({
 			lockedCity: page.city.name,
 			titlePrefix: `${page.language.name}-Speaking Therapists in`,
 			titleHighlight: page.city.name,
+			headingAs: "h2" as const,
+		};
+	} else {
+		// virtual
+		heading = `Online Therapy in Florida`;
+		badgeText = "TELEHEALTH PROVIDERS";
+		badgeColor = "blue";
+		count = professionals.filter((p) =>
+			p.therapyOptions?.some(
+				(m) => typeof m?.type === "string" && m.type.toLowerCase() === VIRTUAL_MODALITY.toLowerCase()
+			)
+		).length;
+		introText = generateIntro("virtual", { count });
+		searchProps = {
+			lockedTherapyModality: VIRTUAL_MODALITY,
+			titlePrefix: `Online Therapy in`,
+			titleHighlight: "Florida",
 			headingAs: "h2" as const,
 		};
 	}

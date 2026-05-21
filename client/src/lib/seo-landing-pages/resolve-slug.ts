@@ -1,14 +1,20 @@
 import {
-	CITIES, CONDITIONS, INSURANCES, LANGUAGES,
+	CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG,
 	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig,
 } from "./config";
 
 export type LandingPageParams =
 	| { type: "condition"; condition: ConditionConfig; city: CityConfig }
 	| { type: "insurance"; insurance: InsuranceConfig; city: CityConfig }
-	| { type: "language"; language: LanguageConfig; city: CityConfig };
+	| { type: "language"; language: LanguageConfig; city: CityConfig }
+	| { type: "virtual" };
 
 export function resolveLandingPageSlug(slug: string): LandingPageParams | null {
+	if (slug === VIRTUAL_SLUG) {
+		return { type: "virtual" };
+	}
+
+
 	// Condition: {condition}-therapist-{city}
 	for (const condition of CONDITIONS) {
 		for (const city of CITIES) {

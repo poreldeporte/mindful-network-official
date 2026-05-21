@@ -1,6 +1,6 @@
 import { getAllProfessionals } from "@/services";
 import { PsychologistModel } from "@/models";
-import { CITIES, CONDITIONS, INSURANCES, LANGUAGES } from "./config";
+import { CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG, VIRTUAL_MODALITY } from "./config";
 
 const MIN_PROVIDERS = 2;
 
@@ -33,6 +33,13 @@ function matchesInsurance(provider: PsychologistModel, filterValue: string): boo
 function matchesLanguage(provider: PsychologistModel, language: string): boolean {
 	return provider.languages?.some(
 		(l) => l.toLowerCase() === language.toLowerCase()
+	) ?? false;
+}
+
+function matchesTherapyModality(provider: PsychologistModel, modality: string): boolean {
+	const target = modality.toLowerCase();
+	return provider.therapyOptions?.some(
+		(m) => typeof m?.type === "string" && m.type.toLowerCase() === target
 	) ?? false;
 }
 
@@ -81,6 +88,14 @@ export async function getAllLandingPageSlugs(): Promise<LandingPageSlug[]> {
 				slugs.push({ slug: `${language.slug}-speaking-therapist-${city.slug}`, count });
 			}
 		}
+	}
+
+	// Virtual / online therapy — statewide, no city
+	const virtualCount = allProfessionals.filter(
+		(p: PsychologistModel) => matchesTherapyModality(p, VIRTUAL_MODALITY)
+	).length;
+	if (virtualCount >= MIN_PROVIDERS) {
+		slugs.push({ slug: VIRTUAL_SLUG, count: virtualCount });
 	}
 
 	return slugs;

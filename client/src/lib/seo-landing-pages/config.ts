@@ -75,24 +75,35 @@ export const LANGUAGES: LanguageConfig[] = [
 	{ name: "Creole", slug: "creole" },
 ];
 
+// Single statewide landing page for telehealth providers. Targets queries like
+// "online therapy florida" / "virtual therapist florida" — high-intent searches
+// that aren't well-served by city-based pages because virtual providers serve
+// the whole state.
+export const VIRTUAL_SLUG = "online-therapy-florida";
+export const VIRTUAL_MODALITY = "Virtual";
+
 export function generateIntro(
-	type: "condition" | "insurance" | "language",
-	params: { condition?: string; insurance?: string; language?: string; city: string; descriptor: string; count: number }
+	type: "condition" | "insurance" | "language" | "virtual",
+	params: { condition?: string; insurance?: string; language?: string; city?: string; descriptor?: string; count: number }
 ): string {
 	const { city, descriptor, count } = params;
 	const providerText = count > 0 ? `Browse ${count} provider${count !== 1 ? "s" : ""}` : "Browse providers";
 
-	if (type === "condition" && params.condition) {
+	if (type === "condition" && params.condition && city && descriptor) {
 		return `Finding the right therapist for ${params.condition.toLowerCase()} in ${city} can feel overwhelming. The Mindful Network connects you with licensed professionals in ${descriptor} who specialize in treating ${params.condition.toLowerCase()}. ${providerText} who understand your needs and can help you take the next step toward feeling better.`;
 	}
 
-	if (type === "insurance" && params.insurance) {
+	if (type === "insurance" && params.insurance && city && descriptor) {
 		return `Looking for a therapist in ${city} who accepts ${params.insurance}? The Mindful Network makes it easy to find licensed mental health professionals in ${descriptor} who are in-network with your insurance plan. ${providerText} accepting ${params.insurance} so you can focus on your care, not your coverage.`;
 	}
 
-	if (type === "language" && params.language) {
+	if (type === "language" && params.language && city && descriptor) {
 		return `Finding a therapist who speaks ${params.language} in ${city} means getting care in the language you're most comfortable with. The Mindful Network connects you with ${params.language}-speaking mental health professionals in ${descriptor}. ${providerText} ready to support you in ${params.language}.`;
 	}
 
-	return `Find licensed mental health professionals in ${city}, ${descriptor}. ${providerText} on The Mindful Network.`;
+	if (type === "virtual") {
+		return `Online therapy in Florida means getting licensed mental health care without commuting — from home, work, or anywhere with a private connection. The Mindful Network connects you with telehealth providers serving the entire state via secure video sessions. ${providerText} offering virtual care, so you can focus on healing instead of logistics.`;
+	}
+
+	return `Find licensed mental health professionals${city ? ` in ${city}, ${descriptor}` : " in Florida"}. ${providerText} on The Mindful Network.`;
 }
