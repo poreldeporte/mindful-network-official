@@ -62,6 +62,26 @@ const nextConfig = {
 				destination: "/search",
 				permanent: true,
 			},
+			// Instagram link-in-bio tracking URLs. The bio link goes to a Later page,
+			// which then sends clicks here; we never see "instagram.com" as the GA4
+			// referrer otherwise. Use 307 (temporary) — these are functional tracking
+			// redirects, not content moves. robots.txt also disallows /ig* so Google
+			// doesn't try to index the source URLs.
+			{
+				source: "/ig",
+				destination: "/search?utm_source=instagram&utm_medium=bio&utm_campaign=link_in_bio",
+				permanent: false,
+			},
+			{
+				source: "/ig/blog",
+				destination: "/blog?utm_source=instagram&utm_medium=bio&utm_campaign=link_in_bio_blog",
+				permanent: false,
+			},
+			{
+				source: "/ig/events",
+				destination: "/events?utm_source=instagram&utm_medium=bio&utm_campaign=link_in_bio_events",
+				permanent: false,
+			},
 		];
 	},
 };

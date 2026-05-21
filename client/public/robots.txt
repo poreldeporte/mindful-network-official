@@ -8,6 +8,11 @@ Disallow: /temp/
 Disallow: /*.log
 Disallow: /cgi-bin/
 
+# Tracking redirects (Instagram link-in-bio + future UTM short URLs).
+# These are functional redirects, not content — Google shouldn't index them.
+Disallow: /ig
+Disallow: /ig/
+
 
 # Permitir acceso específico a archivos CSS y JS (importantes para el renderizado)
 Allow: /assets/
