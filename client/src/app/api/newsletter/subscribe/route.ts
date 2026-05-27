@@ -10,7 +10,10 @@ type SubscribeResult = {
 	message: string;
 };
 
-async function subscribeToMailchimp(email: string): Promise<SubscribeResult> {
+async function subscribeToMailchimp(
+	email: string,
+	firstName: string
+): Promise<SubscribeResult> {
 	const apiKey = process.env.MAILCHIMP_API_KEY;
 	const listId = process.env.MAILCHIMP_LIST_ID;
 
@@ -47,6 +50,7 @@ async function subscribeToMailchimp(email: string): Promise<SubscribeResult> {
 		body: JSON.stringify({
 			email_address: email,
 			status: "subscribed",
+			merge_fields: { FNAME: firstName },
 			tags: [SIGNUP_TAG],
 		}),
 	});
@@ -110,7 +114,17 @@ export async function POST(request: Request) {
 		);
 	}
 
-	const result = await subscribeToMailchimp(email);
+	const rawFirstName = (body as { firstName?: unknown })?.firstName;
+	const firstName =
+		typeof rawFirstName === "string" ? rawFirstName.trim().slice(0, 80) : "";
+	if (!firstName) {
+		return NextResponse.json(
+			{ error: "Please enter your first name." },
+			{ status: 400 }
+		);
+	}
+
+	const result = await subscribeToMailchimp(email, firstName);
 
 	if (result.ok) {
 		return NextResponse.json({

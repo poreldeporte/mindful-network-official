@@ -27,6 +27,7 @@ export function SubscribePopover({
 	onClose,
 	anchorEl,
 }: SubscribePopoverProps) {
+	const [firstName, setFirstName] = useState("");
 	const [email, setEmail] = useState("");
 	const [status, setStatus] = useState<Status>({ kind: "idle" });
 	const [isMounted, setIsMounted] = useState(false);
@@ -39,7 +40,7 @@ export function SubscribePopover({
 		right: number;
 	} | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
-	const emailInputRef = useRef<HTMLInputElement | null>(null);
+	const firstNameInputRef = useRef<HTMLInputElement | null>(null);
 
 	const handleClose = useCallback(() => {
 		onClose();
@@ -61,9 +62,10 @@ export function SubscribePopover({
 	useEffect(() => {
 		if (!isOpen) return;
 		setStatus({ kind: "idle" });
+		setFirstName("");
 		setEmail("");
 		requestAnimationFrame(() => {
-			emailInputRef.current?.focus();
+			firstNameInputRef.current?.focus();
 		});
 	}, [isOpen]);
 
@@ -159,7 +161,7 @@ export function SubscribePopover({
 			const response = await fetch("/api/newsletter/subscribe", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email }),
+				body: JSON.stringify({ email, firstName }),
 			});
 
 			const data = await response.json().catch(() => null);
@@ -238,11 +240,30 @@ export function SubscribePopover({
 						</div>
 					) : (
 						<form onSubmit={handleSubmit} className="space-y-3" noValidate>
+							<label htmlFor="newsletter-first-name" className="sr-only">
+								First name
+							</label>
+							<input
+								ref={firstNameInputRef}
+								id="newsletter-first-name"
+								type="text"
+								required
+								autoComplete="given-name"
+								placeholder="First name"
+								value={firstName}
+								onChange={(e) => {
+									setFirstName(e.target.value);
+									if (status.kind === "error") setStatus({ kind: "idle" });
+								}}
+								disabled={isSubmitting}
+								className="h-10 w-full rounded-full border border-gray-200 bg-white px-4 text-xs text-gray-700 shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:bg-gray-50"
+								aria-invalid={status.kind === "error"}
+							/>
+
 							<label htmlFor="newsletter-email" className="sr-only">
 								Email address
 							</label>
 							<input
-								ref={emailInputRef}
 								id="newsletter-email"
 								type="email"
 								required
@@ -267,7 +288,11 @@ export function SubscribePopover({
 
 							<button
 								type="submit"
-								disabled={isSubmitting || email.trim().length === 0}
+								disabled={
+									isSubmitting ||
+									firstName.trim().length === 0 ||
+									email.trim().length === 0
+								}
 								className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
 							>
 								{isSubmitting && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
