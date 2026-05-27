@@ -4,7 +4,7 @@ export const metadata: Metadata = {
 	title:
 		"Student Mental Health Resources in South Florida | The Mindful Network",
 	description:
-		"Designed for parents, educators, and school communities, this section connects you to vetted professionals offering testing, mental health care, learning support, and family resources in South Florida.",
+		"Designed for parents, educators, and school communities, this section connects you to listed professionals offering testing, mental health care, learning support, and family resources in South Florida.",
 	alternates: {
 		canonical: "/students",
 	},
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 		title:
 			"Student Mental Health Resources in South Florida | The Mindful Network",
 		description:
-			"Vetted child and adolescent professionals, testing pathways, learning support, and family resources for student wellbeing.",
+			"Child and adolescent professionals, testing pathways, learning support, and family resources for student wellbeing.",
 		url: "https://themindfulnetwork.com/students",
 		type: "website",
 		locale: "en_US",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 		title:
 			"Student Mental Health Resources in South Florida | The Mindful Network",
 		description:
-			"Find vetted support for children and adolescents, including testing and family-focused care pathways.",
+			"Find listed support for children and adolescents, including testing and family-focused care pathways.",
 		images: ["https://themindfulnetwork.com/images/logo.webp"],
 	},
 	robots: {

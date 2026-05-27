@@ -25,9 +25,9 @@ const valueProps = [
 		Icon: SparklesIcon,
 	},
 	{
-		title: "Trusted and Verified",
+		title: "Curated Listings",
 		description:
-			"Every listing is reviewed to help students and caregivers find reliable care options with confidence.",
+			"Every listing is maintained to help students and caregivers explore care options in one place.",
 		image: TrustedAndVerifiedResourcesImage,
 		Icon: ShieldCheckIcon,
 	},
@@ -42,15 +42,15 @@ const valueProps = [
 
 const heroHighlights = [
 	"Prefiltered results for Child and Adolescent care",
-	"Vetted provider profiles and credentials",
+	"Listed provider profiles and credentials",
 	"Built for parents, educators, and school teams",
 ];
 
 const audience = [
 	"Parents and caregivers navigating mental health care for children and teens",
-	"Educators and school teams coordinating trusted referrals",
+	"Educators and school teams looking for referral starting points",
 	"Families looking for testing, counseling, learning, and support pathways",
-	"Communities seeking one clear source of student-centered care options",
+	"Communities looking for a starting point for student-centered care options",
 ];
 
 const processSteps = [
@@ -107,7 +107,7 @@ export default function StudentsPage() {
 						name: "What services can I find here?",
 						acceptedAnswer: {
 							"@type": "Answer",
-							text: "You can explore vetted professionals for testing, mental health care, learning support, and family-centered resources.",
+							text: "You can explore listed professionals for testing, mental health care, learning support, and family-centered resources.",
 						},
 					},
 					{
@@ -179,7 +179,7 @@ export default function StudentsPage() {
 
 							<Typography as="p" color="darkGray" variant="bodySmall">
 								Designed for parents, educators, and school communities, this
-								section connects you to vetted professionals offering testing,
+								section connects you to listed professionals offering testing,
 								mental health care, learning support, and family resources -
 								helping students feel supported both in and out of the
 								classroom.

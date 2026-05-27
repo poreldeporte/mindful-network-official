@@ -137,13 +137,13 @@ export const BlogContainer = ({ blogPosts }: BlogProps) => {
 				variant="h2"
 				id="blog-section-heading"
 			>
-				Expert articles and resources
+				Informative articles and resources
 				<span className="block" />
 				<span className="text-blue-500">to support your journey</span>
 			</Typography>
 			<Typography as="p" variant="bodyXSmall" color="darkGray" className="mt-3">
 				Explore practical insights, caregiver guidance, and mental health
-				education from trusted contributors.
+				education from contributing writers and mental health advocates.
 			</Typography>
 
 			<div className="mt-8 flex flex-col gap-5">

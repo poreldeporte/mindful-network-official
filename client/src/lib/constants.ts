@@ -12,9 +12,9 @@ import {
 export const benefits = [
 	{
 		key: 0,
-		title: "Trusted and Verified Resources",
+		title: "Curated Mental Health Resources",
 		description:
-			"We thoroughly vet and verify every provider in our network, ensuring you only have access to reputable and reliable options to tackle mental health conditions.",
+			"We curate and feature every provider in our directory, giving you access to reputable and reliable options to explore for mental health conditions.",
 	},
 	{
 		key: 1,

@@ -28,8 +28,8 @@ export function About() {
 						as="p"
 						variant="bodyXSmall"
 					>
-						Access reliable and reputable care pathways, educational resources,
-						and vetted support options in one place.
+						Access accessible care pathways, educational resources, and listed
+						support options in one place.
 					</Typography>
 				</div>
 			</div>

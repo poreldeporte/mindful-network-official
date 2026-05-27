@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { ProviderListingDisclaimer } from "@/components/shared/ProviderListingDisclaimer";
 import type { ListingDetailViewModel } from "./listingDetailMapper";
 
 interface StickyContactCardProps {
@@ -89,7 +90,12 @@ export const StickyContactCard = ({
 					</div>
 				)}
 
-				<div className="mt-4 space-y-2">
+				<ProviderListingDisclaimer
+					providerName={viewModel.name}
+					className="mt-4"
+				/>
+
+				<div className="mt-3 space-y-2">
 					{viewModel.contact.phone && (
 						<a
 							href={`tel:${viewModel.contact.phone}`}
