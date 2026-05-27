@@ -41,7 +41,7 @@ export const Hero = ({
 
 			<div className="page-width flex flex-col items-start justify-center relative z-10">
 				<div className="inline-flex w-max items-center rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-sm">
-					TRUSTED SOUTH FLORIDA NETWORK
+					SOUTH FLORIDA MENTAL HEALTH NETWORK
 				</div>
 				<Typography
 					id="hero-heading"
@@ -60,9 +60,9 @@ export const Hero = ({
 					color="white"
 					variant="body"
 				>
-					A network curated for your path to healing — explore trusted
-					therapists, psychiatrists, and mental health resources to find the
-					support you need, when you need it.
+					A network curated for your path to healing — explore therapists,
+					psychiatrists, and mental health resources to find the support you
+					need, when you need it.
 				</Typography>
 
 				<div className="mt-8 flex flex-wrap gap-3">

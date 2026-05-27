@@ -13,9 +13,9 @@ import Link from "next/link";
 
 const resourceSections = [
 	{
-		title: "Trusted and Verified Resources",
+		title: "Curated Mental Health Resources",
 		description:
-			"We vet and verify providers in our network so you can start with options that are reputable, relevant, and easier to trust.",
+			"We curate and feature providers in our directory so you can explore options that are reputable, relevant, and easier to find.",
 		bullets: [
 			"Licensed therapists",
 			"Psychiatry and medication management",
@@ -24,7 +24,7 @@ const resourceSections = [
 			"Innovative therapies",
 		],
 		image: TrustedAndVerifiedResourcesImage,
-		imageAlt: "Trusted and verified resources",
+		imageAlt: "Curated mental health resources",
 		imageSide: "right" as const,
 	},
 	{

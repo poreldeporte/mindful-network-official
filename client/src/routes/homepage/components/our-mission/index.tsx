@@ -44,7 +44,7 @@ export const OurMission = () => {
 					variant="bodyXSmall"
 					className="mt-3"
 				>
-					We connect you with trusted behavioral health services, qualified
+					We connect you with behavioral health services, qualified
 					professionals, and practical resources to support progress at every
 					step.
 				</Typography>

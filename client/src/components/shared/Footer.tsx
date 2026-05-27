@@ -268,6 +268,12 @@ export function Footer({ blogPosts, companyDetails }: Props) {
 				</div>
 			</div>
 			</div>
+			<p className="mx-auto max-w-3xl px-4 pb-4 text-center text-[11px] leading-relaxed text-gray-500 md:px-0">
+				Provider information listed in this directory is subject to change. The
+				Mindful Network does not endorse or guarantee the services of any listed
+				provider. We encourage individuals to independently verify credentials,
+				availability, insurance, and fit before engaging with any professional.
+			</p>
 			<div className="flex flex-col items-center gap-4 md:flex-row md:justify-between md:items-center">
 				<Typography
 					variant="bodyXSmall"

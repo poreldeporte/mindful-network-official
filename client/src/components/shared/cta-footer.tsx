@@ -72,7 +72,7 @@ export function CTASection() {
 				id="cta-section-heading"
 			>
 				Take the first step <span className="block"></span>
-				<span className="text-[#3C3D42]">Discover trusted resources</span>
+				<span className="text-[#3C3D42]">Discover mental health resources</span>
 			</Typography>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 				{CTACards.map((card) => (

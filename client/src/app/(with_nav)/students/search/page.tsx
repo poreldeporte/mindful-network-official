@@ -133,7 +133,7 @@ export default function StudentSearchPage() {
 
 							<Typography as="p" variant="bodyXSmall" color="darkGray">
 								Designed for families, educators, and school communities, this
-								directory helps you quickly find trusted professionals for
+								directory helps you quickly find listed professionals for
 								testing, mental health care, and learning support.
 							</Typography>
 
