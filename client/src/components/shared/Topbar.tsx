@@ -5,8 +5,9 @@ import { clearGlobalInteractionLocks } from "@/utilities/clear-global-interactio
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Typography } from "../ui";
+import { SubscribePopover } from "./SubscribePopover";
 
 export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	const pathname = usePathname();
@@ -18,6 +19,13 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 	const startSearchHref = pathname.startsWith("/students")
 		? "/students/search"
 		: "/search";
+
+	const subscribeButtonRef = useRef<HTMLButtonElement | null>(null);
+	const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
+
+	useEffect(() => {
+		setIsSubscribeOpen(false);
+	}, [pathname]);
 
 	useEffect(() => {
 		if (!pathname.startsWith("/professional/")) {
@@ -107,7 +115,17 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 					</Link>
 				</nav>
 
-				<div className="p-2 pr-5">
+				<div className="flex items-center gap-2 p-2 pr-5">
+					<button
+						ref={subscribeButtonRef}
+						type="button"
+						onClick={() => setIsSubscribeOpen((prev) => !prev)}
+						aria-expanded={isSubscribeOpen}
+						aria-haspopup="dialog"
+						className="inline-flex items-center rounded-full border border-blue-600 px-4 py-2 text-[11px] font-semibold text-blue-600 transition hover:bg-blue-600 hover:text-white"
+					>
+						Stay Connected
+					</button>
 					{!isSearchPage && (
 						<Button variant="bodyXSmall" form="outline" className="relative">
 							<Link className="expandable-tag-link" href={startSearchHref}>
@@ -117,6 +135,12 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 					)}
 				</div>
 			</div>
+
+			<SubscribePopover
+				isOpen={isSubscribeOpen}
+				onClose={() => setIsSubscribeOpen(false)}
+				anchorEl={subscribeButtonRef.current}
+			/>
 		</header>
 	);
 }

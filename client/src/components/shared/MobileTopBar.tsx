@@ -10,6 +10,7 @@ import {
 	Home,
 	Info,
 	LifeBuoy,
+	Mail,
 	Menu,
 	Newspaper,
 	Search,
@@ -19,7 +20,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { SubscribePopover } from "./SubscribePopover";
 
 const overlayVariants = {
 	closed: { opacity: 0 },
@@ -44,6 +46,8 @@ export function MobileTopBar({
 	companyDetails: CompanyDetails;
 }) {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
+	const subscribeButtonRef = useRef<HTMLButtonElement | null>(null);
 	const pathname = usePathname();
 	const directoryHref = pathname.startsWith("/students")
 		? "/students/search"
@@ -196,6 +200,21 @@ export function MobileTopBar({
 									</Link>
 								)}
 
+								<button
+									ref={subscribeButtonRef}
+									type="button"
+									onClick={() => {
+										closeHeader();
+										setIsSubscribeOpen(true);
+									}}
+									className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-600 px-3 py-2 text-[13px] font-semibold text-blue-600 transition hover:bg-blue-50"
+									aria-haspopup="dialog"
+									aria-expanded={isSubscribeOpen}
+								>
+									<Mail className="h-3.5 w-3.5" />
+									Stay Connected
+								</button>
+
 								<ul className="grid grid-cols-1 gap-1.5 pb-1">
 									{navItems.map((item) => {
 										const Icon = item.icon;
@@ -226,6 +245,12 @@ export function MobileTopBar({
 					</>
 				)}
 			</AnimatePresence>
+
+			<SubscribePopover
+				isOpen={isSubscribeOpen}
+				onClose={() => setIsSubscribeOpen(false)}
+				anchorEl={subscribeButtonRef.current}
+			/>
 		</header>
 	);
 }
