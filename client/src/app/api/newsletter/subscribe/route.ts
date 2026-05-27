@@ -46,7 +46,7 @@ async function subscribeToMailchimp(email: string): Promise<SubscribeResult> {
 		},
 		body: JSON.stringify({
 			email_address: email,
-			status: "pending",
+			status: "subscribed",
 			tags: [SIGNUP_TAG],
 		}),
 	});

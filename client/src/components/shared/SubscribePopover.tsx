@@ -234,7 +234,7 @@ export function SubscribePopover({
 						<div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-xs text-green-800">
 							{status.alreadySubscribed
 								? "You're already on the list — thanks for staying connected!"
-								: "Almost there! Check your inbox to confirm your subscription."}
+								: "You're in! Check your inbox — your newsletter is on the way."}
 						</div>
 					) : (
 						<form onSubmit={handleSubmit} className="space-y-3" noValidate>
