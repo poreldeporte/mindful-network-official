@@ -44,7 +44,7 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 			<div className="flex items-center justify-between">
 				<Link
 					href={"/"}
-					className="w-60 h-14 xl:w-80 xl:h-20 flex content-center space-x-3 items-center py-2 pl-10 pr-20 bg-blue-500 hover:bg-blue-700 transition-colors rounded-ee-full"
+					className="w-52 h-14 xl:w-64 xl:h-20 shrink-0 flex content-center space-x-3 items-center py-2 pl-8 pr-10 bg-blue-500 hover:bg-blue-700 transition-colors rounded-ee-full"
 				>
 					{companyDetails?.logo && (
 						<Image
@@ -58,7 +58,7 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 					)}
 				</Link>
 
-				<nav className="flex items-center justify-center space-x-4 px-6 flex-1 flex-grow whitespace-nowrap">
+				<nav className="flex items-center justify-center space-x-3 px-3 flex-1 flex-grow whitespace-nowrap">
 					<Link href="/about">
 						<Typography
 							variant="bodyXSmall"
