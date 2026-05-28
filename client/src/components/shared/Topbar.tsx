@@ -58,7 +58,7 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 					)}
 				</Link>
 
-				<nav className="flex items-center justify-center space-x-4 pr-32 flex-1 flex-grow">
+				<nav className="flex items-center justify-center space-x-4 px-6 flex-1 flex-grow whitespace-nowrap">
 					<Link href="/about">
 						<Typography
 							variant="bodyXSmall"
@@ -115,16 +115,18 @@ export function Topbar({ companyDetails }: { companyDetails: CompanyDetails }) {
 					</Link>
 				</nav>
 
-				<div className="flex items-center gap-2 p-2 pr-5">
+				<div className="flex shrink-0 items-center gap-2 p-2 pr-5 whitespace-nowrap">
 					<button
 						ref={subscribeButtonRef}
 						type="button"
 						onClick={() => setIsSubscribeOpen((prev) => !prev)}
 						aria-expanded={isSubscribeOpen}
 						aria-haspopup="dialog"
-						className="inline-flex items-center rounded-full border border-blue-600 px-4 py-2 text-[11px] font-semibold text-blue-600 transition hover:bg-blue-600 hover:text-white"
+						className="group rounded-full border border-blue-500 bg-transparent px-4 py-2 font-medium text-blue-500 transition-colors hover:bg-blue-500 hover:text-white"
 					>
-						Stay Connected
+						<span className="flex items-center justify-center text-[0.75rem] leading-relaxed group-hover:text-white sm:text-[0.875rem] md:text-[0.9375rem] lg:text-[1rem]">
+							Stay Connected
+						</span>
 					</button>
 					{!isSearchPage && (
 						<Button variant="bodyXSmall" form="outline" className="relative">
