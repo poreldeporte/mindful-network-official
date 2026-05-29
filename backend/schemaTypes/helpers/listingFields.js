@@ -73,6 +73,20 @@ const addressField = {
   ],
 }
 
+const address2Field = {
+  name: 'address2',
+  title: 'Second Location',
+  description: 'Optional. A second in-person location, shown below the primary address when present.',
+  type: 'object',
+  fieldset: 'contact',
+  fields: [
+    {name: 'address', title: 'Address', type: 'string'},
+    {name: 'state', title: 'State', type: 'string'},
+    {name: 'city', title: 'City', type: 'string'},
+    {name: 'zip', title: 'Zip', type: 'string'},
+  ],
+}
+
 export const listingFields = ({
   includeVideoMeta = true,
   insurancesHidden,
@@ -193,6 +207,7 @@ export const listingFields = ({
       fieldset: 'contact',
     },
     addressField,
+    address2Field,
   ]
 
   const specialtyFields = [
