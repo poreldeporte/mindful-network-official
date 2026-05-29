@@ -26,6 +26,7 @@ export interface PsychologistModel {
 	name: string;
 	facility: string;
 	address: Address;
+	address2?: Address;
 	position?: Positions;
 	description: string;
 	phone: string;

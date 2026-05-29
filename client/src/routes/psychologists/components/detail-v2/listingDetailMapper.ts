@@ -81,23 +81,24 @@ const normalizeValue = (value: unknown): string | undefined => {
 const uniqueList = (items?: Array<string | undefined>) =>
 	Array.from(new Set((items ?? []).filter(Boolean) as string[]));
 
+const formatLocation = (address?: PsychologistModel["address2"]) => {
+	if (!address) return { short: undefined, full: undefined };
+	const short = [address.city, address.state].filter(Boolean).join(", ");
+	const full = [address.address, address.city, address.state, address.zip]
+		.filter(Boolean)
+		.join(", ");
+	return { short: short || undefined, full: full || undefined };
+};
+
 const buildLocation = (psychologist: PsychologistModel) => {
-	const address = psychologist.address;
-	if (!address) return { shortLocation: undefined, fullLocation: undefined };
-
-	const shortLocation = [address.city, address.state]
-		.filter(Boolean)
-		.join(", ");
-	const fullLocation = [
-		address.address,
-		address.city,
-		address.state,
-		address.zip,
-	]
-		.filter(Boolean)
-		.join(", ");
-
-	return { shortLocation, fullLocation };
+	const primary = formatLocation(psychologist.address);
+	const secondary = formatLocation(psychologist.address2);
+	return {
+		shortLocation: primary.short,
+		fullLocation: primary.full,
+		shortLocation2: secondary.short,
+		fullLocation2: secondary.full,
+	};
 };
 
 const buildGalleryImages = (
@@ -213,16 +214,13 @@ const buildHighlights = (psychologist: PsychologistModel) => {
 };
 
 const buildOverviewItems = (psychologist: PsychologistModel) => {
-	const { fullLocation } = buildLocation(psychologist);
-	const locationAction =
-		fullLocation && fullLocation.length
-			? {
-					actionLabel: "View map",
-					actionHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-						fullLocation
-					)}`,
-				}
-			: undefined;
+	const { fullLocation, fullLocation2 } = buildLocation(psychologist);
+	const mapAction = (loc: string) => ({
+		actionLabel: "View map",
+		actionHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+			loc
+		)}`,
+	});
 
 	const conditions = uniqueList(
 		psychologist.conditionSpecialty?.map((item) => normalizeValue(item?.name))
@@ -243,7 +241,14 @@ const buildOverviewItems = (psychologist: PsychologistModel) => {
 		items.push({
 			label: "Location",
 			value: fullLocation,
-			...locationAction,
+			...mapAction(fullLocation),
+		});
+	}
+	if (fullLocation2) {
+		items.push({
+			label: "Second location",
+			value: fullLocation2,
+			...mapAction(fullLocation2),
 		});
 	}
 	if (resources.length) {
