@@ -7,7 +7,8 @@ export const getPsychologistById = async (
 ): Promise<PsychologistModel | null> => {
 	try {
 		const query = `*[_type == 'professionals' && slug.current == $slug][0]{
-            ..., 
+            ...,
+            "slug": slug.current,
             "conditionSpecialty": conditionSpecialty[]->{
                 "id": _id,
                 name
