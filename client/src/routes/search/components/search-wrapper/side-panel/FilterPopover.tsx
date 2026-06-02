@@ -211,7 +211,8 @@ export const FilterPopover = ({
 						: viewport
 							? {
 									bottom: viewport.inset,
-									maxHeight: Math.max(viewport.height - 16, 200),
+									height: Math.max(viewport.height - 16, 200),
+									maxHeight: "none",
 								}
 							: undefined
 				}
@@ -229,7 +230,11 @@ export const FilterPopover = ({
 						<X className="h-4 w-4" />
 					</button>
 				</div>
-				<div className="flex min-h-0 flex-1 flex-col space-y-3 px-4 py-4">
+				<div
+					className={`space-y-3 px-4 py-4 ${
+						viewport ? "flex min-h-0 flex-1 flex-col" : ""
+					}`}
+				>
 					<div className="flex items-center gap-2">
 						<div className="relative flex-1">
 							<Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -282,7 +287,11 @@ export const FilterPopover = ({
 					)}
 
 					<div
-						className="min-h-0 flex-1 space-y-1 overflow-y-auto pr-1 lg:max-h-[40vh] lg:flex-none"
+						className={`space-y-1 overflow-y-auto pr-1 ${
+							viewport
+								? "min-h-0 flex-1"
+								: "max-h-[45vh] lg:max-h-[40vh]"
+						}`}
 						role="listbox"
 						aria-multiselectable={selectionType === "multi"}
 						aria-label={`${label} options`}
