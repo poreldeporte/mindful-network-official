@@ -49,12 +49,15 @@ export const FilterPopover = ({
 		if (typeof window === "undefined") return false;
 		return window.matchMedia("(min-width: 1024px)").matches;
 	});
-	// Tracks the on-screen keyboard so the mobile bottom sheet can sit ABOVE it.
-	// On iOS Safari a `position: fixed; bottom: 0` element is pinned to the layout
-	// viewport, which is hidden behind the keyboard — so when the options list
-	// collapses (e.g. a search with no matches) the whole sheet slips out of view.
+	// Pins the mobile sheet to the visual viewport (the area NOT covered by the
+	// on-screen keyboard). A `position: fixed; bottom: 0` sheet is laid out against
+	// the layout viewport, which sits behind the keyboard — so on iOS the sheet, or
+	// its lower half, hides behind the keyboard. We read `offsetTop`/`height`
+	// straight off `visualViewport` (no `innerHeight` math, which is unreliable now
+	// that iOS shrinks `innerHeight` with the keyboard) and drive an explicit
+	// top + height so the whole sheet always lands in the visible area.
 	const [viewport, setViewport] = useState<{
-		inset: number;
+		top: number;
 		height: number;
 	} | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
@@ -118,8 +121,12 @@ export const FilterPopover = ({
 		const vv = window.visualViewport;
 		if (!vv) return;
 		const update = () => {
-			const inset = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-			setViewport({ inset, height: vv.height });
+			// Occupy the bottom ~92% of the visible area, flush to the top of the
+			// keyboard, leaving a sliver of backdrop above so it still reads as a
+			// bottom sheet. Floor the height so a near-empty sheet stays usable.
+			const height = Math.max(Math.min(vv.height - 8, vv.height * 0.92), 200);
+			const top = vv.offsetTop + Math.max(vv.height - height, 0);
+			setViewport({ top, height });
 		};
 		update();
 		vv.addEventListener("resize", update);
@@ -210,8 +217,9 @@ export const FilterPopover = ({
 						? desktopPosition ?? undefined
 						: viewport
 							? {
-									bottom: viewport.inset,
-									height: Math.max(viewport.height - 16, 200),
+									top: viewport.top,
+									height: viewport.height,
+									bottom: "auto",
 									maxHeight: "none",
 								}
 							: undefined
