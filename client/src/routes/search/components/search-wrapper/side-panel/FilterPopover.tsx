@@ -49,6 +49,14 @@ export const FilterPopover = ({
 		if (typeof window === "undefined") return false;
 		return window.matchMedia("(min-width: 1024px)").matches;
 	});
+	// Tracks the on-screen keyboard so the mobile bottom sheet can sit ABOVE it.
+	// On iOS Safari a `position: fixed; bottom: 0` element is pinned to the layout
+	// viewport, which is hidden behind the keyboard — so when the options list
+	// collapses (e.g. a search with no matches) the whole sheet slips out of view.
+	const [viewport, setViewport] = useState<{
+		inset: number;
+		height: number;
+	} | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const searchInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -101,6 +109,26 @@ export const FilterPopover = ({
 			searchInputRef.current?.focus();
 		});
 	}, [isOpen]);
+
+	useEffect(() => {
+		if (!isOpen || isDesktop) {
+			setViewport(null);
+			return;
+		}
+		const vv = window.visualViewport;
+		if (!vv) return;
+		const update = () => {
+			const inset = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+			setViewport({ inset, height: vv.height });
+		};
+		update();
+		vv.addEventListener("resize", update);
+		vv.addEventListener("scroll", update);
+		return () => {
+			vv.removeEventListener("resize", update);
+			vv.removeEventListener("scroll", update);
+		};
+	}, [isOpen, isDesktop]);
 
 	useEffect(() => {
 		if (!isOpen) return;
@@ -176,10 +204,19 @@ export const FilterPopover = ({
 				id={id}
 				role="dialog"
 				aria-label={`${label} filters`}
-				className="fixed inset-x-0 bottom-0 z-40 max-h-[75vh] w-full overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl lg:absolute lg:inset-auto lg:z-50 lg:max-h-[60vh] lg:w-[22rem] lg:rounded-2xl"
-				style={isDesktop && desktopPosition ? desktopPosition : undefined}
+				className="fixed inset-x-0 bottom-0 z-40 flex max-h-[75vh] w-full flex-col overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl lg:absolute lg:inset-auto lg:z-50 lg:max-h-[60vh] lg:w-[22rem] lg:rounded-2xl"
+				style={
+					isDesktop
+						? desktopPosition ?? undefined
+						: viewport
+							? {
+									bottom: viewport.inset,
+									maxHeight: Math.max(viewport.height - 16, 200),
+								}
+							: undefined
+				}
 			>
-				<div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
+				<div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
 					<div className="flex items-center gap-2 text-[11px] font-semibold text-gray-700 sm:text-xs">
 						<span>{label}</span>
 					</div>
@@ -192,7 +229,7 @@ export const FilterPopover = ({
 						<X className="h-4 w-4" />
 					</button>
 				</div>
-				<div className="space-y-3 px-4 py-4">
+				<div className="flex min-h-0 flex-1 flex-col space-y-3 px-4 py-4">
 					<div className="flex items-center gap-2">
 						<div className="relative flex-1">
 							<Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -245,7 +282,7 @@ export const FilterPopover = ({
 					)}
 
 					<div
-						className="max-h-[45vh] space-y-1 overflow-y-auto pr-1 lg:max-h-[40vh]"
+						className="min-h-0 flex-1 space-y-1 overflow-y-auto pr-1 lg:max-h-[40vh] lg:flex-none"
 						role="listbox"
 						aria-multiselectable={selectionType === "multi"}
 						aria-label={`${label} options`}
