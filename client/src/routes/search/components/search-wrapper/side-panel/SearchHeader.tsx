@@ -32,6 +32,11 @@ interface SearchHeaderProps {
 	onClearAll: () => void;
 }
 
+// Case-insensitive alphabetical sort so every filter dropdown lists its
+// options A→Z regardless of how the source data is ordered.
+const compareByLabel = (a: { label: string }, b: { label: string }) =>
+	a.label.localeCompare(b.label, undefined, { sensitivity: "base" });
+
 export const SearchHeader = ({
 	resources,
 	conditions,
@@ -65,37 +70,45 @@ export const SearchHeader = ({
 
 	const resourceOptions = useMemo(
 		() =>
-			(resources ?? []).map((resource) => ({
-				value: resource.key,
-				label: resource.label,
-			})),
+			(resources ?? [])
+				.map((resource) => ({
+					value: resource.key,
+					label: resource.label,
+				}))
+				.sort(compareByLabel),
 		[resources]
 	);
 
 	const conditionOptions = useMemo(
 		() =>
-			(conditions ?? []).map((condition) => ({
-				value: condition.name,
-				label: condition.name,
-			})),
+			(conditions ?? [])
+				.map((condition) => ({
+					value: condition.name,
+					label: condition.name,
+				}))
+				.sort(compareByLabel),
 		[conditions]
 	);
 
 	const insuranceOptions = useMemo(
 		() =>
-			(insurances ?? []).map((insurance) => ({
-				value: insurance.name,
-				label: insurance.name,
-			})),
+			(insurances ?? [])
+				.map((insurance) => ({
+					value: insurance.name,
+					label: insurance.name,
+				}))
+				.sort(compareByLabel),
 		[insurances]
 	);
 
 	const therapyOptions = useMemo(
 		() =>
-			(therapyModalities ?? []).map((modality) => ({
-				value: modality.type,
-				label: formatType(modality.type),
-			})),
+			(therapyModalities ?? [])
+				.map((modality) => ({
+					value: modality.type,
+					label: formatType(modality.type),
+				}))
+				.sort(compareByLabel),
 		[therapyModalities]
 	);
 
