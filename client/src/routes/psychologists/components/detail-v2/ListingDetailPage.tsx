@@ -171,7 +171,6 @@ export const ListingDetailPage = ({ psychologist }: ListingDetailPageProps) => {
 				phone={viewModel.contact.phone}
 				contactAnchor={contactAnchor}
 				slug={psychologist.slug}
-				providerName={viewModel.name}
 			/>
 		</section>
 	);

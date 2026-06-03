@@ -8,22 +8,17 @@ interface MobileContactBarProps {
 	phone?: string;
 	contactAnchor: string;
 	slug: string;
-	providerName: string;
 }
 
 export const MobileContactBar = ({
 	phone,
 	contactAnchor,
 	slug,
-	providerName,
 }: MobileContactBarProps) => {
 	if (!phone) {
 		return (
 			<div className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 px-4 py-2 backdrop-blur lg:hidden">
-				<ProviderListingDisclaimer
-					providerName={providerName}
-					className="mb-2"
-				/>
+				<ProviderListingDisclaimer className="mb-2" />
 				<a
 					href={contactAnchor}
 					onClick={() =>
@@ -43,10 +38,7 @@ export const MobileContactBar = ({
 
 	return (
 		<div className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 px-4 py-2 backdrop-blur lg:hidden">
-			<ProviderListingDisclaimer
-				providerName={providerName}
-				className="mb-2"
-			/>
+			<ProviderListingDisclaimer className="mb-2" />
 			<div className="flex gap-2">
 				<a
 					href={`tel:${phone}`}

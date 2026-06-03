@@ -90,10 +90,7 @@ export const StickyContactCard = ({
 					</div>
 				)}
 
-				<ProviderListingDisclaimer
-					providerName={viewModel.name}
-					className="mt-4"
-				/>
+				<ProviderListingDisclaimer className="mt-4" />
 
 				<div className="mt-3 space-y-2">
 					{viewModel.contact.phone && (
