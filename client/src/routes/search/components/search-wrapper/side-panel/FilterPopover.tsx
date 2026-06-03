@@ -49,6 +49,17 @@ export const FilterPopover = ({
 		if (typeof window === "undefined") return false;
 		return window.matchMedia("(min-width: 1024px)").matches;
 	});
+	// Pins the mobile sheet to the visual viewport (the area NOT covered by the
+	// on-screen keyboard). A `position: fixed; bottom: 0` sheet is laid out against
+	// the layout viewport, which sits behind the keyboard — so on iOS the sheet, or
+	// its lower half, hides behind the keyboard. We read `offsetTop`/`height`
+	// straight off `visualViewport` (no `innerHeight` math, which is unreliable now
+	// that iOS shrinks `innerHeight` with the keyboard) and drive an explicit
+	// top + height so the whole sheet always lands in the visible area.
+	const [viewport, setViewport] = useState<{
+		top: number;
+		height: number;
+	} | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const searchInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -101,6 +112,30 @@ export const FilterPopover = ({
 			searchInputRef.current?.focus();
 		});
 	}, [isOpen]);
+
+	useEffect(() => {
+		if (!isOpen || isDesktop) {
+			setViewport(null);
+			return;
+		}
+		const vv = window.visualViewport;
+		if (!vv) return;
+		const update = () => {
+			// Occupy the bottom ~92% of the visible area, flush to the top of the
+			// keyboard, leaving a sliver of backdrop above so it still reads as a
+			// bottom sheet. Floor the height so a near-empty sheet stays usable.
+			const height = Math.max(Math.min(vv.height - 8, vv.height * 0.92), 200);
+			const top = vv.offsetTop + Math.max(vv.height - height, 0);
+			setViewport({ top, height });
+		};
+		update();
+		vv.addEventListener("resize", update);
+		vv.addEventListener("scroll", update);
+		return () => {
+			vv.removeEventListener("resize", update);
+			vv.removeEventListener("scroll", update);
+		};
+	}, [isOpen, isDesktop]);
 
 	useEffect(() => {
 		if (!isOpen) return;
@@ -176,10 +211,21 @@ export const FilterPopover = ({
 				id={id}
 				role="dialog"
 				aria-label={`${label} filters`}
-				className="fixed inset-x-0 bottom-0 z-40 max-h-[75vh] w-full overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl lg:absolute lg:inset-auto lg:z-50 lg:max-h-[60vh] lg:w-[22rem] lg:rounded-2xl"
-				style={isDesktop && desktopPosition ? desktopPosition : undefined}
+				className="fixed inset-x-0 bottom-0 z-40 flex max-h-[75vh] w-full flex-col overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl lg:absolute lg:inset-auto lg:z-50 lg:max-h-[60vh] lg:w-[22rem] lg:rounded-2xl"
+				style={
+					isDesktop
+						? desktopPosition ?? undefined
+						: viewport
+							? {
+									top: viewport.top,
+									height: viewport.height,
+									bottom: "auto",
+									maxHeight: "none",
+								}
+							: undefined
+				}
 			>
-				<div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
+				<div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
 					<div className="flex items-center gap-2 text-[11px] font-semibold text-gray-700 sm:text-xs">
 						<span>{label}</span>
 					</div>
@@ -192,7 +238,11 @@ export const FilterPopover = ({
 						<X className="h-4 w-4" />
 					</button>
 				</div>
-				<div className="space-y-3 px-4 py-4">
+				<div
+					className={`space-y-3 px-4 py-4 ${
+						viewport ? "flex min-h-0 flex-1 flex-col" : ""
+					}`}
+				>
 					<div className="flex items-center gap-2">
 						<div className="relative flex-1">
 							<Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -245,7 +295,11 @@ export const FilterPopover = ({
 					)}
 
 					<div
-						className="max-h-[45vh] space-y-1 overflow-y-auto pr-1 lg:max-h-[40vh]"
+						className={`space-y-1 overflow-y-auto pr-1 ${
+							viewport
+								? "min-h-0 flex-1"
+								: "max-h-[45vh] lg:max-h-[40vh]"
+						}`}
 						role="listbox"
 						aria-multiselectable={selectionType === "multi"}
 						aria-label={`${label} options`}
