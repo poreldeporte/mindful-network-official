@@ -272,7 +272,7 @@ export const FilterPopover = ({
 								placeholder={searchPlaceholder}
 								value={searchTerm}
 								onChange={(event) => setSearchTerm(event.target.value)}
-								className="h-10 w-full rounded-full border border-gray-200 bg-white pl-9 pr-9 text-base text-gray-700 sm:text-xs shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+								className="h-10 w-full rounded-full border border-gray-200 bg-white pl-9 pr-9 text-[16px] text-gray-700 shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
 								aria-label={searchPlaceholder}
 							/>
 							{searchTerm.length > 0 && (
