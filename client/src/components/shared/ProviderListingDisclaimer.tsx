@@ -1,12 +1,10 @@
 import { Info } from "lucide-react";
 
 interface ProviderListingDisclaimerProps {
-	providerName: string;
 	className?: string;
 }
 
 export const ProviderListingDisclaimer = ({
-	providerName,
 	className = "",
 }: ProviderListingDisclaimerProps) => {
 	return (
@@ -17,10 +15,7 @@ export const ProviderListingDisclaimer = ({
 			<Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-500" aria-hidden="true" />
 			<p>
 				Listing details including availability, insurance accepted, and services
-				offered may have changed. Please contact{" "}
-				<span className="font-semibold text-gray-800">{providerName}</span>{" "}
-				directly to confirm current information and determine if they are the
-				right fit for your needs. The Mindful Network does not endorse any
+				offered may have changed. The Mindful Network does not endorse any
 				listed provider.
 			</p>
 		</div>
