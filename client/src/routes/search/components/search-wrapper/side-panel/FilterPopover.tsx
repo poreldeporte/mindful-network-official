@@ -324,14 +324,14 @@ export const FilterPopover = ({
 						aria-label={`${label} options`}
 					>
 						{filteredOptions.length === 0 ? (
-							<p className="text-[11px] text-gray-500 sm:text-xs">No matches found.</p>
+							<p className="text-[14px] text-gray-500 sm:text-xs">No matches found.</p>
 						) : (
 							filteredOptions.map((option, index) => {
 								const isSelected = selectedSet.has(option.value);
 								return (
 									<label
 										key={option.value}
-										className={`flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2 text-[11px] transition sm:text-xs hover:border-blue-200 ${
+										className={`flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2 text-[14px] transition sm:text-xs hover:border-blue-200 ${
 											isSelected
 												? "border-blue-200 bg-blue-50"
 												: "border-transparent"
