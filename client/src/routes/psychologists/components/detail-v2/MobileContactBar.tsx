@@ -8,12 +8,14 @@ interface MobileContactBarProps {
 	phone?: string;
 	contactAnchor: string;
 	slug: string;
+	providerName: string;
 }
 
 export const MobileContactBar = ({
 	phone,
 	contactAnchor,
 	slug,
+	providerName,
 }: MobileContactBarProps) => {
 	if (!phone) {
 		return (
@@ -48,10 +50,10 @@ export const MobileContactBar = ({
 							therapist_slug: slug,
 						})
 					}
-					className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-blue-600 text-[12px] font-semibold text-white shadow-sm transition hover:bg-blue-700"
+					className="flex h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-blue-600 px-3 text-[12px] font-semibold text-white shadow-sm transition hover:bg-blue-700"
 				>
-					<Phone className="h-4 w-4" />
-					Call
+					<Phone className="h-4 w-4 shrink-0" />
+					<span className="truncate">Call {providerName}</span>
 				</a>
 				<a
 					href={contactAnchor}

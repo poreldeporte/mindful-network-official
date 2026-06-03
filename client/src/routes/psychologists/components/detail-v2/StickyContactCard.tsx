@@ -102,10 +102,10 @@ export const StickyContactCard = ({
 									therapist_slug: slug,
 								})
 							}
-							className="flex h-10 items-center justify-center gap-2 rounded-full bg-blue-600 text-[12px] font-semibold text-white shadow-sm transition hover:bg-blue-700"
+							className="flex h-10 min-w-0 items-center justify-center gap-2 rounded-full bg-blue-600 px-4 text-[12px] font-semibold text-white shadow-sm transition hover:bg-blue-700"
 						>
-							<Phone className="h-4 w-4" />
-							Call
+							<Phone className="h-4 w-4 shrink-0" />
+							<span className="truncate">Call {viewModel.name}</span>
 						</a>
 					)}
 					{viewModel.contact.email && (
