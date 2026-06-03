@@ -161,6 +161,7 @@ export const SearchWrapper = ({
 		const conditionParam = params.get("condition");
 		const insuranceParam = params.get("insurance");
 		const therapyParam = params.get("therapy");
+		const cityParam = params.get("city");
 		const searchQuery = params.get("search");
 
 		let result = [...allProfessionals];
@@ -215,6 +216,15 @@ export const SearchWrapper = ({
 							typeof modality?.type === "string" &&
 							normalizeFilterValue(modality.type) === selectedTherapy
 					) ?? false
+			);
+		}
+
+		if (cityParam) {
+			const selectedCities = new Set(
+				cityParam.split(",").map(normalizeFilterValue)
+			);
+			result = result.filter((professional) =>
+				selectedCities.has(normalizeFilterValue(professional.address?.city || ""))
 			);
 		}
 
@@ -343,6 +353,21 @@ export const SearchWrapper = ({
 		return result;
 	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, lockedTherapyModality, searchParamsKey]);
 
+	// Unique list of cities present in the dataset (deduped case-insensitively),
+	// used to populate the City filter. Derived from the full set so the options
+	// stay stable as other filters narrow the results.
+	const cities = useMemo(() => {
+		if (!allProfessionals) return [];
+		const seen = new Map<string, string>();
+		for (const professional of allProfessionals) {
+			const raw = (professional.address?.city || "").trim();
+			if (!raw) continue;
+			const key = raw.toLowerCase();
+			if (!seen.has(key)) seen.set(key, raw);
+		}
+		return Array.from(seen.values());
+	}, [allProfessionals]);
+
 	useEffect(() => {
 		if (lastTrackedParamsRef.current === searchParamsKey) return;
 		lastTrackedParamsRef.current = searchParamsKey;
@@ -353,9 +378,10 @@ export const SearchWrapper = ({
 		const insurance = params.get("insurance") ?? "";
 		const therapy = params.get("therapy") ?? "";
 		const resource = params.get("resource") ?? "";
+		const city = params.get("city") ?? "";
 
 		const hasFilters = Boolean(
-			query || condition || insurance || therapy || resource ||
+			query || condition || insurance || therapy || resource || city ||
 			lockedAgeSpecialties.length || lockedConditions.length ||
 			lockedInsurances.length || lockedCity || lockedLanguage
 		);
@@ -368,6 +394,7 @@ export const SearchWrapper = ({
 				insurance,
 				therapy,
 				resource,
+				city,
 				locked_city: lockedCity ?? "",
 				locked_language: lockedLanguage ?? "",
 				locked_age: lockedAgeSpecialties.join(",") || "",
@@ -387,6 +414,7 @@ export const SearchWrapper = ({
 			insurances={insurances}
 			therapyModalities={therapyModalities}
 			resources={allResourceKeys}
+			cities={cities}
 			lockedAgeSpecialties={lockedAgeSpecialties}
 			showLockedAgeSpecialties={showLockedAgeSpecialties}
 			titlePrefix={titlePrefix}

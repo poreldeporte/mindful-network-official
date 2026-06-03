@@ -6,7 +6,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { FilterPill } from "./FilterPill";
 import { FilterOption, FilterPopover } from "./FilterPopover";
 
-export type FilterKey = "resource" | "condition" | "insurance" | "therapy";
+export type FilterKey =
+	| "resource"
+	| "condition"
+	| "insurance"
+	| "therapy"
+	| "city";
 
 export interface FilterConfig {
 	key: FilterKey;
