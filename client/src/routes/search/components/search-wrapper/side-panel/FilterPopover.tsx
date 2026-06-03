@@ -121,12 +121,11 @@ export const FilterPopover = ({
 		const vv = window.visualViewport;
 		if (!vv) return;
 		const update = () => {
-			// Occupy the bottom ~92% of the visible area, flush to the top of the
-			// keyboard, leaving a sliver of backdrop above so it still reads as a
-			// bottom sheet. Floor the height so a near-empty sheet stays usable.
-			const height = Math.max(Math.min(vv.height - 8, vv.height * 0.92), 200);
-			const top = vv.offsetTop + Math.max(vv.height - height, 0);
-			setViewport({ top, height });
+			// Describe the visible area (above the keyboard). A positioning layer
+			// covers exactly this region and bottom-aligns the content-sized sheet,
+			// so the sheet sits just above the keyboard and only grows to fill the
+			// area (with the list scrolling) when the options overflow.
+			setViewport({ top: vv.offsetTop, height: vv.height });
 		};
 		update();
 		vv.addEventListener("resize", update);
@@ -199,32 +198,57 @@ export const FilterPopover = ({
 	if (!isOpen) return null;
 	if (isDesktop && !desktopPosition) return null;
 
+	// On mobile, keep the sheet a bottom sheet that never reaches the top of the
+	// screen (where the sticky site header sits) and never exceeds the area above
+	// the keyboard. TOP_CLEARANCE leaves room for the header + a backdrop sliver;
+	// the list cap also subtracts the sheet's own header + search chrome so the
+	// sheet sizes to its content instead of always filling the screen.
+	const TOP_CLEARANCE = 120;
+	const CHROME = 130;
+	const sheetMaxHeight = viewport
+		? Math.max(viewport.height - TOP_CLEARANCE, 200)
+		: undefined;
+	const listMaxHeight = viewport
+		? Math.max(viewport.height - TOP_CLEARANCE - CHROME, 120)
+		: undefined;
+
 	return (
 		<>
 			<div
-				className="fixed inset-0 z-30 bg-black/20 lg:hidden"
+				className="fixed inset-0 z-[60] bg-black/20 lg:hidden"
 				aria-hidden="true"
 				onClick={handleClose}
 			/>
 			<div
-				ref={containerRef}
-				id={id}
-				role="dialog"
-				aria-label={`${label} filters`}
-				className="fixed inset-x-0 bottom-0 z-40 flex max-h-[75vh] w-full flex-col overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl lg:absolute lg:inset-auto lg:z-50 lg:max-h-[60vh] lg:w-[22rem] lg:rounded-2xl"
+				className={
+					isDesktop
+						? "contents"
+						: "pointer-events-none fixed inset-x-0 z-[70] flex flex-col justify-end"
+				}
 				style={
 					isDesktop
-						? desktopPosition ?? undefined
+						? undefined
 						: viewport
-							? {
-									top: viewport.top,
-									height: viewport.height,
-									bottom: "auto",
-									maxHeight: "none",
-								}
-							: undefined
+							? { top: viewport.top, height: viewport.height }
+							: { top: 0, bottom: 0 }
 				}
 			>
+				<div
+					ref={containerRef}
+					id={id}
+					role="dialog"
+					aria-label={`${label} filters`}
+					className={
+						isDesktop
+							? "absolute z-50 max-h-[60vh] w-[22rem] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl"
+							: "pointer-events-auto max-h-[75vh] w-full overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl"
+					}
+					style={
+						isDesktop
+							? desktopPosition ?? undefined
+							: { maxHeight: sheetMaxHeight }
+					}
+				>
 				<div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
 					<div className="flex items-center gap-2 text-[11px] font-semibold text-gray-700 sm:text-xs">
 						<span>{label}</span>
@@ -238,11 +262,7 @@ export const FilterPopover = ({
 						<X className="h-4 w-4" />
 					</button>
 				</div>
-				<div
-					className={`space-y-3 px-4 py-4 ${
-						viewport ? "flex min-h-0 flex-1 flex-col" : ""
-					}`}
-				>
+				<div className="space-y-3 px-4 py-4">
 					<div className="flex items-center gap-2">
 						<div className="relative flex-1">
 							<Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -252,7 +272,7 @@ export const FilterPopover = ({
 								placeholder={searchPlaceholder}
 								value={searchTerm}
 								onChange={(event) => setSearchTerm(event.target.value)}
-								className="h-10 w-full rounded-full border border-gray-200 bg-white pl-9 pr-9 text-[11px] text-gray-700 sm:text-xs shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+								className="h-10 w-full rounded-full border border-gray-200 bg-white pl-9 pr-9 text-[16px] text-gray-700 shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
 								aria-label={searchPlaceholder}
 							/>
 							{searchTerm.length > 0 && (
@@ -296,10 +316,9 @@ export const FilterPopover = ({
 
 					<div
 						className={`space-y-1 overflow-y-auto pr-1 ${
-							viewport
-								? "min-h-0 flex-1"
-								: "max-h-[45vh] lg:max-h-[40vh]"
+							isDesktop ? "max-h-[40vh]" : "max-h-[60vh]"
 						}`}
+						style={isDesktop ? undefined : { maxHeight: listMaxHeight }}
 						role="listbox"
 						aria-multiselectable={selectionType === "multi"}
 						aria-label={`${label} options`}
@@ -334,6 +353,7 @@ export const FilterPopover = ({
 							})
 						)}
 					</div>
+				</div>
 				</div>
 			</div>
 		</>
