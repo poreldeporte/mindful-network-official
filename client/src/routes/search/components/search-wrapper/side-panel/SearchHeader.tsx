@@ -226,7 +226,7 @@ export const SearchHeader = ({
 							value={searchQuery}
 							onChange={(event) => setSearchQuery(event.target.value)}
 							placeholder="Search by name, insurance, or therapy"
-							className="h-11 w-full rounded-full border border-gray-200 bg-white pl-11 pr-10 text-[12px] text-gray-700 sm:text-[13px] shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+							className="h-11 w-full rounded-full border border-gray-200 bg-white pl-11 pr-10 text-base text-gray-700 sm:text-[13px] shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
 							aria-label="Search professionals"
 						/>
 						{searchQuery.length > 0 && (
