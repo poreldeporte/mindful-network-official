@@ -312,6 +312,9 @@ export const SearchWrapper = ({
 					) ||
 					professional.therapyOptions?.some?.((modality) =>
 						modality.type?.toLowerCase().includes(query)
+					) ||
+					professional.resource?.some?.((res) =>
+						res.title?.toLowerCase().includes(query)
 					)
 			);
 
