@@ -198,11 +198,18 @@ export const FilterPopover = ({
 	if (!isOpen) return null;
 	if (isDesktop && !desktopPosition) return null;
 
-	// On mobile, cap the scrollable option list to the room left in the visible
-	// area (above the keyboard) after the header + search chrome, so the sheet
-	// can size to its content instead of always filling the screen.
+	// On mobile, keep the sheet a bottom sheet that never reaches the top of the
+	// screen (where the sticky site header sits) and never exceeds the area above
+	// the keyboard. TOP_CLEARANCE leaves room for the header + a backdrop sliver;
+	// the list cap also subtracts the sheet's own header + search chrome so the
+	// sheet sizes to its content instead of always filling the screen.
+	const TOP_CLEARANCE = 120;
+	const CHROME = 130;
+	const sheetMaxHeight = viewport
+		? Math.max(viewport.height - TOP_CLEARANCE, 200)
+		: undefined;
 	const listMaxHeight = viewport
-		? Math.max(viewport.height - 150, 120)
+		? Math.max(viewport.height - TOP_CLEARANCE - CHROME, 120)
 		: undefined;
 
 	return (
@@ -234,9 +241,13 @@ export const FilterPopover = ({
 					className={
 						isDesktop
 							? "absolute z-50 max-h-[60vh] w-[22rem] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl"
-							: "pointer-events-auto max-h-full w-full overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl"
+							: "pointer-events-auto max-h-[75vh] w-full overflow-hidden rounded-t-3xl border border-gray-200 bg-white shadow-2xl"
 					}
-					style={isDesktop ? desktopPosition ?? undefined : undefined}
+					style={
+						isDesktop
+							? desktopPosition ?? undefined
+							: { maxHeight: sheetMaxHeight }
+					}
 				>
 				<div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
 					<div className="flex items-center gap-2 text-[11px] font-semibold text-gray-700 sm:text-xs">
