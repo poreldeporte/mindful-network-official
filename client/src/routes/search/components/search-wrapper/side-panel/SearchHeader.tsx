@@ -18,6 +18,7 @@ interface SearchHeaderProps {
 	conditions: conditionSpecialty[] | null;
 	insurances: insurances[] | null;
 	therapyModalities: TherapyModality[] | null;
+	cities: string[];
 	lockedAgeSpecialties?: string[];
 	showLockedAgeSpecialties?: boolean;
 	titlePrefix?: string;
@@ -27,6 +28,7 @@ interface SearchHeaderProps {
 	selectedCondition: string[];
 	selectedInsurance: string[];
 	selectedTherapy: string | null;
+	selectedCity: string[];
 	onToggleFilter: (key: FilterKey, value: string) => void;
 	onClearFilter: (key: FilterKey) => void;
 	onClearAll: () => void;
@@ -42,6 +44,7 @@ export const SearchHeader = ({
 	conditions,
 	insurances,
 	therapyModalities,
+	cities,
 	lockedAgeSpecialties = [],
 	showLockedAgeSpecialties = true,
 	titlePrefix = "Find Professionals in",
@@ -51,6 +54,7 @@ export const SearchHeader = ({
 	selectedCondition,
 	selectedInsurance,
 	selectedTherapy,
+	selectedCity,
 	onToggleFilter,
 	onClearFilter,
 	onClearAll,
@@ -112,6 +116,17 @@ export const SearchHeader = ({
 		[therapyModalities]
 	);
 
+	const cityOptions = useMemo(
+		() =>
+			(cities ?? [])
+				.map((city) => ({
+					value: city,
+					label: city,
+				}))
+				.sort(compareByLabel),
+		[cities]
+	);
+
 	const filters = useMemo<FilterConfig[]>(() => {
 		const configs: FilterConfig[] = [
 			{
@@ -150,6 +165,15 @@ export const SearchHeader = ({
 				selectionType: "single",
 				accentColor: "blue",
 			},
+			{
+				key: "city",
+				label: "City",
+				searchPlaceholder: "Search cities",
+				options: cityOptions,
+				selectedValues: selectedCity,
+				selectionType: "multi",
+				accentColor: "green",
+			},
 		];
 
 		return configs.filter(
@@ -160,10 +184,12 @@ export const SearchHeader = ({
 		conditionOptions,
 		insuranceOptions,
 		therapyOptions,
+		cityOptions,
 		selectedResources,
 		selectedCondition,
 		selectedInsurance,
 		selectedTherapy,
+		selectedCity,
 	]);
 
 	const pushSearchParams = (nextSearch: string) => {

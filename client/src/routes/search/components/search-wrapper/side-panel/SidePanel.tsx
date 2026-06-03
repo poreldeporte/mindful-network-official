@@ -22,6 +22,7 @@ interface Props {
 	insurances: insurances[] | null;
 	therapyModalities: TherapyModality[] | null;
 	resources: ResourcesKey[];
+	cities: string[];
 	lockedAgeSpecialties?: string[];
 	showLockedAgeSpecialties?: boolean;
 	titlePrefix?: string;
@@ -36,6 +37,7 @@ const SidePanel = ({
 	insurances,
 	therapyModalities,
 	resources,
+	cities,
 	lockedAgeSpecialties = [],
 	showLockedAgeSpecialties = true,
 	titlePrefix,
@@ -50,6 +52,7 @@ const SidePanel = ({
 	const selectedResources = searchParams.get("resource")?.split(",") ?? [];
 	const selectedInsurance = searchParams.get("insurance")?.split(",") ?? [];
 	const selectedTherapy = searchParams.get("therapy") ?? null;
+	const selectedCity = searchParams.get("city")?.split(",") ?? [];
 	const pageParam = searchParams.get("page");
 	const parsedPage = Number.parseInt(pageParam ?? "1", 10);
 	const currentPage =
@@ -144,6 +147,20 @@ const SidePanel = ({
 			} else {
 				currentParams.set(filterType, value);
 			}
+		} else if (filterType === "city") {
+			let updatedCities = [...selectedCity];
+
+			if (updatedCities.includes(value)) {
+				updatedCities = updatedCities.filter((city) => city !== value);
+			} else {
+				updatedCities.push(value);
+			}
+
+			if (updatedCities.length > 0) {
+				currentParams.set("city", updatedCities.join(","));
+			} else {
+				currentParams.delete("city");
+			}
 		}
 
 		pushParams(currentParams);
@@ -169,6 +186,10 @@ const SidePanel = ({
 			currentParams.delete("therapy");
 		}
 
+		if (filterType === "city") {
+			currentParams.delete("city");
+		}
+
 		pushParams(currentParams);
 	};
 
@@ -179,6 +200,7 @@ const SidePanel = ({
 		currentParams.delete("condition");
 		currentParams.delete("insurance");
 		currentParams.delete("therapy");
+		currentParams.delete("city");
 		pushParams(currentParams);
 	};
 
@@ -227,6 +249,7 @@ const SidePanel = ({
 				insurances={insurances}
 				resources={resources}
 				therapyModalities={therapyModalities}
+				cities={cities}
 				lockedAgeSpecialties={lockedAgeSpecialties}
 				showLockedAgeSpecialties={showLockedAgeSpecialties}
 				titlePrefix={titlePrefix}
@@ -236,6 +259,7 @@ const SidePanel = ({
 				selectedInsurance={selectedInsurance}
 				selectedResources={selectedResources}
 				selectedTherapy={selectedTherapy}
+				selectedCity={selectedCity}
 				onToggleFilter={handleBadgeClick}
 				onClearFilter={handleClearFilter}
 				onClearAll={handleClearAll}
