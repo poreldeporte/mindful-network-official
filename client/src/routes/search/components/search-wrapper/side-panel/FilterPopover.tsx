@@ -215,7 +215,7 @@ export const FilterPopover = ({
 	return (
 		<>
 			<div
-				className="fixed inset-0 z-30 bg-black/20 lg:hidden"
+				className="fixed inset-0 z-[60] bg-black/20 lg:hidden"
 				aria-hidden="true"
 				onClick={handleClose}
 			/>
@@ -223,7 +223,7 @@ export const FilterPopover = ({
 				className={
 					isDesktop
 						? "contents"
-						: "pointer-events-none fixed inset-x-0 z-40 flex flex-col justify-end"
+						: "pointer-events-none fixed inset-x-0 z-[70] flex flex-col justify-end"
 				}
 				style={
 					isDesktop
