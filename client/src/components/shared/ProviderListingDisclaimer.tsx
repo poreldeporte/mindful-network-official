@@ -14,9 +14,9 @@ export const ProviderListingDisclaimer = ({
 		>
 			<Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-500" aria-hidden="true" />
 			<p>
-				Listing details including availability, insurance accepted, and services
-				offered may have changed. The Mindful Network does not endorse any
-				listed provider.
+				Details including availability, insurance, and services may have changed.
+				This listing was independently sourced — The Mindful Network is not
+				affiliated with or endorsing this provider.
 			</p>
 		</div>
 	);
