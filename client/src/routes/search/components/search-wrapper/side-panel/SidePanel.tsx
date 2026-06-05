@@ -9,7 +9,7 @@ import {
 	TherapyModality,
 } from "@/models";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import PsychologistCard from "./PsychologistCard";
 import { PsychologistCardSkeleton } from "./PsychologistCard.skeleton";
 import { SearchHeader } from "./SearchHeader";
@@ -46,6 +46,7 @@ const SidePanel = ({
 	isLoading,
 }: Props) => {
 	const RESULTS_PER_PAGE = 12;
+	const asideRef = useRef<HTMLElement>(null);
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const selectedCondition = searchParams.get("condition")?.split(",") ?? [];
@@ -215,6 +216,11 @@ const SidePanel = ({
 		}
 
 		pushParams(currentParams);
+
+		// replaceState updates the URL without a real navigation, so the browser
+		// keeps the current scroll position (stuck at the bottom of the previous
+		// page). Scroll the results panel back into view for the new page.
+		asideRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 	};
 
 	useEffect(() => {
@@ -240,7 +246,8 @@ const SidePanel = ({
 
 	return (
 		<aside
-			className="w-full bg-white flex flex-col"
+			ref={asideRef}
+			className="w-full bg-white flex flex-col scroll-mt-24"
 			role="complementary"
 			aria-labelledby="side-panel-header"
 		>
