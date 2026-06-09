@@ -11,7 +11,8 @@ export type FilterKey =
 	| "condition"
 	| "insurance"
 	| "therapy"
-	| "city";
+	| "city"
+	| "age";
 
 export interface FilterConfig {
 	key: FilterKey;

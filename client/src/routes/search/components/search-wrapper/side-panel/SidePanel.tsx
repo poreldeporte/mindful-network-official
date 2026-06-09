@@ -23,6 +23,7 @@ interface Props {
 	therapyModalities: TherapyModality[] | null;
 	resources: ResourcesKey[];
 	cities: string[];
+	ageSpecialties: string[];
 	lockedAgeSpecialties?: string[];
 	showLockedAgeSpecialties?: boolean;
 	titlePrefix?: string;
@@ -38,6 +39,7 @@ const SidePanel = ({
 	therapyModalities,
 	resources,
 	cities,
+	ageSpecialties,
 	lockedAgeSpecialties = [],
 	showLockedAgeSpecialties = true,
 	titlePrefix,
@@ -54,6 +56,7 @@ const SidePanel = ({
 	const selectedInsurance = searchParams.get("insurance")?.split(",") ?? [];
 	const selectedTherapy = searchParams.get("therapy") ?? null;
 	const selectedCity = searchParams.get("city")?.split(",") ?? [];
+	const selectedAge = searchParams.get("age")?.split(",") ?? [];
 	const pageParam = searchParams.get("page");
 	const parsedPage = Number.parseInt(pageParam ?? "1", 10);
 	const currentPage =
@@ -162,6 +165,20 @@ const SidePanel = ({
 			} else {
 				currentParams.delete("city");
 			}
+		} else if (filterType === "age") {
+			let updatedAges = [...selectedAge];
+
+			if (updatedAges.includes(value)) {
+				updatedAges = updatedAges.filter((age) => age !== value);
+			} else {
+				updatedAges.push(value);
+			}
+
+			if (updatedAges.length > 0) {
+				currentParams.set("age", updatedAges.join(","));
+			} else {
+				currentParams.delete("age");
+			}
 		}
 
 		pushParams(currentParams);
@@ -191,6 +208,10 @@ const SidePanel = ({
 			currentParams.delete("city");
 		}
 
+		if (filterType === "age") {
+			currentParams.delete("age");
+		}
+
 		pushParams(currentParams);
 	};
 
@@ -202,6 +223,7 @@ const SidePanel = ({
 		currentParams.delete("insurance");
 		currentParams.delete("therapy");
 		currentParams.delete("city");
+		currentParams.delete("age");
 		pushParams(currentParams);
 	};
 
@@ -257,6 +279,7 @@ const SidePanel = ({
 				resources={resources}
 				therapyModalities={therapyModalities}
 				cities={cities}
+				ageSpecialties={ageSpecialties}
 				lockedAgeSpecialties={lockedAgeSpecialties}
 				showLockedAgeSpecialties={showLockedAgeSpecialties}
 				titlePrefix={titlePrefix}
@@ -267,6 +290,7 @@ const SidePanel = ({
 				selectedResources={selectedResources}
 				selectedTherapy={selectedTherapy}
 				selectedCity={selectedCity}
+				selectedAge={selectedAge}
 				onToggleFilter={handleBadgeClick}
 				onClearFilter={handleClearFilter}
 				onClearAll={handleClearAll}
