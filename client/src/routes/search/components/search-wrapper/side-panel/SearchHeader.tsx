@@ -19,6 +19,7 @@ interface SearchHeaderProps {
 	insurances: insurances[] | null;
 	therapyModalities: TherapyModality[] | null;
 	cities: string[];
+	ageSpecialties: string[];
 	lockedAgeSpecialties?: string[];
 	showLockedAgeSpecialties?: boolean;
 	titlePrefix?: string;
@@ -29,6 +30,7 @@ interface SearchHeaderProps {
 	selectedInsurance: string[];
 	selectedTherapy: string | null;
 	selectedCity: string[];
+	selectedAge: string[];
 	onToggleFilter: (key: FilterKey, value: string) => void;
 	onClearFilter: (key: FilterKey) => void;
 	onClearAll: () => void;
@@ -45,6 +47,7 @@ export const SearchHeader = ({
 	insurances,
 	therapyModalities,
 	cities,
+	ageSpecialties,
 	lockedAgeSpecialties = [],
 	showLockedAgeSpecialties = true,
 	titlePrefix = "Find Professionals in",
@@ -55,6 +58,7 @@ export const SearchHeader = ({
 	selectedInsurance,
 	selectedTherapy,
 	selectedCity,
+	selectedAge,
 	onToggleFilter,
 	onClearFilter,
 	onClearAll,
@@ -127,6 +131,17 @@ export const SearchHeader = ({
 		[cities]
 	);
 
+	// Age options keep the life-stage order assembled in SearchWrapper
+	// (Child → Adult), so this list is intentionally not alphabetized.
+	const ageOptions = useMemo(
+		() =>
+			(ageSpecialties ?? []).map((age) => ({
+				value: age,
+				label: age,
+			})),
+		[ageSpecialties]
+	);
+
 	const filters = useMemo<FilterConfig[]>(() => {
 		const configs: FilterConfig[] = [
 			{
@@ -174,17 +189,28 @@ export const SearchHeader = ({
 				selectionType: "multi",
 				accentColor: "green",
 			},
+			{
+				key: "age",
+				label: "Age",
+				searchPlaceholder: "Search ages",
+				options: ageOptions,
+				selectedValues: selectedAge,
+				selectionType: "multi",
+				accentColor: "orange",
+			},
 		];
 
 		return configs.filter(
 			(config) => config.options.length > 0 || config.selectedValues.length > 0
 		);
 	}, [
+		ageOptions,
 		resourceOptions,
 		conditionOptions,
 		insuranceOptions,
 		therapyOptions,
 		cityOptions,
+		selectedAge,
 		selectedResources,
 		selectedCondition,
 		selectedInsurance,

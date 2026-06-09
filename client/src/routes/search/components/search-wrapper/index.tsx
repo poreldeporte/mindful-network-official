@@ -162,6 +162,7 @@ export const SearchWrapper = ({
 		const insuranceParam = params.get("insurance");
 		const therapyParam = params.get("therapy");
 		const cityParam = params.get("city");
+		const ageParam = params.get("age");
 		const searchQuery = params.get("search");
 
 		let result = [...allProfessionals];
@@ -225,6 +226,19 @@ export const SearchWrapper = ({
 			);
 			result = result.filter((professional) =>
 				selectedCities.has(normalizeFilterValue(professional.address?.city || ""))
+			);
+		}
+
+		if (ageParam) {
+			const selectedAges = new Set(
+				ageParam.split(",").map(normalizeFilterValue)
+			);
+			result = result.filter(
+				(professional) =>
+					professional.ageSpecialty?.some?.((age) => {
+						if (!age?.age) return false;
+						return selectedAges.has(normalizeFilterValue(age.age));
+					}) ?? false
 			);
 		}
 
@@ -371,6 +385,31 @@ export const SearchWrapper = ({
 		return Array.from(seen.values());
 	}, [allProfessionals]);
 
+	// Unique age specialties present in the dataset, ordered by life stage
+	// (Child → Adult) rather than alphabetically. Hidden on landing pages that
+	// already lock an age specialty, since age is prefiltered there.
+	const ageSpecialties = useMemo(() => {
+		if (!allProfessionals || lockedAgeSpecialties.length > 0) return [];
+		const seen = new Map<string, string>();
+		for (const professional of allProfessionals) {
+			for (const age of professional.ageSpecialty ?? []) {
+				const raw = (age?.age || "").trim();
+				if (!raw) continue;
+				const key = raw.toLowerCase();
+				if (!seen.has(key)) seen.set(key, raw);
+			}
+		}
+		const order = ["child", "adolescent", "young adult", "adult"];
+		return Array.from(seen.values()).sort((a, b) => {
+			const ai = order.indexOf(a.toLowerCase());
+			const bi = order.indexOf(b.toLowerCase());
+			if (ai === -1 && bi === -1) return a.localeCompare(b);
+			if (ai === -1) return 1;
+			if (bi === -1) return -1;
+			return ai - bi;
+		});
+	}, [allProfessionals, lockedAgeSpecialties]);
+
 	useEffect(() => {
 		if (lastTrackedParamsRef.current === searchParamsKey) return;
 		lastTrackedParamsRef.current = searchParamsKey;
@@ -382,9 +421,10 @@ export const SearchWrapper = ({
 		const therapy = params.get("therapy") ?? "";
 		const resource = params.get("resource") ?? "";
 		const city = params.get("city") ?? "";
+		const age = params.get("age") ?? "";
 
 		const hasFilters = Boolean(
-			query || condition || insurance || therapy || resource || city ||
+			query || condition || insurance || therapy || resource || city || age ||
 			lockedAgeSpecialties.length || lockedConditions.length ||
 			lockedInsurances.length || lockedCity || lockedLanguage
 		);
@@ -398,6 +438,7 @@ export const SearchWrapper = ({
 				therapy,
 				resource,
 				city,
+				age,
 				locked_city: lockedCity ?? "",
 				locked_language: lockedLanguage ?? "",
 				locked_age: lockedAgeSpecialties.join(",") || "",
@@ -418,6 +459,7 @@ export const SearchWrapper = ({
 			therapyModalities={therapyModalities}
 			resources={allResourceKeys}
 			cities={cities}
+			ageSpecialties={ageSpecialties}
 			lockedAgeSpecialties={lockedAgeSpecialties}
 			showLockedAgeSpecialties={showLockedAgeSpecialties}
 			titlePrefix={titlePrefix}
