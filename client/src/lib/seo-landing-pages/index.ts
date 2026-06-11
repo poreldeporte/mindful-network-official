@@ -2,5 +2,5 @@ export { CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG, VIRTUAL_MODALI
 export type { CityConfig, ConditionConfig, InsuranceConfig, LanguageConfig } from "./config";
 export { resolveLandingPageSlug } from "./resolve-slug";
 export type { LandingPageParams } from "./resolve-slug";
-export { getAllLandingPageSlugs, getProviderCount } from "./generate-pages";
-export type { LandingPageSlug } from "./generate-pages";
+export { getAllLandingPageSlugs, computeLandingPageSlugs, getProviderCount, getRelatedSlugs } from "./generate-pages";
+export type { LandingPageSlug, RelatedLink } from "./generate-pages";

@@ -82,6 +82,59 @@ export const LANGUAGES: LanguageConfig[] = [
 export const VIRTUAL_SLUG = "online-therapy-florida";
 export const VIRTUAL_MODALITY = "Virtual";
 
+// --- Internal-linking data -------------------------------------------------
+// Drives the "related searches" cross-links between /find/ pages so the ~169
+// pages form a connected topical cluster instead of crawl-orphaned islands.
+
+// Geographic adjacency by city slug. Used to surface "same facet, nearby city"
+// links (e.g. anxiety in Miami → anxiety in Coral Gables). Kept hand-curated for
+// real South Florida proximity rather than computed from coordinates.
+export const CITY_NEIGHBORS: Record<string, string[]> = {
+	"miami": ["coral-gables", "miami-beach", "south-miami", "hialeah", "aventura"],
+	"fort-lauderdale": ["hollywood", "pembroke-pines", "coral-springs", "weston"],
+	"boca-raton": ["delray-beach", "west-palm-beach", "coral-springs"],
+	"coral-gables": ["miami", "south-miami", "miami-beach"],
+	"west-palm-beach": ["boca-raton", "delray-beach"],
+	"hollywood": ["fort-lauderdale", "pembroke-pines", "aventura"],
+	"aventura": ["sunny-isles-beach", "miami-beach", "hollywood", "miami"],
+	"pembroke-pines": ["hollywood", "fort-lauderdale", "weston"],
+	"hialeah": ["miami", "coral-gables"],
+	"coral-springs": ["fort-lauderdale", "boca-raton", "weston"],
+	"weston": ["pembroke-pines", "fort-lauderdale", "coral-springs"],
+	"delray-beach": ["boca-raton", "west-palm-beach"],
+	"south-miami": ["coral-gables", "miami"],
+	"sunny-isles-beach": ["aventura", "miami-beach"],
+	"miami-beach": ["miami", "aventura", "sunny-isles-beach", "coral-gables"],
+};
+
+// Insurance pages that historically rank best (≈ position 9) and so pass the
+// most internal authority — surfaced first in same-city cross-links.
+export const PRIORITY_INSURANCE_SLUGS = ["medicaid", "medicare", "aetna"];
+
+// Highest-demand specialties, used as the fallback set of "browse by specialty"
+// links and for non-condition pages that have no inherent related specialty.
+export const POPULAR_CONDITION_SLUGS = ["anxiety", "depression", "trauma", "adhd"];
+
+// Clinically adjacent specialties by condition slug. Drives "same city, related
+// specialty" links so a searcher on the anxiety page sees depression/trauma/OCD.
+export const RELATED_CONDITIONS: Record<string, string[]> = {
+	"anxiety": ["depression", "trauma", "ocd"],
+	"depression": ["anxiety", "trauma", "grief"],
+	"trauma": ["ptsd", "anxiety", "depression"],
+	"ptsd": ["trauma", "anxiety", "depression"],
+	"adhd": ["anxiety", "autism", "parenting"],
+	"relationship": ["anxiety", "depression", "parenting"],
+	"grief": ["depression", "trauma", "anxiety"],
+	"ocd": ["anxiety", "ptsd", "trauma"],
+	"eating-disorders": ["anxiety", "depression", "trauma"],
+	"addiction": ["depression", "anxiety", "trauma"],
+	"autism": ["adhd", "parenting", "anxiety"],
+	"bipolar": ["depression", "anxiety", "ptsd"],
+	"parenting": ["relationship", "adhd", "anxiety"],
+	"lgbtq": ["anxiety", "depression", "relationship"],
+	"womens-issues": ["anxiety", "depression", "trauma"],
+};
+
 export function generateIntro(
 	type: "condition" | "insurance" | "language" | "virtual",
 	params: { condition?: string; insurance?: string; language?: string; city?: string; descriptor?: string; count: number }

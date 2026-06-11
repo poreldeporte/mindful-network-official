@@ -2,9 +2,12 @@ import { Typography } from "@/components/ui";
 import {
 	resolveLandingPageSlug,
 	getAllLandingPageSlugs,
+	computeLandingPageSlugs,
+	getRelatedSlugs,
 	generateIntro,
 	VIRTUAL_MODALITY,
 } from "@/lib/seo-landing-pages";
+import { RelatedSearches } from "@/routes/find/components/RelatedSearches";
 import {
 	getAllConditions,
 	getAllInsurances,
@@ -227,6 +230,12 @@ export default async function FindPage({
 	};
 	const colors = colorMap[badgeColor] || colorMap.blue;
 
+	// Related /find/ cross-links. Derive the valid-slug set from the providers we
+	// already fetched (no extra Sanity round-trip) so we never link to a page that
+	// wouldn't be generated.
+	const validSlugs = new Set(computeLandingPageSlugs(professionals).map((s) => s.slug));
+	const relatedLinks = getRelatedSlugs(page, validSlugs);
+
 	const schemaData = {
 		"@context": "https://schema.org",
 		"@graph": [
@@ -337,6 +346,8 @@ export default async function FindPage({
 					</Suspense>
 				</div>
 			</section>
+
+			<RelatedSearches links={relatedLinks} />
 		</main>
 	);
 }
