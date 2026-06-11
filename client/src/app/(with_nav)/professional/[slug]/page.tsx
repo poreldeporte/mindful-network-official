@@ -39,7 +39,17 @@ export async function generateMetadata({
 	const nameWithDegree = psychologist.degree
 		? `${psychologist.name}, ${psychologist.degree}`
 		: psychologist.name;
-	const profession = psychologist.degree ? "Therapist" : "Mental Health Practice";
+	// Non-clinical listings (e.g. attorneys) must not be labeled a clinical
+	// "Mental Health Practice" — that mislabel is the site's biggest CTR leak.
+	// Branch the SEO title/description/schema on the provider's resource type.
+	const isAttorney = psychologist.resource?.some((r) =>
+		r?.title?.startsWith("Attorney")
+	);
+	const profession = isAttorney
+		? "Mental Health & Substance Use Attorney"
+		: psychologist.degree
+		? "Therapist"
+		: "Mental Health Practice";
 	const locPart = cityState
 		? `${profession} in ${cityState}`
 		: `${profession} in South Florida`;
@@ -115,6 +125,19 @@ export async function generateMetadata({
 		description += insStr + ".";
 	}
 
+	// Non-clinical override: attorneys/orgs get their own provider-written bio,
+	// trimmed to ~155 chars at a word boundary — the clinical "specializes in
+	// {conditions}" template misrepresents them.
+	if (isAttorney) {
+		const raw = (psychologist.description || "").trim();
+		if (raw) {
+			description =
+				raw.length > MAX_LENGTH
+					? raw.slice(0, MAX_LENGTH - 1).replace(/\s+\S*$/, "") + "…"
+					: raw;
+		}
+	}
+
 	// Fallback if we somehow have no data
 	if (description === psychologist.name || description.length < 40) {
 		description = `Connect with ${psychologist.name}, a licensed mental health professional in South Florida.`;
@@ -162,9 +185,12 @@ export default async function PsychologistPage({
 	}
 
 	const url = `https://themindfulnetwork.com/professional/${params.slug}`;
+	const isAttorney = psychologist.resource?.some((r) =>
+		r?.title?.startsWith("Attorney")
+	);
 	const schemaData: Record<string, unknown> = {
 		"@context": "https://schema.org",
-		"@type": "MedicalBusiness",
+		"@type": isAttorney ? "Attorney" : "MedicalBusiness",
 		name: psychologist.name,
 		description: psychologist.subtitle || psychologist.description,
 		image: psychologist.image,
@@ -184,7 +210,9 @@ export default async function PsychologistPage({
 		schemaData.email = psychologist.email;
 	}
 
-	if (psychologist.degree) {
+	if (isAttorney) {
+		schemaData.jobTitle = "Attorney";
+	} else if (psychologist.degree) {
 		schemaData.jobTitle = psychologist.degree;
 	} else {
 		schemaData.jobTitle = "Mental Health Professional";
@@ -205,7 +233,7 @@ export default async function PsychologistPage({
 		schemaData.paymentAccepted = psychologist.insurances.map((i) => i.name).join(", ");
 	}
 
-	if (psychologist.conditionSpecialty?.length > 0) {
+	if (!isAttorney && psychologist.conditionSpecialty?.length > 0) {
 		schemaData.medicalSpecialty = psychologist.conditionSpecialty.map((c) => c.name).join(", ");
 	}
 
