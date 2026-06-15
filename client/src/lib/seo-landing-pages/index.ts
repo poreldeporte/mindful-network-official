@@ -2,5 +2,11 @@ export { CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG, VIRTUAL_MODALI
 export type { CityConfig, ConditionConfig, InsuranceConfig, LanguageConfig } from "./config";
 export { resolveLandingPageSlug } from "./resolve-slug";
 export type { LandingPageParams } from "./resolve-slug";
-export { getAllLandingPageSlugs, computeLandingPageSlugs, getProviderCount, getRelatedSlugs } from "./generate-pages";
+export { getAllLandingPageSlugs, computeLandingPageSlugs, getProviderCount, getRelatedSlugs, matchProviders } from "./generate-pages";
 export type { LandingPageSlug, RelatedLink } from "./generate-pages";
+export { computeProviderStats } from "./provider-stats";
+export type { ProviderStats } from "./provider-stats";
+export { getPageContent } from "./page-content";
+export type { PageContent } from "./page-content";
+export { getFacetBlock, getCityBlock } from "./content";
+export type { FacetBlock, CityBlock, FaqItem } from "./content";
