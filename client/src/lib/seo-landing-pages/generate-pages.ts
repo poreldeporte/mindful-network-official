@@ -216,3 +216,23 @@ export function getProviderCount(
 		return false;
 	}).length;
 }
+
+// Return the providers matching a resolved landing page, using the same
+// (variant-aware) matchers that decide which pages exist. Callers use this for
+// both the headline count and the live "About these providers" stats so the two
+// never disagree.
+export function matchProviders(
+	professionals: PsychologistModel[],
+	page: LandingPageParams
+): PsychologistModel[] {
+	if (page.type === "virtual") {
+		return professionals.filter((p) => matchesTherapyModality(p, VIRTUAL_MODALITY));
+	}
+	return professionals.filter((p) => {
+		if (!matchesCity(p, page.city.name)) return false;
+		if (page.type === "condition") return matchesCondition(p, page.condition.filterValue);
+		if (page.type === "insurance") return matchesInsurance(p, page.insurance.filterValue);
+		if (page.type === "language") return matchesLanguage(p, page.language.name);
+		return false;
+	});
+}

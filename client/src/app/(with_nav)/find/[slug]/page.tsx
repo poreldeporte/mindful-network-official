@@ -4,10 +4,14 @@ import {
 	getAllLandingPageSlugs,
 	computeLandingPageSlugs,
 	getRelatedSlugs,
+	matchProviders,
+	computeProviderStats,
+	getPageContent,
 	generateIntro,
 	VIRTUAL_MODALITY,
 } from "@/lib/seo-landing-pages";
 import { RelatedSearches } from "@/routes/find/components/RelatedSearches";
+import { LandingPageBody, LandingPageFaq } from "@/routes/find/components/LandingPageBody";
 import {
 	getAllConditions,
 	getAllInsurances,
@@ -131,22 +135,24 @@ export default async function FindPage({
 	const initialTherapyModalities = Array.isArray(allTherapyModalities) ? allTherapyModalities : [];
 	const initialResourceKeys = generateResourceKeys(Array.isArray(allResources) ? allResources : []);
 
+	// Providers matched to this page (variant-aware matcher, same one that decides
+	// which pages exist). Drives both the headline count and the live stats, so the
+	// two never disagree.
+	const matched = matchProviders(professionals, page);
+	const stats = computeProviderStats(matched);
+	const pageContent = getPageContent(page, stats);
+
 	let heading: string;
 	let badgeText: string;
 	let badgeColor: string;
 	let introText: string;
 	let searchProps: Record<string, unknown>;
-	let count = 0;
+	const count = matched.length;
 
 	if (page.type === "condition") {
 		heading = `${page.condition.therapistLabel} in ${page.city.name}, ${page.city.stateAbbr}`;
 		badgeText = `${page.condition.name.toUpperCase()} SPECIALISTS`;
 		badgeColor = "emerald";
-		count = professionals.filter(
-			(p) =>
-				p.conditionSpecialty?.some((c) => c.name.toLowerCase() === page.condition.filterValue) &&
-				(p.address?.city || "").trim().toLowerCase() === page.city.name.toLowerCase()
-		).length;
 		introText = generateIntro("condition", {
 			condition: page.condition.name,
 			city: page.city.name,
@@ -164,11 +170,6 @@ export default async function FindPage({
 		heading = `Therapists Accepting ${page.insurance.name} in ${page.city.name}, ${page.city.stateAbbr}`;
 		badgeText = `${page.insurance.name.toUpperCase()} IN-NETWORK`;
 		badgeColor = "blue";
-		count = professionals.filter(
-			(p) =>
-				p.insurances?.some((i) => i.name.toLowerCase() === page.insurance.filterValue) &&
-				(p.address?.city || "").trim().toLowerCase() === page.city.name.toLowerCase()
-		).length;
 		introText = generateIntro("insurance", {
 			insurance: page.insurance.name,
 			city: page.city.name,
@@ -186,11 +187,6 @@ export default async function FindPage({
 		heading = `${page.language.name}-Speaking Therapists in ${page.city.name}, ${page.city.stateAbbr}`;
 		badgeText = `${page.language.name.toUpperCase()}-SPEAKING`;
 		badgeColor = "purple";
-		count = professionals.filter(
-			(p) =>
-				p.languages?.some((l) => l.toLowerCase() === page.language.name.toLowerCase()) &&
-				(p.address?.city || "").trim().toLowerCase() === page.city.name.toLowerCase()
-		).length;
 		introText = generateIntro("language", {
 			language: page.language.name,
 			city: page.city.name,
@@ -209,11 +205,6 @@ export default async function FindPage({
 		heading = `Online Therapy in Florida`;
 		badgeText = "TELEHEALTH PROVIDERS";
 		badgeColor = "blue";
-		count = professionals.filter((p) =>
-			p.therapyOptions?.some(
-				(m) => typeof m?.type === "string" && m.type.toLowerCase() === VIRTUAL_MODALITY.toLowerCase()
-			)
-		).length;
 		introText = generateIntro("virtual", { count });
 		searchProps = {
 			lockedTherapyModality: VIRTUAL_MODALITY,
@@ -272,6 +263,18 @@ export default async function FindPage({
 					},
 				],
 			},
+			...(pageContent.faqs.length > 0
+				? [
+						{
+							"@type": "FAQPage",
+							mainEntity: pageContent.faqs.map((f) => ({
+								"@type": "Question",
+								name: f.q,
+								acceptedAnswer: { "@type": "Answer", text: f.a },
+							})),
+						},
+					]
+				: []),
 		],
 	};
 
@@ -332,6 +335,8 @@ export default async function FindPage({
 				</div>
 			</section>
 
+			<LandingPageBody content={pageContent} />
+
 			<section className="page-width pb-16 lg:pb-24">
 				<div className={`overflow-hidden rounded-[2rem] border ${colors.border} bg-white shadow-sm`}>
 					<Suspense fallback={<div className="p-8">Loading providers...</div>}>
@@ -346,6 +351,8 @@ export default async function FindPage({
 					</Suspense>
 				</div>
 			</section>
+
+			<LandingPageFaq faqs={pageContent.faqs} />
 
 			<RelatedSearches links={relatedLinks} />
 		</main>
