@@ -1,6 +1,11 @@
 import { getAllProfessionals } from "@/services";
 import { PsychologistModel } from "@/models";
-import { CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG, VIRTUAL_MODALITY } from "./config";
+import {
+	CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG, VIRTUAL_MODALITY,
+	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, RELATED_CONDITIONS,
+	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig,
+} from "./config";
+import type { LandingPageParams } from "./resolve-slug";
 
 const MIN_PROVIDERS = 2;
 
@@ -48,8 +53,10 @@ export interface LandingPageSlug {
 	count: number;
 }
 
-export async function getAllLandingPageSlugs(): Promise<LandingPageSlug[]> {
-	const allProfessionals = await getAllProfessionals();
+// Pure slug computation over an already-fetched provider list. Extracted so
+// callers that already hold the professionals array (the /find/ page) can derive
+// the valid-slug set without re-fetching from Sanity.
+export function computeLandingPageSlugs(allProfessionals: PsychologistModel[]): LandingPageSlug[] {
 	if (!allProfessionals || !Array.isArray(allProfessionals)) return [];
 
 	const slugs: LandingPageSlug[] = [];
@@ -99,6 +106,102 @@ export async function getAllLandingPageSlugs(): Promise<LandingPageSlug[]> {
 	}
 
 	return slugs;
+}
+
+export async function getAllLandingPageSlugs(): Promise<LandingPageSlug[]> {
+	const allProfessionals = await getAllProfessionals();
+	return computeLandingPageSlugs(Array.isArray(allProfessionals) ? allProfessionals : []);
+}
+
+// --- Related-page cross-linking --------------------------------------------
+
+export interface RelatedLink {
+	slug: string;
+	label: string;
+	group: "city" | "specialty" | "insurance" | "language";
+}
+
+const MAX_RELATED = 10;
+
+const conditionLink = (c: ConditionConfig, city: CityConfig) => ({
+	slug: `${c.slug}-therapist-${city.slug}`,
+	label: `${c.therapistLabel} in ${city.name}`,
+});
+const insuranceLink = (i: InsuranceConfig, city: CityConfig) => ({
+	slug: `therapists-accepting-${i.slug}-${city.slug}`,
+	label: `Therapists Accepting ${i.name} in ${city.name}`,
+});
+const languageLink = (l: LanguageConfig, city: CityConfig) => ({
+	slug: `${l.slug}-speaking-therapist-${city.slug}`,
+	label: `${l.name}-Speaking Therapists in ${city.name}`,
+});
+
+const cityBySlug = (slug: string) => CITIES.find((c) => c.slug === slug);
+const conditionBySlug = (slug: string) => CONDITIONS.find((c) => c.slug === slug);
+const insuranceBySlug = (slug: string) => INSURANCES.find((i) => i.slug === slug);
+
+// Given the current page, return sibling /find/ pages that actually exist
+// (validated against `validSlugs`, so we never emit a link to a page that won't
+// be generated). Capped at MAX_RELATED, ordered by descending authority value.
+export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<string>): RelatedLink[] {
+	const links: RelatedLink[] = [];
+	const seen = new Set<string>();
+	const add = (group: RelatedLink["group"], item: { slug: string; label: string } | undefined) => {
+		if (!item || seen.has(item.slug) || !validSlugs.has(item.slug)) return;
+		seen.add(item.slug);
+		links.push({ ...item, group });
+	};
+
+	if (current.type === "virtual") {
+		// No city anchor — surface popular specialty pages in the largest markets.
+		for (const citySlug of ["miami", "fort-lauderdale", "boca-raton"]) {
+			const city = cityBySlug(citySlug);
+			if (!city) continue;
+			for (const condSlug of POPULAR_CONDITION_SLUGS) {
+				const cond = conditionBySlug(condSlug);
+				if (cond) add("specialty", conditionLink(cond, city));
+			}
+		}
+		return links.slice(0, MAX_RELATED);
+	}
+
+	const city = current.city;
+	const neighbors = (CITY_NEIGHBORS[city.slug] ?? []).map(cityBySlug).filter(Boolean) as CityConfig[];
+
+	if (current.type === "condition") {
+		// Same specialty, nearby cities
+		for (const nb of neighbors) add("city", conditionLink(current.condition, nb));
+		// Same city, clinically related specialties
+		const related = RELATED_CONDITIONS[current.condition.slug] ?? POPULAR_CONDITION_SLUGS;
+		for (const condSlug of related) {
+			const cond = conditionBySlug(condSlug);
+			if (cond) add("specialty", conditionLink(cond, city));
+		}
+		// Same city, highest-authority insurance pages
+		for (const insSlug of PRIORITY_INSURANCE_SLUGS) {
+			const ins = insuranceBySlug(insSlug);
+			if (ins) add("insurance", insuranceLink(ins, city));
+		}
+		// Same city, language variants
+		for (const lang of LANGUAGES) add("language", languageLink(lang, city));
+	} else if (current.type === "insurance") {
+		for (const nb of neighbors) add("city", insuranceLink(current.insurance, nb));
+		for (const condSlug of POPULAR_CONDITION_SLUGS) {
+			const cond = conditionBySlug(condSlug);
+			if (cond) add("specialty", conditionLink(cond, city));
+		}
+		for (const ins of INSURANCES) {
+			if (ins.slug !== current.insurance.slug) add("insurance", insuranceLink(ins, city));
+		}
+	} else if (current.type === "language") {
+		for (const nb of neighbors) add("city", languageLink(current.language, nb));
+		for (const condSlug of POPULAR_CONDITION_SLUGS) {
+			const cond = conditionBySlug(condSlug);
+			if (cond) add("specialty", conditionLink(cond, city));
+		}
+	}
+
+	return links.slice(0, MAX_RELATED);
 }
 
 export function getProviderCount(
