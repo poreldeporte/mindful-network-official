@@ -44,7 +44,10 @@ function buildStatsSentence(stats: ProviderStats, cityName?: string): string {
 	}
 
 	const body = clauses.length ? ` Of these, ${clauses.join("; ")}.` : "";
-	return `${lead}${body}`;
+	const creds = stats.credentials.length
+		? ` Credentials among them include ${formatList(stats.credentials)}.`
+		: "";
+	return `${lead}${body}${creds}`;
 }
 
 export function getPageContent(page: LandingPageParams, stats: ProviderStats): PageContent {
