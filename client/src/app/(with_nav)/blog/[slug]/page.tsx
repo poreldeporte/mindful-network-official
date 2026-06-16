@@ -1,6 +1,6 @@
 import { sanityClient } from "@/api";
-import { Content, Hero } from "@/routes/blog";
-import { getBlogById } from "@/routes/homepage/services";
+import { Content, Hero, RelatedPosts } from "@/routes/blog";
+import { getBlogById, getRelatedBlogs } from "@/routes/homepage/services";
 import type { Metadata } from "next";
 
 // Revalidate every hour so blog SEO updates from Sanity appear without redeploying
@@ -76,6 +76,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 	}
 
 	const ogImage = post.seo?.openGraphImage || post.featuredImage;
+	const relatedPosts = await getRelatedBlogs(params.slug);
 
 	const schemaData = {
 		"@context": "https://schema.org",
@@ -110,6 +111,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 			/>
 			<Hero post={post} />
 			<Content post={post} />
+			<RelatedPosts posts={relatedPosts} />
 		</>
 	);
 }

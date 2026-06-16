@@ -62,6 +62,24 @@ export const blogsWithOffsetQuery = ({
 	return query;
 };
 
+// Related posts for the bottom of a blog post: same category as the current
+// post (matched by reference, so it works regardless of how category is shaped
+// elsewhere), excluding the current post and any external-link posts. Newest
+// first, capped at 3. Gives each post inbound internal links — blog posts were
+// otherwise cross-link orphans.
+export const relatedBlogQuery = `*[
+    _type == "blog" &&
+    slug.current != $slug &&
+    isInternal != false &&
+    category._ref == *[_type == "blog" && slug.current == $slug][0].category._ref
+  ] | order(publishDate desc)[0...3]{
+    title,
+    "slug": slug.current,
+    excerpt,
+    "featuredImage": featuredImage.asset->url,
+    "featuredImageAlt": featuredImage.alt
+  }`;
+
 export const countBlogsQuery = `count(*[_type == "blog"])`;
 
 export const AllblogCategories = `*[_type == "blogCategories"]{
