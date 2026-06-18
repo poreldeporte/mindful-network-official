@@ -5,13 +5,8 @@ import professionals from './professionals/professionals'
 
 import resources from './resources/resources'
 import {
-  psychologists,
-  psychiatry,
-  bakerActFacilities,
   innovativeTherapies,
-  inpatient,
   mindBodyPractices,
-  outpatient,
   mentalHealthLawyers,
   estatePlanningLawyers,
 } from './resources'
@@ -30,11 +25,6 @@ import redirects from './redirects/redirects'
 export const schemaTypes = [
   // Listings
   professionals,
-  psychologists,
-  psychiatry,
-  outpatient,
-  inpatient,
-  bakerActFacilities,
   innovativeTherapies,
   mindBodyPractices,
   mentalHealthLawyers,

@@ -160,11 +160,6 @@ export default defineConfig({
                   .title('Listings')
                   .items([
                     professionalsMenu,
-                    listingMenu('psychologist', 'Psychologists', FaUserMd),
-                    listingMenu('psychiatry', 'Psychiatry', FaUserMd),
-                    listingMenu('outpatientFacilities', 'Outpatient Facilities', FaBuilding),
-                    listingMenu('inpatientFacilities', 'Inpatient Facilities', FaBuilding),
-                    listingMenu('bakerActFacilities', 'Baker Act Facilities', FaBuilding),
                     listingMenu('innovativeTherapies', 'Innovative Therapies', FaBrain),
                     listingMenu('mindBodyPractices', 'Mind Body Practices', FaBrain),
                     listingMenu('mentalHealthLawyers', 'Mental Health Lawyers', FaUser),
