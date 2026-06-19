@@ -1,12 +1,7 @@
 import { sanityClient } from "@/api";
 import { NextResponse } from "next/server";
 import {
-	allPsychiatricQuery,
-	allBakerActFacilitiesQuery,
 	allInnovativeTherapiesQuery,
-	allInpatientQuery,
-	allOutpatientQuery,
-	allPsychologistsQuery,
 	allMindBodyPracticesQuery,
 	allMentalHealthLawyers,
 	allEstatePlanningLawyers,
@@ -16,11 +11,6 @@ import { getPsychologistsAdapter } from "@/adapters";
 export async function GET() {
 	const query = `{
 	"innovativeTherapies": ${allInnovativeTherapiesQuery},
-    "psychologists": ${allPsychologistsQuery},
-	"psychiatry": ${allPsychiatricQuery},
-	"outpatientFacilities": ${allOutpatientQuery},
-	"inpatientFacilities": ${allInpatientQuery},
-    "bakerActFacilities": ${allBakerActFacilitiesQuery},
     "estatePlanningLawyers": ${allEstatePlanningLawyers},
     "mindBodyPractices": ${allMindBodyPracticesQuery},
     "mentalHealthLawyers": ${allMentalHealthLawyers},
@@ -32,18 +22,6 @@ export async function GET() {
 		if (data) {
 			const adaptedData = {
 				innovativeTherapies: data.innovativeTherapies.map(
-					getPsychologistsAdapter
-				),
-				psychologists: data.psychologists.map(getPsychologistsAdapter),
-				psychiatry: data.psychiatry.map(getPsychologistsAdapter),
-
-				outpatientFacilities: data.outpatientFacilities.map(
-					getPsychologistsAdapter
-				),
-				inpatientFacilities: data.inpatientFacilities.map(
-					getPsychologistsAdapter
-				),
-				bakerActFacilities: data.bakerActFacilities.map(
 					getPsychologistsAdapter
 				),
 				estatePlanningLawyers: data.estatePlanningLawyers.map(

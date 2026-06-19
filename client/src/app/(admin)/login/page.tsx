@@ -29,7 +29,7 @@ export default function Login() {
 			if (data.token) {
 				alert("Login successful");
 				setLocalStorage("token", data.token);
-				router.push("/admin/psychologists");
+				router.push("/");
 			}
 		} else {
 			alert("Login failed");
