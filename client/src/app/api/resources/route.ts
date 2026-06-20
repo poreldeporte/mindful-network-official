@@ -8,6 +8,11 @@ import {
 } from "../types";
 import { getPsychologistsAdapter } from "@/adapters";
 
+// Reference data (innovative therapies, lawyers, mind-body practices) changes
+// rarely, so cache the response for an hour instead of refetching from Sanity
+// on every request. Matches the hourly ISR cadence used elsewhere on the site.
+export const revalidate = 3600;
+
 export async function GET() {
 	const query = `{
 	"innovativeTherapies": ${allInnovativeTherapiesQuery},
@@ -35,7 +40,8 @@ export async function GET() {
 
 			return NextResponse.json(adaptedData, {
 				headers: {
-					"Cache-Control": "no-store",
+					"Cache-Control":
+						"public, s-maxage=3600, stale-while-revalidate=86400",
 				},
 			});
 		}
