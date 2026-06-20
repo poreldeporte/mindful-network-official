@@ -42,10 +42,15 @@ export const getPsychologistById = async (
             }
         }`;
 
+		// Revalidate hourly instead of no-store. no-store forces the whole
+		// /professional/[slug] route to render dynamically on every request,
+		// defeating its `revalidate = 3600` + generateStaticParams (433 pages
+		// were being SSR'd per hit). Matching the page cadence lets these pages
+		// serve from the edge/ISR cache and cuts per-request Sanity reads.
 		const data = await sanityClient.fetch(
 			query,
 			{ slug },
-			{ cache: "no-store" }
+			{ next: { revalidate: 3600 } }
 		);
 
 		// console.log(data);
