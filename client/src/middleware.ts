@@ -8,9 +8,8 @@ export async function middleware(request: NextRequest) {
 	const authUser = process.env.ADMIN_BASIC_AUTH_USER;
 	const authPassword = process.env.ADMIN_BASIC_AUTH_PASSWORD;
 	const isAuthEnabled = Boolean(authUser && authPassword);
-	const isAdminPath = pathname.startsWith("/admin");
 	const isProtectedApiPath = pathname === "/api/redirects";
-	const needsAuth = isAuthEnabled && (isAdminPath || isProtectedApiPath);
+	const needsAuth = isAuthEnabled && isProtectedApiPath;
 	const unauthorizedResponse = () =>
 		new NextResponse("Authentication required", {
 			status: 401,
