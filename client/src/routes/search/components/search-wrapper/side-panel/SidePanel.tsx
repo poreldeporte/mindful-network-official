@@ -49,6 +49,7 @@ const SidePanel = ({
 }: Props) => {
 	const RESULTS_PER_PAGE = 12;
 	const asideRef = useRef<HTMLElement>(null);
+	const prevPageRef = useRef<number | null>(null);
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const selectedCondition = searchParams.get("condition")?.split(",") ?? [];
@@ -238,11 +239,11 @@ const SidePanel = ({
 		}
 
 		pushParams(currentParams);
-
-		// replaceState updates the URL without a real navigation, so the browser
-		// keeps the current scroll position (stuck at the bottom of the previous
-		// page). Scroll the results panel back into view for the new page.
-		asideRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+		// The scroll-back-to-top happens in the effect below, once the new page's
+		// cards have actually committed to the DOM. Scrolling synchronously here
+		// scrolled against the previous page's (taller) layout; on the shorter
+		// last page the browser clamped the smooth-scroll to the new, shorter
+		// bottom and left the user stranded at the end of the list.
 	};
 
 	useEffect(() => {
@@ -265,6 +266,21 @@ const SidePanel = ({
 		searchParams,
 		totalResults,
 	]);
+
+	// Scroll the results panel back to the top after the page changes. Running
+	// this in an effect (rather than synchronously in the click handler) means
+	// the new page's cards have already rendered, so the document height is
+	// correct and the smooth-scroll lands at the top even on the shorter last
+	// page. The ref guard skips the scroll on the initial mount.
+	useEffect(() => {
+		if (prevPageRef.current === null) {
+			prevPageRef.current = safePage;
+			return;
+		}
+		if (prevPageRef.current === safePage) return;
+		prevPageRef.current = safePage;
+		asideRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+	}, [safePage]);
 
 	return (
 		<aside
