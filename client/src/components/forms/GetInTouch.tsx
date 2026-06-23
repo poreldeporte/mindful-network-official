@@ -1,19 +1,14 @@
 "use client";
 
-import emailjs from "@emailjs/browser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { submitInquiry } from "@/lib/contact";
 import { Button, Typography } from "../ui";
 import { ToastProvider, useToast } from "../ui/Toasts";
 
 function ContactForm() {
 	const toast = useToast();
 
-	useEffect(() => {
-		emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
-	}, []);
-
 	const [userInput, setUserInput] = useState({
-		to_email: "contact@themindfulnetwork.com",
 		from_name: "",
 		user_email: "",
 		message: "",
@@ -63,30 +58,32 @@ function ContactForm() {
 		}
 
 		try {
-			const res = await emailjs.send(
-				process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-				process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-				userInput
-			);
+			await submitInquiry({
+				name: userInput.from_name,
+				email: userInput.user_email,
+				phone: userInput.user_phone,
+				message: userInput.message,
+			});
 
-			if (res.status === 200) {
-				toast.success("Success", {
-					description: "Your message has been sent successfully!",
-					position: "bottom-right",
-				});
+			toast.success("Success", {
+				description: "Your message has been sent successfully!",
+				position: "bottom-right",
+			});
 
-				setUserInput({
-					...userInput,
-					from_name: "",
-					user_email: "",
-					message: "",
-					user_phone: "",
-				});
-			}
+			setUserInput({
+				...userInput,
+				from_name: "",
+				user_email: "",
+				message: "",
+				user_phone: "",
+			});
 		} catch (error) {
-			console.error("EmailJS Error:", error);
+			console.error("Contact form error:", error);
 			toast.error("Error", {
-				description: `Failed to send message: ${error.message}`,
+				description:
+					error instanceof Error
+						? error.message
+						: "Failed to send message. Please try again later.",
 				position: "bottom-right",
 			});
 		} finally {

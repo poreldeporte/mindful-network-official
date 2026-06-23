@@ -2,10 +2,10 @@
 
 import { Button, Typography } from "@/components/ui";
 import { ToastProvider, useToast } from "@/components/ui/Toasts";
+import { submitInquiry } from "@/lib/contact";
 import { trackEvent } from "@/lib/analytics";
 import { PsychologistModel } from "@/models";
-import emailjs from "@emailjs/browser";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Props {
 	psychologistName: string;
@@ -13,22 +13,10 @@ interface Props {
 	psychologistSlug?: string;
 }
 
-function ContactForm({
-	psychologistName,
-	psychologistEmail,
-	psychologistSlug,
-}: Props) {
+function ContactForm({ psychologistName, psychologistSlug }: Props) {
 	const toast = useToast();
 
-	useEffect(() => {
-		emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
-	}, []);
-
 	const initialFormState = {
-		to_email: psychologistEmail
-			? `${psychologistEmail},contact@themindfulnetwork.com`
-			: "contact@themindfulnetwork.com",
-		profesional_name: psychologistName,
 		from_name: "",
 		user_email: "",
 		message: "",
@@ -83,36 +71,33 @@ function ContactForm({
 			return;
 		}
 
-		const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-		const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-
 		try {
-			const res = await emailjs.send(serviceID, templateID, userInput);
+			await submitInquiry({
+				name: userInput.from_name,
+				email: userInput.user_email,
+				phone: userInput.user_phone,
+				message: userInput.message,
+				professionalName: psychologistName,
+				professionalSlug: psychologistSlug,
+			});
 
-			if (res.status === 200) {
-				trackEvent("contact_form_submit", {
-					therapist_slug: psychologistSlug,
-					therapist_name: psychologistName,
-				});
+			trackEvent("contact_form_submit", {
+				therapist_slug: psychologistSlug,
+				therapist_name: psychologistName,
+			});
 
-				toast.success("Success", {
-					description: "Your message has been sent successfully!",
-					position: "bottom-right",
-				});
+			toast.success("Success", {
+				description: "Your message has been sent successfully!",
+				position: "bottom-right",
+			});
 
-				setUserInput({
-					...userInput,
-					from_name: "",
-					user_email: "",
-					message: "",
-					user_phone: "",
-				});
-
-				resetForm();
-			}
+			resetForm();
 		} catch (error) {
 			toast.error("Error", {
-				description: "Failed to send message. Please try again later.",
+				description:
+					error instanceof Error
+						? error.message
+						: "Failed to send message. Please try again later.",
 				position: "top-right",
 			});
 			console.error(error);
