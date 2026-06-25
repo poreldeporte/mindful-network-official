@@ -3,6 +3,7 @@
 import { Button, Typography } from "@/components/ui";
 import { ToastProvider, useToast } from "@/components/ui/Toasts";
 import { submitInquiry } from "@/lib/contact";
+import { getAttribution } from "@/lib/attribution";
 import { trackEvent } from "@/lib/analytics";
 import { PsychologistModel } from "@/models";
 import { useState } from "react";
@@ -72,6 +73,8 @@ function ContactForm({ psychologistName, psychologistSlug }: Props) {
 		}
 
 		try {
+			const attribution = await getAttribution();
+
 			await submitInquiry({
 				name: userInput.from_name,
 				email: userInput.user_email,
@@ -79,11 +82,14 @@ function ContactForm({ psychologistName, psychologistSlug }: Props) {
 				message: userInput.message,
 				professionalName: psychologistName,
 				professionalSlug: psychologistSlug,
+				attribution,
 			});
 
 			trackEvent("contact_form_submit", {
 				therapist_slug: psychologistSlug,
 				therapist_name: psychologistName,
+				lead_channel: attribution.last_touch?.channel,
+				lead_source: attribution.last_touch?.referrer || "(direct)",
 			});
 
 			toast.success("Success", {

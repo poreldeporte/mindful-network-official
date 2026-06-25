@@ -7,6 +7,8 @@
  * site's Vercel project.
  */
 
+import type { AttributionPayload } from "@/lib/attribution";
+
 const CONTACT_ENDPOINT = "https://tmn-contact-service.vercel.app/api/contact";
 
 export interface InquiryPayload {
@@ -18,6 +20,12 @@ export interface InquiryPayload {
 	professionalName?: string;
 	/** Provider slug; the service resolves their email server-side. */
 	professionalSlug?: string;
+	/**
+	 * First-party traffic attribution for this lead (see lib/attribution.ts).
+	 * The contact service surfaces it in the provider email and logs it so we
+	 * have factual, per-lead source data independent of GA4.
+	 */
+	attribution?: AttributionPayload;
 }
 
 /**

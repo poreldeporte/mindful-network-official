@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Antic_Didone, DM_Sans } from "next/font/google";
 import Script from "next/script";
+import { AttributionTracker } from "@/components/AttributionTracker";
 import "./globals.css";
 
 const anticDidone = Antic_Didone({
@@ -145,6 +146,7 @@ export default function RootLayout({
 			<body
 				className={`${anticDidone.className} ${dmSans.className} antialiased`}
 			>
+				<AttributionTracker />
 				{children}
 			</body>
 		</html>
