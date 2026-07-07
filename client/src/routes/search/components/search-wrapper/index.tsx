@@ -30,6 +30,7 @@ interface SearchWrapperProps {
 	lockedCity?: string;
 	lockedLanguage?: string;
 	lockedTherapyModality?: string;
+	lockedResource?: string;
 	titlePrefix?: string;
 	titleHighlight?: string;
 	headingAs?: "h1" | "h2";
@@ -59,6 +60,7 @@ export const SearchWrapper = ({
 	lockedCity,
 	lockedLanguage,
 	lockedTherapyModality,
+	lockedResource,
 	titlePrefix = "Find Professionals in",
 	titleHighlight = "South Florida",
 	headingAs = "h1",
@@ -315,6 +317,18 @@ export const SearchWrapper = ({
 			);
 		}
 
+		if (lockedResource) {
+			const resourceLower = normalizeFilterValue(lockedResource);
+			result = result.filter(
+				(professional) =>
+					professional.resource?.some?.(
+						(res) =>
+							typeof res?.title === "string" &&
+							normalizeFilterValue(res.title) === resourceLower
+					) ?? false
+			);
+		}
+
 		if (searchQuery) {
 			const query = searchQuery.toLowerCase();
 			result = result.filter(
@@ -368,7 +382,7 @@ export const SearchWrapper = ({
 		}
 
 		return result;
-	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, lockedTherapyModality, searchParamsKey]);
+	}, [allProfessionals, lockedAgeSpecialties, lockedConditions, lockedInsurances, lockedCity, lockedLanguage, lockedTherapyModality, lockedResource, searchParamsKey]);
 
 	// Unique list of cities present in the dataset (deduped case-insensitively),
 	// used to populate the City filter. Derived from the full set so the options

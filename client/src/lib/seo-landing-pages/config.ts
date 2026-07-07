@@ -24,6 +24,20 @@ export interface LanguageConfig {
 	slug: string;
 }
 
+// A "Level of care" service category, driven by the professionals.resource field
+// (→ resources doc type, matched on its `title`). A distinct axis from condition/
+// insurance/language: these are services (testing, psychiatry, coaching), not
+// conditions or modalities. `label` is the heading noun ("Psychiatrists"); `blurb`
+// is the lowercase service phrase used in intro copy ("psychiatry and medication
+// management"); `filterValue` is the exact resources.title in Sanity.
+export interface ResourceConfig {
+	name: string;
+	slug: string;
+	filterValue: string;
+	label: string;
+	blurb: string;
+}
+
 export const CITIES: CityConfig[] = [
 	{ name: "Miami", slug: "miami", state: "Florida", stateAbbr: "FL", descriptor: "South Florida's largest city" },
 	{ name: "Fort Lauderdale", slug: "fort-lauderdale", state: "Florida", stateAbbr: "FL", descriptor: "the heart of Broward County" },
@@ -75,6 +89,21 @@ export const LANGUAGES: LanguageConfig[] = [
 	{ name: "Creole", slug: "creole" },
 ];
 
+// "Level of care" service categories with enough provider inventory to justify a
+// page (see docs/find-resource-axis-spec.md). filterValue must match the Sanity
+// resources.title exactly. Facility categories (Residential/Inpatient/Detox/etc.)
+// and the generic "Therapy" are intentionally excluded.
+export const RESOURCES: ResourceConfig[] = [
+	{ name: "Psychiatry & Medication Management", slug: "psychiatrist", filterValue: "Psychiatry/Medication Management", label: "Psychiatrists", blurb: "psychiatry and medication management" },
+	{ name: "Psychological Testing", slug: "psychological-testing", filterValue: "Psychological Testing", label: "Psychological Testing Providers", blurb: "psychological testing and assessment" },
+	{ name: "Psychoeducational Testing", slug: "psychoeducational-testing", filterValue: "Psychoeducational Testing", label: "Psychoeducational Testing Providers", blurb: "psychoeducational testing" },
+	{ name: "Neuropsychological Evaluations", slug: "neuropsychological-evaluation", filterValue: "Neuropsychological Evaluations", label: "Neuropsychological Evaluation Providers", blurb: "neuropsychological evaluations" },
+	{ name: "Gifted Evaluations", slug: "gifted-evaluation", filterValue: "Gifted Evaluations", label: "Gifted Evaluation Providers", blurb: "gifted evaluations" },
+	{ name: "Mind-Body Wellness", slug: "mind-body-wellness", filterValue: "Mind-Body Wellness", label: "Mind-Body Wellness Providers", blurb: "mind-body wellness care" },
+	{ name: "Life Coaching", slug: "life-coach", filterValue: "Life Coach", label: "Life Coaches", blurb: "life coaching" },
+	{ name: "Innovative Therapies", slug: "innovative-therapy", filterValue: "Innovative Therapies", label: "Innovative Therapy Providers", blurb: "innovative therapies" },
+];
+
 // Single statewide landing page for telehealth providers. Targets queries like
 // "online therapy florida" / "virtual therapist florida" — high-intent searches
 // that aren't well-served by city-based pages because virtual providers serve
@@ -115,6 +144,13 @@ export const PRIORITY_INSURANCE_SLUGS = ["medicaid", "medicare", "aetna"];
 // links and for non-condition pages that have no inherent related specialty.
 export const POPULAR_CONDITION_SLUGS = ["anxiety", "depression", "trauma", "adhd"];
 
+// Flagship service categories surfaced as "browse by service" cross-links from
+// the higher-authority condition/insurance pages, so the newer resource-axis
+// pages receive inbound links from the established mesh instead of being
+// crawl-orphaned. Kept to the two with the deepest provider inventory + authored
+// copy (see RESOURCES / content/resources.ts).
+export const PRIORITY_RESOURCE_SLUGS = ["psychiatrist", "psychological-testing"];
+
 // Clinically adjacent specialties by condition slug. Drives "same city, related
 // specialty" links so a searcher on the anxiety page sees depression/trauma/OCD.
 export const RELATED_CONDITIONS: Record<string, string[]> = {
@@ -136,8 +172,8 @@ export const RELATED_CONDITIONS: Record<string, string[]> = {
 };
 
 export function generateIntro(
-	type: "condition" | "insurance" | "language" | "virtual",
-	params: { condition?: string; insurance?: string; language?: string; city?: string; descriptor?: string; count: number }
+	type: "condition" | "insurance" | "language" | "virtual" | "resource",
+	params: { condition?: string; insurance?: string; language?: string; resource?: string; city?: string; descriptor?: string; count: number }
 ): string {
 	const { city, descriptor, count } = params;
 	const providerText = count > 0 ? `Browse ${count} provider${count !== 1 ? "s" : ""}` : "Browse providers";
@@ -152,6 +188,10 @@ export function generateIntro(
 
 	if (type === "language" && params.language && city && descriptor) {
 		return `Finding a therapist who speaks ${params.language} in ${city} means getting care in the language you're most comfortable with. The Mindful Network connects you with ${params.language}-speaking mental health professionals in ${descriptor}. ${providerText} ready to support you in ${params.language}.`;
+	}
+
+	if (type === "resource" && params.resource && city && descriptor) {
+		return `Finding ${params.resource} in ${city} shouldn't be complicated. The Mindful Network connects you with licensed providers in ${descriptor} who offer ${params.resource}. ${providerText} so you can compare approaches and take the next step.`;
 	}
 
 	if (type === "virtual") {

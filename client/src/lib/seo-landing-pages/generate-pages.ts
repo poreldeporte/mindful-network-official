@@ -1,9 +1,9 @@
 import { getAllProfessionals } from "@/services";
 import { PsychologistModel } from "@/models";
 import {
-	CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG, VIRTUAL_MODALITY,
-	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, RELATED_CONDITIONS,
-	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig,
+	CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, VIRTUAL_SLUG, VIRTUAL_MODALITY,
+	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, PRIORITY_RESOURCE_SLUGS, RELATED_CONDITIONS,
+	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig, type ResourceConfig,
 } from "./config";
 import type { LandingPageParams } from "./resolve-slug";
 
@@ -45,6 +45,13 @@ function matchesTherapyModality(provider: PsychologistModel, modality: string): 
 	const target = modality.toLowerCase();
 	return provider.therapyOptions?.some(
 		(m) => typeof m?.type === "string" && m.type.toLowerCase() === target
+	) ?? false;
+}
+
+function matchesResource(provider: PsychologistModel, filterValue: string): boolean {
+	const target = filterValue.toLowerCase();
+	return provider.resource?.some(
+		(r) => typeof r?.title === "string" && r.title.toLowerCase() === target
 	) ?? false;
 }
 
@@ -97,6 +104,18 @@ export function computeLandingPageSlugs(allProfessionals: PsychologistModel[]): 
 		}
 	}
 
+	// Resource (level of care) + City
+	for (const resource of RESOURCES) {
+		for (const city of CITIES) {
+			const count = allProfessionals.filter(
+				(p: PsychologistModel) => matchesCity(p, city.name) && matchesResource(p, resource.filterValue)
+			).length;
+			if (count >= MIN_PROVIDERS) {
+				slugs.push({ slug: `${resource.slug}-${city.slug}`, count });
+			}
+		}
+	}
+
 	// Virtual / online therapy — statewide, no city
 	const virtualCount = allProfessionals.filter(
 		(p: PsychologistModel) => matchesTherapyModality(p, VIRTUAL_MODALITY)
@@ -118,7 +137,7 @@ export async function getAllLandingPageSlugs(): Promise<LandingPageSlug[]> {
 export interface RelatedLink {
 	slug: string;
 	label: string;
-	group: "city" | "specialty" | "insurance" | "language";
+	group: "city" | "specialty" | "insurance" | "language" | "resource";
 }
 
 const MAX_RELATED = 10;
@@ -135,9 +154,14 @@ const languageLink = (l: LanguageConfig, city: CityConfig) => ({
 	slug: `${l.slug}-speaking-therapist-${city.slug}`,
 	label: `${l.name}-Speaking Therapists in ${city.name}`,
 });
+const resourceLink = (r: ResourceConfig, city: CityConfig) => ({
+	slug: `${r.slug}-${city.slug}`,
+	label: `${r.label} in ${city.name}`,
+});
 
 const cityBySlug = (slug: string) => CITIES.find((c) => c.slug === slug);
 const conditionBySlug = (slug: string) => CONDITIONS.find((c) => c.slug === slug);
+const resourceBySlug = (slug: string) => RESOURCES.find((r) => r.slug === slug);
 const insuranceBySlug = (slug: string) => INSURANCES.find((i) => i.slug === slug);
 
 // Given the current page, return sibling /find/ pages that actually exist
@@ -182,6 +206,12 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 			const ins = insuranceBySlug(insSlug);
 			if (ins) add("insurance", insuranceLink(ins, city));
 		}
+		// Same city, flagship service categories (feeds inbound links to the
+		// newer resource-axis pages from this established page)
+		for (const resSlug of PRIORITY_RESOURCE_SLUGS) {
+			const res = resourceBySlug(resSlug);
+			if (res) add("resource", resourceLink(res, city));
+		}
 		// Same city, language variants
 		for (const lang of LANGUAGES) add("language", languageLink(lang, city));
 	} else if (current.type === "insurance") {
@@ -190,11 +220,28 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 			const cond = conditionBySlug(condSlug);
 			if (cond) add("specialty", conditionLink(cond, city));
 		}
+		// Same city, flagship service categories (inbound links to resource-axis pages)
+		for (const resSlug of PRIORITY_RESOURCE_SLUGS) {
+			const res = resourceBySlug(resSlug);
+			if (res) add("resource", resourceLink(res, city));
+		}
 		for (const ins of INSURANCES) {
 			if (ins.slug !== current.insurance.slug) add("insurance", insuranceLink(ins, city));
 		}
 	} else if (current.type === "language") {
 		for (const nb of neighbors) add("city", languageLink(current.language, nb));
+		for (const condSlug of POPULAR_CONDITION_SLUGS) {
+			const cond = conditionBySlug(condSlug);
+			if (cond) add("specialty", conditionLink(cond, city));
+		}
+	} else if (current.type === "resource") {
+		// Same service, nearby cities
+		for (const nb of neighbors) add("resource", resourceLink(current.resource, nb));
+		// Same city, other service categories
+		for (const r of RESOURCES) {
+			if (r.slug !== current.resource.slug) add("resource", resourceLink(r, city));
+		}
+		// Same city, popular specialties
 		for (const condSlug of POPULAR_CONDITION_SLUGS) {
 			const cond = conditionBySlug(condSlug);
 			if (cond) add("specialty", conditionLink(cond, city));
@@ -206,13 +253,14 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 
 export function getProviderCount(
 	professionals: PsychologistModel[],
-	params: { type: string; city: string; condition?: string; insurance?: string; language?: string }
+	params: { type: string; city: string; condition?: string; insurance?: string; language?: string; resource?: string }
 ): number {
 	return professionals.filter((p) => {
 		if (!matchesCity(p, params.city)) return false;
 		if (params.type === "condition" && params.condition) return matchesCondition(p, params.condition);
 		if (params.type === "insurance" && params.insurance) return matchesInsurance(p, params.insurance);
 		if (params.type === "language" && params.language) return matchesLanguage(p, params.language);
+		if (params.type === "resource" && params.resource) return matchesResource(p, params.resource);
 		return false;
 	}).length;
 }
@@ -233,6 +281,7 @@ export function matchProviders(
 		if (page.type === "condition") return matchesCondition(p, page.condition.filterValue);
 		if (page.type === "insurance") return matchesInsurance(p, page.insurance.filterValue);
 		if (page.type === "language") return matchesLanguage(p, page.language.name);
+		if (page.type === "resource") return matchesResource(p, page.resource.filterValue);
 		return false;
 	});
 }
