@@ -223,7 +223,11 @@ export function generateIntro(
 	}
 
 	if (type === "population" && params.population && city && descriptor) {
-		return `Finding the right therapist for a teen in ${city} means finding someone who genuinely connects with adolescents. The Mindful Network connects you with licensed providers in ${descriptor} who offer ${params.population} — clinicians experienced with the pressures teens face, from anxiety and school stress to identity and family conflict. ${providerText} so you can find the right fit for your teen.`;
+		// Population-agnostic frame driven by `params.population` (the blurb) so
+		// adding Child / Young Adult to POPULATIONS produces correct copy without
+		// editing this branch. Population-specific depth (what to look for, FAQs)
+		// lives in the per-slug facet block in content/populations.ts.
+		return `Finding ${params.population} in ${city} means finding a provider who genuinely connects with the person in your care. The Mindful Network connects you with licensed professionals in ${descriptor} who offer ${params.population}. ${providerText} so you can compare approaches and find the right fit.`;
 	}
 
 	if (type === "virtual") {
