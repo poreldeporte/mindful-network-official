@@ -38,6 +38,20 @@ export interface ResourceConfig {
 	blurb: string;
 }
 
+// A population / age-group facet, driven by the professionals.ageSpecialty field
+// (→ ageSpecialty doc type, matched on its `age` value: Child/Adolescent/Adult/
+// Young Adult). A distinct axis from condition/insurance/language/resource: it
+// scopes providers by WHO they treat, not what or how. `filterValue` is the exact
+// ageSpecialty.age string in Sanity; `label` is the heading noun ("Teen
+// Therapists"); `blurb` is the lowercase phrase used in intro/description copy.
+export interface PopulationConfig {
+	name: string;
+	slug: string;
+	filterValue: string;
+	label: string;
+	blurb: string;
+}
+
 export const CITIES: CityConfig[] = [
 	{ name: "Miami", slug: "miami", state: "Florida", stateAbbr: "FL", descriptor: "South Florida's largest city" },
 	{ name: "Fort Lauderdale", slug: "fort-lauderdale", state: "Florida", stateAbbr: "FL", descriptor: "the heart of Broward County" },
@@ -104,6 +118,15 @@ export const RESOURCES: ResourceConfig[] = [
 	{ name: "Innovative Therapies", slug: "innovative-therapy", filterValue: "Innovative Therapies", label: "Innovative Therapy Providers", blurb: "innovative therapies" },
 ];
 
+// Population / age-group categories with enough provider inventory to justify a
+// page (see docs/find-expansion-specs). filterValue must match the Sanity
+// ageSpecialty.age value exactly. Only "Adolescent" (teen) is built for now —
+// the deepest-inventory age tag with clear GSC demand ("teen therapist {city}",
+// "adhd therapy for teens"). Child / Young Adult are deliberate follow-ups.
+export const POPULATIONS: PopulationConfig[] = [
+	{ name: "Teens & Adolescents", slug: "teen-therapist", filterValue: "Adolescent", label: "Teen Therapists", blurb: "therapy for teens and adolescents" },
+];
+
 // Single statewide landing page for telehealth providers. Targets queries like
 // "online therapy florida" / "virtual therapist florida" — high-intent searches
 // that aren't well-served by city-based pages because virtual providers serve
@@ -151,6 +174,11 @@ export const POPULAR_CONDITION_SLUGS = ["anxiety", "depression", "trauma", "adhd
 // copy (see RESOURCES / content/resources.ts).
 export const PRIORITY_RESOURCE_SLUGS = ["psychiatrist", "psychological-testing"];
 
+// Population facets surfaced as "browse by who it's for" cross-links from the
+// higher-authority condition pages, so the newer population-axis pages receive
+// inbound links from the established mesh instead of being crawl-orphaned.
+export const PRIORITY_POPULATION_SLUGS = ["teen-therapist"];
+
 // Clinically adjacent specialties by condition slug. Drives "same city, related
 // specialty" links so a searcher on the anxiety page sees depression/trauma/OCD.
 export const RELATED_CONDITIONS: Record<string, string[]> = {
@@ -172,8 +200,8 @@ export const RELATED_CONDITIONS: Record<string, string[]> = {
 };
 
 export function generateIntro(
-	type: "condition" | "insurance" | "language" | "virtual" | "resource",
-	params: { condition?: string; insurance?: string; language?: string; resource?: string; city?: string; descriptor?: string; count: number }
+	type: "condition" | "insurance" | "language" | "virtual" | "resource" | "population",
+	params: { condition?: string; insurance?: string; language?: string; resource?: string; population?: string; city?: string; descriptor?: string; count: number }
 ): string {
 	const { city, descriptor, count } = params;
 	const providerText = count > 0 ? `Browse ${count} provider${count !== 1 ? "s" : ""}` : "Browse providers";
@@ -192,6 +220,10 @@ export function generateIntro(
 
 	if (type === "resource" && params.resource && city && descriptor) {
 		return `Finding ${params.resource} in ${city} shouldn't be complicated. The Mindful Network connects you with licensed providers in ${descriptor} who offer ${params.resource}. ${providerText} so you can compare approaches and take the next step.`;
+	}
+
+	if (type === "population" && params.population && city && descriptor) {
+		return `Finding the right therapist for a teen in ${city} means finding someone who genuinely connects with adolescents. The Mindful Network connects you with licensed providers in ${descriptor} who offer ${params.population} — clinicians experienced with the pressures teens face, from anxiety and school stress to identity and family conflict. ${providerText} so you can find the right fit for your teen.`;
 	}
 
 	if (type === "virtual") {
