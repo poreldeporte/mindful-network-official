@@ -92,15 +92,60 @@ entry point. Low effort, high crawl-equity payoff.
 
 ## Priority target pages (validate the lift here first)
 
-From GSC 56-day data — high impressions, climbable position, currently 0 clicks:
+**Refreshed 2026-07-03 with GSC 90-day data (2026-04-01→06-30).** Of 140 `/find` pages with ≥10
+impressions: 37 already page-1, **44 on page 2 (pos 11–20)** — the target cohort, earning ~2,600
+impr/90d at near-zero clicks. Full clustered list + link-source mapping in the SEO repo analysis
+(`seo/docs/find-internal-linking-funnel-spec.md`).
+
+**Key routing insight:** every orphaned city *also* has page-1 pages in the **same city** — so the
+same-city related-links block should deliberately link page-1 pages *down* to their page-2 same-city
+siblings (authority flows from the ranking page into the orphan). Weight the adjacency map / related
+selection to exploit this.
+
+**Priority 1 — flagship + near-border (pos 10–13, one nudge from page 1):**
 
 | Page | Impr | Pos |
 |------|------|-----|
-| `/find/trauma-therapist-coral-gables` | 90 | 15.4 |
-| `/find/adhd-therapist-weston` | 36 | 15.1 |
-| `/find/anxiety-therapist-coral-gables` | 52 | 20.6 |
-| `/find/adhd-therapist-coral-gables` | 34 | 25.3 |
-| `/find/anxiety-therapist-fort-lauderdale` | 544 | 47.6 (volume monster, hardest climb) |
+| `/find/spanish-speaking-therapist-miami` | 292 | 12.6 |
+| `/find/autism-therapist-weston` | 122 | 11.4 |
+| `/find/therapists-accepting-medicare-miami` | 109 | 11.0 |
+| `/find/spanish-speaking-therapist-south-miami` | 88 | 11.4 |
+| `/find/anxiety-therapist-south-miami` | 49 | 10.7 |
+| `/find/eating-disorders-therapist-aventura` | 48 | 12.9 |
+| `/find/lgbtq-therapist-coral-gables` | 37 | 10.1 |
+| `/find/relationship-therapist-miami` | 28 | 12.4 |
+
+`spanish-speaking-therapist-miami` is the single biggest prize (292 impr of high-intent Spanish demand).
+
+**Priority 2 — orphan city clusters (fix as whole same-city hubs; page-1 link sources in italics):**
+- **Weston** (9 pages, 713 impr): anxiety, trauma, autism, depression, adhd, ocd, womens-issues, bcbs, grief. *from page-1 Weston: spanish-speaking(7), aetna(8), unitedhealthcare(8), cigna(5).*
+- **Aventura** (4 pages, 440 impr): trauma(205i@19.9), anxiety(175i), eating-disorders, relationship. *from: autism(8), spanish-speaking(8), medicare(8), ocd(10).*
+- **Coral Gables** (6 pages, 298 impr): trauma, ocd, lgbtq, addiction, medicaid, bipolar. *from: parenting(8), autism(8), grief(9), aetna/bcbs/cigna/uhc.*
+- **Coral Springs** (8 pages, 211 impr): ocd, womens-issues, parenting, trauma, grief, addiction, eating-disorders, medicare. *from: spanish-speaking(7), aetna(7), cigna(6), uhc(7).*
+- **South Miami** (4 pages, 201 impr): spanish-speaking, anxiety, grief, trauma.
+
+## Provider availability & new page types (checked 2026-07-03)
+
+New `/find` page types only rank if Sanity has providers to fill them (same ≥2-provider validity gate
+as existing pages). Availability results:
+
+- **Teen / adolescent — READY TO BUILD.** 322 providers tag `ageSpecialty == "Adolescent"` (Miami 117,
+  Coral Gables 77, Coral Springs 17, Aventura 16, Weston 15, Boca 13, South Miami 13). Add `teen` (or
+  an `age` axis) to the landing-page `config.ts` and build `/find/teen-therapist-{miami,coral-gables,florida}`.
+  Born into the link mesh from day one so they don't start orphaned.
+- **Psychological testing / evaluations — READY TO BUILD (already tagged).** These live on the
+  **`resource`** field (→ `resources` doc type = the site's "Level of care" facet), a *separate axis*
+  from `therapyModality`/`conditionSpecialty`. Counts: **Psychological Testing 64** (Miami 21, Coral
+  Gables 10, Aventura 10, Weston 6, Boca 3, South Miami 3, Fort Lauderdale 2, Hallandale 2 — 8 cities
+  ≥2), Psychoeducational Testing 28 (Miami 12, CG 5, Aventura 4…), Neuropsychological Evaluations 14
+  (Miami 8, Boca 2, Aventura 2), Gifted Evaluations 18. Build `/find/psychological-testing-{miami,
+  coral-gables,aventura,weston,florida}` off the `resource` axis. Aventura is the sweet spot (10
+  providers + the strongest testing-query demand per GSC).
+- **NEW /find AXIS — `resource` / "Level of care".** This whole field was previously unused for `/find`
+  pages. Beyond testing, buildable clinical categories include Psychiatry/Medication Management (63),
+  Life Coach (14), Innovative Therapies (15). (Skip the facility categories — Residential/Inpatient/
+  Detox/Baker Act/Sober Housing — those are the org-type listings flagged for pruning.) Extend the
+  landing-page `config.ts` with a `resource` axis alongside condition/insurance/language.
 
 The pos-14–21 cluster is one good content+linking pass from page 1 — measure those.
 
