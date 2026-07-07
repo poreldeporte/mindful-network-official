@@ -144,6 +144,13 @@ export const PRIORITY_INSURANCE_SLUGS = ["medicaid", "medicare", "aetna"];
 // links and for non-condition pages that have no inherent related specialty.
 export const POPULAR_CONDITION_SLUGS = ["anxiety", "depression", "trauma", "adhd"];
 
+// Flagship service categories surfaced as "browse by service" cross-links from
+// the higher-authority condition/insurance pages, so the newer resource-axis
+// pages receive inbound links from the established mesh instead of being
+// crawl-orphaned. Kept to the two with the deepest provider inventory + authored
+// copy (see RESOURCES / content/resources.ts).
+export const PRIORITY_RESOURCE_SLUGS = ["psychiatrist", "psychological-testing"];
+
 // Clinically adjacent specialties by condition slug. Drives "same city, related
 // specialty" links so a searcher on the anxiety page sees depression/trauma/OCD.
 export const RELATED_CONDITIONS: Record<string, string[]> = {

@@ -2,7 +2,7 @@ import { getAllProfessionals } from "@/services";
 import { PsychologistModel } from "@/models";
 import {
 	CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, VIRTUAL_SLUG, VIRTUAL_MODALITY,
-	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, RELATED_CONDITIONS,
+	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, PRIORITY_RESOURCE_SLUGS, RELATED_CONDITIONS,
 	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig, type ResourceConfig,
 } from "./config";
 import type { LandingPageParams } from "./resolve-slug";
@@ -161,6 +161,7 @@ const resourceLink = (r: ResourceConfig, city: CityConfig) => ({
 
 const cityBySlug = (slug: string) => CITIES.find((c) => c.slug === slug);
 const conditionBySlug = (slug: string) => CONDITIONS.find((c) => c.slug === slug);
+const resourceBySlug = (slug: string) => RESOURCES.find((r) => r.slug === slug);
 const insuranceBySlug = (slug: string) => INSURANCES.find((i) => i.slug === slug);
 
 // Given the current page, return sibling /find/ pages that actually exist
@@ -205,6 +206,12 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 			const ins = insuranceBySlug(insSlug);
 			if (ins) add("insurance", insuranceLink(ins, city));
 		}
+		// Same city, flagship service categories (feeds inbound links to the
+		// newer resource-axis pages from this established page)
+		for (const resSlug of PRIORITY_RESOURCE_SLUGS) {
+			const res = resourceBySlug(resSlug);
+			if (res) add("resource", resourceLink(res, city));
+		}
 		// Same city, language variants
 		for (const lang of LANGUAGES) add("language", languageLink(lang, city));
 	} else if (current.type === "insurance") {
@@ -212,6 +219,11 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 		for (const condSlug of POPULAR_CONDITION_SLUGS) {
 			const cond = conditionBySlug(condSlug);
 			if (cond) add("specialty", conditionLink(cond, city));
+		}
+		// Same city, flagship service categories (inbound links to resource-axis pages)
+		for (const resSlug of PRIORITY_RESOURCE_SLUGS) {
+			const res = resourceBySlug(resSlug);
+			if (res) add("resource", resourceLink(res, city));
 		}
 		for (const ins of INSURANCES) {
 			if (ins.slug !== current.insurance.slug) add("insurance", insuranceLink(ins, city));
