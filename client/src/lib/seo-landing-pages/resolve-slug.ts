@@ -1,12 +1,13 @@
 import {
-	CITIES, CONDITIONS, INSURANCES, LANGUAGES, VIRTUAL_SLUG,
-	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig,
+	CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, VIRTUAL_SLUG,
+	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig, type ResourceConfig,
 } from "./config";
 
 export type LandingPageParams =
 	| { type: "condition"; condition: ConditionConfig; city: CityConfig }
 	| { type: "insurance"; insurance: InsuranceConfig; city: CityConfig }
 	| { type: "language"; language: LanguageConfig; city: CityConfig }
+	| { type: "resource"; resource: ResourceConfig; city: CityConfig }
 	| { type: "virtual" };
 
 export function resolveLandingPageSlug(slug: string): LandingPageParams | null {
@@ -38,6 +39,15 @@ export function resolveLandingPageSlug(slug: string): LandingPageParams | null {
 		for (const city of CITIES) {
 			if (slug === `${language.slug}-speaking-therapist-${city.slug}`) {
 				return { type: "language", language, city };
+			}
+		}
+	}
+
+	// Resource / level-of-care: {resource}-{city}
+	for (const resource of RESOURCES) {
+		for (const city of CITIES) {
+			if (slug === `${resource.slug}-${city.slug}`) {
+				return { type: "resource", resource, city };
 			}
 		}
 	}

@@ -3,6 +3,7 @@ import type { FacetBlock, CityBlock } from "./types";
 import { CONDITION_CONTENT } from "./conditions";
 import { INSURANCE_CONTENT } from "./insurances";
 import { LANGUAGE_CONTENT } from "./languages";
+import { RESOURCE_CONTENT } from "./resources";
 import { CITY_CONTENT } from "./cities";
 
 export type { FacetBlock, CityBlock, FaqItem } from "./types";
@@ -14,6 +15,7 @@ export function getFacetBlock(page: LandingPageParams): FacetBlock | undefined {
 	if (page.type === "condition") return CONDITION_CONTENT[page.condition.slug];
 	if (page.type === "insurance") return INSURANCE_CONTENT[page.insurance.slug];
 	if (page.type === "language") return LANGUAGE_CONTENT[page.language.slug];
+	if (page.type === "resource") return RESOURCE_CONTENT[page.resource.slug];
 	return undefined; // virtual — no facet block authored yet
 }
 

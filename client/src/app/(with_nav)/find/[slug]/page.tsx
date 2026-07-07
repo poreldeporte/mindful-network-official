@@ -64,6 +64,9 @@ export async function generateMetadata({
 	} else if (page.type === "language") {
 		title = `${page.language.name}-Speaking Therapists in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
 		description = `Find ${page.language.name}-speaking therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse licensed bilingual providers by specialty and insurance on The Mindful Network.`;
+	} else if (page.type === "resource") {
+		title = `${page.resource.label} in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
+		description = `Find ${page.resource.label.toLowerCase()} in ${page.city.name}, ${page.city.stateAbbr}. Browse licensed providers offering ${page.resource.blurb} on The Mindful Network.`;
 	} else {
 		// virtual
 		title = `Online Therapy in Florida — Telehealth Providers | The Mindful Network`;
@@ -200,6 +203,23 @@ export default async function FindPage({
 			titleHighlight: page.city.name,
 			headingAs: "h2" as const,
 		};
+	} else if (page.type === "resource") {
+		heading = `${page.resource.label} in ${page.city.name}, ${page.city.stateAbbr}`;
+		badgeText = page.resource.name.toUpperCase();
+		badgeColor = "amber";
+		introText = generateIntro("resource", {
+			resource: page.resource.blurb,
+			city: page.city.name,
+			descriptor: page.city.descriptor,
+			count,
+		});
+		searchProps = {
+			lockedResource: page.resource.filterValue,
+			lockedCity: page.city.name,
+			titlePrefix: `${page.resource.label} in`,
+			titleHighlight: page.city.name,
+			headingAs: "h2" as const,
+		};
 	} else {
 		// virtual
 		heading = `Online Therapy in Florida`;
@@ -218,6 +238,7 @@ export default async function FindPage({
 		emerald: { badge: "border-emerald-200 bg-emerald-50", bg: "from-emerald-50", border: "border-emerald-100", text: "text-emerald-600" },
 		blue: { badge: "border-blue-200 bg-blue-50", bg: "from-blue-50", border: "border-blue-100", text: "text-blue-600" },
 		purple: { badge: "border-purple-200 bg-purple-50", bg: "from-purple-50", border: "border-purple-100", text: "text-purple-600" },
+		amber: { badge: "border-amber-200 bg-amber-50", bg: "from-amber-50", border: "border-amber-100", text: "text-amber-600" },
 	};
 	const colors = colorMap[badgeColor] || colorMap.blue;
 

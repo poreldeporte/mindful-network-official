@@ -6,10 +6,11 @@ const GROUP_TITLES: Record<RelatedLink["group"], string> = {
 	specialty: "Browse by specialty",
 	insurance: "Browse by insurance",
 	language: "Browse by language",
+	resource: "Browse by service",
 };
 
 // Render order — nearby cities and specialties first (highest searcher relevance).
-const GROUP_ORDER: RelatedLink["group"][] = ["city", "specialty", "insurance", "language"];
+const GROUP_ORDER: RelatedLink["group"][] = ["city", "specialty", "resource", "insurance", "language"];
 
 /**
  * Server-rendered "related searches" block for /find/ landing pages.
