@@ -1,6 +1,6 @@
 import { ListingDetailPage } from "@/routes/psychologists/components/detail-v2";
-import { getPsychologistById, getAllProfessionals } from "@/services";
-import { computeLandingPageSlugs, getProviderFindLinks } from "@/lib/seo-landing-pages";
+import { getPsychologistById } from "@/services";
+import { getValidFindSlugSet, getProviderFindLinks } from "@/lib/seo-landing-pages";
 import { ProfileFindLinks } from "@/routes/find/components/ProfileFindLinks";
 import { sanityClient } from "@/api";
 import { Metadata } from "next";
@@ -186,13 +186,11 @@ export default async function PsychologistPage({
 		notFound();
 	}
 
-	// Profile → /find/ funnel links. validSlugs is derived from the full provider
-	// list (the same source the /find/ pages use) so we never link to a
+	// Profile → /find/ funnel links. The valid-slug set is a global (provider-
+	// independent) value shared across all profiles and memoized, so this adds no
+	// per-page directory fetch — just one lookup per provider. We never link to a
 	// non-generated page. See docs/profile-find-funnel-spec.md.
-	const allProfessionals = await getAllProfessionals();
-	const validSlugs = new Set(
-		computeLandingPageSlugs(Array.isArray(allProfessionals) ? allProfessionals : []).map((s) => s.slug),
-	);
+	const validSlugs = await getValidFindSlugSet();
 	const findLinks = getProviderFindLinks(psychologist, validSlugs);
 
 	const url = `https://themindfulnetwork.com/professional/${params.slug}`;
