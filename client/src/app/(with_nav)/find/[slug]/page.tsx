@@ -59,8 +59,8 @@ export async function generateMetadata({
 		title = `${page.condition.therapistLabel} in ${page.city.name}, ${page.city.stateAbbr} — ${page.condition.synonymPhrase} | The Mindful Network`;
 		description = `Browse licensed ${page.condition.therapistLabel.toLowerCase()} in ${page.city.name}, ${page.city.stateAbbr} offering therapy, counseling, and treatment. Compare specialties, insurance accepted, and care approaches on The Mindful Network.`;
 	} else if (page.type === "insurance") {
-		title = `Therapists Accepting ${page.insurance.name} in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
-		description = `Find ${page.insurance.name}-covered therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse in-network providers by specialty, language, and treatment approach on The Mindful Network.`;
+		title = `Therapists Accepting ${page.insurance.name} in ${page.city.name}, ${page.city.stateAbbr} — ${page.insurance.name} Therapists & Mental Health Providers | The Mindful Network`;
+		description = `Find ${page.insurance.name}-covered therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse in-network ${page.insurance.name} mental health providers by specialty, language, and treatment approach on The Mindful Network.`;
 	} else if (page.type === "language") {
 		title = `${page.language.name}-Speaking Therapists in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
 		description = `Find ${page.language.name}-speaking therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse licensed bilingual providers by specialty and insurance on The Mindful Network.`;

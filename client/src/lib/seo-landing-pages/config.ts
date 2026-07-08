@@ -218,7 +218,7 @@ export function generateIntro(
 	}
 
 	if (type === "insurance" && params.insurance && city && descriptor) {
-		return `Looking for a therapist in ${city} who accepts ${params.insurance}? The Mindful Network makes it easy to find licensed mental health professionals in ${descriptor} who are in-network with your insurance plan. ${providerText} accepting ${params.insurance} so you can focus on your care, not your coverage.`;
+		return `Looking for a therapist in ${city} who takes ${params.insurance}? The Mindful Network makes it easy to find licensed ${params.insurance} therapists and mental health providers in ${descriptor} who are in-network with your plan. ${providerText} accepting ${params.insurance} so you can focus on your care, not your coverage.`;
 	}
 
 	if (type === "language" && params.language && city && descriptor) {
