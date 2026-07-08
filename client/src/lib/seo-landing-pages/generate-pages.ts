@@ -297,6 +297,64 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 	return links.slice(0, MAX_RELATED);
 }
 
+// Resolve a provider's city to one of the CITIES configs using the same
+// variant-aware matcher that decides which /find/ pages exist.
+function providerCity(provider: PsychologistModel): CityConfig | undefined {
+	return CITIES.find((c) => matchesCity(provider, c.name));
+}
+
+// Profile-anchored /find/ cross-links (the profile → /find funnel — see
+// docs/profile-find-funnel-spec.md). For a given provider, surface the landing
+// pages that match THIS provider's own conditions / insurance / language /
+// service / age group in their city, validated against the real generated-slug
+// set so we can never link to a page that wasn't generated. Mirror of
+// getRelatedSlugs() but anchored on a profile instead of a /find/ page; reuses
+// the same link builders so labels/slugs stay in sync. Covers all five /find
+// axes (condition/insurance/language + resource/population).
+export function getProviderFindLinks(
+	provider: PsychologistModel,
+	validSlugs: Set<string>,
+): RelatedLink[] {
+	const city = providerCity(provider);
+	if (!city) return []; // provider not in a covered city → no city-anchored pages
+
+	const links: RelatedLink[] = [];
+	const seen = new Set<string>();
+	const add = (group: RelatedLink["group"], item: { slug: string; label: string } | undefined) => {
+		if (!item || seen.has(item.slug) || !validSlugs.has(item.slug)) return;
+		seen.add(item.slug);
+		links.push({ ...item, group });
+	};
+
+	// Conditions this provider treats → condition+city pages (the primary orphans)
+	for (const cond of provider.conditionSpecialty ?? []) {
+		const cfg = CONDITIONS.find((c) => c.filterValue.toLowerCase() === cond?.name?.toLowerCase());
+		if (cfg) add("specialty", conditionLink(cfg, city));
+	}
+	// Age groups this provider treats → population+city pages
+	for (const age of provider.ageSpecialty ?? []) {
+		const cfg = POPULATIONS.find((p) => p.filterValue.toLowerCase() === age?.age?.toLowerCase());
+		if (cfg) add("population", populationLink(cfg, city));
+	}
+	// Level-of-care services this provider offers → resource+city pages
+	for (const res of provider.resource ?? []) {
+		const cfg = RESOURCES.find((r) => r.filterValue.toLowerCase() === res?.title?.toLowerCase());
+		if (cfg) add("resource", resourceLink(cfg, city));
+	}
+	// Insurances this provider accepts → insurance+city pages
+	for (const ins of provider.insurances ?? []) {
+		const cfg = INSURANCES.find((i) => i.filterValue.toLowerCase() === ins?.name?.toLowerCase());
+		if (cfg) add("insurance", insuranceLink(cfg, city));
+	}
+	// Languages this provider speaks → language+city pages
+	for (const langName of provider.languages ?? []) {
+		const cfg = LANGUAGES.find((l) => l.name.toLowerCase() === langName?.toLowerCase());
+		if (cfg) add("language", languageLink(cfg, city));
+	}
+
+	return links.slice(0, MAX_RELATED);
+}
+
 export function getProviderCount(
 	professionals: PsychologistModel[],
 	params: { type: string; city: string; condition?: string; insurance?: string; language?: string; resource?: string; population?: string }
