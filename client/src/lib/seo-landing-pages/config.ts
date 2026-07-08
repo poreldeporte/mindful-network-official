@@ -11,6 +11,13 @@ export interface ConditionConfig {
 	slug: string;
 	therapistLabel: string;
 	filterValue: string;
+	// Natural synonym phrase for the <title> tail, capturing the high-demand
+	// "{condition} counseling / treatment" search variants these pages already
+	// rank mid-page for but don't word-match (e.g. "anxiety treatment fort
+	// lauderdale" — 591 impr, pos 44, 0 clicks). Varied per condition so it reads
+	// naturally ("treatment" for clinical conditions, "therapy"/"support" where
+	// "treatment" is awkward). See docs/find-* / GSC synonym analysis.
+	synonymPhrase: string;
 }
 
 export interface InsuranceConfig {
@@ -71,21 +78,21 @@ export const CITIES: CityConfig[] = [
 ];
 
 export const CONDITIONS: ConditionConfig[] = [
-	{ name: "Anxiety Disorders", slug: "anxiety", therapistLabel: "Anxiety Therapists", filterValue: "anxiety disorders" },
-	{ name: "Depression", slug: "depression", therapistLabel: "Depression Therapists", filterValue: "depression" },
-	{ name: "Trauma", slug: "trauma", therapistLabel: "Trauma Therapists", filterValue: "trauma" },
-	{ name: "PTSD", slug: "ptsd", therapistLabel: "PTSD Therapists", filterValue: "ptsd" },
-	{ name: "ADHD", slug: "adhd", therapistLabel: "ADHD Therapists", filterValue: "adhd" },
-	{ name: "Relationship Concerns", slug: "relationship", therapistLabel: "Relationship Therapists", filterValue: "relationship concerns" },
-	{ name: "Grief", slug: "grief", therapistLabel: "Grief Counselors", filterValue: "grief" },
-	{ name: "Obsessive-Compulsive Disorder", slug: "ocd", therapistLabel: "OCD Therapists", filterValue: "obsessive-compulsive disorder" },
-	{ name: "Eating Disorders", slug: "eating-disorders", therapistLabel: "Eating Disorder Therapists", filterValue: "eating disorders" },
-	{ name: "Addiction", slug: "addiction", therapistLabel: "Addiction Therapists", filterValue: "addiction" },
-	{ name: "Autism Spectrum Disorder", slug: "autism", therapistLabel: "Autism Therapists", filterValue: "autism spectrum disorder" },
-	{ name: "Bipolar Disorder", slug: "bipolar", therapistLabel: "Bipolar Therapists", filterValue: "bipolar disorder" },
-	{ name: "Parenting", slug: "parenting", therapistLabel: "Parenting Therapists", filterValue: "parenting" },
-	{ name: "LGBTQ", slug: "lgbtq", therapistLabel: "LGBTQ-Affirming Therapists", filterValue: "lgbtq" },
-	{ name: "Women's Issues", slug: "womens-issues", therapistLabel: "Women's Issues Therapists", filterValue: "women's issues" },
+	{ name: "Anxiety Disorders", slug: "anxiety", therapistLabel: "Anxiety Therapists", filterValue: "anxiety disorders", synonymPhrase: "Anxiety Counseling & Treatment" },
+	{ name: "Depression", slug: "depression", therapistLabel: "Depression Therapists", filterValue: "depression", synonymPhrase: "Depression Counseling & Treatment" },
+	{ name: "Trauma", slug: "trauma", therapistLabel: "Trauma Therapists", filterValue: "trauma", synonymPhrase: "Trauma Counseling & Treatment" },
+	{ name: "PTSD", slug: "ptsd", therapistLabel: "PTSD Therapists", filterValue: "ptsd", synonymPhrase: "PTSD Counseling & Treatment" },
+	{ name: "ADHD", slug: "adhd", therapistLabel: "ADHD Therapists", filterValue: "adhd", synonymPhrase: "ADHD Counseling & Treatment" },
+	{ name: "Relationship Concerns", slug: "relationship", therapistLabel: "Relationship Therapists", filterValue: "relationship concerns", synonymPhrase: "Relationship & Couples Counseling" },
+	{ name: "Grief", slug: "grief", therapistLabel: "Grief Counselors", filterValue: "grief", synonymPhrase: "Grief Counseling & Support" },
+	{ name: "Obsessive-Compulsive Disorder", slug: "ocd", therapistLabel: "OCD Therapists", filterValue: "obsessive-compulsive disorder", synonymPhrase: "OCD Counseling & Treatment" },
+	{ name: "Eating Disorders", slug: "eating-disorders", therapistLabel: "Eating Disorder Therapists", filterValue: "eating disorders", synonymPhrase: "Eating Disorder Counseling & Treatment" },
+	{ name: "Addiction", slug: "addiction", therapistLabel: "Addiction Therapists", filterValue: "addiction", synonymPhrase: "Addiction Counseling & Treatment" },
+	{ name: "Autism Spectrum Disorder", slug: "autism", therapistLabel: "Autism Therapists", filterValue: "autism spectrum disorder", synonymPhrase: "Autism Counseling & Therapy" },
+	{ name: "Bipolar Disorder", slug: "bipolar", therapistLabel: "Bipolar Therapists", filterValue: "bipolar disorder", synonymPhrase: "Bipolar Counseling & Treatment" },
+	{ name: "Parenting", slug: "parenting", therapistLabel: "Parenting Therapists", filterValue: "parenting", synonymPhrase: "Parenting Counseling & Support" },
+	{ name: "LGBTQ", slug: "lgbtq", therapistLabel: "LGBTQ-Affirming Therapists", filterValue: "lgbtq", synonymPhrase: "LGBTQ Counseling & Therapy" },
+	{ name: "Women's Issues", slug: "womens-issues", therapistLabel: "Women's Issues Therapists", filterValue: "women's issues", synonymPhrase: "Women's Issues Counseling & Therapy" },
 ];
 
 export const INSURANCES: InsuranceConfig[] = [
@@ -207,7 +214,7 @@ export function generateIntro(
 	const providerText = count > 0 ? `Browse ${count} provider${count !== 1 ? "s" : ""}` : "Browse providers";
 
 	if (type === "condition" && params.condition && city && descriptor) {
-		return `Finding the right therapist for ${params.condition.toLowerCase()} in ${city} can feel overwhelming. The Mindful Network connects you with licensed professionals in ${descriptor} who specialize in treating ${params.condition.toLowerCase()}. ${providerText} who understand your needs and can help you take the next step toward feeling better.`;
+		return `Finding the right therapist for ${params.condition.toLowerCase()} in ${city} can feel overwhelming. The Mindful Network connects you with licensed professionals in ${descriptor} who specialize in ${params.condition} — offering therapy, counseling, and treatment. ${providerText} who understand your needs and can help you take the next step toward feeling better.`;
 	}
 
 	if (type === "insurance" && params.insurance && city && descriptor) {

@@ -56,8 +56,8 @@ export async function generateMetadata({
 	let description: string;
 
 	if (page.type === "condition") {
-		title = `${page.condition.therapistLabel} in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
-		description = `Browse licensed ${page.condition.therapistLabel.toLowerCase()} in ${page.city.name}, ${page.city.stateAbbr}. Compare specialties, insurance accepted, and treatment approaches on The Mindful Network.`;
+		title = `${page.condition.therapistLabel} in ${page.city.name}, ${page.city.stateAbbr} — ${page.condition.synonymPhrase} | The Mindful Network`;
+		description = `Browse licensed ${page.condition.therapistLabel.toLowerCase()} in ${page.city.name}, ${page.city.stateAbbr} offering therapy, counseling, and treatment. Compare specialties, insurance accepted, and care approaches on The Mindful Network.`;
 	} else if (page.type === "insurance") {
 		title = `Therapists Accepting ${page.insurance.name} in ${page.city.name}, ${page.city.stateAbbr} | The Mindful Network`;
 		description = `Find ${page.insurance.name}-covered therapists in ${page.city.name}, ${page.city.stateAbbr}. Browse in-network providers by specialty, language, and treatment approach on The Mindful Network.`;
