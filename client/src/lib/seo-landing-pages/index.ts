@@ -1,5 +1,5 @@
-export { CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, VIRTUAL_SLUG, VIRTUAL_MODALITY, generateIntro } from "./config";
-export type { CityConfig, ConditionConfig, InsuranceConfig, LanguageConfig, ResourceConfig } from "./config";
+export { CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, POPULATIONS, VIRTUAL_SLUG, VIRTUAL_MODALITY, generateIntro } from "./config";
+export type { CityConfig, ConditionConfig, InsuranceConfig, LanguageConfig, ResourceConfig, PopulationConfig } from "./config";
 export { resolveLandingPageSlug } from "./resolve-slug";
 export type { LandingPageParams } from "./resolve-slug";
 export { getAllLandingPageSlugs, computeLandingPageSlugs, getProviderCount, getRelatedSlugs, matchProviders } from "./generate-pages";

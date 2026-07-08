@@ -1,9 +1,9 @@
 import { getAllProfessionals } from "@/services";
 import { PsychologistModel } from "@/models";
 import {
-	CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, VIRTUAL_SLUG, VIRTUAL_MODALITY,
-	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, PRIORITY_RESOURCE_SLUGS, RELATED_CONDITIONS,
-	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig, type ResourceConfig,
+	CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, POPULATIONS, VIRTUAL_SLUG, VIRTUAL_MODALITY,
+	CITY_NEIGHBORS, PRIORITY_INSURANCE_SLUGS, POPULAR_CONDITION_SLUGS, PRIORITY_RESOURCE_SLUGS, PRIORITY_POPULATION_SLUGS, RELATED_CONDITIONS,
+	type CityConfig, type ConditionConfig, type InsuranceConfig, type LanguageConfig, type ResourceConfig, type PopulationConfig,
 } from "./config";
 import type { LandingPageParams } from "./resolve-slug";
 
@@ -52,6 +52,13 @@ function matchesResource(provider: PsychologistModel, filterValue: string): bool
 	const target = filterValue.toLowerCase();
 	return provider.resource?.some(
 		(r) => typeof r?.title === "string" && r.title.toLowerCase() === target
+	) ?? false;
+}
+
+function matchesAgeSpecialty(provider: PsychologistModel, filterValue: string): boolean {
+	const target = filterValue.toLowerCase();
+	return provider.ageSpecialty?.some(
+		(a) => typeof a?.age === "string" && a.age.toLowerCase() === target
 	) ?? false;
 }
 
@@ -116,6 +123,18 @@ export function computeLandingPageSlugs(allProfessionals: PsychologistModel[]): 
 		}
 	}
 
+	// Population (age group) + City
+	for (const population of POPULATIONS) {
+		for (const city of CITIES) {
+			const count = allProfessionals.filter(
+				(p: PsychologistModel) => matchesCity(p, city.name) && matchesAgeSpecialty(p, population.filterValue)
+			).length;
+			if (count >= MIN_PROVIDERS) {
+				slugs.push({ slug: `${population.slug}-${city.slug}`, count });
+			}
+		}
+	}
+
 	// Virtual / online therapy — statewide, no city
 	const virtualCount = allProfessionals.filter(
 		(p: PsychologistModel) => matchesTherapyModality(p, VIRTUAL_MODALITY)
@@ -137,7 +156,7 @@ export async function getAllLandingPageSlugs(): Promise<LandingPageSlug[]> {
 export interface RelatedLink {
 	slug: string;
 	label: string;
-	group: "city" | "specialty" | "insurance" | "language" | "resource";
+	group: "city" | "specialty" | "insurance" | "language" | "resource" | "population";
 }
 
 const MAX_RELATED = 10;
@@ -158,10 +177,15 @@ const resourceLink = (r: ResourceConfig, city: CityConfig) => ({
 	slug: `${r.slug}-${city.slug}`,
 	label: `${r.label} in ${city.name}`,
 });
+const populationLink = (p: PopulationConfig, city: CityConfig) => ({
+	slug: `${p.slug}-${city.slug}`,
+	label: `${p.label} in ${city.name}`,
+});
 
 const cityBySlug = (slug: string) => CITIES.find((c) => c.slug === slug);
 const conditionBySlug = (slug: string) => CONDITIONS.find((c) => c.slug === slug);
 const resourceBySlug = (slug: string) => RESOURCES.find((r) => r.slug === slug);
+const populationBySlug = (slug: string) => POPULATIONS.find((p) => p.slug === slug);
 const insuranceBySlug = (slug: string) => INSURANCES.find((i) => i.slug === slug);
 
 // Given the current page, return sibling /find/ pages that actually exist
@@ -212,6 +236,12 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 			const res = resourceBySlug(resSlug);
 			if (res) add("resource", resourceLink(res, city));
 		}
+		// Same city, population pages (feeds inbound links to the newer
+		// population-axis pages from this established page)
+		for (const popSlug of PRIORITY_POPULATION_SLUGS) {
+			const pop = populationBySlug(popSlug);
+			if (pop) add("population", populationLink(pop, city));
+		}
 		// Same city, language variants
 		for (const lang of LANGUAGES) add("language", languageLink(lang, city));
 	} else if (current.type === "insurance") {
@@ -246,6 +276,22 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 			const cond = conditionBySlug(condSlug);
 			if (cond) add("specialty", conditionLink(cond, city));
 		}
+	} else if (current.type === "population") {
+		// Same population, nearby cities
+		for (const nb of neighbors) add("population", populationLink(current.population, nb));
+		// Same city, popular specialties (teens often search by specialty too —
+		// adhd/anxiety/depression/trauma therapist)
+		for (const condSlug of POPULAR_CONDITION_SLUGS) {
+			const cond = conditionBySlug(condSlug);
+			if (cond) add("specialty", conditionLink(cond, city));
+		}
+		// Same city, psychological testing (adjacent teen intent — evaluations)
+		const testing = resourceBySlug("psychological-testing");
+		if (testing) add("resource", resourceLink(testing, city));
+		// Same city, other population pages, if any are added later
+		for (const p of POPULATIONS) {
+			if (p.slug !== current.population.slug) add("population", populationLink(p, city));
+		}
 	}
 
 	return links.slice(0, MAX_RELATED);
@@ -253,7 +299,7 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 
 export function getProviderCount(
 	professionals: PsychologistModel[],
-	params: { type: string; city: string; condition?: string; insurance?: string; language?: string; resource?: string }
+	params: { type: string; city: string; condition?: string; insurance?: string; language?: string; resource?: string; population?: string }
 ): number {
 	return professionals.filter((p) => {
 		if (!matchesCity(p, params.city)) return false;
@@ -261,6 +307,7 @@ export function getProviderCount(
 		if (params.type === "insurance" && params.insurance) return matchesInsurance(p, params.insurance);
 		if (params.type === "language" && params.language) return matchesLanguage(p, params.language);
 		if (params.type === "resource" && params.resource) return matchesResource(p, params.resource);
+		if (params.type === "population" && params.population) return matchesAgeSpecialty(p, params.population);
 		return false;
 	}).length;
 }
@@ -282,6 +329,7 @@ export function matchProviders(
 		if (page.type === "insurance") return matchesInsurance(p, page.insurance.filterValue);
 		if (page.type === "language") return matchesLanguage(p, page.language.name);
 		if (page.type === "resource") return matchesResource(p, page.resource.filterValue);
+		if (page.type === "population") return matchesAgeSpecialty(p, page.population.filterValue);
 		return false;
 	});
 }
