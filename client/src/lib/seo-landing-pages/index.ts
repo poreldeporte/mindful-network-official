@@ -2,7 +2,7 @@ export { CITIES, CONDITIONS, INSURANCES, LANGUAGES, RESOURCES, POPULATIONS, VIRT
 export type { CityConfig, ConditionConfig, InsuranceConfig, LanguageConfig, ResourceConfig, PopulationConfig } from "./config";
 export { resolveLandingPageSlug } from "./resolve-slug";
 export type { LandingPageParams } from "./resolve-slug";
-export { getAllLandingPageSlugs, computeLandingPageSlugs, getProviderCount, getRelatedSlugs, matchProviders } from "./generate-pages";
+export { getAllLandingPageSlugs, getValidFindSlugSet, computeLandingPageSlugs, getProviderCount, getRelatedSlugs, getProviderFindLinks, matchProviders } from "./generate-pages";
 export type { LandingPageSlug, RelatedLink } from "./generate-pages";
 export { computeProviderStats } from "./provider-stats";
 export type { ProviderStats } from "./provider-stats";
