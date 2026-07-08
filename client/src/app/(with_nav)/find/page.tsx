@@ -5,6 +5,8 @@ import {
 	CONDITIONS,
 	INSURANCES,
 	LANGUAGES,
+	RESOURCES,
+	POPULATIONS,
 	VIRTUAL_SLUG,
 } from "@/lib/seo-landing-pages";
 import { Metadata } from "next";
@@ -19,7 +21,7 @@ const baseUrl = "https://themindfulnetwork.com";
 const url = `${baseUrl}/find`;
 const title = "Find a Therapist in South Florida | The Mindful Network";
 const description =
-	"Browse licensed therapists across South Florida by specialty, insurance, language, and city. Find anxiety, depression, trauma, ADHD, and more on The Mindful Network.";
+	"Browse licensed therapists across South Florida by specialty, service, insurance, language, and city. Find anxiety, depression, ADHD, teen therapy, psychiatry, and psychological testing on The Mindful Network.";
 
 export const metadata: Metadata = {
 	title,
@@ -137,6 +139,24 @@ export default async function FindHubPage() {
 		}))
 	);
 
+	const populationGroups = buildGroups(
+		valid,
+		POPULATIONS.map((p) => ({
+			key: p.slug,
+			title: p.label,
+			slugFor: (citySlug: string) => `${p.slug}-${citySlug}`,
+		}))
+	);
+
+	const resourceGroups = buildGroups(
+		valid,
+		RESOURCES.map((r) => ({
+			key: r.slug,
+			title: r.label,
+			slugFor: (citySlug: string) => `${r.slug}-${citySlug}`,
+		}))
+	);
+
 	const hasVirtual = valid.has(VIRTUAL_SLUG);
 
 	const schemaData = {
@@ -209,8 +229,8 @@ export default async function FindHubPage() {
 							</Typography>
 							<Typography as="p" variant="bodyXSmall" color="darkGray">
 								Browse licensed mental health professionals across South Florida by
-								specialty, insurance, language, and city. Choose a category below to see
-								matching therapists in your area.
+								specialty, service, age group, insurance, language, and city. Choose a
+								category below to see matching therapists in your area.
 							</Typography>
 						</div>
 					</div>
@@ -220,6 +240,18 @@ export default async function FindHubPage() {
 			{specialtyGroups.length > 0 && (
 				<Section id="find-by-specialty" heading="Browse by specialty">
 					<GroupGrid groups={specialtyGroups} />
+				</Section>
+			)}
+
+			{populationGroups.length > 0 && (
+				<Section id="find-by-population" heading="Browse by who it's for">
+					<GroupGrid groups={populationGroups} />
+				</Section>
+			)}
+
+			{resourceGroups.length > 0 && (
+				<Section id="find-by-service" heading="Browse by service">
+					<GroupGrid groups={resourceGroups} />
 				</Section>
 			)}
 
