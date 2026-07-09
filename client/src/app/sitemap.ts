@@ -2,7 +2,7 @@ import { sanityClient } from "@/api";
 import { Eventbrite } from "@/api/Eventbrite";
 import { EventbriteKeys } from "@/config/eventbrite.config";
 import { generateSlug } from "@/utilities";
-import { getAllLandingPageSlugs } from "@/lib/seo-landing-pages";
+import { getAllLandingPageSlugs, isIndexableFindCount } from "@/lib/seo-landing-pages";
 import { MetadataRoute } from "next";
 
 export const revalidate = 3600;
@@ -124,12 +124,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		let landingPageUrls: MetadataRoute.Sitemap = [];
 		try {
 			const landingPages = await getAllLandingPageSlugs();
-			landingPageUrls = landingPages.map(({ slug }) => ({
-				url: `${baseUrl}/find/${slug}`,
-				lastModified: currentDate,
-				changeFrequency: "weekly" as const,
-				priority: 0.8,
-			}));
+			// Only advertise pages we mark indexable. Thin cells below
+			// MIN_INDEXABLE_PROVIDERS carry robots:noindex (see find/[slug]/page.tsx),
+			// so listing them here would just submit noindex URLs to Google.
+			landingPageUrls = landingPages
+				.filter(({ count }) => isIndexableFindCount(count))
+				.map(({ slug }) => ({
+					url: `${baseUrl}/find/${slug}`,
+					lastModified: currentDate,
+					changeFrequency: "weekly" as const,
+					priority: 0.8,
+				}));
 		} catch (error) {
 			console.error("Error generating landing page URLs:", error);
 		}

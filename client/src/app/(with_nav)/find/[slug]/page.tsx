@@ -2,6 +2,8 @@ import { Typography } from "@/components/ui";
 import {
 	resolveLandingPageSlug,
 	getAllLandingPageSlugs,
+	getFindSlugCountMap,
+	isIndexableFindCount,
 	computeLandingPageSlugs,
 	getRelatedSlugs,
 	getCityHubLinks,
@@ -49,6 +51,13 @@ export async function generateMetadata({
 			robots: { index: false, follow: false },
 		};
 	}
+
+	// Thin city×facet cells (2–3 matching providers) still render for users but
+	// are too near-duplicate for Google to index. Mark them noindex,follow so the
+	// crawler stops folding them as "Duplicate without user-selected canonical"
+	// while link equity still flows through to the pages that clear the bar.
+	const countMap = await getFindSlugCountMap();
+	const indexable = isIndexableFindCount(countMap.get(params.slug) ?? 0);
 
 	const baseUrl = "https://themindfulnetwork.com";
 	const url = `${baseUrl}/find/${params.slug}`;
@@ -105,7 +114,7 @@ export async function generateMetadata({
 		alternates: {
 			canonical: url,
 		},
-		robots: { index: true, follow: true },
+		robots: { index: indexable, follow: true },
 	};
 }
 
