@@ -4,6 +4,7 @@ import {
 	getAllLandingPageSlugs,
 	computeLandingPageSlugs,
 	getRelatedSlugs,
+	getCityHubLinks,
 	matchProviders,
 	computeProviderStats,
 	getPageContent,
@@ -11,6 +12,7 @@ import {
 	VIRTUAL_MODALITY,
 } from "@/lib/seo-landing-pages";
 import { RelatedSearches } from "@/routes/find/components/RelatedSearches";
+import { CityHub } from "@/routes/find/components/CityHub";
 import { LandingPageBody, LandingPageFaq } from "@/routes/find/components/LandingPageBody";
 import {
 	getAllConditions,
@@ -268,6 +270,10 @@ export default async function FindPage({
 	// wouldn't be generated.
 	const validSlugs = new Set(computeLandingPageSlugs(professionals).map((s) => s.slug));
 	const relatedLinks = getRelatedSlugs(page, validSlugs);
+	// Comprehensive same-city index — every other /find page in this city, so the
+	// same-city pages form a complete mesh (page-1 → page-2 authority routing).
+	const cityHubLinks = getCityHubLinks(page, validSlugs, params.slug);
+	const cityName = page.type === "virtual" ? "" : page.city.name;
 
 	const schemaData = {
 		"@context": "https://schema.org",
@@ -397,6 +403,8 @@ export default async function FindPage({
 			<LandingPageFaq faqs={pageContent.faqs} />
 
 			<RelatedSearches links={relatedLinks} />
+
+			<CityHub links={cityHubLinks} cityName={cityName} />
 		</main>
 	);
 }

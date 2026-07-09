@@ -315,6 +315,37 @@ export function getRelatedSlugs(current: LandingPageParams, validSlugs: Set<stri
 	return links.slice(0, MAX_RELATED);
 }
 
+// Comprehensive same-city hub links (the "More therapists in {city}" block —
+// funnel spec link-type #1). Unlike getRelatedSlugs (curated + capped at 10 for
+// an "Explore related" module), this returns EVERY other valid /find page in the
+// current page's city across all five axes, so the same-city pages form a
+// complete mesh and page-1 pages route authority down to every page-2 sibling.
+// `currentSlug` is the page's own slug, excluded so it never links to itself.
+// Returns [] for the cityless virtual page.
+export function getCityHubLinks(
+	current: LandingPageParams,
+	validSlugs: Set<string>,
+	currentSlug: string,
+): RelatedLink[] {
+	if (current.type === "virtual") return [];
+	const city = current.city;
+	const links: RelatedLink[] = [];
+	const seen = new Set<string>([currentSlug]);
+	const add = (group: RelatedLink["group"], item: { slug: string; label: string }) => {
+		if (seen.has(item.slug) || !validSlugs.has(item.slug)) return;
+		seen.add(item.slug);
+		links.push({ ...item, group });
+	};
+
+	for (const c of CONDITIONS) add("specialty", conditionLink(c, city));
+	for (const p of POPULATIONS) add("population", populationLink(p, city));
+	for (const r of RESOURCES) add("resource", resourceLink(r, city));
+	for (const i of INSURANCES) add("insurance", insuranceLink(i, city));
+	for (const l of LANGUAGES) add("language", languageLink(l, city));
+
+	return links;
+}
+
 // Resolve a provider's city to one of the CITIES configs using the same
 // variant-aware matcher that decides which /find/ pages exist.
 function providerCity(provider: PsychologistModel): CityConfig | undefined {
