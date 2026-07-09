@@ -9,6 +9,20 @@ import type { LandingPageParams } from "./resolve-slug";
 
 const MIN_PROVIDERS = 2;
 
+// A page is GENERATED at >= MIN_PROVIDERS (2) so users following a cross-link or
+// deep-link always land on a real page. But a 2–3 provider city×facet cell is
+// too thin/near-duplicate for Google to index — it folds them as "Duplicate
+// without user-selected canonical" (Search Console, 2026-07). MIN_INDEXABLE_PROVIDERS
+// is the higher bar a page must clear to be marked indexable (robots:index) and
+// included in the sitemap. Pages between the two thresholds still render for
+// users but carry robots:noindex,follow so link equity flows to the pages that
+// can actually rank while Google stops trying to index the thin ones.
+export const MIN_INDEXABLE_PROVIDERS = 4;
+
+export function isIndexableFindCount(count: number): boolean {
+	return count >= MIN_INDEXABLE_PROVIDERS;
+}
+
 function normalizeCity(city: string): string {
 	return city.trim().toLowerCase();
 }
@@ -167,6 +181,23 @@ export function getValidFindSlugSet(): Promise<Set<string>> {
 		_validFindSlugSet = getAllLandingPageSlugs().then((slugs) => new Set(slugs.map((s) => s.slug)));
 	}
 	return _validFindSlugSet;
+}
+
+// Memoized slug -> matched-provider-count map. generateMetadata() runs in a
+// separate pass from the page render, so it can't reuse the page's fetched
+// provider list; without this it would call getAllProfessionals() (no-store) a
+// second time per render just to recover the count. Memoizing at module scope
+// (same rationale/staleness tradeoff as getValidFindSlugSet above) lets the
+// metadata pass look up the count for MIN_INDEXABLE_PROVIDERS gating with no
+// extra Sanity read. Counts still revalidate via the page's hourly ISR.
+let _findSlugCountMap: Promise<Map<string, number>> | null = null;
+export function getFindSlugCountMap(): Promise<Map<string, number>> {
+	if (!_findSlugCountMap) {
+		_findSlugCountMap = getAllLandingPageSlugs().then(
+			(slugs) => new Map(slugs.map((s) => [s.slug, s.count]))
+		);
+	}
+	return _findSlugCountMap;
 }
 
 // --- Related-page cross-linking --------------------------------------------
